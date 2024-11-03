@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7t4t4yiek3u1"]
+
+[ext_resource type="Script" path="res://Scenes/Market/market.gd" id="1_ajah2"]
+[ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_ob1b7"]
+
+[node name="Market" type="Node"]
+script = ExtResource("1_ajah2")
+
+[node name="MarketControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ob1b7")
+
+[node name="ColorRect" type="ColorRect" parent="MarketControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.890196, 0.780392, 0.572549, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarketControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarketControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarketControl/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarketControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer3/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Exit" type="Button" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer3/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Continue" type="Button" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer3/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[connection signal="pressed" from="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer3/PanelContainer/HBoxContainer/Continue" to="." method="_on_continue_pressed"]

@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://pu2tcvtr60nh"]
+
+[ext_resource type="Script" path="res://Scenes/Main/main.gd" id="1_nt4i4"]
+[ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="2_kjelv"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_nt4i4")
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_kjelv")
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.890196, 0.780392, 0.572549, 1)
+
+[node name="Title" type="RichTextLabel" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.308
+anchor_right = 0.5
+anchor_bottom = 0.308
+offset_left = -369.0
+offset_top = -112.76
+offset_right = 369.0
+offset_bottom = 113.24
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[color=black][font_size=92][center]Confidential Coffee[/center][/font_size][/color]"
+fit_content = true
+autowrap_mode = 2
+
+[node name="Options" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="MainMenu/Options"]
+layout_mode = 2
+text = "Start"

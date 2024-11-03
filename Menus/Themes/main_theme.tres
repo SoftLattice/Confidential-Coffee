@@ -1,0 +1,27 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bplqepcs14bpk"]
+
+[ext_resource type="FontFile" uid="uid://eqi05m8rvn2t" path="res://Fonts/SpecialElite/SpecialElite-Regular.ttf" id="1_2fnfl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xiud"]
+bg_color = Color(0.695503, 0.695503, 0.695503, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 12
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[resource]
+MarginContainer/constants/margin_bottom = 24
+MarginContainer/constants/margin_left = 24
+MarginContainer/constants/margin_right = 24
+MarginContainer/constants/margin_top = 24
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_6xiud")
+RichTextLabel/fonts/normal_font = ExtResource("1_2fnfl")

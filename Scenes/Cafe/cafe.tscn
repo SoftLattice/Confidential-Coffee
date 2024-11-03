@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5gca0k3lihsi"]
+
+[ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
+[ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
+[ext_resource type="Script" path="res://Scenes/Cafe/day_intro.gd" id="3_n1fs1"]
+[ext_resource type="Texture2D" uid="uid://cwywuy11l4fyj" path="res://Scenes/Cafe/Textures/clock_face.png" id="4_q2nnl"]
+
+[node name="Cafe" type="Node" node_paths=PackedStringArray("day_intro")]
+script = ExtResource("1_8x71m")
+day_intro = NodePath("Overlay/Preamble/DayIntro")
+
+[node name="Overlay" type="Node" parent="."]
+
+[node name="Preamble" type="Control" parent="Overlay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6ohen")
+
+[node name="ColorRect" type="ColorRect" parent="Overlay/Preamble"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DayIntro" type="RichTextLabel" parent="Overlay/Preamble"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.0
+offset_top = -106.0
+offset_right = 254.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=96][center]Day: #[/center][/font_size]
+
+[font_size=64][center]6:00 AM[/center][/font_size]
+"
+visible_characters = 22
+visible_characters_behavior = 1
+visible_ratio = 1.375
+script = ExtResource("3_n1fs1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Overlay"]
+
+[node name="HUD" type="Control" parent="Overlay/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Clock" type="TextureRect" parent="Overlay/CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -139.0
+offset_bottom = 139.0
+grow_horizontal = 0
+texture = ExtResource("4_q2nnl")
+
+[node name="CafeDisplay" type="Node2D" parent="."]
+
+[node name="Effects" type="Node" parent="."]

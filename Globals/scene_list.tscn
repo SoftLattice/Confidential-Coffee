@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dky7wqbfq767u"]
+
+[ext_resource type="Script" path="res://Globals/scene_list.gd" id="1_grk1m"]
+
+[node name="SceneList" type="Node"]
+script = ExtResource("1_grk1m")
+cafe_scene = "res://Scenes/Cafe/cafe.tscn"
