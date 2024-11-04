@@ -7,16 +7,11 @@ func _ready() -> void:
 
 	text = ""
 	push_paragraph(HORIZONTAL_ALIGNMENT_CENTER);
-	push_font_size(96);
+	push_font_size(48);
 	append_text(day_string);
 	append_text("\n");
 	pop()
-	push_font_size(64)
+	push_font_size(32)
 	append_text(time_string);
 	pop();
 	pop();
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

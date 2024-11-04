@@ -4,24 +4,23 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xiud"]
 bg_color = Color(0.695503, 0.695503, 0.695503, 1)
-border_width_left = 12
-border_width_top = 12
-border_width_right = 12
-border_width_bottom = 12
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
-border_blend = true
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 12
-shadow_size = 5
-shadow_offset = Vector2(5, 5)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 4
+shadow_size = 1
+shadow_offset = Vector2(2, 2)
 
 [resource]
-MarginContainer/constants/margin_bottom = 24
-MarginContainer/constants/margin_left = 24
-MarginContainer/constants/margin_right = 24
-MarginContainer/constants/margin_top = 24
+MarginContainer/constants/margin_bottom = 4
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_6xiud")
 RichTextLabel/fonts/normal_font = ExtResource("1_2fnfl")
