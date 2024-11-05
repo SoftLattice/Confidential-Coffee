@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://ohgi3bpo420w"]
+
+[ext_resource type="FontFile" uid="uid://d0cvjtrpesdn3" path="res://Fonts/Poppins/Poppins-Bold.ttf" id="1_4eogv"]
+[ext_resource type="FontFile" uid="uid://bgvjf5aax1y3u" path="res://Fonts/Poppins/Poppins-Italic.ttf" id="2_iv1aa"]
+[ext_resource type="FontFile" uid="uid://tmt38lngskm1" path="res://Fonts/Poppins/Poppins-BoldItalic.ttf" id="2_qornb"]
+[ext_resource type="FontFile" uid="uid://c8s18y77t6ywm" path="res://Fonts/Poppins/Poppins-Regular.ttf" id="3_iqxhh"]
+
+[resource]
+RichTextLabel/colors/default_color = Color(0.227451, 0.207843, 0.196078, 1)
+RichTextLabel/font_sizes/normal_font_size = 18
+RichTextLabel/fonts/bold_font = ExtResource("1_4eogv")
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_qornb")
+RichTextLabel/fonts/italics_font = ExtResource("2_iv1aa")
+RichTextLabel/fonts/normal_font = ExtResource("3_iqxhh")

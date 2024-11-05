@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://mjw0orq2pttq"]
+
+[ext_resource type="Shader" path="res://Scenes/Common/pixel_shader.gdshader" id="1_n62dt"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_4plhb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5w8vl"]
+render_priority = 0
+shader = ExtResource("1_n62dt")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wogwd"]
+flip_faces = true
+size = Vector2(1.6, 0.9)
+
+[node name="PixelCamera" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1.7, 1.7)
+current = true
+fov = 60.0
+size = 1.5
+
+[node name="PostProcessing" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+material_override = SubResource("ShaderMaterial_5w8vl")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_wogwd")
+
+[node name="PhantomCameraHost" type="Node" parent="."]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_4plhb")

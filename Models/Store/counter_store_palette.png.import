@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b11lhl7rxchsk"
-path.s3tc="res://.godot/imported/counter_store_palette.png-8f6b0410134b7530cd4bccbcaad21f2b.s3tc.ctex"
+path="res://.godot/imported/counter_store_palette.png-8f6b0410134b7530cd4bccbcaad21f2b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "2feff63310c8a007057b4bd0b2c2a3fe"
@@ -15,17 +14,17 @@ generator_parameters={
 [deps]
 
 source_file="res://Models/Store/counter_store_palette.png"
-dest_files=["res://.godot/imported/counter_store_palette.png-8f6b0410134b7530cd4bccbcaad21f2b.s3tc.ctex"]
+dest_files=["res://.godot/imported/counter_store_palette.png-8f6b0410134b7530cd4bccbcaad21f2b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=true
+compress/hdr_compression=0
+compress/normal_map=2
+compress/channel_pack=1
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

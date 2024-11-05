@@ -1,27 +1,22 @@
-[gd_scene load_steps=28 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=32 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
 [ext_resource type="Script" path="res://Scenes/Cafe/day_intro.gd" id="3_n1fs1"]
 [ext_resource type="Texture2D" uid="uid://cwywuy11l4fyj" path="res://Scenes/Cafe/Textures/clock_face.png" id="4_q2nnl"]
-[ext_resource type="Shader" path="res://Scenes/Common/pixel_shader.gdshader" id="5_1xsdy"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="6_melnc"]
+[ext_resource type="PackedScene" uid="uid://mjw0orq2pttq" path="res://Scenes/Common/pixel_camera.tscn" id="5_vromj"]
 [ext_resource type="Texture2D" uid="uid://b11lhl7rxchsk" path="res://Models/Store/counter_store_palette.png" id="6_yj1sb"]
-[ext_resource type="Texture2D" uid="uid://d21hd2x6ionba" path="res://Models/Palettes/store_palette.png" id="7_0je8c"]
+[ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="7_0je8c"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="7_vam80"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_qpvg1"]
+[ext_resource type="Script" path="res://Scenes/Common/player_controller.gd" id="9_uktlt"]
+[ext_resource type="Theme" uid="uid://ohgi3bpo420w" path="res://Scenes/Common/SpeechBubble/theme.tres" id="10_7k0pr"]
+[ext_resource type="Script" path="res://Scenes/Common/SpeechBubble/speech_bubble.gd" id="10_h6f8s"]
+[ext_resource type="Texture2D" uid="uid://b8ka5qir52ml8" path="res://Textures/Overlay/speech_bubble.png" id="10_qvxef"]
 
 [sub_resource type="Environment" id="Environment_w3stk"]
 background_mode = 1
 background_color = Color(0.564962, 0.564962, 0.564962, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5w8vl"]
-render_priority = 0
-shader = ExtResource("5_1xsdy")
-
-[sub_resource type="QuadMesh" id="QuadMesh_wogwd"]
-flip_faces = true
-size = Vector2(1.6, 0.9)
 
 [sub_resource type="Resource" id="Resource_3do3o"]
 script = ExtResource("8_qpvg1")
@@ -29,46 +24,65 @@ duration = 0.75
 transition = 4
 ease = 2
 
-[sub_resource type="Resource" id="Resource_l48bd"]
+[sub_resource type="Resource" id="Resource_xv80h"]
 script = ExtResource("8_qpvg1")
-duration = 0.75
-transition = 4
+duration = 1.0
+transition = 0
 ease = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7sds"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r66bg"]
 resource_name = "Material"
 cull_mode = 2
-albedo_texture = ExtResource("6_yj1sb")
+albedo_texture = ExtResource("7_0je8c")
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_fp6h3"]
-resource_name = "counter_Plane"
+[sub_resource type="ArrayMesh" id="ArrayMesh_asc6m"]
+resource_name = "counter-modular_Plane"
 _surfaces = [{
-"aabb": AABB(-2.86603, 0, -0.5, 5.73205, 1, 2.73205),
-"attribute_data": PackedByteArray("ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkbkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+QuQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+RuQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5G5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5U/MA+AADEPkTkAj4AAAY+VPzAPgAAxD5E5AI+AAAGPlT8wD4AAMQ+VPzAPgAAxD5E5AI+AAAGPlT8wD4AAMQ+VPzAPgAAxD5U/MA+AADEPkTkAj4AAAY+VPzAPgAAxD5E5AI+AAAGPlT8wD4AAMQ+VPzAPgAAxD5E5AI+AAAGPlT8wD4AAMQ+ROQCPgAABj5U/MA+AADEPlT8wD4AAMQ+ROQCPgAABj5U/MA+AADEPlT8wD4AAMQ+ROQCPgAABj5U/MA+AADEPkTkAj4AAAY+VPzAPgAAxD5U/MA+AADEPkTkAj4AAAY+VPzAPgAAxD5E5AI+AAAGPlT8wD4AAMQ+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+ROQCPgAABj5E5AI+AAAGPkTkAj4AAAY+"),
+"aabb": AABB(-1, 0, -0.5, 2, 1, 1),
+"attribute_data": PackedByteArray("QobmPUBu4z1z3rw+ENy/PkKG5j1AbuM9QobmPUBu4z1z3rw+ENy/PkKG5j1AbuM9QobmPUBu4z1ChuY9QG7jPUKG5j1AbuM9QobmPUBu4z1ChuY9QG7jPUKG5j1AbuM9QobmPUBu4z1ChuY9QG7jPUKG5j1AbuM9QobmPUBu4z1z3rw+ENy/PkKG5j1AbuM9QobmPUBu4z1z3rw+ENy/PkKG5j1AbuM9QobmPUBu4z1ChuY9QG7jPUKG5j1AbuM9QobmPUBu4z1ChuY9QG7jPUKG5j1AbuM9QobmPUBu4z1ChuY9QG7jPUKG5j1AbuM9QobmPUBu4z1ChuY9QG7jPUKG5j1AbuM9QobmPUBu4z1ChuY9QG7jPUKG5j1AbuM9c968PhDcvz5z3rw+ENy/PkKG5j1AbuM9c968PhDcvz5z3rw+ENy/PkKG5j1AbuM9c968PhDcvz5z3rw+ENy/PkKG5j1AbuM9c968PhDcvz5z3rw+ENy/PkKG5j1AbuM9"),
 "format": 34359742487,
-"index_count": 300,
-"index_data": PackedByteArray("PQAKAAcAPQBAAAoAQwAWAEYAQwANABYAFgAbAEYAPQAHACoACQAMAAYACQAVAAwACwAcABcACwAZABwARgAnAEsARgAbACcACgBAABgAJQBMACgAJQBJAEwAGABIACQAGABAAEgAHQAmACkAHQAaACYAIgBmAGkAIgAfAGYADgArAAgADgAuACsALQANAEMAUwA3AFAAUwA6ADcAKgBRAD0AKgA5AFEALwA7ACwALwA4ADsAQwA2AC0AQwBOADYAAwA8AAAAAwA/ADwADwBFABIADwBCAEUAIABNAEoAIAAjAE0AIwBHAE0AIwAUAEcABQBKAEEABQAgAEoANQBPADIANQBSAE8AMgBEABEAMgBPAEQAAgBSADUAAgA+AFIAXQB0AF8AXQB+AHQAMwBWAAEAMwBaAFYAMQBbADQAMQBZAFsAEABYADAAEABVAFgAVgCBAGEAVgB2AIEAAQBcAAQAAQBhAFwAEwBgABAAEwBeAGAAZQCIAGcAZQCGAIgAEwBoAGQAEwAhAGgAHgBiAGUAHgAEAGIAYQBrAFwAYQCBAGsAVQAQAGAAAQBWAGEAWgB2AFYAWgB7AHYAXgATAGQAXABiAAQAeAB6AHIAeAB8AHoAgAB9AGoAgABzAH0AbwCJAIcAbwCFAIkAdQB3AHEAdQCCAHcAbgB/AIQAbgBsAH8AZwCDAGMAZwCIAIMAVwB7AFoAVwB5AHsAYwB+AF0AYwCDAH4AXABtAGIAXABrAG0AYgCGAGUAYgBtAIYAVAB5AFcAVABwAHkAXwBwAFQAXwB0AHAA"),
-"lods": [1.2255, PackedByteArray("PQAKACoACgA9AEgACgBIACQAKgBRAD0AKgA5AFEAiwCNAI4AjQCLACYAjQAmACkARgAnAEsARgAWACcARgA2ABYARgBOADYAJQBMACgAJQBJAEwAIgBmAGkAIgAfAGYAUwA3AFAAUwA6ADcAFQA7ACsAFQA4ADsAIABNAEoAigAgAEoAIAAjAE0AIwCPAE0AIwCMAI8AAwBKADwAAwA8AFIAAwBSADUANQBSAE8ANQBPADIAMgBPAEUAMgBFABIAMwBWAAQAMwBaAFYABABWAGEABABhAFwAXABiAAQAHgAEAGIAHgBiAGUAMQBbADQAMQBZAFsAEwBYADAAEwBVAFgAVQATAGAAEwBeAGAAXgATAGQAEwBoAGQAEwAhAGgAdwB6AHEAdwB8AHoAcwB3AHEAcwCAAHcAgABzAH0AgAB9AGoAbgBqAH0AbgB9AIQAbgCEAIkAbgCJAIcA")],
-"material": SubResource("StandardMaterial3D_d7sds"),
+"index_count": 84,
+"index_data": PackedByteArray("GQAKAAcAGQAcAAoAHwAWACIAHwANABYACQAMAAYACQAVAAwAAwAYAAAAAwAbABgADwAhABIADwAeACEAAQAlAAQAAQAuACUAEwAoABAAEwArACgALQAqACQALQAnACoAIAApAA4AIAARACkACAApAC8ACAAOACkACAACABoACAAvAAIAFwAUACMAFwAsABQAFwAmACwAFwALACYACwAFACYACwAdAAUA"),
+"material": SubResource("StandardMaterial3D_r66bg"),
 "name": "Material",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 144,
-"vertex_data": PackedByteArray("AACAv8ws3j0AAAA/AACAv8ws3j0AAAA/AACAv8ws3j0AAAA/AACAP8ws3j0AAAA/AACAP8ws3j0AAAA/AACAP8ws3j0AAAA/AACAvwAAAAAAAAC/AACAvwAAAAAAAAC/AACAvwAAAAAAAAC/AACAPwAAAAAAAAC/AACAPwAAAAAAAAC/AACAPwAAAAAAAAC/AACAvwAAgD8AAAC/AACAvwAAgD8AAAC/AACAvwAAgD8AAAC/AACAv2Y6ZD8AAAA/AACAv2Y6ZD8AAAA/AACAv2Y6ZD8AAAA/AACAP2Y6ZD8AAAA/AACAP2Y6ZD8AAAA/AACAP2Y6ZD8AAAA/AACAPwAAgD8AAAC/AACAPwAAgD8AAAC/AACAPwAAgD8AAAC/7NnuPwAAAAAAAACA7NnuPwAAAAAAAACA7NnuPwAAAAAAAACA7NnuPwAAgD8AAACA7NnuPwAAgD8AAACA7NnuPwAAgD8AAACAmg75P8os3j2m1ghAmg75P8os3j2m1ghAmg75P8os3j2m1ghAmg75P2c6ZD+m1ghAmg75P2c6ZD+m1ghAmg75P2c6ZD+m1ghA9mw3QAAAAADYs90/9mw3QAAAAADYs90/9mw3QAAAAADYs90/9mw3QAAAgD/Ys90/9mw3QAAAgD/Ys90/9mw3QAAAgD/Ys90/7NnuvwAAAAAAAACA7NnuvwAAAAAAAACA7NnuvwAAAAAAAACA7NnuvwAAgD8AAACA7NnuvwAAgD8AAACA7NnuvwAAgD8AAACAmg75v2c6ZD+m1ghAmg75v2c6ZD+m1ghAmg75v2c6ZD+m1ghAmg75v8os3j2m1ghAmg75v8os3j2m1ghAmg75v8os3j2m1ghA9mw3wAAAgD/Ys90/9mw3wAAAgD/Ys90/9mw3wAAAgD/Ys90/9mw3wAAAAADYs90/9mw3wAAAAADYs90/9mw3wAAAAADYs90/AACAvwAAAAAAAAA/AACAvwAAAAAAAAA/AACAvwAAAAAAAAA/AACAPwAAAAAAAAA/AACAPwAAAAAAAAA/AACAPwAAAAAAAAA/AACAvwAAgD8AAAA/AACAvwAAgD8AAAA/AACAvwAAgD8AAAA/AACAPwAAgD8AAAA/AACAPwAAgD8AAAA/AACAPwAAgD8AAAA/AAAAQAAAAADs2Q5AAAAAQAAAAADs2Q5AAAAAQAAAAADs2Q5AAAAAQAAAgD/s2Q5AAAAAQAAAgD/s2Q5AAAAAQAAAgD/s2Q5AAAAAwAAAgD/s2Q5AAAAAwAAAgD/s2Q5AAAAAwAAAgD/s2Q5AAAAAwAAAAADs2Q5AAAAAwAAAAADs2Q5AAAAAwAAAAADs2Q5AVq7Yv2Y6ZD/QzMw9Vq7Yv2Y6ZD/QzMw9Vq7Yv8ws3j3QzMw9eN4owGc6ZD8Zet4/eN4owGc6ZD8Zet4/eN4owGc6ZD8Zet4/eN4owMos3j0Zet4/eN4owMos3j0Zet4/AACAP8ws3j2amZm+AACAP2Y6ZD+amZm+AACAP2Y6ZD+amZm+AACAv2Y6ZD+amZm+AACAv2Y6ZD+amZm+AACAv8ws3j2amZm+Vq7YP8ws3j3QzMw9Vq7YP2Y6ZD/QzMw9Vq7YP2Y6ZD/QzMw9eN4oQMos3j0Zet4/eN4oQMos3j0Zet4/eN4oQGc6ZD8Zet4/eN4oQGc6ZD8Zet4/eN4oQGc6ZD8Zet4/AACAP8ws3j2amZm+AACAP8ws3j2amZm+AACAP8ws3j2amZm+Vq7YP8ws3j3QzMw9Vq7YP8ws3j3QzMw9Vq7YP8ws3j3QzMw9Vq7Yv2Y6ZD/QzMw9Vq7Yv2Y6ZD/QzMw9Vq7Yv2Y6ZD/QzMw9AACAv2Y6ZD+amZm+AACAv2Y6ZD+amZm+AACAv2Y6ZD+amZm+Vq7Yv8ws3j3QzMw9Vq7Yv8ws3j3QzMw9Vq7Yv8ws3j3QzMw9eN4owGc6ZD8Zet4/eN4owGc6ZD8Zet4/eN4owMos3j0Zet4/eN4owMos3j0Zet4/AACAP2Y6ZD+amZm+AACAP2Y6ZD+amZm+AACAP2Y6ZD+amZm+AACAv8ws3j2amZm+AACAv8ws3j2amZm+AACAv8ws3j2amZm+Vq7YP2Y6ZD/QzMw9Vq7YP2Y6ZD/QzMw9Vq7YP2Y6ZD/QzMw9eN4oQMos3j0Zet4/eN4oQMos3j0Zet4/eN4oQGc6ZD8Zet4/eN4oQGc6ZD8Zet4/AACAP8ws3j0AAAA/AACAPwAAAAAAAAC/AACAP2Y6ZD8AAAA/AACAPwAAgD8AAAC/7NnuvwAAAAAAAACAAACAPwAAgD8AAAA//3//f////z//f///////vyXR/3////8//3//f////z//f///////v9ku/3////8//////////7//fwAA////vwAAJdH///+//////////7//fwAA////v///JdH///+//////////7//f///////vwAAJdH///+//3//f////z//fwAA////vyXR/3////8//3//f////z//fwAA////v9ku/3////8//////////7//f///////v///JdH///+//38AAP///7///yXR////v///2a7///+//3///////7///yXR////v///2a7///+//3///////78AACXR////v9ku/3////8//38AAP///78AACXR////v9ku/3////8//38AAP///7/Zrv9/////P///2a7///+//3///////7/Zrv9/////P///2a7///+//38AAP///78AACXR////vwAA2a7///+//3///////78AACXR////vwAA2a7///+//38AAP///7///yXR////vyXR/3////8//3///////7///yXR////vyXR/3////8//3///////78lUf9/////PwAA2a7///+//38AAP///78lUf9/////PwAA2a7///+//3//f////z//fwAA////vyXR/3////8//3//f////z//fwAA////v9ku/3////8//3//f////z//f///////vyXR/3////8//3//f////z//f///////v9ku/3////8//38AAP///7/Zrv9/////P9ku/3////8//3///////7/Zrv9/////P9ku/3////8//3///////78l0f9/////PyVR/3////8//38AAP///78l0f9/////PyVR/3////8//3///////7//fwAA////v/9///////+//3///////7//fwAA////v///JdH///+//3///////7///yXR////v/9///////+//3///////7//fwAA////v/9///////+//38AAP///7//f///////v/9///////+//3///////7//fwAA////v/9///////+/AAAl0f///7//f///////v/9/AAD///+/AAAl0f///7//f/9/////P/9///////+/JVH/f////z//f///////vyVR/3////8/2S7/f////z//f///////v9mu/3////8/JdH/f////z//f/9/////P/9///////+/2a7/f////z//f///////v9mu/3////8/JdH/f////z//f///////vyXR/3////8//3///////78l0f9/////P/9//3////8//3///////78lUf9/////P/9//3////8//3///////7/Zrv9/////P/9///////+/JVH/f////z/ZLv9/////P/9///////+/2S7/f////z//f///////v9ku/3////8/2S7/f////z///9Lg////v9ku/3////8///8A1f///7//////////v9ku/3////8/")
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AACAv8ws3j0AAAA/AACAv8ws3j0AAAA/AACAv8ws3j0AAAA/AACAP8ws3j0AAAA/AACAP8ws3j0AAAA/AACAP8ws3j0AAAA/AACAvwAAAAAAAAC/AACAvwAAAAAAAAC/AACAvwAAAAAAAAC/AACAPwAAAAAAAAC/AACAPwAAAAAAAAC/AACAPwAAAAAAAAC/AACAvwAAgD8AAAC/AACAvwAAgD8AAAC/AACAvwAAgD8AAAC/AACAv2Y6ZD8AAAA/AACAv2Y6ZD8AAAA/AACAv2Y6ZD8AAAA/AACAP2Y6ZD8AAAA/AACAP2Y6ZD8AAAA/AACAP2Y6ZD8AAAA/AACAPwAAgD8AAAC/AACAPwAAgD8AAAC/AACAPwAAgD8AAAC/AACAvwAAAAAAAAA/AACAvwAAAAAAAAA/AACAvwAAAAAAAAA/AACAPwAAAAAAAAA/AACAPwAAAAAAAAA/AACAPwAAAAAAAAA/AACAvwAAgD8AAAA/AACAvwAAgD8AAAA/AACAvwAAgD8AAAA/AACAPwAAgD8AAAA/AACAPwAAgD8AAAA/AACAPwAAgD8AAAA/AACAP8ws3j2amZm+AACAP8ws3j2amZm+AACAP8ws3j2amZm+AACAv2Y6ZD+amZm+AACAv2Y6ZD+amZm+AACAv2Y6ZD+amZm+AACAP2Y6ZD+amZm+AACAP2Y6ZD+amZm+AACAP2Y6ZD+amZm+AACAv8ws3j2amZm+AACAv8ws3j2amZm+AACAv8ws3j2amZm+/3//f////z//f///////vwAA/3////+//3//f////z//f///////v////3////+//////////7//fwAA////vwAA/3////+//////////7//fwAA////v////3////+//////////7//f///////vwAA/3////+//3//f////z//fwAA////vwAA/3////+//3//f////z//fwAA////v////3////+//////////7//f///////v////3////+//3//f////z//fwAA////vwAA/3////+//3//f////z//fwAA////v////3////+//3//f////z//f///////vwAA/3////+//3//f////z//f///////v////3////+//3//f////z//f///////v////3////+//3//f////z//fwAA////vwAA/3////+//3//f////z//fwAA////v////3////+//3//f////z//f///////vwAA/3////+/")
 }]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4b1o8"]
 radius = 0.3
 height = 1.8
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_mtli7"]
+viewport_path = NodePath("Environment/SpeechBubble/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_en05t"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("ViewportTexture_mtli7")
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_aquhc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_en05t")
+size = Vector2(2, 0.5)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbs5p"]
 resource_name = "Opaque"
 cull_mode = 2
-albedo_texture = ExtResource("7_0je8c")
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("6_yj1sb")
 metallic = 0.5
 roughness = 0.25
 texture_filter = 0
+texture_repeat = false
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6ohf7"]
 resource_name = "coffee_maker_Cube_001"
@@ -200,9 +214,11 @@ _surfaces = [{
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hflrq"]
 
-[node name="Cafe" type="Node" node_paths=PackedStringArray("day_intro")]
+[node name="Cafe" type="Node" node_paths=PackedStringArray("day_intro", "mark_primary", "mark_coffee")]
 script = ExtResource("1_8x71m")
 day_intro = NodePath("Overlay/Preamble/DayIntro")
+mark_primary = NodePath("Environment/PlayerControl")
+mark_coffee = NodePath("Environment/CoffeeMaker/CoffeeMakerView")
 
 [node name="Overlay" type="Node" parent="."]
 
@@ -290,54 +306,44 @@ render_target_update_mode = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="Overlay/HUD/HUD/MarginContainer/SubViewportContainer/SubViewport"]
 
-[node name="CafeDisplay" type="Node2D" parent="."]
-
 [node name="Environment" type="Node" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_w3stk")
 
-[node name="PixelCamera" type="Camera3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1.70388, 1.72341)
-current = true
-fov = 60.0
-size = 1.5
-
-[node name="PostProcessing" type="MeshInstance3D" parent="Environment/PixelCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-material_override = SubResource("ShaderMaterial_5w8vl")
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_wogwd")
-
-[node name="PhantomCameraHost" type="Node" parent="Environment/PixelCamera"]
-process_priority = 300
-process_physics_priority = 300
-script = ExtResource("6_melnc")
+[node name="PixelCamera" parent="Environment" instance=ExtResource("5_vromj")]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1.7, 1.7)
 
 [node name="PCamMainView" type="Node3D" parent="Environment" node_paths=PackedStringArray("follow_target")]
-transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1.70388, 1.72341)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1.7, 1.7)
 script = ExtResource("7_vam80")
 priority = 10
-follow_mode = 5
-follow_target = NodePath("../PrimaryView")
+follow_mode = 2
+follow_target = NodePath("../PlayerControl")
 tween_resource = SubResource("Resource_3do3o")
+tween_on_load = false
+follow_offset = Vector3(0, 0.3, 1.7)
+follow_damping = true
 follow_distance = 1.75
 spring_length = 1.75
+look_at_damping = true
 
-[node name="PrimaryView" type="Marker3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Environment/PCamMainView"]
+remote_path = NodePath("../../PCamPointView")
+update_rotation = false
+update_scale = false
 
-[node name="PCamCoffeeMaker" type="Node3D" parent="Environment" node_paths=PackedStringArray("follow_target")]
-transform = Transform3D(0.866025, 0.0868241, -0.492404, 0, 0.984808, 0.173648, 0.5, -0.150384, 0.852868, 0.352163, 1.60388, 1.7084)
+[node name="PCamPointView" type="Node3D" parent="Environment" node_paths=PackedStringArray("look_at_target")]
+transform = Transform3D(0.774004, 0.0978828, -0.62557, 1.11759e-08, 0.987979, 0.154589, 0.633181, -0.119652, 0.7647, 0, 1.7, 1.7)
 script = ExtResource("7_vam80")
-follow_mode = 5
-follow_target = NodePath("../CoffeeMakerView")
-tween_resource = SubResource("Resource_l48bd")
-follow_distance = 1.75
-spring_length = 1.75
+look_at_mode = 2
+look_at_target = NodePath("../CoffeeMaker/CoffeeMakerView")
+tween_resource = SubResource("Resource_xv80h")
 
-[node name="CoffeeMakerView" type="Marker3D" parent="Environment"]
-transform = Transform3D(-0.375, 0, -0.649519, 0, 0.75, 0, 0.649519, 0, -0.375, 1.21387, 1.3, 0.215878)
+[node name="PlayerControl" type="Marker3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+script = ExtResource("9_uktlt")
 
 [node name="Lights" type="Node" parent="Environment"]
 
@@ -346,16 +352,75 @@ transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025
 
 [node name="Furniture" type="Node3D" parent="Environment"]
 
-[node name="Counter" type="MeshInstance3D" parent="Environment/Furniture"]
-mesh = SubResource("ArrayMesh_fp6h3")
+[node name="Counter2" type="MeshInstance3D" parent="Environment/Furniture"]
+mesh = SubResource("ArrayMesh_asc6m")
+skeleton = NodePath("")
+
+[node name="Counter3" type="MeshInstance3D" parent="Environment/Furniture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("ArrayMesh_asc6m")
+skeleton = NodePath("")
+
+[node name="Counter4" type="MeshInstance3D" parent="Environment/Furniture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+mesh = SubResource("ArrayMesh_asc6m")
 skeleton = NodePath("")
 
 [node name="Customer" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
 mesh = SubResource("CapsuleMesh_4b1o8")
 
+[node name="SpeechLocation" type="Marker3D" parent="Environment/Customer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.7, 0)
+
+[node name="SpeechBubble" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 2.1, -2)
+mesh = SubResource("QuadMesh_aquhc")
+skeleton = NodePath("../Customer")
+script = ExtResource("10_h6f8s")
+
+[node name="SubViewport" type="SubViewport" parent="Environment/SpeechBubble"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(128, 32)
+render_target_update_mode = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Environment/SpeechBubble/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_7k0pr")
+texture = ExtResource("10_qvxef")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 16
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="Environment/SpeechBubble/SubViewport/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Environment/SpeechBubble/SubViewport/NinePatchRect/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]This is a test![/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
 [node name="CoffeeMaker" type="Node3D" parent="Environment"]
-transform = Transform3D(-0.375, 0, -0.649519, 0, 0.75, 0, 0.649519, 0, -0.375, 1.21387, 1, 0.215878)
+transform = Transform3D(-3.27835e-08, 0, -0.75, 0, 0.75, 0, 0.75, 0, -3.27835e-08, 1.21387, 1, 0.015878)
 
 [node name="Base" type="MeshInstance3D" parent="Environment/CoffeeMaker"]
 mesh = SubResource("ArrayMesh_6ohf7")
@@ -381,5 +446,8 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/CoffeeMaker/Select"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500008, 0)
 shape = SubResource("BoxShape3D_hflrq")
+
+[node name="CoffeeMakerView" type="Marker3D" parent="Environment/CoffeeMaker"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.266829, 0.533333, -0.000173211)
 
 [node name="Effects" type="Node" parent="."]
