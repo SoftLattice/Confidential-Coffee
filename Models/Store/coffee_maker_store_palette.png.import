@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvl0ame7rdfa2"
-path.s3tc="res://.godot/imported/counter-modular_store_palette.png-e829d730f37998fbee23d4ccfbc56475.s3tc.ctex"
-path.etc2="res://.godot/imported/counter-modular_store_palette.png-e829d730f37998fbee23d4ccfbc56475.etc2.ctex"
+uid="uid://b21jvh70aj6h3"
+path.s3tc="res://.godot/imported/coffee_maker_store_palette.png-2acea0d153781ed8a50d39c09be2c2a5.s3tc.ctex"
+path.etc2="res://.godot/imported/coffee_maker_store_palette.png-2acea0d153781ed8a50d39c09be2c2a5.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Models/Store/counter-modular_store_palette.png"
-dest_files=["res://.godot/imported/counter-modular_store_palette.png-e829d730f37998fbee23d4ccfbc56475.s3tc.ctex", "res://.godot/imported/counter-modular_store_palette.png-e829d730f37998fbee23d4ccfbc56475.etc2.ctex"]
+source_file="res://Models/Store/coffee_maker_store_palette.png"
+dest_files=["res://.godot/imported/coffee_maker_store_palette.png-2acea0d153781ed8a50d39c09be2c2a5.s3tc.ctex", "res://.godot/imported/coffee_maker_store_palette.png-2acea0d153781ed8a50d39c09be2c2a5.etc2.ctex"]
 
 [params]
 

@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8xwen6ao2c85"]
+
+[ext_resource type="Theme" uid="uid://ohgi3bpo420w" path="res://Scenes/Common/SpeechBubble/theme.tres" id="1_fv67g"]
+[ext_resource type="Script" path="res://Scenes/Common/SpeechBubble/bubble_control.gd" id="2_6y3v4"]
+[ext_resource type="Texture2D" uid="uid://b8ka5qir52ml8" path="res://Textures/Overlay/speech_bubble.png" id="2_mkkbk"]
+[ext_resource type="Texture2D" uid="uid://dfmb3ye7fquh8" path="res://Textures/Icons/Purchases/coffee.png" id="3_fl263"]
+
+[node name="SpeechBubble" type="Node2D" node_paths=PackedStringArray("tail_node", "bubble_container", "display_label", "label_options")]
+z_index = -10
+script = ExtResource("2_6y3v4")
+tail_node = NodePath("TailPosition")
+bubble_container = NodePath("Container")
+debug_texture = ExtResource("3_fl263")
+display_label = NodePath("Container/MarginContainer/RealTextLabel")
+label_options = [NodePath("LabelSmall"), NodePath("LabelMedium"), NodePath("LabelLarge")]
+
+[node name="Container" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_fv67g")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("2_mkkbk")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 16
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 12
+
+[node name="RealTextLabel" type="RichTextLabel" parent="Container/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "HELLO THERE"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="LabelSmall" type="RichTextLabel" parent="."]
+offset_right = 64.0
+offset_bottom = 26.0
+theme = ExtResource("1_fv67g")
+bbcode_enabled = true
+text = "Small"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="LabelMedium" type="RichTextLabel" parent="."]
+offset_right = 128.0
+offset_bottom = 26.0
+theme = ExtResource("1_fv67g")
+bbcode_enabled = true
+text = "Medium
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="LabelLarge" type="RichTextLabel" parent="."]
+offset_right = 256.0
+offset_bottom = 26.0
+theme = ExtResource("1_fv67g")
+bbcode_enabled = true
+text = "Large"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="TailPosition" type="Marker2D" parent="."]
+
+[connection signal="resized" from="Container/MarginContainer" to="." method="_on_margin_container_resized"]

@@ -1,18 +1,19 @@
-[gd_scene load_steps=32 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=30 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
 [ext_resource type="Script" path="res://Scenes/Cafe/day_intro.gd" id="3_n1fs1"]
+[ext_resource type="Script" path="res://Scenes/Cafe/clock_container.gd" id="4_2fd8n"]
 [ext_resource type="Texture2D" uid="uid://cwywuy11l4fyj" path="res://Scenes/Cafe/Textures/clock_face.png" id="4_q2nnl"]
+[ext_resource type="Texture2D" uid="uid://by61oyinxak7f" path="res://Scenes/Cafe/Textures/clock_hand.png" id="5_srdep"]
 [ext_resource type="PackedScene" uid="uid://mjw0orq2pttq" path="res://Scenes/Common/pixel_camera.tscn" id="5_vromj"]
 [ext_resource type="Texture2D" uid="uid://b11lhl7rxchsk" path="res://Models/Store/counter_store_palette.png" id="6_yj1sb"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="7_0je8c"]
+[ext_resource type="Texture2D" uid="uid://cg545isbhsax2" path="res://Scenes/Cafe/Textures/receipt_paper.png" id="7_c1nps"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="7_vam80"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_qpvg1"]
 [ext_resource type="Script" path="res://Scenes/Common/player_controller.gd" id="9_uktlt"]
-[ext_resource type="Theme" uid="uid://ohgi3bpo420w" path="res://Scenes/Common/SpeechBubble/theme.tres" id="10_7k0pr"]
-[ext_resource type="Script" path="res://Scenes/Common/SpeechBubble/speech_bubble.gd" id="10_h6f8s"]
-[ext_resource type="Texture2D" uid="uid://b8ka5qir52ml8" path="res://Textures/Overlay/speech_bubble.png" id="10_qvxef"]
+[ext_resource type="PackedScene" uid="uid://b8xwen6ao2c85" path="res://Scenes/Common/SpeechBubble/speech_bubble.tscn" id="11_dle77"]
 
 [sub_resource type="Environment" id="Environment_w3stk"]
 background_mode = 1
@@ -55,24 +56,6 @@ _surfaces = [{
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4b1o8"]
 radius = 0.3
 height = 1.8
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_mtli7"]
-viewport_path = NodePath("Environment/SpeechBubble/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_en05t"]
-resource_local_to_scene = true
-transparency = 1
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_texture = SubResource("ViewportTexture_mtli7")
-texture_filter = 0
-texture_repeat = false
-billboard_mode = 1
-
-[sub_resource type="QuadMesh" id="QuadMesh_aquhc"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_en05t")
-size = Vector2(2, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbs5p"]
 resource_name = "Opaque"
@@ -266,7 +249,6 @@ visible_ratio = 1.375
 script = ExtResource("3_n1fs1")
 
 [node name="HUD" type="CanvasLayer" parent="Overlay"]
-visible = false
 
 [node name="HUD" type="Control" parent="Overlay/HUD"]
 layout_mode = 3
@@ -277,34 +259,63 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_6ohen")
 
-[node name="MarginContainer" type="MarginContainer" parent="Overlay/HUD/HUD"]
+[node name="ClockContainer" type="MarginContainer" parent="Overlay/HUD/HUD" node_paths=PackedStringArray("clock_hand")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -80.0
-offset_bottom = 80.0
+offset_left = -48.0
+offset_bottom = 48.0
 grow_horizontal = 0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
+script = ExtResource("4_2fd8n")
+clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 
-[node name="Clock" type="TextureRect" parent="Overlay/HUD/HUD/MarginContainer"]
+[node name="Clock" type="TextureRect" parent="Overlay/HUD/HUD/ClockContainer"]
 layout_mode = 2
 texture = ExtResource("4_q2nnl")
-expand_mode = 3
+expand_mode = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Overlay/HUD/HUD/MarginContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Overlay/HUD/HUD/ClockContainer"]
 layout_mode = 2
+use_top_left = true
 
-[node name="SubViewport" type="SubViewport" parent="Overlay/HUD/HUD/MarginContainer/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(64, 64)
-render_target_update_mode = 0
+[node name="ClockCenter" type="Node2D" parent="Overlay/HUD/HUD/ClockContainer/CenterContainer"]
+position = Vector2(16, 16)
+scale = Vector2(0.5, 0.5)
 
-[node name="Sprite2D" type="Sprite2D" parent="Overlay/HUD/HUD/MarginContainer/SubViewportContainer/SubViewport"]
+[node name="Hand" type="Sprite2D" parent="Overlay/HUD/HUD/ClockContainer/CenterContainer/ClockCenter"]
+texture_filter = 1
+texture = ExtResource("5_srdep")
+
+[node name="OrderContainer" type="MarginContainer" parent="Overlay/HUD/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.319
+anchor_top = 1.0
+anchor_right = 0.319
+anchor_bottom = 1.0
+offset_left = -41.12
+offset_top = -31.0
+offset_right = 40.88
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Overlay/HUD/HUD/OrderContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+texture = ExtResource("7_c1nps")
+patch_margin_left = 4
+patch_margin_top = 2
+patch_margin_right = 4
+patch_margin_bottom = 2
 
 [node name="Environment" type="Node" parent="."]
 
@@ -335,7 +346,7 @@ update_rotation = false
 update_scale = false
 
 [node name="PCamPointView" type="Node3D" parent="Environment" node_paths=PackedStringArray("look_at_target")]
-transform = Transform3D(0.774004, 0.0978828, -0.62557, 1.11759e-08, 0.987979, 0.154589, 0.633181, -0.119652, 0.7647, 0, 1.7, 1.7)
+transform = Transform3D(0.774004, 0.0978828, -0.62557, 1.49012e-08, 0.987979, 0.154589, 0.633181, -0.119652, 0.7647, 0, 1.7, 1.7)
 script = ExtResource("7_vam80")
 look_at_mode = 2
 look_at_target = NodePath("../CoffeeMaker/CoffeeMakerView")
@@ -373,51 +384,8 @@ mesh = SubResource("CapsuleMesh_4b1o8")
 [node name="SpeechLocation" type="Marker3D" parent="Environment/Customer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.7, 0)
 
-[node name="SpeechBubble" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 2.1, -2)
-mesh = SubResource("QuadMesh_aquhc")
-skeleton = NodePath("../Customer")
-script = ExtResource("10_h6f8s")
-
-[node name="SubViewport" type="SubViewport" parent="Environment/SpeechBubble"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(128, 32)
-render_target_update_mode = 4
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Environment/SpeechBubble/SubViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("10_7k0pr")
-texture = ExtResource("10_qvxef")
-region_rect = Rect2(0, 0, 64, 64)
-patch_margin_left = 16
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 12
-
-[node name="MarginContainer" type="MarginContainer" parent="Environment/SpeechBubble/SubViewport/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 10
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Environment/SpeechBubble/SubViewport/NinePatchRect/MarginContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]This is a test![/center]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 2
+[node name="SpeechBubble" parent="Environment/Customer" node_paths=PackedStringArray("track_position") instance=ExtResource("11_dle77")]
+track_position = NodePath("../SpeechLocation")
 
 [node name="CoffeeMaker" type="Node3D" parent="Environment"]
 transform = Transform3D(-3.27835e-08, 0, -0.75, 0, 0.75, 0, 0.75, 0, -3.27835e-08, 1.21387, 1, 0.015878)

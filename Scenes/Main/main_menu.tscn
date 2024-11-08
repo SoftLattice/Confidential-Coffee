@@ -31,15 +31,16 @@ anchor_left = 0.5
 anchor_top = 0.308
 anchor_right = 0.5
 anchor_bottom = 0.308
-offset_left = -369.0
-offset_top = -112.76
-offset_right = 369.0
-offset_bottom = 113.24
+offset_left = -213.0
+offset_top = -49.16
+offset_right = 213.0
+offset_bottom = 48.84
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
-text = "[color=black][font_size=92][center]Confidential Coffee[/center][/font_size][/color]"
+text = "[color=black][font_size=48][center]Confidential Coffee[/center][/font_size][/color]"
 fit_content = true
+scroll_active = false
 autowrap_mode = 2
 
 [node name="Options" type="VBoxContainer" parent="MainMenu"]
@@ -50,9 +51,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -20.0
+offset_top = 14.0
 offset_right = 150.0
-offset_bottom = 162.0
+offset_bottom = 94.0
 grow_horizontal = 2
 grow_vertical = 2
 

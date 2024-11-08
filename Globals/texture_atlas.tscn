@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct7n8paqn8scc"]
+
+[ext_resource type="Script" path="res://Globals/texture_atlas.gd" id="1_d6eet"]
+
+[node name="TextureAtlas" type="Node"]
+script = ExtResource("1_d6eet")
+coffee_icon = "res://Textures/Icons/Purchases/coffee.png"
