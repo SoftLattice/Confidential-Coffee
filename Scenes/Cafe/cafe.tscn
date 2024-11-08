@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=34 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
@@ -9,11 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://mjw0orq2pttq" path="res://Scenes/Common/pixel_camera.tscn" id="5_vromj"]
 [ext_resource type="Texture2D" uid="uid://b11lhl7rxchsk" path="res://Models/Store/counter_store_palette.png" id="6_yj1sb"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="7_0je8c"]
-[ext_resource type="Texture2D" uid="uid://cg545isbhsax2" path="res://Scenes/Cafe/Textures/receipt_paper.png" id="7_c1nps"]
+[ext_resource type="PackedScene" uid="uid://c7jb0q5etl8tc" path="res://Scenes/Common/OrderReceipt/order_receipt.tscn" id="7_goaex"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="7_vam80"]
+[ext_resource type="Texture2D" uid="uid://civgi14dtocw2" path="res://Textures/Overlay/cashout_key.png" id="8_aoq8y"]
+[ext_resource type="Script" path="res://Scenes/Common/RegisterButtons/register_key.gd" id="8_lcv2h"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_qpvg1"]
+[ext_resource type="Texture2D" uid="uid://b4m5xqc0173q7" path="res://Textures/Overlay/cancel_key.png" id="9_2fqge"]
 [ext_resource type="Script" path="res://Scenes/Common/player_controller.gd" id="9_uktlt"]
 [ext_resource type="PackedScene" uid="uid://b8xwen6ao2c85" path="res://Scenes/Common/SpeechBubble/speech_bubble.tscn" id="11_dle77"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3wg5"]
+size = Vector2(34, 38)
 
 [sub_resource type="Environment" id="Environment_w3stk"]
 background_mode = 1
@@ -251,12 +257,14 @@ script = ExtResource("3_n1fs1")
 [node name="HUD" type="CanvasLayer" parent="Overlay"]
 
 [node name="HUD" type="Control" parent="Overlay/HUD"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1_6ohen")
 
 [node name="ClockContainer" type="MarginContainer" parent="Overlay/HUD/HUD" node_paths=PackedStringArray("clock_hand")]
@@ -291,31 +299,34 @@ scale = Vector2(0.5, 0.5)
 texture_filter = 1
 texture = ExtResource("5_srdep")
 
-[node name="OrderContainer" type="MarginContainer" parent="Overlay/HUD/HUD"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.319
-anchor_top = 1.0
-anchor_right = 0.319
-anchor_bottom = 1.0
-offset_left = -41.12
-offset_top = -31.0
-offset_right = 40.88
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+[node name="RegisterKey" type="Node2D" parent="Overlay/HUD/HUD"]
+position = Vector2(161, 250)
+script = ExtResource("8_lcv2h")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Overlay/HUD/HUD/OrderContainer"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-texture = ExtResource("7_c1nps")
-patch_margin_left = 4
-patch_margin_top = 2
-patch_margin_right = 4
-patch_margin_bottom = 2
+[node name="Sprite" type="Sprite2D" parent="Overlay/HUD/HUD/RegisterKey"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("8_aoq8y")
+
+[node name="CollisionArea" type="Area2D" parent="Overlay/HUD/HUD/RegisterKey"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Overlay/HUD/HUD/RegisterKey/CollisionArea"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_d3wg5")
+
+[node name="CancelKey" type="Node2D" parent="Overlay/HUD/HUD"]
+position = Vector2(201, 250)
+
+[node name="Sprite" type="Sprite2D" parent="Overlay/HUD/HUD/CancelKey"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("9_2fqge")
+
+[node name="Area2D" type="Area2D" parent="Overlay/HUD/HUD/CancelKey"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Overlay/HUD/HUD/CancelKey/Area2D"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_d3wg5")
+
+[node name="OrderReceipt" parent="Overlay/HUD" instance=ExtResource("7_goaex")]
 
 [node name="Environment" type="Node" parent="."]
 
@@ -419,3 +430,7 @@ shape = SubResource("BoxShape3D_hflrq")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.266829, 0.533333, -0.000173211)
 
 [node name="Effects" type="Node" parent="."]
+
+[connection signal="input_event" from="Overlay/HUD/HUD/RegisterKey/CollisionArea" to="Overlay/HUD/HUD/RegisterKey" method="_on_collision_area_input_event"]
+[connection signal="mouse_entered" from="Overlay/HUD/HUD/RegisterKey/CollisionArea" to="Overlay/HUD/HUD/RegisterKey" method="_on_collision_area_mouse_entered"]
+[connection signal="mouse_exited" from="Overlay/HUD/HUD/RegisterKey/CollisionArea" to="Overlay/HUD/HUD/RegisterKey" method="_on_collision_area_mouse_exited"]

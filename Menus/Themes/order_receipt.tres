@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c2uxmkcgnk0ae"]
+
+[ext_resource type="FontFile" uid="uid://buqeflmusk13e" path="res://Fonts/CourierPrime/CourierPrime-Bold.ttf" id="1_2c4h0"]
+[ext_resource type="FontFile" uid="uid://c7gl14jnr6cxp" path="res://Fonts/CourierPrime/CourierPrime-BoldItalic.ttf" id="2_gsf16"]
+[ext_resource type="FontFile" uid="uid://cdv5ofpluxc7t" path="res://Fonts/CourierPrime/CourierPrime-Italic.ttf" id="3_pjb7p"]
+[ext_resource type="FontFile" uid="uid://d2elkiel72mlt" path="res://Fonts/CourierPrime/CourierPrime-Regular.ttf" id="4_4g344"]
+
+[resource]
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/fonts/bold_font = ExtResource("1_2c4h0")
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_gsf16")
+RichTextLabel/fonts/italics_font = ExtResource("3_pjb7p")
+RichTextLabel/fonts/mono_font = ExtResource("4_4g344")
+RichTextLabel/fonts/normal_font = ExtResource("4_4g344")

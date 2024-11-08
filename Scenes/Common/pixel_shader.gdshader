@@ -13,4 +13,3 @@ void fragment() {
 	ALBEDO = pixel_color;
 	ALPHA = 0.;
 }
-

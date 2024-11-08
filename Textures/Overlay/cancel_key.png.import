@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg545isbhsax2"
-path="res://.godot/imported/receipt_paper.png-59eeb19b7445e186786456ea25aaf45a.ctex"
+uid="uid://b4m5xqc0173q7"
+path="res://.godot/imported/cancel_key.png-6ddec616c4881d4889f20241884d8ff5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Cafe/Textures/receipt_paper.png"
-dest_files=["res://.godot/imported/receipt_paper.png-59eeb19b7445e186786456ea25aaf45a.ctex"]
+source_file="res://Textures/Overlay/cancel_key.png"
+dest_files=["res://.godot/imported/cancel_key.png-6ddec616c4881d4889f20241884d8ff5.ctex"]
 
 [params]
 
