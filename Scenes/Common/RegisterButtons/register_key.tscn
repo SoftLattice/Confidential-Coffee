@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://0np3f6fpdso0"]
+
+[ext_resource type="Script" path="res://Scenes/Common/RegisterButtons/register_key.gd" id="1_g3hwg"]
+[ext_resource type="Texture2D" uid="uid://cj838y4vhsje3" path="res://Textures/Overlay/blank_key.png" id="2_dwvlg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3wg5"]
+size = Vector2(36, 46)
+
+[node name="RegisterKey" type="Node2D"]
+script = ExtResource("1_g3hwg")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_dwvlg")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_d3wg5")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+shape = SubResource("RectangleShape2D_d3wg5")
+
+[connection signal="input_event" from="CollisionArea" to="." method="_on_collision_area_input_event"]
+[connection signal="mouse_entered" from="CollisionArea" to="." method="_on_collision_area_mouse_entered"]
+[connection signal="mouse_exited" from="CollisionArea" to="." method="_on_collision_area_mouse_exited"]
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]

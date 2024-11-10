@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcdjonkjbxh0r"]
+
+[ext_resource type="Script" path="res://Scenes/Common/Characters/customer.gd" id="1_ljmpa"]
+[ext_resource type="Texture2D" uid="uid://dxjl86xa2pcep" path="res://Characters/Handler/handler.png" id="2_topkw"]
+[ext_resource type="Shader" path="res://Scenes/Common/Characters/character_cafe.gdshader" id="3_645i4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_noaim"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_645i4")
+shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
+shader_parameter/modulate_strength = 0.0
+shader_parameter/albedo_texture = ExtResource("2_topkw")
+
+[node name="Customer" type="Node3D"]
+script = ExtResource("1_ljmpa")
+character_texture = ExtResource("2_topkw")
+
+[node name="SpeechLocation" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194373, 1.92046, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+material_override = SubResource("ShaderMaterial_noaim")
+centered = false
+offset = Vector2(-64, 0)
+pixel_size = 0.0068
+shaded = true
+texture_filter = 0
+texture = ExtResource("2_topkw")

@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var debug_receipt: Array[Recipe];
+
 @export var landing_label: RichTextLabel;
 @export var text_container: MarginContainer;
 @export var primary_container: Container;
@@ -16,22 +18,13 @@ func render_message(label: RichTextLabel) -> int:
     label.text = "";
     label.push_font_size(12);
 
-    label.push_meta(0, RichTextLabel.META_UNDERLINE_ON_HOVER);
-    label.append_text("1 COFFEE");
-    label.pop();
+    label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER);
+    label.append_text("***ORDER***");
+    label.pop()
 
-    label.append_text("\n");
-
-    label.push_meta(1, RichTextLabel.META_UNDERLINE_ON_HOVER);
-    label.append_text("1 LATTE");
-    label.append_text("\n");
-    label.append_text("  + CARAMEL");
-    label.pop();
-
-    label.push_meta(2, RichTextLabel.META_UNDERLINE_ON_HOVER);
-    label.append_text("\n");
-    label.append_text("2 ESPRESSO");
-    label.pop();
+    for recipe in debug_receipt:
+        label.append_text("\n");
+        recipe.print_to_label(label);
 
     label.pop();
     return 4
@@ -53,8 +46,10 @@ func prepare_display(render_function: Callable) -> void:
     pop_receipt();
 
 
-func _on_meta_clicked(meta: Variant) -> void:
-    print(meta);
+func _on_meta_clicked(resource: ReceiptResource) -> void:
+    resource._on_resource_select();
+    render_message(landing_label);
+
 
 # TODO: Juice up the receipt printing
 func pop_receipt() -> void:
