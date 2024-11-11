@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=52 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
@@ -21,13 +21,14 @@
 [ext_resource type="Shader" path="res://Scenes/Common/Characters/character_cafe.gdshader" id="17_i0fn5"]
 [ext_resource type="PackedScene" uid="uid://dcdjonkjbxh0r" path="res://Scenes/Common/Characters/customer.tscn" id="17_m4akn"]
 [ext_resource type="Texture2D" uid="uid://dxjl86xa2pcep" path="res://Characters/Handler/handler.png" id="17_y72sv"]
-[ext_resource type="Script" path="res://Scenes/Cafe/cafe_path.gd" id="18_63kjy"]
-[ext_resource type="Script" path="res://Scenes/Cafe/queue_start_path.gd" id="18_diojo"]
 [ext_resource type="Script" path="res://Scenes/Cafe/exit_door.gd" id="18_r0epc"]
-[ext_resource type="Script" path="res://Scenes/Cafe/queue_end_path.gd" id="19_stn1i"]
 [ext_resource type="Texture2D" uid="uid://cid7i8pi17u5g" path="res://Characters/MaleCharacter/male_customer.png" id="20_sf5ya"]
 [ext_resource type="Texture2D" uid="uid://dr3obbvsegrk3" path="res://Characters/FemaleCharacter/female_customer.png" id="21_jr68o"]
+[ext_resource type="Script" path="res://Scenes/Cafe/customer_queue_path.gd" id="22_i87mr"]
 [ext_resource type="PackedScene" uid="uid://bnkc8jhwbld7v" path="res://Scenes/Cafe/Assets/coffee_maker.tscn" id="24_7t71w"]
+[ext_resource type="Script" path="res://Resources/Recipes/recipe.gd" id="24_64p5n"]
+[ext_resource type="Script" path="res://Resources/Recipes/recipe_modifier.gd" id="25_vr4f0"]
+[ext_resource type="Script" path="res://Resources/Recipes/customer_order.gd" id="26_u5kap"]
 
 [sub_resource type="Environment" id="Environment_w3stk"]
 background_mode = 1
@@ -67,26 +68,12 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AACAv8ws3j0AAAA/AACAv8ws3j0AAAA/AACAv8ws3j0AAAA/AACAP8ws3j0AAAA/AACAP8ws3j0AAAA/AACAP8ws3j0AAAA/AACAvwAAAAAAAAC/AACAvwAAAAAAAAC/AACAvwAAAAAAAAC/AACAPwAAAAAAAAC/AACAPwAAAAAAAAC/AACAPwAAAAAAAAC/AACAvwAAgD8AAAC/AACAvwAAgD8AAAC/AACAvwAAgD8AAAC/AACAv2Y6ZD8AAAA/AACAv2Y6ZD8AAAA/AACAv2Y6ZD8AAAA/AACAP2Y6ZD8AAAA/AACAP2Y6ZD8AAAA/AACAP2Y6ZD8AAAA/AACAPwAAgD8AAAC/AACAPwAAgD8AAAC/AACAPwAAgD8AAAC/AACAvwAAAAAAAAA/AACAvwAAAAAAAAA/AACAvwAAAAAAAAA/AACAPwAAAAAAAAA/AACAPwAAAAAAAAA/AACAPwAAAAAAAAA/AACAvwAAgD8AAAA/AACAvwAAgD8AAAA/AACAvwAAgD8AAAA/AACAPwAAgD8AAAA/AACAPwAAgD8AAAA/AACAPwAAgD8AAAA/AACAP8ws3j2amZm+AACAP8ws3j2amZm+AACAP8ws3j2amZm+AACAv2Y6ZD+amZm+AACAv2Y6ZD+amZm+AACAv2Y6ZD+amZm+AACAP2Y6ZD+amZm+AACAP2Y6ZD+amZm+AACAP2Y6ZD+amZm+AACAv8ws3j2amZm+AACAv8ws3j2amZm+AACAv8ws3j2amZm+/3//f////z//f///////vwAA/3////+//3//f////z//f///////v////3////+//////////7//fwAA////vwAA/3////+//////////7//fwAA////v////3////+//////////7//f///////vwAA/3////+//3//f////z//fwAA////vwAA/3////+//3//f////z//fwAA////v////3////+//////////7//f///////v////3////+//3//f////z//fwAA////vwAA/3////+//3//f////z//fwAA////v////3////+//3//f////z//f///////vwAA/3////+//3//f////z//f///////v////3////+//3//f////z//f///////v////3////+//3//f////z//fwAA////vwAA/3////+//3//f////z//fwAA////v////3////+//3//f////z//f///////vwAA/3////+/")
 }]
 
-[sub_resource type="Curve3D" id="Curve3D_uhc7s"]
+[sub_resource type="Curve3D" id="Curve3D_srjgh"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0),
-"tilts": PackedFloat32Array(0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.5, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
 }
-point_count = 2
-
-[sub_resource type="Curve3D" id="Curve3D_grcx2"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.551217, 0, -1.94745, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
-
-[sub_resource type="Curve3D" id="Curve3D_5yr2e"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -6.543, 0, 0),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
+point_count = 4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6v8wq"]
 size = Vector3(0.619141, 2.61829, 1)
@@ -98,6 +85,19 @@ shader = ExtResource("17_i0fn5")
 shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
 shader_parameter/modulate_strength = 0.0
 shader_parameter/albedo_texture = ExtResource("17_y72sv")
+
+[sub_resource type="Resource" id="Resource_aybgg"]
+script = ExtResource("25_vr4f0")
+display_name = "No sugar"
+
+[sub_resource type="Resource" id="Resource_i1tge"]
+script = ExtResource("24_64p5n")
+display_name = "Latte"
+modifiers = Array[ExtResource("25_vr4f0")]([SubResource("Resource_aybgg")])
+
+[sub_resource type="Resource" id="Resource_hkgb3"]
+script = ExtResource("26_u5kap")
+items = Array[ExtResource("24_64p5n")]([SubResource("Resource_i1tge")])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uoft5"]
 resource_local_to_scene = true
@@ -260,6 +260,7 @@ script = ExtResource("1_8x71m")
 day_intro = NodePath("Overlay/Preamble/DayIntro")
 mark_primary = NodePath("Environment/PlayerControl")
 mark_coffee = NodePath("Environment/CoffeeMakerOLD/CoffeeMakerView")
+receipt_scene = ExtResource("7_goaex")
 
 [node name="Overlay" type="Node" parent="."]
 
@@ -306,9 +307,10 @@ visible_characters_behavior = 1
 visible_ratio = 1.375
 script = ExtResource("3_n1fs1")
 
-[node name="HUD" type="CanvasLayer" parent="Overlay"]
+[node name="HUDViewport" type="CanvasLayer" parent="Overlay"]
 
-[node name="HUD" type="Control" parent="Overlay/HUD"]
+[node name="CafeHUD" type="Control" parent="Overlay/HUDViewport" node_paths=PackedStringArray("sell_key", "cancel_key")]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -319,8 +321,10 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_6ohen")
 script = ExtResource("4_hgyob")
+sell_key = NodePath("SellKey")
+cancel_key = NodePath("CancelKey")
 
-[node name="ClockContainer" type="MarginContainer" parent="Overlay/HUD/HUD" node_paths=PackedStringArray("clock_hand")]
+[node name="ClockContainer" type="MarginContainer" parent="Overlay/HUDViewport/CafeHUD" node_paths=PackedStringArray("clock_hand")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -335,38 +339,36 @@ theme_override_constants/margin_bottom = 8
 script = ExtResource("4_2fd8n")
 clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 
-[node name="Clock" type="TextureRect" parent="Overlay/HUD/HUD/ClockContainer"]
+[node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
 layout_mode = 2
 texture = ExtResource("4_q2nnl")
 expand_mode = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Overlay/HUD/HUD/ClockContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
 layout_mode = 2
 use_top_left = true
 
-[node name="ClockCenter" type="Node2D" parent="Overlay/HUD/HUD/ClockContainer/CenterContainer"]
+[node name="ClockCenter" type="Node2D" parent="Overlay/HUDViewport/CafeHUD/ClockContainer/CenterContainer"]
 position = Vector2(16, 16)
 scale = Vector2(0.5, 0.5)
 
-[node name="Hand" type="Sprite2D" parent="Overlay/HUD/HUD/ClockContainer/CenterContainer/ClockCenter"]
+[node name="Hand" type="Sprite2D" parent="Overlay/HUDViewport/CafeHUD/ClockContainer/CenterContainer/ClockCenter"]
 texture_filter = 1
 texture = ExtResource("5_srdep")
 
-[node name="SellKey" parent="Overlay/HUD/HUD" instance=ExtResource("7_31yfp")]
+[node name="SellKey" parent="Overlay/HUDViewport/CafeHUD" instance=ExtResource("7_31yfp")]
 position = Vector2(159, 253)
 scale = Vector2(0.8, 0.8)
 
-[node name="Sprite" parent="Overlay/HUD/HUD/SellKey" index="0"]
+[node name="Sprite" parent="Overlay/HUDViewport/CafeHUD/SellKey" index="0"]
 texture = ExtResource("8_aoq8y")
 
-[node name="CancelKey" parent="Overlay/HUD/HUD" instance=ExtResource("7_31yfp")]
+[node name="CancelKey" parent="Overlay/HUDViewport/CafeHUD" instance=ExtResource("7_31yfp")]
 position = Vector2(195, 253)
 scale = Vector2(0.8, 0.8)
 
-[node name="Sprite" parent="Overlay/HUD/HUD/CancelKey" index="0"]
+[node name="Sprite" parent="Overlay/HUDViewport/CafeHUD/CancelKey" index="0"]
 texture = ExtResource("9_2fqge")
-
-[node name="OrderReceipt" parent="Overlay/HUD" instance=ExtResource("7_goaex")]
 
 [node name="Environment" type="Node" parent="."]
 
@@ -433,66 +435,52 @@ track_position = NodePath("../Handler/SpeechLocation")
 
 [node name="CustomerFlow" type="Node" parent="Environment"]
 
-[node name="CustomerEntrance" type="Marker3D" parent="Environment/CustomerFlow" node_paths=PackedStringArray("queued_customers", "motion_path", "next_path")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.555, 0, -2.64532)
-script = ExtResource("18_diojo")
-queued_customers = [NodePath("../../CustomerMale"), NodePath("../../CustomerFemale")]
-motion_path = NodePath("QueuePath")
-next_path = NodePath("../CustomerNextUp")
-
-[node name="QueuePath" type="Path3D" parent="Environment/CustomerFlow/CustomerEntrance"]
-curve = SubResource("Curve3D_uhc7s")
-
-[node name="CustomerNextUp" type="Marker3D" parent="Environment/CustomerFlow" node_paths=PackedStringArray("active_customer", "motion_path", "next_path")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.555, 0, -2.645)
-script = ExtResource("19_stn1i")
-active_customer = NodePath("../../Handler")
-motion_path = NodePath("ApproachPath")
-next_path = NodePath("../CustomerOrdering")
-
-[node name="ApproachPath" type="Path3D" parent="Environment/CustomerFlow/CustomerNextUp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.555, 0, 1.94999)
-curve = SubResource("Curve3D_grcx2")
-
-[node name="CustomerOrdering" type="Marker3D" parent="Environment/CustomerFlow" node_paths=PackedStringArray("motion_path")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.695325)
-script = ExtResource("18_63kjy")
-motion_path = NodePath("ExitPath")
-
-[node name="ExitPath" type="Path3D" parent="Environment/CustomerFlow/CustomerOrdering"]
+[node name="CustomerPath" type="Path3D" parent="Environment/CustomerFlow" node_paths=PackedStringArray("queue_front", "counter", "exit")]
 unique_name_in_owner = true
-curve = SubResource("Curve3D_5yr2e")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2.645)
+curve = SubResource("Curve3D_srjgh")
+script = ExtResource("22_i87mr")
+queue_front = NodePath("QueueFront")
+counter = NodePath("Counter")
+exit = NodePath("CustomerExit")
 
-[node name="CustomerExit" type="Marker3D" parent="Environment/CustomerFlow"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.54051, 0, -0.695325)
+[node name="QueueFront" type="Marker3D" parent="Environment/CustomerFlow/CustomerPath"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0)
 
-[node name="ExitDoor" type="Area3D" parent="Environment/CustomerFlow/CustomerExit"]
+[node name="Counter" type="Marker3D" parent="Environment/CustomerFlow/CustomerPath"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[node name="CustomerExit" type="Marker3D" parent="Environment/CustomerFlow/CustomerPath"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
+
+[node name="ExitDoor" type="Area3D" parent="Environment/CustomerFlow/CustomerPath/CustomerExit"]
 script = ExtResource("18_r0epc")
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Environment/CustomerFlow/CustomerExit/ExitDoor"]
+[node name="CollisionShape" type="CollisionShape3D" parent="Environment/CustomerFlow/CustomerPath/CustomerExit/ExitDoor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2525, 0)
 shape = SubResource("BoxShape3D_6v8wq")
 
-[node name="Handler" parent="Environment" node_paths=PackedStringArray("cafe_path") instance=ExtResource("17_m4akn")]
+[node name="Handler" parent="Environment" instance=ExtResource("17_m4akn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.695325)
-cafe_path = NodePath("../CustomerFlow/CustomerNextUp")
 
 [node name="Sprite3D" parent="Environment/Handler/Visual" index="0"]
 material_override = SubResource("ShaderMaterial_mo8b8")
 
-[node name="CustomerMale" parent="Environment" node_paths=PackedStringArray("cafe_path") instance=ExtResource("17_m4akn")]
+[node name="CustomerAnimationStateMachine" parent="Environment/Handler" index="2" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Walking")
+
+[node name="CustomerMale" parent="Environment" instance=ExtResource("17_m4akn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.555, 0, -2.64532)
 character_texture = ExtResource("20_sf5ya")
-cafe_path = NodePath("../CustomerFlow/CustomerEntrance")
+order = SubResource("Resource_hkgb3")
 
 [node name="Sprite3D" parent="Environment/CustomerMale/Visual" index="0"]
 material_override = SubResource("ShaderMaterial_uoft5")
 texture = ExtResource("20_sf5ya")
 
-[node name="CustomerFemale" parent="Environment" node_paths=PackedStringArray("cafe_path") instance=ExtResource("17_m4akn")]
+[node name="CustomerFemale" parent="Environment" instance=ExtResource("17_m4akn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52698, 0, -2.64532)
 character_texture = ExtResource("21_jr68o")
-cafe_path = NodePath("../CustomerFlow/CustomerEntrance")
 
 [node name="Sprite3D" parent="Environment/CustomerFemale/Visual" index="0"]
 material_override = SubResource("ShaderMaterial_invm7")
@@ -534,13 +522,11 @@ transform = Transform3D(-3.49691e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.49691e-08, 
 
 [node name="Effects" type="Node" parent="."]
 
-[connection signal="pressed" from="Overlay/HUD/HUD/SellKey" to="Environment/CustomerFlow/CustomerNextUp" method="_on_customer_served"]
-[connection signal="pressed" from="Overlay/HUD/HUD/CancelKey" to="Environment/CustomerFlow/CustomerNextUp" method="_on_customer_served"]
-[connection signal="path_opened" from="Environment/CustomerFlow/CustomerNextUp" to="Environment/CustomerFlow/CustomerEntrance" method="_on_queue_move"]
-[connection signal="area_entered" from="Environment/CustomerFlow/CustomerExit/ExitDoor" to="Environment/CustomerFlow/CustomerExit/ExitDoor" method="_on_area_entered"]
+[connection signal="customer_order_placed" from="Environment/CustomerFlow/CustomerPath" to="." method="_on_order_placed"]
+[connection signal="area_entered" from="Environment/CustomerFlow/CustomerPath/CustomerExit/ExitDoor" to="Environment/CustomerFlow/CustomerPath/CustomerExit/ExitDoor" method="_on_area_entered"]
 
-[editable path="Overlay/HUD/HUD/SellKey"]
-[editable path="Overlay/HUD/HUD/CancelKey"]
+[editable path="Overlay/HUDViewport/CafeHUD/SellKey"]
+[editable path="Overlay/HUDViewport/CafeHUD/CancelKey"]
 [editable path="Environment/Handler"]
 [editable path="Environment/CustomerMale"]
 [editable path="Environment/CustomerFemale"]

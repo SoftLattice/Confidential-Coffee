@@ -1,11 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcdjonkjbxh0r"]
+[gd_scene load_steps=18 format=3 uid="uid://dcdjonkjbxh0r"]
 
 [ext_resource type="Script" path="res://Scenes/Common/Characters/customer.gd" id="1_ljmpa"]
 [ext_resource type="Texture2D" uid="uid://dxjl86xa2pcep" path="res://Characters/Handler/handler.png" id="2_topkw"]
+[ext_resource type="Script" path="res://Resources/Recipes/recipe.gd" id="3_1vvxe"]
 [ext_resource type="Shader" path="res://Scenes/Common/Characters/character_cafe.gdshader" id="3_645i4"]
+[ext_resource type="Script" path="res://Resources/Recipes/recipe_modifier.gd" id="4_cgjsr"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/Customer/customer_state_machine.gd" id="4_ulwlg"]
+[ext_resource type="Script" path="res://Resources/Recipes/customer_order.gd" id="5_c0gts"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/Customer/walking.gd" id="5_uc7lx"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/Customer/idle.gd" id="6_41h4p"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/Customer/queued.gd" id="7_kuhq5"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/Customer/next_up.gd" id="8_6ed6q"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/Customer/ordering.gd" id="9_7p6l2"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/Customer/exiting.gd" id="13_hcb6v"]
+
+[sub_resource type="Resource" id="Resource_imfn5"]
+script = ExtResource("3_1vvxe")
+display_name = "Coffee"
+modifiers = Array[ExtResource("4_cgjsr")]([])
+
+[sub_resource type="Resource" id="Resource_tafa8"]
+script = ExtResource("5_c0gts")
+items = Array[ExtResource("3_1vvxe")]([SubResource("Resource_imfn5")])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_noaim"]
 resource_local_to_scene = true
@@ -18,11 +34,17 @@ shader_parameter/albedo_texture = ExtResource("2_topkw")
 [sub_resource type="BoxShape3D" id="BoxShape3D_yhs0y"]
 size = Vector3(0.718506, 2.19766, 0.293945)
 
-[node name="Customer" type="Node3D" node_paths=PackedStringArray("visual_node", "state_machine")]
+[node name="Customer" type="Node3D" node_paths=PackedStringArray("visual_node", "animation_state_machine", "idle_state", "walking_state", "queue_state_machine", "next_up")]
 script = ExtResource("1_ljmpa")
 character_texture = ExtResource("2_topkw")
 visual_node = NodePath("Visual")
-state_machine = NodePath("CustomerStateMachine")
+order = SubResource("Resource_tafa8")
+animation_state_machine = NodePath("CustomerAnimationStateMachine")
+idle_state = NodePath("CustomerAnimationStateMachine/Idle")
+walking_state = NodePath("CustomerAnimationStateMachine/Walking")
+queue_state_machine = NodePath("CustomerQueueStateMachine")
+next_up = NodePath("CustomerQueueStateMachine/NextUp")
+velocity = 1.25
 
 [node name="SpeechLocation" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194373, 1.92046, 0)
@@ -38,15 +60,31 @@ shaded = true
 texture_filter = 0
 texture = ExtResource("2_topkw")
 
-[node name="CustomerStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="CustomerAnimationStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_ulwlg")
 initial_state = NodePath("Idle")
 
-[node name="Walking" type="Node" parent="CustomerStateMachine"]
+[node name="Idle" type="Node" parent="CustomerAnimationStateMachine"]
+script = ExtResource("6_41h4p")
+
+[node name="Walking" type="Node" parent="CustomerAnimationStateMachine"]
 script = ExtResource("5_uc7lx")
 
-[node name="Idle" type="Node" parent="CustomerStateMachine"]
-script = ExtResource("6_41h4p")
+[node name="CustomerQueueStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_ulwlg")
+initial_state = NodePath("Queued")
+
+[node name="Queued" type="Node" parent="CustomerQueueStateMachine"]
+script = ExtResource("7_kuhq5")
+
+[node name="NextUp" type="Node" parent="CustomerQueueStateMachine"]
+script = ExtResource("8_6ed6q")
+
+[node name="Ordering" type="Node" parent="CustomerQueueStateMachine"]
+script = ExtResource("9_7p6l2")
+
+[node name="Exiting" type="Node" parent="CustomerQueueStateMachine"]
+script = ExtResource("13_hcb6v")
 
 [node name="CollisionArea" type="Area3D" parent="."]
 
@@ -54,6 +92,7 @@ script = ExtResource("6_41h4p")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10182, 0)
 shape = SubResource("BoxShape3D_yhs0y")
 
-[connection signal="changed_paths" from="." to="CustomerStateMachine/Idle" method="_on_path_start"]
-[connection signal="start_walking" from="." to="CustomerStateMachine/Idle" method="_on_start_walking"]
-[connection signal="stop_walking" from="." to="CustomerStateMachine/Walking" method="_on_stop_walking"]
+[connection signal="approach_counter" from="." to="CustomerQueueStateMachine/NextUp" method="_on_approach_counter"]
+[connection signal="order_completed" from="." to="CustomerQueueStateMachine/Ordering" method="_on_order_completed"]
+[connection signal="start_walking" from="." to="CustomerAnimationStateMachine/Idle" method="_on_start_walking"]
+[connection signal="stop_walking" from="." to="CustomerAnimationStateMachine/Walking" method="_on_stop_walking"]

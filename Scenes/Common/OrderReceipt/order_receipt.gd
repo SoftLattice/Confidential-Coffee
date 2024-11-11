@@ -1,6 +1,6 @@
-extends Node2D
+class_name OrderReceipt extends Node2D
 
-@export var debug_receipt: Array[Recipe];
+@export var debug_order: CustomerOrder;
 
 @export var landing_label: RichTextLabel;
 @export var text_container: MarginContainer;
@@ -8,31 +8,31 @@ extends Node2D
 
 const VERTICAL_MARGIN: int = 4;
 var displayed_lines: int = 0;
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-    prepare_display(render_message);
+var customer: Customer;
 
 # This just pushes out a generic message for testing
-func render_message(label: RichTextLabel) -> int:
+func render_message(label: RichTextLabel, order: CustomerOrder) -> int:
     label.text = "";
     label.push_font_size(12);
 
+    var lines_printed: int = 1;
     label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER);
     label.append_text("***ORDER***");
     label.pop()
 
-    for recipe in debug_receipt:
+    for recipe in order.items:
         label.append_text("\n");
-        recipe.print_to_label(label);
+        lines_printed += recipe.print_to_label(label);
 
     label.pop();
-    return 4
+    #TODO: Print TIME of day????
+    return lines_printed;
 
-
-func prepare_display(render_function: Callable) -> void:
+var active_order: CustomerOrder = null;
+func prepare_display(order: CustomerOrder) -> void:
+    active_order = order;
     # Render the text into the landing display
-    displayed_lines = render_function.call(landing_label);
+    displayed_lines = render_message(landing_label, order);
 
     # Figure out the smallest (vertical_ size)
     await RenderingServer.frame_post_draw;
@@ -45,13 +45,25 @@ func prepare_display(render_function: Callable) -> void:
     await RenderingServer.frame_post_draw;
     pop_receipt();
 
-
 func _on_meta_clicked(resource: ReceiptResource) -> void:
     resource._on_resource_select();
-    render_message(landing_label);
+    render_message(landing_label, active_order);
 
 
 # TODO: Juice up the receipt printing
 func pop_receipt() -> void:
     var slide_tween: Tween = create_tween().bind_node(self);
-    slide_tween.tween_property(self, "global_position:y", global_position.y - primary_container.size.y, 2.);
+    slide_tween.tween_property(self, "global_position:y", global_position.y - primary_container.size.y, 1.5);
+
+# TODO: Juice up the receipt being torn away
+func remove_receipt() -> void:
+    queue_free();
+
+
+func _on_complete_order() -> void:
+    customer.order_completed.emit.call_deferred(false);
+    remove_receipt();
+
+func _on_cancel_order() -> void:
+    customer.order_completed.emit.call_deferred(true);
+    remove_receipt();

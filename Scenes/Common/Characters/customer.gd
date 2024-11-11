@@ -1,20 +1,39 @@
 class_name Customer extends Node3D
 
+signal start_walking();
+signal stop_walking();
+signal at_queue_front();
+signal approach_counter();
+signal place_order(order: CustomerOrder);
+signal order_completed(canceled: bool);
+
 @export var character_texture: Texture2D;
 @export var visual_node: Node3D;
 @export var cafe_path: CafePath;
-@export var state_machine: CustomerStateMachine;
 
-signal changed_paths();
-signal start_walking();
-signal stop_walking();
+@export var order: CustomerOrder;
 
-func change_paths(new_path: CafePath) -> void:
-    cafe_path  = new_path;
-    new_path._on_join_path(self);
-    changed_paths.emit();
+@export_group("Animation Properties")
+@export var animation_state_machine: CustomerStateMachine;
 
-const STATE_WALKING: String = "walking";
+@export var idle_state: CustomerState;
+@export var walking_state: CustomerState;
 
-func current_state() -> String:
-    return state_machine.current_state.name.to_lower();
+@export_group("Queuing Properties")
+@export var queue_state_machine: CustomerStateMachine;
+@export var next_up: CustomerState;
+
+@export var velocity: float = 1.0;
+@export var radius: float = 0.5;
+
+func is_customer_idle() -> bool:
+    return animation_state_machine.current_state == idle_state;
+
+func is_customer_walking() -> bool:
+    return animation_state_machine.current_state == walking_state;
+
+func get_customer_path() -> CustomerPath:
+    return get_parent().get_node("%CustomerPath");
+
+func is_customer_ready() -> bool:
+    return queue_state_machine.current_state == next_up;

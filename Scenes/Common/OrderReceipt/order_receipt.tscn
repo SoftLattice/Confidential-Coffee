@@ -1,34 +1,34 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7jb0q5etl8tc"]
+[gd_scene load_steps=11 format=3 uid="uid://c7jb0q5etl8tc"]
 
 [ext_resource type="Script" path="res://Scenes/Common/OrderReceipt/order_receipt.gd" id="1_wym1e"]
 [ext_resource type="Script" path="res://Resources/Recipes/recipe.gd" id="2_050rq"]
 [ext_resource type="Theme" uid="uid://c2uxmkcgnk0ae" path="res://Menus/Themes/order_receipt.tres" id="2_h8mf6"]
 [ext_resource type="Script" path="res://Resources/Recipes/recipe_modifier.gd" id="3_pjboe"]
 [ext_resource type="Texture2D" uid="uid://cg545isbhsax2" path="res://Textures/Overlay/receipt_paper.png" id="3_wls5r"]
+[ext_resource type="Script" path="res://Resources/Recipes/customer_order.gd" id="4_nsrxo"]
 
-[sub_resource type="Resource" id="Resource_ee82k"]
+[sub_resource type="Resource" id="Resource_mlu81"]
+script = ExtResource("3_pjboe")
+display_name = "Vanilla"
+
+[sub_resource type="Resource" id="Resource_6if8e"]
 script = ExtResource("2_050rq")
 display_name = "Coffee"
-modifiers = Array[ExtResource("3_pjboe")]([])
+modifiers = Array[ExtResource("3_pjboe")]([SubResource("Resource_mlu81")])
 
-[sub_resource type="Resource" id="Resource_0a1tu"]
-script = ExtResource("3_pjboe")
-display_name = "Caramel"
-
-[sub_resource type="Resource" id="Resource_s22g5"]
+[sub_resource type="Resource" id="Resource_pmjsg"]
 script = ExtResource("2_050rq")
 display_name = "Latte"
-modifiers = Array[ExtResource("3_pjboe")]([SubResource("Resource_0a1tu")])
-
-[sub_resource type="Resource" id="Resource_km5aw"]
-script = ExtResource("2_050rq")
-display_name = "Espresso"
 modifiers = Array[ExtResource("3_pjboe")]([])
+
+[sub_resource type="Resource" id="Resource_x8sn0"]
+script = ExtResource("4_nsrxo")
+items = Array[ExtResource("2_050rq")]([SubResource("Resource_6if8e"), SubResource("Resource_pmjsg")])
 
 [node name="OrderReceipt" type="Node2D" node_paths=PackedStringArray("landing_label", "text_container", "primary_container")]
 position = Vector2(72, 270)
 script = ExtResource("1_wym1e")
-debug_receipt = Array[ExtResource("2_050rq")]([SubResource("Resource_ee82k"), SubResource("Resource_s22g5"), SubResource("Resource_km5aw")])
+debug_order = SubResource("Resource_x8sn0")
 landing_label = NodePath("LandingLabel")
 text_container = NodePath("Container/TextContainer")
 primary_container = NodePath("Container")

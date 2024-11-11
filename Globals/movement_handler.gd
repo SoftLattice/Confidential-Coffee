@@ -17,7 +17,6 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventScreenDrag:
         parse_drag_movement(event);
-        print("HANDLING");
 
 func parse_drag_movement(event: InputEventScreenDrag) -> void:
     dead_time = minimum_dead_time;

@@ -27,17 +27,8 @@ func _on_queue_move() -> void:
 func _pack_customers() -> void:
     pass;
 
-func _process(delta: float) -> void:
-    for i in range(queued_customers.size()):
-        # Check if any customer is not packed...
-        if (customer_flags[i] & PACKED_CUSTOMER) == 0:
-            if queued_customers[i].current_state() != Customer.STATE_WALKING:
-                queued_customers[i].start_walking.emit.call_deferred();
-            else:
-                var furthest_point: float = motion_path.curve.get_baked_length() - i * customer_spacing;
-                if customer_offset(queued_customers[i]) >= furthest_point:
-                    customer_flags[i] |= PACKED_CUSTOMER;
-                    queued_customers[i].stop_walking.emit();
+func _process(_delta: float) -> void:
+    pass;
 
 func customer_offset(customer: Customer) -> float:
     return motion_path.curve.get_closest_offset(to_local(customer.global_position));
