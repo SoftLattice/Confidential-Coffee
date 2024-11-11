@@ -1,9 +1,10 @@
-[gd_scene load_steps=41 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=50 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
 [ext_resource type="Script" path="res://Scenes/Cafe/day_intro.gd" id="3_n1fs1"]
 [ext_resource type="Script" path="res://Scenes/Cafe/clock_container.gd" id="4_2fd8n"]
+[ext_resource type="Script" path="res://Scenes/Cafe/hud.gd" id="4_hgyob"]
 [ext_resource type="Texture2D" uid="uid://cwywuy11l4fyj" path="res://Scenes/Cafe/Textures/clock_face.png" id="4_q2nnl"]
 [ext_resource type="Texture2D" uid="uid://by61oyinxak7f" path="res://Scenes/Cafe/Textures/clock_hand.png" id="5_srdep"]
 [ext_resource type="PackedScene" uid="uid://mjw0orq2pttq" path="res://Scenes/Common/pixel_camera.tscn" id="5_vromj"]
@@ -20,8 +21,13 @@
 [ext_resource type="Shader" path="res://Scenes/Common/Characters/character_cafe.gdshader" id="17_i0fn5"]
 [ext_resource type="PackedScene" uid="uid://dcdjonkjbxh0r" path="res://Scenes/Common/Characters/customer.tscn" id="17_m4akn"]
 [ext_resource type="Texture2D" uid="uid://dxjl86xa2pcep" path="res://Characters/Handler/handler.png" id="17_y72sv"]
+[ext_resource type="Script" path="res://Scenes/Cafe/cafe_path.gd" id="18_63kjy"]
+[ext_resource type="Script" path="res://Scenes/Cafe/queue_start_path.gd" id="18_diojo"]
+[ext_resource type="Script" path="res://Scenes/Cafe/exit_door.gd" id="18_r0epc"]
+[ext_resource type="Script" path="res://Scenes/Cafe/queue_end_path.gd" id="19_stn1i"]
 [ext_resource type="Texture2D" uid="uid://cid7i8pi17u5g" path="res://Characters/MaleCharacter/male_customer.png" id="20_sf5ya"]
 [ext_resource type="Texture2D" uid="uid://dr3obbvsegrk3" path="res://Characters/FemaleCharacter/female_customer.png" id="21_jr68o"]
+[ext_resource type="PackedScene" uid="uid://bnkc8jhwbld7v" path="res://Scenes/Cafe/Assets/coffee_maker.tscn" id="24_7t71w"]
 
 [sub_resource type="Environment" id="Environment_w3stk"]
 background_mode = 1
@@ -63,12 +69,29 @@ _surfaces = [{
 
 [sub_resource type="Curve3D" id="Curve3D_uhc7s"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qxk14"]
+[sub_resource type="Curve3D" id="Curve3D_grcx2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.551217, 0, -1.94745, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_5yr2e"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -6.543, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6v8wq"]
+size = Vector3(0.619141, 2.61829, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mo8b8"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("17_i0fn5")
@@ -76,15 +99,15 @@ shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
 shader_parameter/modulate_strength = 0.0
 shader_parameter/albedo_texture = ExtResource("17_y72sv")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uegyx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uoft5"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("17_i0fn5")
-shader_parameter/modulate_color = Color(0.501961, 0.501961, 0.501961, 1)
+shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
 shader_parameter/modulate_strength = 1.0
 shader_parameter/albedo_texture = ExtResource("20_sf5ya")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7uba"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_invm7"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("17_i0fn5")
@@ -236,7 +259,7 @@ _surfaces = [{
 script = ExtResource("1_8x71m")
 day_intro = NodePath("Overlay/Preamble/DayIntro")
 mark_primary = NodePath("Environment/PlayerControl")
-mark_coffee = NodePath("Environment/CoffeeMaker/CoffeeMakerView")
+mark_coffee = NodePath("Environment/CoffeeMakerOLD/CoffeeMakerView")
 
 [node name="Overlay" type="Node" parent="."]
 
@@ -295,6 +318,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_6ohen")
+script = ExtResource("4_hgyob")
 
 [node name="ClockContainer" type="MarginContainer" parent="Overlay/HUD/HUD" node_paths=PackedStringArray("clock_hand")]
 layout_mode = 1
@@ -376,7 +400,7 @@ update_scale = false
 transform = Transform3D(0.774004, 0.0978828, -0.62557, 1.49012e-08, 0.987979, 0.154589, 0.633181, -0.119652, 0.7647, 0, 1.7, 1.7)
 script = ExtResource("7_vam80")
 look_at_mode = 2
-look_at_target = NodePath("../CoffeeMaker/CoffeeMakerView")
+look_at_target = NodePath("../CoffeeMakerOLD/CoffeeMakerView")
 tween_resource = SubResource("Resource_xv80h")
 
 [node name="PlayerControl" type="Marker3D" parent="Environment"]
@@ -388,89 +412,135 @@ script = ExtResource("9_uktlt")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment/Lights"]
 transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, -5.86419e-16, -1, -4.37114e-08, -3.4, 4, 0)
 
-[node name="Furniture" type="Node3D" parent="Environment"]
+[node name="Counters" type="Node3D" parent="Environment"]
 
-[node name="Counter2" type="MeshInstance3D" parent="Environment/Furniture"]
+[node name="Counter2" type="MeshInstance3D" parent="Environment/Counters"]
 mesh = SubResource("ArrayMesh_asc6m")
 skeleton = NodePath("")
 
-[node name="Counter3" type="MeshInstance3D" parent="Environment/Furniture"]
+[node name="Counter3" type="MeshInstance3D" parent="Environment/Counters"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 mesh = SubResource("ArrayMesh_asc6m")
 skeleton = NodePath("")
 
-[node name="Counter4" type="MeshInstance3D" parent="Environment/Furniture"]
+[node name="Counter4" type="MeshInstance3D" parent="Environment/Counters"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 mesh = SubResource("ArrayMesh_asc6m")
 skeleton = NodePath("")
 
-[node name="CustomerQueueEnd" type="Marker3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.355, 0, -4.25)
+[node name="SpeechBubble" parent="Environment" node_paths=PackedStringArray("track_position") instance=ExtResource("11_dle77")]
+track_position = NodePath("../Handler/SpeechLocation")
 
-[node name="Path3D" type="Path3D" parent="Environment/CustomerQueueEnd"]
+[node name="CustomerFlow" type="Node" parent="Environment"]
+
+[node name="CustomerEntrance" type="Marker3D" parent="Environment/CustomerFlow" node_paths=PackedStringArray("queued_customers", "motion_path", "next_path")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.555, 0, -2.64532)
+script = ExtResource("18_diojo")
+queued_customers = [NodePath("../../CustomerMale"), NodePath("../../CustomerFemale")]
+motion_path = NodePath("QueuePath")
+next_path = NodePath("../CustomerNextUp")
+
+[node name="QueuePath" type="Path3D" parent="Environment/CustomerFlow/CustomerEntrance"]
 curve = SubResource("Curve3D_uhc7s")
 
-[node name="CustomerStandingPoint" type="Marker3D" parent="Environment"]
+[node name="CustomerNextUp" type="Marker3D" parent="Environment/CustomerFlow" node_paths=PackedStringArray("active_customer", "motion_path", "next_path")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.555, 0, -2.645)
+script = ExtResource("19_stn1i")
+active_customer = NodePath("../../Handler")
+motion_path = NodePath("ApproachPath")
+next_path = NodePath("../CustomerOrdering")
+
+[node name="ApproachPath" type="Path3D" parent="Environment/CustomerFlow/CustomerNextUp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.555, 0, 1.94999)
+curve = SubResource("Curve3D_grcx2")
+
+[node name="CustomerOrdering" type="Marker3D" parent="Environment/CustomerFlow" node_paths=PackedStringArray("motion_path")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.695325)
+script = ExtResource("18_63kjy")
+motion_path = NodePath("ExitPath")
 
-[node name="SpeechBubble" parent="Environment" node_paths=PackedStringArray("track_position") instance=ExtResource("11_dle77")]
-track_position = NodePath("../Customer/SpeechLocation")
+[node name="ExitPath" type="Path3D" parent="Environment/CustomerFlow/CustomerOrdering"]
+unique_name_in_owner = true
+curve = SubResource("Curve3D_5yr2e")
 
-[node name="Customer" parent="Environment" instance=ExtResource("17_m4akn")]
+[node name="CustomerExit" type="Marker3D" parent="Environment/CustomerFlow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.54051, 0, -0.695325)
+
+[node name="ExitDoor" type="Area3D" parent="Environment/CustomerFlow/CustomerExit"]
+script = ExtResource("18_r0epc")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Environment/CustomerFlow/CustomerExit/ExitDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2525, 0)
+shape = SubResource("BoxShape3D_6v8wq")
+
+[node name="Handler" parent="Environment" node_paths=PackedStringArray("cafe_path") instance=ExtResource("17_m4akn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.695325)
+cafe_path = NodePath("../CustomerFlow/CustomerNextUp")
 
-[node name="Sprite3D" parent="Environment/Customer" index="1"]
-material_override = SubResource("ShaderMaterial_qxk14")
+[node name="Sprite3D" parent="Environment/Handler/Visual" index="0"]
+material_override = SubResource("ShaderMaterial_mo8b8")
 
-[node name="CustomerMale" parent="Environment" instance=ExtResource("17_m4akn")]
+[node name="CustomerMale" parent="Environment" node_paths=PackedStringArray("cafe_path") instance=ExtResource("17_m4akn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.555, 0, -2.64532)
+character_texture = ExtResource("20_sf5ya")
+cafe_path = NodePath("../CustomerFlow/CustomerEntrance")
 
-[node name="Sprite3D" parent="Environment/CustomerMale" index="1"]
-material_override = SubResource("ShaderMaterial_uegyx")
+[node name="Sprite3D" parent="Environment/CustomerMale/Visual" index="0"]
+material_override = SubResource("ShaderMaterial_uoft5")
 texture = ExtResource("20_sf5ya")
 
-[node name="CustomerFemale" parent="Environment" instance=ExtResource("17_m4akn")]
+[node name="CustomerFemale" parent="Environment" node_paths=PackedStringArray("cafe_path") instance=ExtResource("17_m4akn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52698, 0, -2.64532)
+character_texture = ExtResource("21_jr68o")
+cafe_path = NodePath("../CustomerFlow/CustomerEntrance")
 
-[node name="Sprite3D" parent="Environment/CustomerFemale" index="1"]
-material_override = SubResource("ShaderMaterial_n7uba")
-texture = ExtResource("21_jr68o")
+[node name="Sprite3D" parent="Environment/CustomerFemale/Visual" index="0"]
+material_override = SubResource("ShaderMaterial_invm7")
 
-[node name="CoffeeMaker" type="Node3D" parent="Environment"]
+[node name="CoffeeMakerOLD" type="Node3D" parent="Environment"]
 transform = Transform3D(-3.27835e-08, 0, -0.75, 0, 0.75, 0, 0.75, 0, -3.27835e-08, 1.21387, 1, 0.015878)
+visible = false
 
-[node name="Base" type="MeshInstance3D" parent="Environment/CoffeeMaker"]
+[node name="Base" type="MeshInstance3D" parent="Environment/CoffeeMakerOLD"]
 mesh = SubResource("ArrayMesh_6ohf7")
 skeleton = NodePath("")
 
-[node name="HotPlates" type="MeshInstance3D" parent="Environment/CoffeeMaker"]
+[node name="HotPlates" type="MeshInstance3D" parent="Environment/CoffeeMakerOLD"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.192029, 0.247349, -0.238551)
 mesh = SubResource("ArrayMesh_od51u")
 skeleton = NodePath("")
 
-[node name="Drip" type="MeshInstance3D" parent="Environment/CoffeeMaker"]
+[node name="Drip" type="MeshInstance3D" parent="Environment/CoffeeMakerOLD"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.189649, 0.75595, -0.238551)
 mesh = SubResource("ArrayMesh_y6uc3")
 skeleton = NodePath("")
 
-[node name="Carafe" type="MeshInstance3D" parent="Environment/CoffeeMaker"]
+[node name="Carafe" type="MeshInstance3D" parent="Environment/CoffeeMakerOLD"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.192029, 0.267794, -0.238551)
 mesh = SubResource("ArrayMesh_hinhy")
 skeleton = NodePath("")
 
-[node name="Select" type="Area3D" parent="Environment/CoffeeMaker"]
+[node name="Select" type="Area3D" parent="Environment/CoffeeMakerOLD"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/CoffeeMaker/Select"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/CoffeeMakerOLD/Select"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500008, 0)
 shape = SubResource("BoxShape3D_hflrq")
 
-[node name="CoffeeMakerView" type="Marker3D" parent="Environment/CoffeeMaker"]
+[node name="CoffeeMakerView" type="Marker3D" parent="Environment/CoffeeMakerOLD"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.266829, 0.533333, -0.000173211)
+
+[node name="CoffeeMaker" parent="Environment" instance=ExtResource("24_7t71w")]
+transform = Transform3D(-3.49691e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.49691e-08, 1.2, 1, 0)
 
 [node name="Effects" type="Node" parent="."]
 
+[connection signal="pressed" from="Overlay/HUD/HUD/SellKey" to="Environment/CustomerFlow/CustomerNextUp" method="_on_customer_served"]
+[connection signal="pressed" from="Overlay/HUD/HUD/CancelKey" to="Environment/CustomerFlow/CustomerNextUp" method="_on_customer_served"]
+[connection signal="path_opened" from="Environment/CustomerFlow/CustomerNextUp" to="Environment/CustomerFlow/CustomerEntrance" method="_on_queue_move"]
+[connection signal="area_entered" from="Environment/CustomerFlow/CustomerExit/ExitDoor" to="Environment/CustomerFlow/CustomerExit/ExitDoor" method="_on_area_entered"]
+
 [editable path="Overlay/HUD/HUD/SellKey"]
 [editable path="Overlay/HUD/HUD/CancelKey"]
-[editable path="Environment/Customer"]
+[editable path="Environment/Handler"]
 [editable path="Environment/CustomerMale"]
 [editable path="Environment/CustomerFemale"]

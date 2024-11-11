@@ -19,10 +19,6 @@ texture = ExtResource("2_dwvlg")
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_d3wg5")
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
-shape = SubResource("RectangleShape2D_d3wg5")
-
 [connection signal="input_event" from="CollisionArea" to="." method="_on_collision_area_input_event"]
 [connection signal="mouse_entered" from="CollisionArea" to="." method="_on_collision_area_mouse_entered"]
 [connection signal="mouse_exited" from="CollisionArea" to="." method="_on_collision_area_mouse_exited"]
-[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]

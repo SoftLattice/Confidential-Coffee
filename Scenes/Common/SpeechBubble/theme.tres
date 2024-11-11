@@ -7,7 +7,11 @@
 
 [resource]
 RichTextLabel/colors/default_color = Color(0.227451, 0.207843, 0.196078, 1)
-RichTextLabel/font_sizes/normal_font_size = 18
+RichTextLabel/font_sizes/bold_font_size = 12
+RichTextLabel/font_sizes/bold_italics_font_size = 12
+RichTextLabel/font_sizes/italics_font_size = 12
+RichTextLabel/font_sizes/mono_font_size = 12
+RichTextLabel/font_sizes/normal_font_size = 12
 RichTextLabel/fonts/bold_font = ExtResource("1_4eogv")
 RichTextLabel/fonts/bold_italics_font = ExtResource("2_qornb")
 RichTextLabel/fonts/italics_font = ExtResource("2_iv1aa")

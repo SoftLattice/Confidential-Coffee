@@ -16,8 +16,12 @@ label_options = [NodePath("LabelSmall"), NodePath("LabelMedium"), NodePath("Labe
 
 [node name="Container" type="MarginContainer" parent="."]
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 20.0
 theme = ExtResource("1_fv67g")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Container"]
 layout_mode = 2
@@ -31,45 +35,38 @@ patch_margin_bottom = 12
 [node name="MarginContainer" type="MarginContainer" parent="Container"]
 layout_mode = 2
 theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 12
 
 [node name="RealTextLabel" type="RichTextLabel" parent="Container/MarginContainer"]
 layout_mode = 2
 bbcode_enabled = true
-text = "HELLO THERE"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
+shortcut_keys_enabled = false
 
 [node name="LabelSmall" type="RichTextLabel" parent="."]
 offset_right = 64.0
-offset_bottom = 26.0
 theme = ExtResource("1_fv67g")
 bbcode_enabled = true
-text = "Small"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
 
 [node name="LabelMedium" type="RichTextLabel" parent="."]
 offset_right = 128.0
-offset_bottom = 26.0
 theme = ExtResource("1_fv67g")
 bbcode_enabled = true
-text = "Medium
-"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
 
 [node name="LabelLarge" type="RichTextLabel" parent="."]
-offset_right = 256.0
-offset_bottom = 26.0
+offset_right = 192.0
 theme = ExtResource("1_fv67g")
 bbcode_enabled = true
-text = "Large"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2

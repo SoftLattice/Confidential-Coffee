@@ -12,6 +12,7 @@ class_name BubbleControl extends Node2D
 
 func _ready() -> void:
     prepare_display(render_message);
+    track_position.tree_exiting.connect(queue_free);
 
 func _process(_delta: float) -> void:
     if is_instance_valid(track_position):
@@ -21,7 +22,13 @@ func track_target() -> void:
     var cam: Camera3D = get_viewport().get_camera_3d();
     var target_position: Vector2 = to_local(cam.unproject_position(track_position.global_position));
 
-    global_position = to_global(target_position - tail_node.position);
+    var viewport_bounds: Vector2 = get_viewport().get_visible_rect().size - bubble_container.size;
+    var new_global_position: Vector2 = to_global(target_position - tail_node.position);
+
+    new_global_position.x = clampf(new_global_position.x, 0, viewport_bounds.x);
+    new_global_position.y = clampf(new_global_position.y, 0, viewport_bounds.y);
+
+    global_position = new_global_position;
 
 
 # This just pushes out a generic message for testing

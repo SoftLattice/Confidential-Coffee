@@ -16,7 +16,3 @@ func _on_collision_area_mouse_entered() -> void:
 
 func _on_collision_area_mouse_exited() -> void:
     mouse_in = false;
-
-
-func _on_touch_screen_button_pressed() -> void:
-    print("TOUCHED!");
