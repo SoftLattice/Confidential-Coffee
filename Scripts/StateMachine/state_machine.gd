@@ -14,7 +14,7 @@ func _ready() -> void:
             child.machine = self;
     
     if initial_state:
-        initial_state._enter_state();
+        initial_state._enter_state.call_deferred();
         current_state = initial_state;
 
 func _initialize_machine() -> void:

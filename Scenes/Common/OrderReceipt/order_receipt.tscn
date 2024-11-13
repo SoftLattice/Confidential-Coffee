@@ -25,8 +25,12 @@ modifiers = Array[ExtResource("3_pjboe")]([])
 script = ExtResource("4_nsrxo")
 items = Array[ExtResource("2_050rq")]([SubResource("Resource_6if8e"), SubResource("Resource_pmjsg")])
 
-[node name="OrderReceipt" type="Node2D" node_paths=PackedStringArray("landing_label", "text_container", "primary_container")]
-position = Vector2(72, 270)
+[node name="OrderReceipt" type="Control" node_paths=PackedStringArray("landing_label", "text_container", "primary_container")]
+layout_mode = 3
+anchor_left = 0.15
+anchor_top = 1.0
+anchor_right = 0.15
+anchor_bottom = 1.0
 script = ExtResource("1_wym1e")
 debug_order = SubResource("Resource_x8sn0")
 landing_label = NodePath("LandingLabel")
@@ -34,6 +38,7 @@ text_container = NodePath("Container/TextContainer")
 primary_container = NodePath("Container")
 
 [node name="Container" type="MarginContainer" parent="."]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -68,6 +73,7 @@ theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 2
 
 [node name="LandingLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -77,5 +83,3 @@ grow_horizontal = 2
 theme = ExtResource("2_h8mf6")
 fit_content = true
 scroll_active = false
-
-[connection signal="resized" from="Container" to="." method="_on_container_resized"]

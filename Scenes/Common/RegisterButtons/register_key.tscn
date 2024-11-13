@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3wg5"]
 size = Vector2(36, 46)
 
-[node name="RegisterKey" type="Node2D"]
+[node name="RegisterKey" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_g3hwg")
 
 [node name="Sprite" type="Sprite2D" parent="."]

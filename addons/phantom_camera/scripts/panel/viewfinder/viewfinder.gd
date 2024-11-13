@@ -1,5 +1,5 @@
 @tool
-extends Control
+class_name ViewFinderPanel extends Control
 
 #region Constants
 

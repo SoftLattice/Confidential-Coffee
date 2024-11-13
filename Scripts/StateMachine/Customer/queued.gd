@@ -46,4 +46,3 @@ func target_offset() -> float:
 		var ahead_offset: float = customer_path.get_closest_offset_from_global(ahead_customer.global_position);
 		return ahead_offset - ahead_customer.radius - customer.radius;
 	return 0;
-

@@ -24,6 +24,7 @@ TextureAtlas="*res://Globals/texture_atlas.tscn"
 SaveData="*res://Globals/save_data.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 MovementHandler="*res://Globals/movement_handler.tscn"
+CafeManager="*res://Globals/cafe_manager.tscn"
 
 [debug]
 

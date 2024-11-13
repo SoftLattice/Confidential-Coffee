@@ -3,7 +3,14 @@ class_name Cafe extends Node
 @export var day_intro: RichTextLabel;
 @export var pcam_main: PhantomCamera3D;
 
+# Singleton pattern
+static var _active_cafe: Cafe;
+static func get_cafe() -> Cafe:
+    return _active_cafe;
+
+
 func _ready() -> void:
+    _active_cafe = self;
     pcam_main = get_node("%PCamMainView");
 
 @export var mark_primary: Node3D;
@@ -13,12 +20,11 @@ func _ready() -> void:
 
 @onready var cafe_hud: CafeHUD = get_node("%CafeHUD");
 
+@export var debug_order: CustomerOrder;
+
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("debug"):
-        if pcam_main.look_at_target == mark_primary:
-            pcam_main.look_at_target = mark_coffee;
-        else:
-            pcam_main.look_at_target = mark_primary;
+        spawn_customer.emit.call_deferred(debug_order);
 
 func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     var order_receipt: OrderReceipt = receipt_scene.instantiate();
@@ -29,3 +35,6 @@ func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     cafe_hud.cancel_key.pressed.connect(order_receipt._on_cancel_order, CONNECT_ONE_SHOT);
 
     order_receipt.prepare_display.call_deferred(order);
+
+
+signal spawn_customer(order: CustomerOrder);

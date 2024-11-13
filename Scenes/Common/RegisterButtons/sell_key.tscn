@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cou2iiqdd16kt"]
+[gd_scene load_steps=3 format=3 uid="uid://x6vv2vweb3wc"]
 
 [ext_resource type="PackedScene" uid="uid://0np3f6fpdso0" path="res://Scenes/Common/RegisterButtons/register_key.tscn" id="1_lkg8c"]
+[ext_resource type="Texture2D" uid="uid://civgi14dtocw2" path="res://Textures/Overlay/cashout_key.png" id="2_7nwuj"]
 
-[node name="SellKey" type="Node"]
+[node name="SellKey" instance=ExtResource("1_lkg8c")]
 
-[node name="RegisterKey" parent="." instance=ExtResource("1_lkg8c")]
-
-[editable path="RegisterKey"]
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_7nwuj")

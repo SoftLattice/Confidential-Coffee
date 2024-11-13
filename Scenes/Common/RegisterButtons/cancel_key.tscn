@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://fe2ffiu87c5d"]
+
+[ext_resource type="PackedScene" uid="uid://0np3f6fpdso0" path="res://Scenes/Common/RegisterButtons/register_key.tscn" id="1_2suo0"]
+[ext_resource type="Texture2D" uid="uid://b4m5xqc0173q7" path="res://Textures/Overlay/cancel_key.png" id="2_5xuef"]
+
+[node name="CancelKey" instance=ExtResource("1_2suo0")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_5xuef")

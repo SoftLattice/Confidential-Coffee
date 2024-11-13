@@ -1,4 +1,4 @@
-class_name OrderReceipt extends Node2D
+class_name OrderReceipt extends Control
 
 @export var debug_order: CustomerOrder;
 

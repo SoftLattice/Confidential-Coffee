@@ -4,7 +4,7 @@ extends VBoxContainer
 var editor_plugin: EditorPlugin
 
 @onready var updater: Control = %UpdateButton
-@onready var viewfinder: Control = %ViewfinderPanel
+@onready var viewfinder: ViewFinderPanel = %ViewfinderPanel
 
 
 func _ready():

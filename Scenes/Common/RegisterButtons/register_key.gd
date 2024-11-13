@@ -1,4 +1,4 @@
-class_name RegisterKey extends Node2D
+class_name RegisterKey extends Control
 
 signal pressed();
 
