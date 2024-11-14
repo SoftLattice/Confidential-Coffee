@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=42 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
@@ -8,23 +8,21 @@
 [ext_resource type="Texture2D" uid="uid://cwywuy11l4fyj" path="res://Scenes/Cafe/Textures/clock_face.png" id="4_q2nnl"]
 [ext_resource type="Texture2D" uid="uid://by61oyinxak7f" path="res://Scenes/Cafe/Textures/clock_hand.png" id="5_srdep"]
 [ext_resource type="PackedScene" uid="uid://mjw0orq2pttq" path="res://Scenes/Common/pixel_camera.tscn" id="5_vromj"]
+[ext_resource type="PackedScene" uid="uid://006km13gs34g" path="res://Scenes/Common/Characters/Handler/handler_intro.tscn" id="6_3f48u"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="7_0je8c"]
 [ext_resource type="PackedScene" uid="uid://c7jb0q5etl8tc" path="res://Scenes/Common/OrderReceipt/order_receipt.tscn" id="7_goaex"]
+[ext_resource type="Script" path="res://Resources/Customers/customer_definition.gd" id="7_k8tcd"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="7_vam80"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_qpvg1"]
 [ext_resource type="PackedScene" uid="uid://x6vv2vweb3wc" path="res://Scenes/Common/RegisterButtons/sell_key.tscn" id="9_4kugm"]
 [ext_resource type="Script" path="res://Scenes/Common/player_controller.gd" id="9_uktlt"]
 [ext_resource type="PackedScene" uid="uid://fe2ffiu87c5d" path="res://Scenes/Common/RegisterButtons/cancel_key.tscn" id="10_aa5we"]
 [ext_resource type="Script" path="res://Scenes/Cafe/customer_spawner.gd" id="16_g4dun"]
-[ext_resource type="Shader" path="res://Scenes/Common/Characters/character_cafe.gdshader" id="17_i0fn5"]
-[ext_resource type="PackedScene" uid="uid://dcdjonkjbxh0r" path="res://Scenes/Common/Characters/customer.tscn" id="17_m4akn"]
-[ext_resource type="Texture2D" uid="uid://dxjl86xa2pcep" path="res://Characters/Handler/handler.png" id="17_y72sv"]
 [ext_resource type="Script" path="res://Scenes/Cafe/exit_door.gd" id="18_r0epc"]
-[ext_resource type="Texture2D" uid="uid://cid7i8pi17u5g" path="res://Characters/MaleCharacter/male_customer.png" id="20_sf5ya"]
-[ext_resource type="Texture2D" uid="uid://dr3obbvsegrk3" path="res://Characters/FemaleCharacter/female_customer.png" id="21_jr68o"]
 [ext_resource type="Script" path="res://Scenes/Cafe/customer_queue_path.gd" id="22_i87mr"]
 [ext_resource type="PackedScene" uid="uid://bnkc8jhwbld7v" path="res://Scenes/Cafe/Assets/coffee_maker.tscn" id="24_7t71w"]
 [ext_resource type="Script" path="res://Resources/Recipes/recipe.gd" id="24_64p5n"]
+[ext_resource type="PackedScene" uid="uid://tqdyj3qifga6" path="res://Scenes/Cafe/Assets/cup_rack.tscn" id="25_2lf1c"]
 [ext_resource type="Script" path="res://Resources/Recipes/recipe_modifier.gd" id="25_vr4f0"]
 [ext_resource type="Script" path="res://Resources/Recipes/customer_order.gd" id="26_u5kap"]
 
@@ -36,6 +34,10 @@ modifiers = Array[ExtResource("25_vr4f0")]([])
 [sub_resource type="Resource" id="Resource_i73i6"]
 script = ExtResource("26_u5kap")
 items = Array[ExtResource("24_64p5n")]([SubResource("Resource_imfn5")])
+
+[sub_resource type="Resource" id="Resource_ftj6f"]
+script = ExtResource("7_k8tcd")
+customer_scene = ExtResource("6_3f48u")
 
 [sub_resource type="Environment" id="Environment_w3stk"]
 background_mode = 1
@@ -106,49 +108,13 @@ point_count = 4
 [sub_resource type="BoxShape3D" id="BoxShape3D_6v8wq"]
 size = Vector3(0.619141, 2.61829, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mo8b8"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("17_i0fn5")
-shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
-shader_parameter/modulate_strength = 0.0
-shader_parameter/albedo_texture = ExtResource("17_y72sv")
-
-[sub_resource type="Resource" id="Resource_aybgg"]
-script = ExtResource("25_vr4f0")
-display_name = "No sugar"
-
-[sub_resource type="Resource" id="Resource_i1tge"]
-script = ExtResource("24_64p5n")
-display_name = "Latte"
-modifiers = Array[ExtResource("25_vr4f0")]([SubResource("Resource_aybgg")])
-
-[sub_resource type="Resource" id="Resource_hkgb3"]
-script = ExtResource("26_u5kap")
-items = Array[ExtResource("24_64p5n")]([SubResource("Resource_i1tge")])
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uoft5"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("17_i0fn5")
-shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
-shader_parameter/modulate_strength = 1.0
-shader_parameter/albedo_texture = ExtResource("20_sf5ya")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_invm7"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("17_i0fn5")
-shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
-shader_parameter/modulate_strength = 1.0
-shader_parameter/albedo_texture = ExtResource("21_jr68o")
-
 [node name="Cafe" type="Node" node_paths=PackedStringArray("day_intro", "mark_primary")]
 script = ExtResource("1_8x71m")
 day_intro = NodePath("Overlay/Preamble/DayIntro")
 mark_primary = NodePath("Environment/PlayerControl")
 receipt_scene = ExtResource("7_goaex")
 debug_order = SubResource("Resource_i73i6")
+debug_customer_definition = SubResource("Resource_ftj6f")
 
 [node name="Overlay" type="Node" parent="."]
 
@@ -398,40 +364,14 @@ script = ExtResource("18_r0epc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2525, 0)
 shape = SubResource("BoxShape3D_6v8wq")
 
-[node name="Handler" parent="Environment" instance=ExtResource("17_m4akn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.695325)
-
-[node name="Sprite3D" parent="Environment/Handler/Visual" index="0"]
-material_override = SubResource("ShaderMaterial_mo8b8")
-
-[node name="CustomerAnimationStateMachine" parent="Environment/Handler" index="2" node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("Walking")
-
-[node name="CustomerMale" parent="Environment" instance=ExtResource("17_m4akn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.555, 0, -2.64532)
-character_texture = ExtResource("20_sf5ya")
-order = SubResource("Resource_hkgb3")
-
-[node name="Sprite3D" parent="Environment/CustomerMale/Visual" index="0"]
-material_override = SubResource("ShaderMaterial_uoft5")
-texture = ExtResource("20_sf5ya")
-
-[node name="CustomerFemale" parent="Environment" instance=ExtResource("17_m4akn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52698, 0, -2.64532)
-character_texture = ExtResource("21_jr68o")
-
-[node name="Sprite3D" parent="Environment/CustomerFemale/Visual" index="0"]
-material_override = SubResource("ShaderMaterial_invm7")
-
 [node name="CoffeeMaker" parent="Environment" instance=ExtResource("24_7t71w")]
 transform = Transform3D(-3.49691e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.49691e-08, 1.2, 1, 0)
 
 [node name="Effects" type="Node" parent="."]
 
+[node name="CupRack" parent="." instance=ExtResource("25_2lf1c")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.6, 1, 0)
+
 [connection signal="spawn_customer" from="." to="Environment/CustomerFlow/CustomerSpawner" method="_on_spawn_customer"]
 [connection signal="customer_order_placed" from="Environment/CustomerFlow/CustomerPath" to="." method="_on_order_placed"]
 [connection signal="area_entered" from="Environment/CustomerFlow/CustomerPath/CustomerExit/ExitDoor" to="Environment/CustomerFlow/CustomerPath/CustomerExit/ExitDoor" method="_on_area_entered"]
-
-[editable path="Environment/Handler"]
-[editable path="Environment/CustomerMale"]
-[editable path="Environment/CustomerFemale"]

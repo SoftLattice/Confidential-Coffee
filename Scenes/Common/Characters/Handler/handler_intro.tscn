@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://006km13gs34g"]
+
+[ext_resource type="PackedScene" uid="uid://dcdjonkjbxh0r" path="res://Scenes/Common/Characters/customer.tscn" id="1_g6ytw"]
+[ext_resource type="Shader" path="res://Scenes/Common/Characters/character_cafe.gdshader" id="2_obe0o"]
+[ext_resource type="Texture2D" uid="uid://dxjl86xa2pcep" path="res://Scenes/Common/Characters/Handler/handler.png" id="3_f7r5a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h8m5q"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_obe0o")
+shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
+shader_parameter/modulate_strength = 0.0
+shader_parameter/albedo_texture = ExtResource("3_f7r5a")
+
+[node name="Customer" instance=ExtResource("1_g6ytw")]
+
+[node name="Sprite3D" parent="Visual" index="0"]
+material_override = SubResource("ShaderMaterial_h8m5q")

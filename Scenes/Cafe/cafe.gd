@@ -21,10 +21,13 @@ func _ready() -> void:
 @onready var cafe_hud: CafeHUD = get_node("%CafeHUD");
 
 @export var debug_order: CustomerOrder;
+@export var debug_customer_definition: CustomerDefinition;
+
+signal spawn_customer(customer_definition: CustomerDefinition, order: CustomerOrder);
 
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("debug"):
-        spawn_customer.emit.call_deferred(debug_order);
+        spawn_customer.emit.call_deferred(debug_customer_definition, debug_order);
 
 func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     var order_receipt: OrderReceipt = receipt_scene.instantiate();
@@ -35,6 +38,3 @@ func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     cafe_hud.cancel_key.pressed.connect(order_receipt._on_cancel_order, CONNECT_ONE_SHOT);
 
     order_receipt.prepare_display.call_deferred(order);
-
-
-signal spawn_customer(order: CustomerOrder);

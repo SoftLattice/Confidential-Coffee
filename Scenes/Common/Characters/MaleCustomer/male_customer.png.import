@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr3obbvsegrk3"
-path.s3tc="res://.godot/imported/female_customer.png-1b7fdab51e3c12cc18354c4d7d17ea0e.s3tc.ctex"
-path.etc2="res://.godot/imported/female_customer.png-1b7fdab51e3c12cc18354c4d7d17ea0e.etc2.ctex"
+uid="uid://cid7i8pi17u5g"
+path.s3tc="res://.godot/imported/male_customer.png-4ac925a099e9a7061a8a44a11c7aabea.s3tc.ctex"
+path.etc2="res://.godot/imported/male_customer.png-4ac925a099e9a7061a8a44a11c7aabea.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Characters/FemaleCharacter/female_customer.png"
-dest_files=["res://.godot/imported/female_customer.png-1b7fdab51e3c12cc18354c4d7d17ea0e.s3tc.ctex", "res://.godot/imported/female_customer.png-1b7fdab51e3c12cc18354c4d7d17ea0e.etc2.ctex"]
+source_file="res://Scenes/Common/Characters/MaleCustomer/male_customer.png"
+dest_files=["res://.godot/imported/male_customer.png-4ac925a099e9a7061a8a44a11c7aabea.s3tc.ctex", "res://.godot/imported/male_customer.png-4ac925a099e9a7061a8a44a11c7aabea.etc2.ctex"]
 
 [params]
 
