@@ -1,6 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://bnkc8jhwbld7v"]
+[gd_scene load_steps=17 format=4 uid="uid://bnkc8jhwbld7v"]
 
+[ext_resource type="Script" path="res://Scenes/Cafe/Assets/coffee_maker.gd" id="1_ftk31"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_xa4m8"]
+[ext_resource type="Script" path="res://Scenes/Cafe/Assets/carafe.gd" id="3_rpehd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7xsq"]
 resource_name = "Metal"
@@ -212,6 +214,7 @@ shadow_mesh = SubResource("ArrayMesh_tr6lw")
 
 [node name="CoffeeMaker" type="Node3D"]
 transform = Transform3D(-3.49691e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.49691e-08, 0, 0, 0)
+script = ExtResource("1_ftk31")
 
 [node name="Machine" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_lr58o")
@@ -244,13 +247,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.192029, 0.267794, 0.238551)
 [node name="OriginCarafe2" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.192029, 0.267794, -0.238551)
 
-[node name="Carafe1" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.192029, 0.267794, 0.238551)
+[node name="Carafe" type="Node3D" parent="." node_paths=PackedStringArray("liquid")]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0.192029, 0.267794, 0.238551)
+script = ExtResource("3_rpehd")
+liquid = NodePath("Liquid")
+
+[node name="Mesh" type="MeshInstance3D" parent="Carafe"]
 mesh = SubResource("ArrayMesh_nkjn6")
 skeleton = NodePath("")
 
-[node name="Coffee" type="MeshInstance3D" parent="Carafe1"]
-transform = Transform3D(0.0999405, 0, -8.88178e-16, 0, 0.0999405, 0, 8.88178e-16, 0, 0.0999405, 0, 0, 0)
+[node name="Liquid" type="MeshInstance3D" parent="Carafe"]
+transform = Transform3D(0.0999405, 0, -1.33227e-15, 0, 0.0999405, 0, 1.33227e-15, 0, 0.0999405, 0, 0, 0)
 mesh = SubResource("ArrayMesh_rmkg4")
 skeleton = NodePath("../..")
 

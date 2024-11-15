@@ -37,7 +37,6 @@ size = Vector3(0.718506, 2.19766, 0.293945)
 
 [node name="Customer" type="Node3D" node_paths=PackedStringArray("visual_node", "animation_state_machine", "idle_state", "walking_state", "speech_location", "queue_state_machine", "next_up") groups=["customer"]]
 script = ExtResource("1_ljmpa")
-character_texture = ExtResource("2_topkw")
 visual_node = NodePath("Visual")
 order = SubResource("Resource_tafa8")
 animation_state_machine = NodePath("CustomerAnimationStateMachine")

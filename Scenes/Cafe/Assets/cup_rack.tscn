@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=4 uid="uid://tqdyj3qifga6"]
+[gd_scene load_steps=14 format=4 uid="uid://tqdyj3qifga6"]
 
+[ext_resource type="Script" path="res://Scenes/Cafe/Assets/cup_rack.gd" id="1_em3gw"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_fhcmr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_im3u3"]
@@ -124,7 +125,11 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AACAPV9DHrwAAIA9AACAPV9DHrwAAIA9AACAPV9DHrwAAIA9AAAAPV9DHrwAAIA9AAAAPV9DHrwAAIA9AACAPQAAgLAAAIA9AACAPQAAgLAAAIA9AACAPV9DHrwAAAA9AACAPV9DHrwAAAA9AACAPQAAgLAAAAA9AACAPQAAgLAAAAA9AACAPQAAgLAAAAA9AAAAPQAAgLAAAAA9AAAAPQAAgLAAAIA9AAAAPQAAgLAAAIA9AAAAPQAAgLAAAIA9AACAPcZbLT4AAAA9AACAPcZbLT4AAAA9AACAPcZbLT4AAAA9AACAPcZbLT4AAIA9AACAPcZbLT4AAIA9AACAPcZbLT4AAIA9AAAAPcZbLT4AAIA9AAAAPcZbLT4AAIA9AAAAPcZbLT4AAIA9AAAAvQAAgLAAAIA9AAAAvQAAgLAAAIA9AAAAvQAAgLAAAIA9AACAvQAAgLAAAIA9AACAvQAAgLAAAIA9AAAAvQAAgLAAAAA9AAAAvV9DHrwAAIA9AAAAvV9DHrwAAIA9AACAvQAAgLAAAAA9AACAvQAAgLAAAAA9AACAvQAAgLAAAAA9AAAAvcZbLT4AAIA9AAAAvcZbLT4AAIA9AAAAvcZbLT4AAIA9AACAvcZbLT4AAIA9AACAvcZbLT4AAIA9AACAvcZbLT4AAIA9AACAvcZbLT4AAAA9AACAvcZbLT4AAAA9AACAvcZbLT4AAAA9AACAvV9DHrwAAAA9AACAvV9DHrwAAAA9AACAvV9DHrwAAIA9AACAvV9DHrwAAIA9AACAvV9DHrwAAIA9AACAvV9DHrwAAAC9AACAvV9DHrwAAAC9AAAAvV9DHrwAAIC9AAAAvV9DHrwAAIC9AACAvV9DHrwAAIC9AACAvV9DHrwAAIC9AACAvV9DHrwAAIC9AAAAvQAAgLAAAIC9AAAAvQAAgLAAAIC9AAAAvQAAgLAAAIC9AACAvQAAgLAAAIC9AACAvQAAgLAAAIC9AAAAvQAAgLAAAAC9AACAvQAAgLAAAAC9AACAvQAAgLAAAAC9AACAvQAAgLAAAAC9AAAAvcZbLT4AAIC9AAAAvcZbLT4AAIC9AAAAvcZbLT4AAIC9AACAvcZbLT4AAIC9AACAvcZbLT4AAIC9AACAvcZbLT4AAIC9AACAvcZbLT4AAAC9AACAvcZbLT4AAAC9AACAvcZbLT4AAAC9AAAAPQAAgLAAAAC9AAAAPQAAgLAAAIC9AAAAPQAAgLAAAIC9AAAAPQAAgLAAAIC9AACAPQAAgLAAAAC9AACAPQAAgLAAAAC9AACAPQAAgLAAAAC9AACAPQAAgLAAAIC9AACAPQAAgLAAAIC9AACAPV9DHrwAAAC9AACAPV9DHrwAAAC9AACAPcZbLT4AAAC9AACAPcZbLT4AAAC9AACAPcZbLT4AAAC9AACAPcZbLT4AAIC9AACAPcZbLT4AAIC9AACAPcZbLT4AAIC9AAAAPcZbLT4AAIC9AAAAPcZbLT4AAIC9AAAAPcZbLT4AAIC9AACAPV9DHrwAAIC9AACAPV9DHrwAAIC9AACAPV9DHrwAAIC9AAAAPV9DHrwAAIC9AAAAPV9DHrwAAIC9qqqqvF9DHrwAAAC9qqqqPF9DHrwAAAC9qqqqPF9DHrwAAAA9qqqqvF9DHrwAAAA9/3//f////z//fwAA////v////3////+//3//f////z//fwAA////v/9//3////8/////f////7//fwAA////v////3////+//3///////7////9/////vwAA/7////+//3///////7//f/9/////P/9///////+/AAD/v////7//f///////v////3////+/AAD/v////7//f/9/////P/9///////+/////f////7//f/9/////P/9///////+/AAD/v////7//f/9/////P/9///////+/////v////7//f/9/////PwAA/3////+//3///////7//f/9/////P/9/AAD///+//3///////7////+/////vwAA/3////+//3//f////z//f///////v////7////+//3//f////z//f///////vwAA/3////+//3///////7////+/////vwAA/3////+//38AAP///78AAP9/////v/9//3////8//38AAP///78AAP9/////v/9/AAD///+/AAD/f////7//////////v/9/AAD///+//////////7//fwAA////vwAA/3////+//////////7//f///////v/+//3////8//////////78AAP9/////v/9///////+//3///////7//v/9/////PwAA/3////+//////////7//f///////v/+//3////8//////////7//f///////vwAA/3////+//3///////7//v/9/////PwAA/3////+//3///////7//////////v/9///////+//z//f////z//f///////v////3////+//z//f////z//////////v////3////+//38AAP///7////9/////v/9///////+/////f////7//P/9/////P/////////+//3///////7////9/////v/////////+//3///////7//P/9/////P/////////+//38AAP///7////9/////v/////////+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////vw==")
 }]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1map3"]
+size = Vector3(0.375366, 0.221283, 0.150635)
+
 [node name="CupRack" type="Node3D"]
+script = ExtResource("1_em3gw")
 
 [node name="HolderBase" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_wsbch")
@@ -192,3 +197,13 @@ skeleton = NodePath("")
 
 [node name="StandardCup" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.370801, 0, 0.0735908)
+
+[node name="Select" type="Area3D" parent="."]
+
+[node name="Collider" type="CollisionShape3D" parent="Select"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0.0471726, 0.176035, 0)
+shape = SubResource("BoxShape3D_1map3")
+
+[connection signal="input_event" from="Select" to="." method="_on_select_input_event"]
+[connection signal="mouse_entered" from="Select" to="." method="_on_select_mouse_entered"]
+[connection signal="mouse_exited" from="Select" to="." method="_on_select_mouse_exited"]

@@ -7,7 +7,6 @@ signal approach_counter();
 signal place_order(order: CustomerOrder);
 signal order_completed(canceled: bool);
 
-@export var character_texture: Texture2D;
 @export var visual_node: Node3D;
 @export var cafe_path: CafePath;
 
@@ -50,10 +49,11 @@ func speak(render_function: Callable, duration: float = 3.) -> void:
 
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("debug"):
-        speak.call_deferred(render_message);
+        speak.call_deferred(debug_render_message);
+
 
 # This just pushes out a generic message for testing
-func render_message(label: RichTextLabel) -> void:
+func debug_render_message(label: RichTextLabel) -> void:
     label.text = "";
     label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER );
     label.push_font_size(16);
