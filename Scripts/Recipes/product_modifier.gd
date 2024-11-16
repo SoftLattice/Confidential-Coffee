@@ -1,4 +1,4 @@
-class_name RecipeModifier extends ReceiptResource
+class_name ProductModifier extends ReceiptResource
 
 @export var display_name: String;
 

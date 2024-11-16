@@ -34,6 +34,7 @@ func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     cafe_hud.add_child(order_receipt);
     order_receipt.customer = customer;
 
+    # Connect the keys to the order receipt
     cafe_hud.sell_key.pressed.connect(order_receipt._on_complete_order, CONNECT_ONE_SHOT);
     cafe_hud.cancel_key.pressed.connect(order_receipt._on_cancel_order, CONNECT_ONE_SHOT);
 

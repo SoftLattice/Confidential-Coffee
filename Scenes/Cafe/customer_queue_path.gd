@@ -13,7 +13,13 @@ var counter_offset: float;
 signal customer_dequeued();
 signal customer_order_placed(order: CustomerOrder, customer: Customer);
 
+static var _active_customer_path: CustomerPath;
+
+static func get_active_path() -> CustomerPath:
+    return _active_customer_path;
+
 func _ready() -> void:
+    _active_customer_path = self;
     queue_front_offset = curve.get_closest_offset(queue_front.position);
     counter_offset = curve.get_closest_offset(counter.position);
 

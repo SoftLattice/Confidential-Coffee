@@ -1,8 +1,16 @@
-[gd_scene load_steps=8 format=4 uid="uid://bvib1pg6k5rf1"]
+[gd_scene load_steps=16 format=4 uid="uid://bvib1pg6k5rf1"]
 
 [ext_resource type="Script" path="res://Scenes/Cafe/Assets/paper_cup.gd" id="1_8rjvn"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_v1aut"]
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="2_laiml"]
 [ext_resource type="Shader" path="res://Scenes/Cafe/Assets/paper_cup_liquid.gdshader" id="3_132e2"]
+[ext_resource type="Script" path="res://Scripts/Recipes/order.gd" id="3_n4v3i"]
+[ext_resource type="Script" path="res://Scripts/CafeInterfaces/clickable_asset.gd" id="6_tjwsn"]
+
+[sub_resource type="Resource" id="Resource_0t7cj"]
+resource_local_to_scene = true
+script = ExtResource("3_n4v3i")
+modifiers = Array[ExtResource("2_laiml")]([])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkxfs"]
 resource_name = "Paper"
@@ -52,8 +60,31 @@ _surfaces = [{
 "vertex_data": PackedByteArray("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0xFXvLzriTxeK7K7bpskvL7riTxumyS8YCuyu8DriTzTEVe8UsjWr8DriTwlymi8XiuyO8DriTzTEVe8bpskPL7riTxumyS80xFXPLzriTxeK7K7JcpoPLnriTwCJoyv0xFXPLbriTxfK7I7bpskPLTriTxvmyQ8AABAsMcMJz7HXmo9AABAsMcMJz7HXmo9n8nyvLTriTygyfI8n8nyvLTriTygyfI8Pa0rvbnriTwSbrEwBWGzvMkMJz6Ph1i9BWGzvMkMJz6Ph1i90JsePbzriTxHZYO8uV5qPcgMJz5USVIzPa0rPbnriTwSbrEwn8nyvLTriTygyfI8n8nyvLTriTygyfI8Pa0rvbnriTwSbrEwBWGzvMkMJz6Ph1i90JsePbzriTxHZYO80JsePbbriTxJZYM8g7klPccMJz6QuSU9SGWDPLLriTzRmx49/3///////7+Ik7l1////P3ZsuXX///8//3///////7+Ik7l1////P7yvLXf///8//3///////792bLl1////P0JQLXf///8//38AAP///7+Ik7l1////P3ZsuXX///8//38AAP///7+Ik7l1////P7yvLXf///8//38AAP///792bLl1////P0JQLXf///8//38AAP///79CUC13////P444LXf///8//38AAP///7+OOC13////P84duXX///8//3///////79CUC13////P444LXf///8//3///////7+OOC13////P84duXX///8//3///////7/OHbl1////P0YKMGL///+//3///////7/RCHBH////v0YKMGL///+//38AAP///7/OHbl1////P0YKMGL///+//38AAP///7/RCHBH////v0YKMGL///+//38AAP///7/RCL0v////v9EIcEf///+//38AAP///79GCogT////v9EIvS////+//3///////7/RCL0v////v9EIcEf///+//3///////79GCogT////v9EIvS////+//3///////7+49YgT////v0YKiBP///+//3///////7+49YgT////vy33vS////+//38AAP///7+49YgT////v0YKiBP///+//38AAP///7+49YgT////vy33vS////+//38AAP///78t970v////vy33cEf///+//38AAP///78t93BH////v7j1MGL///+//3///////78t970v////vy33cEf///+//3///////78t93BH////v7j1MGL///+//3///////78w4rl1////P7j1MGL///+//3///////79wxy13////PzDiuXX///8//38AAP///78w4rl1////P7j1MGL///+//38AAP///79wxy13////PzDiuXX///8//38AAP///7+8ry13////P3DHLXf///8//3///////7+8ry13////P3DHLXf///8//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///79+TcR2////P92nC3b///8/ITrYdv///z/bj9J0////PwkKsST///+/wAmYL////7+h9sYw////v+z1MS7///+/9Mandv///z/DvcF2////P3hsBXX///8/Ey+pdv///z9CCS9K////v1sJPTL///+/cfYBOv///7+1s3x2////P/DGoHb///8/6Kc7dv///z8=")
 }]
 
-[node name="PaperCup" type="Node3D"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_obugs"]
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 0.3
+initial_velocity_max = 0.3
+gravity = Vector3(0, -3, 0)
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_twsue"]
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_c6sdu"]
+material = SubResource("StandardMaterial3D_twsue")
+size = Vector2(0.01, 0.01)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3k7xm"]
+height = 0.168036
+radius = 0.055314
+
+[node name="PaperCup" type="Node3D" node_paths=PackedStringArray("pour_stream")]
 script = ExtResource("1_8rjvn")
+pour_stream = NodePath("PourStream")
+contents = SubResource("Resource_0t7cj")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_0pwin")
@@ -64,3 +95,34 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00723813, 0)
 mesh = SubResource("ArrayMesh_w6blb")
 skeleton = NodePath("")
+
+[node name="PourStream" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.3, 0)
+emitting = false
+amount = 128
+lifetime = 0.6
+one_shot = true
+local_coords = true
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_obugs")
+draw_pass_1 = SubResource("QuadMesh_c6sdu")
+
+[node name="CupBottom" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.028081, 0)
+size = Vector3(0.15, 0.05, 0.15)
+
+[node name="Selecter" type="Node3D" parent="."]
+script = ExtResource("6_tjwsn")
+
+[node name="Collider" type="Area3D" parent="Selecter"]
+input_ray_pickable = false
+
+[node name="Shape" type="CollisionShape3D" parent="Selecter/Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0839224, 0)
+shape = SubResource("CylinderShape3D_3k7xm")
+
+[connection signal="picked_up" from="." to="Selecter/Collider" method="set_ray_pickable" binds= [false]]
+[connection signal="put_down" from="." to="Selecter/Collider" method="set_ray_pickable" binds= [true]]
+[connection signal="clicked" from="Selecter" to="." method="_on_clicked"]
+[connection signal="mouse_entered" from="Selecter/Collider" to="Selecter" method="_on_select_mouse_entered"]
+[connection signal="mouse_exited" from="Selecter/Collider" to="Selecter" method="_on_select_mouse_exited"]

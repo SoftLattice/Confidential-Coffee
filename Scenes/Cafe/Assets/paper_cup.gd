@@ -1,9 +1,10 @@
-extends Node3D
+class_name PaperCup extends LiquidContainer
 
-@onready var liquid_material: ShaderMaterial = (%Liquid as MeshInstance3D).mesh.surface_get_material(0);
+@export var pour_stream: GPUParticles3D;
 
-func set_liquid_level(f: float) -> void:
-	liquid_material.set_shader_parameter("liquid_fraction", f);
-
-func set_liquid_color(color: Color) -> void:
-	liquid_material.set_shader_parameter("liquid_color", color);
+func fill_liquid(color: Color) -> void:
+    super(color);
+    var material: StandardMaterial3D = pour_stream.draw_pass_1.surface_get_material(0);
+    pour_stream.lifetime = 0.9 * pour_time;
+    material.albedo_color = color;
+    pour_stream.emitting = true;

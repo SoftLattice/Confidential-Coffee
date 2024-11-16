@@ -1,7 +1,5 @@
 class_name OrderReceipt extends Control
 
-@export var debug_order: CustomerOrder;
-
 @export var landing_label: RichTextLabel;
 @export var text_container: MarginContainer;
 @export var primary_container: Container;
@@ -9,6 +7,7 @@ class_name OrderReceipt extends Control
 const VERTICAL_MARGIN: int = 4;
 var displayed_lines: int = 0;
 var customer: Customer;
+var active_order: CustomerOrder = null;
 
 # This just pushes out a generic message for testing
 func render_message(label: RichTextLabel, order: CustomerOrder) -> int:
@@ -25,10 +24,10 @@ func render_message(label: RichTextLabel, order: CustomerOrder) -> int:
         lines_printed += recipe.print_to_label(label);
 
     label.pop();
+
     #TODO: Print TIME of day????
     return lines_printed;
 
-var active_order: CustomerOrder = null;
 func prepare_display(order: CustomerOrder) -> void:
     active_order = order;
     # Render the text into the landing display
@@ -45,6 +44,7 @@ func prepare_display(order: CustomerOrder) -> void:
     await RenderingServer.frame_post_draw;
     pop_receipt();
 
+
 func _on_meta_clicked(resource: ReceiptResource) -> void:
     resource._on_resource_select();
     render_message(landing_label, active_order);
@@ -57,11 +57,20 @@ func pop_receipt() -> void:
 
 # TODO: Juice up the receipt being torn away
 func remove_receipt() -> void:
+    var delivery_pad: DeliveryPad = DeliveryPad.get_delivery_pad();
+    delivery_pad.clear_order();
     queue_free();
 
 
 func _on_complete_order() -> void:
+    var delivery_pad: DeliveryPad = DeliveryPad.get_delivery_pad();
+    var delivered_order: CustomerOrder = delivery_pad.to_order();
+    print(active_order.compare_orders(delivered_order));
+
+    delivery_pad.clear_order();
+
     customer.order_completed.emit.call_deferred(false);
+    
     remove_receipt();
 
 func _on_cancel_order() -> void:

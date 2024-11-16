@@ -35,7 +35,7 @@ func is_customer_walking() -> bool:
     return animation_state_machine.current_state == walking_state;
 
 func get_customer_path() -> CustomerPath:
-    return Cafe.get_cafe().get_node("%CustomerPath");
+    return CustomerPath.get_active_path();
 
 func is_customer_ready() -> bool:
     return queue_state_machine.current_state == next_up;

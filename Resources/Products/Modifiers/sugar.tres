@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ProductModifier" load_steps=2 format=3 uid="uid://c05hacu5870kx"]
+
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_mjj4x"]
+
+[resource]
+script = ExtResource("1_mjj4x")
+display_name = "Sugar"

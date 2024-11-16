@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dux71js1ov2y7"]
+
+[ext_resource type="Script" path="res://Globals/recipe_manager.gd" id="1_ninxl"]
+
+[node name="RecipeManager" type="Node"]
+script = ExtResource("1_ninxl")

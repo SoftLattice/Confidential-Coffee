@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BasicPoured" load_steps=3 format=3 uid="uid://b53vn6igp0fcw"]
+
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_3uafc"]
+[ext_resource type="Script" path="res://Scripts/Recipes/basic_poured.gd" id="2_geomh"]
+
+[resource]
+script = ExtResource("2_geomh")
+color = Color(0.227451, 0.207843, 0.196078, 1)
+display_name = "Decaf"
+modifiers = Array[ExtResource("1_3uafc")]([])

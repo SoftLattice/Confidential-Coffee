@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=4 uid="uid://tqdyj3qifga6"]
 
-[ext_resource type="Script" path="res://Scenes/Cafe/Assets/cup_rack.gd" id="1_em3gw"]
+[ext_resource type="Script" path="res://Scripts/CafeInterfaces/clickable_asset.gd" id="1_0sq2h"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_fhcmr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_im3u3"]
@@ -129,7 +129,7 @@ _surfaces = [{
 size = Vector3(0.375366, 0.221283, 0.150635)
 
 [node name="CupRack" type="Node3D"]
-script = ExtResource("1_em3gw")
+script = ExtResource("1_0sq2h")
 
 [node name="HolderBase" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_wsbch")

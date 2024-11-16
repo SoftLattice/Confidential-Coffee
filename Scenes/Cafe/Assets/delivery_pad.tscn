@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctsd8bv0jtyw1"]
+
+[ext_resource type="Script" path="res://Scenes/Cafe/Assets/delivery_pad.gd" id="1_ghtpj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmkqe"]
+albedo_color = Color(0.662745, 0.639216, 0.619608, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_lyxqe"]
+material = SubResource("StandardMaterial3D_hmkqe")
+size = Vector2(0.8, 0.8)
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tupyd"]
+size = Vector3(0.8, 0.0236816, 0.8)
+
+[node name="DeliveryPad" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.001, 0)
+script = ExtResource("1_ghtpj")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_lyxqe")
+skeleton = NodePath("../../../PlayerControl")
+
+[node name="Collider" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collider"]
+shape = SubResource("BoxShape3D_tupyd")
+
+[connection signal="mouse_entered" from="Collider" to="." method="_on_select_mouse_entered"]
+[connection signal="mouse_exited" from="Collider" to="." method="_on_select_mouse_exited"]
