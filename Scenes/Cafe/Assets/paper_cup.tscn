@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bvib1pg6k5rf1"]
+[gd_scene load_steps=19 format=4 uid="uid://bvib1pg6k5rf1"]
 
 [ext_resource type="Script" path="res://Scenes/Cafe/Assets/paper_cup.gd" id="1_8rjvn"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_v1aut"]
@@ -69,6 +69,7 @@ gravity = Vector3(0, -3, 0)
 collision_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_twsue"]
+transparency = 1
 vertex_color_use_as_albedo = true
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
@@ -77,13 +78,28 @@ backlight = Color(1, 1, 1, 1)
 material = SubResource("StandardMaterial3D_twsue")
 size = Vector2(0.01, 0.01)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cbu15"]
+spread = 180.0
+initial_velocity_max = 0.1
+gravity = Vector3(0, -2.5, 0)
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cksqv"]
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_kua5a"]
+material = SubResource("StandardMaterial3D_cksqv")
+size = Vector2(0.01, 0.01)
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_3k7xm"]
 height = 0.168036
 radius = 0.055314
 
-[node name="PaperCup" type="Node3D" node_paths=PackedStringArray("pour_stream")]
+[node name="PaperCup" type="Node3D" node_paths=PackedStringArray("pour_stream", "sprinkle_stream")]
 script = ExtResource("1_8rjvn")
 pour_stream = NodePath("PourStream")
+sprinkle_stream = NodePath("SprinkleStream")
 contents = SubResource("Resource_0t7cj")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
@@ -107,9 +123,20 @@ transform_align = 2
 process_material = SubResource("ParticleProcessMaterial_obugs")
 draw_pass_1 = SubResource("QuadMesh_c6sdu")
 
+[node name="SprinkleStream" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.299972, 0)
+emitting = false
+amount = 64
+lifetime = 0.75
+one_shot = true
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_cbu15")
+draw_pass_1 = SubResource("QuadMesh_kua5a")
+
 [node name="CupBottom" type="GPUParticlesCollisionBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.028081, 0)
-size = Vector3(0.15, 0.05, 0.15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0542834, 0)
+size = Vector3(0.15, 0.102405, 0.15)
 
 [node name="Selecter" type="Node3D" parent="."]
 script = ExtResource("6_tjwsn")

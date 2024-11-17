@@ -27,7 +27,6 @@ func _on_click() -> void:
     var player_hand: PlayerHand = PlayerHand.get_active_hand();
     if player_hand.held_item is LiquidContainer:
         var container: LiquidContainer = player_hand.held_item;
-
         if cups >= container.volume and container.add_pourable(produces):
             _is_busy = true;
             var drain_tween: Tween = create_tween();

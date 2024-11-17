@@ -13,18 +13,54 @@ orientation = 1
 [sub_resource type="BoxShape3D" id="BoxShape3D_tupyd"]
 size = Vector3(0.8, 0.0236816, 0.8)
 
-[node name="DeliveryPad" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.001, 0)
+[node name="DeliveryPad" type="Node3D" node_paths=PackedStringArray("spots")]
 script = ExtResource("1_ghtpj")
+spots = NodePath("Spots")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("QuadMesh_lyxqe")
-skeleton = NodePath("../../../PlayerControl")
 
 [node name="Collider" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Collider"]
 shape = SubResource("BoxShape3D_tupyd")
+
+[node name="Spots" type="Node3D" parent="."]
+
+[node name="Marker1" type="Marker3D" parent="Spots"]
+gizmo_extents = 0.05
+
+[node name="Marker2" type="Marker3D" parent="Spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+gizmo_extents = 0.05
+
+[node name="Marker3" type="Marker3D" parent="Spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+gizmo_extents = 0.05
+
+[node name="Marker4" type="Marker3D" parent="Spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+gizmo_extents = 0.05
+
+[node name="Marker5" type="Marker3D" parent="Spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+gizmo_extents = 0.05
+
+[node name="Marker6" type="Marker3D" parent="Spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0.2)
+gizmo_extents = 0.05
+
+[node name="Marker7" type="Marker3D" parent="Spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0.2)
+gizmo_extents = 0.05
+
+[node name="Marker8" type="Marker3D" parent="Spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.2)
+gizmo_extents = 0.05
+
+[node name="Marker9" type="Marker3D" parent="Spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -0.2)
+gizmo_extents = 0.05
 
 [connection signal="mouse_entered" from="Collider" to="." method="_on_select_mouse_entered"]
 [connection signal="mouse_exited" from="Collider" to="." method="_on_select_mouse_exited"]

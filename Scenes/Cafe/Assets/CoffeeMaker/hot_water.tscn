@@ -1,0 +1,87 @@
+[gd_scene load_steps=14 format=3 uid="uid://duljkoncxtkw6"]
+
+[ext_resource type="Script" path="res://Scenes/Cafe/Assets/CoffeeMaker/hot_water.gd" id="1_gw7br"]
+[ext_resource type="Resource" uid="uid://qotcrywq3oec" path="res://Resources/Products/Basics/hot_water.tres" id="2_whgtn"]
+[ext_resource type="Script" path="res://Scripts/CafeInterfaces/clickable_asset.gd" id="3_xhojk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2jpls"]
+size = Vector3(0.106445, 0.143555, 0.0966797)
+
+[sub_resource type="Curve" id="Curve_x67lc"]
+bake_resolution = 10
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n6rmt"]
+curve = SubResource("Curve_x67lc")
+
+[sub_resource type="Gradient" id="Gradient_6rqo6"]
+colors = PackedColorArray(0.435192, 0.435192, 0.435192, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7m88s"]
+gradient = SubResource("Gradient_6rqo6")
+
+[sub_resource type="Curve" id="Curve_hjhaa"]
+bake_resolution = 10
+_data = [Vector2(0, 0.225467), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_30buc"]
+curve = SubResource("Curve_hjhaa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v241u"]
+direction = Vector3(0.5, 1, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.5
+gravity = Vector3(0, 1, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_30buc")
+color_ramp = SubResource("GradientTexture1D_7m88s")
+alpha_curve = SubResource("CurveTexture_n6rmt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x55yf"]
+transparency = 1
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.273873, 0.273873, 0.273873, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_wmh4i"]
+material = SubResource("StandardMaterial3D_x55yf")
+size = Vector2(0.2, 0.2)
+
+[node name="HotWater" type="Node3D"]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.553442, 0.894974, 0.133739)
+script = ExtResource("1_gw7br")
+produces = ExtResource("2_whgtn")
+
+[node name="Clickable" type="Node3D" parent="."]
+script = ExtResource("3_xhojk")
+
+[node name="Select" type="Area3D" parent="Clickable"]
+
+[node name="Collider" type="CollisionShape3D" parent="Clickable/Select"]
+shape = SubResource("BoxShape3D_2jpls")
+
+[node name="SteamParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0224138, -0.0841413, 0)
+emitting = false
+amount = 16
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.33
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_v241u")
+draw_pass_1 = SubResource("QuadMesh_wmh4i")
+
+[connection signal="pour_water" from="." to="SteamParticles" method="set_emitting" binds= [true]]
+[connection signal="clicked" from="Clickable" to="." method="_on_click"]
+[connection signal="mouse_entered" from="Clickable/Select" to="Clickable" method="_on_select_mouse_entered"]
+[connection signal="mouse_exited" from="Clickable/Select" to="Clickable" method="_on_select_mouse_exited"]

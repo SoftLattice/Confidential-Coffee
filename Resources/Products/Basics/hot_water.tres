@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BasicPoured" load_steps=3 format=3 uid="uid://qotcrywq3oec"]
+
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_vlwyn"]
+[ext_resource type="Script" path="res://Scripts/Recipes/basic_poured.gd" id="2_ekwof"]
+
+[resource]
+script = ExtResource("2_ekwof")
+color = Color(0.32549, 0.533333, 1, 0.662745)
+display_name = "Hot Water"
+allowed_modifiers = Array[ExtResource("1_vlwyn")]([])

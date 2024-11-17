@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ProductModifier" load_steps=2 format=3 uid="uid://c05hacu5870kx"]
+[gd_resource type="Resource" script_class="SprinkledModifier" load_steps=2 format=3 uid="uid://c05hacu5870kx"]
 
-[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_mjj4x"]
+[ext_resource type="Script" path="res://Scripts/Recipes/sprinkled_modifier.gd" id="1_3v1x5"]
 
 [resource]
-script = ExtResource("1_mjj4x")
+script = ExtResource("1_3v1x5")
+color = Color(1, 1, 1, 1)
 display_name = "Sugar"

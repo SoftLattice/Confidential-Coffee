@@ -17,7 +17,10 @@ func can_mix_product(addition: Product) -> Product:
     return RecipeManager.mix_recipes(product, addition);
 
 func can_modify_product(addition: ProductModifier) -> bool:
-    return true;
+    if product == null:
+        return false;
+    return addition in product.allowed_modifiers;
+
 
 const SAME_ORDER: int = 0;
 const DIFFERENT_MODIFIERS: int = 1;
@@ -29,5 +32,3 @@ func compare_order(other: Order) -> int:
                 return 0;
         return 1;
     return -1;
-
-        

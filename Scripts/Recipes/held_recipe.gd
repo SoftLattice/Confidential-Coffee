@@ -9,3 +9,14 @@ signal put_down();
 func _on_clicked() -> void:
     if PlayerHand.get_active_hand().take_item(self):
         picked_up.emit.call_deferred();
+
+
+func add_modifier(modifier: ProductModifier) -> bool:
+    if contents.can_modify_product(modifier):
+        if contents.modifiers.has(modifier):
+            return false;
+        contents.modifiers.append(modifier);
+        modifier.animate_addition(self);
+        return true;
+
+    return false;

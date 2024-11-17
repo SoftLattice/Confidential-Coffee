@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="BasicPoured" load_steps=3 format=3 uid="uid://brewrw1m1dmg3"]
+[gd_resource type="Resource" script_class="BasicPoured" load_steps=4 format=3 uid="uid://brewrw1m1dmg3"]
 
 [ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_jab20"]
+[ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="2_6b12r"]
 [ext_resource type="Script" path="res://Scripts/Recipes/basic_poured.gd" id="2_i2ci7"]
 
 [resource]
 script = ExtResource("2_i2ci7")
 color = Color(0.227451, 0.207843, 0.196078, 1)
 display_name = "Coffee"
-modifiers = Array[ExtResource("1_jab20")]([])
+allowed_modifiers = Array[ExtResource("1_jab20")]([ExtResource("2_6b12r")])

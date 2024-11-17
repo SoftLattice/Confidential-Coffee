@@ -1,7 +1,7 @@
 class_name Product extends ReceiptResource
 
 @export var display_name: String;
-@export var modifiers: Array[ProductModifier];
+@export var allowed_modifiers: Array[ProductModifier];
 
 var completed: bool = false;
 func print_to_label(label: RichTextLabel) -> int:
@@ -16,3 +16,6 @@ func print_to_label(label: RichTextLabel) -> int:
 
 func _on_resource_select() -> void:
     completed = not completed;
+
+func animate_addition(_held_recipe: HeldRecipe) -> void:
+    printerr("Method not implemented");
