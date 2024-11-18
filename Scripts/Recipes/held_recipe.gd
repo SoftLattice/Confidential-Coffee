@@ -10,13 +10,23 @@ func _on_clicked() -> void:
     if PlayerHand.get_active_hand().take_item(self):
         picked_up.emit.call_deferred();
 
+func _process(delta: float) -> void:
+    contents._update(delta);
+
+func _ready() -> void:
+    contents.set_held_recipe(self);
+
+func set_product(product: Product) -> void:
+    contents.set_product(product);
+
+func can_modify_product(modifier: ProductModifier) -> bool:
+    return contents.can_modify_product(modifier);
+
+func can_mix_product(product: Product) -> Product:
+    return contents.can_mix_product(product);
 
 func add_modifier(modifier: ProductModifier) -> bool:
-    if contents.can_modify_product(modifier):
-        if contents.modifiers.has(modifier):
-            return false;
-        contents.modifiers.append(modifier);
-        modifier.animate_addition(self);
-        return true;
+    return contents.add_modifier(modifier);
 
-    return false;
+func add_sprinkles(_color: Color) -> void:
+    printerr("Method 'add_sprinkles' not implemented");

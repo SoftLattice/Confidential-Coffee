@@ -21,5 +21,8 @@ func print_to_label(label: RichTextLabel, parent_completed: bool = false) -> int
 func _on_resource_select() -> void:
     completed = not completed;
 
-func animate_addition(_held_recipe: HeldRecipe) -> void:
-    printerr("Method not implemented");
+func _enter_resource(_order: Order) -> void:
+    pass;
+
+func _exit_resource(_order: Order) -> void:
+    pass;

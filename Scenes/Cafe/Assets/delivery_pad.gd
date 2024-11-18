@@ -51,9 +51,6 @@ func _on_item_removed(held_item: HeldRecipe) -> void:
 
 # Convert whatever is on the counter to a customer order
 func to_order() -> CustomerOrder:
-    var delivered_items: Array[HeldRecipe];
-    delivered_items.assign(get_children().filter(func(t: Node) -> bool: return t is HeldRecipe));
-
     var customer_order: CustomerOrder = CustomerOrder.new();
     customer_order.items.assign(delivered_items.map(func(o: HeldRecipe) -> Order: return o.contents));
 
@@ -61,7 +58,5 @@ func to_order() -> CustomerOrder:
 
 
 func clear_order() -> void:
-    var delivered_items: Array[HeldRecipe];
-    delivered_items.assign(get_children().filter(func(t: Node) -> bool: return t is HeldRecipe));
     for item in delivered_items:
         item.queue_free();

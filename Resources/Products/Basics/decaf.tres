@@ -1,11 +1,26 @@
-[gd_resource type="Resource" script_class="BasicPoured" load_steps=4 format=3 uid="uid://b53vn6igp0fcw"]
+[gd_resource type="Resource" script_class="AnimatedProduct" load_steps=10 format=3 uid="uid://b53vn6igp0fcw"]
 
 [ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_3uafc"]
-[ext_resource type="Script" path="res://Scripts/Recipes/basic_poured.gd" id="2_geomh"]
 [ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="2_pr8wn"]
+[ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="3_xx12q"]
+[ext_resource type="PackedScene" uid="uid://csh67jnwsteub" path="res://Scenes/Common/Animations/pour_stream.tscn" id="4_q3jr3"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_pour_animation.gd" id="5_x1edu"]
+[ext_resource type="Script" path="res://Scripts/Recipes/animated_product.gd" id="6_j2e2g"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_fill_animation.gd" id="6_kx8sl"]
+
+[sub_resource type="Resource" id="Resource_wmman"]
+script = ExtResource("5_x1edu")
+pour_stream_scene = ExtResource("4_q3jr3")
+color = Color(0.227451, 0.207843, 0.196078, 1)
+pour_time = 0.7
+
+[sub_resource type="Resource" id="Resource_35pbi"]
+script = ExtResource("6_kx8sl")
+color = Color(0.227451, 0.207843, 0.196078, 1)
+pour_time = 0.7
 
 [resource]
-script = ExtResource("2_geomh")
-color = Color(0.227451, 0.207843, 0.196078, 1)
+script = ExtResource("6_j2e2g")
+animations = Array[ExtResource("3_xx12q")]([SubResource("Resource_wmman"), SubResource("Resource_35pbi")])
 display_name = "Decaf"
 allowed_modifiers = Array[ExtResource("1_3uafc")]([ExtResource("2_pr8wn")])

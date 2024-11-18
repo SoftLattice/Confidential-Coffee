@@ -1,8 +1,17 @@
-[gd_resource type="Resource" script_class="SprinkledModifier" load_steps=2 format=3 uid="uid://c05hacu5870kx"]
+[gd_resource type="Resource" script_class="AnimatedProductModifier" load_steps=6 format=3 uid="uid://c05hacu5870kx"]
 
-[ext_resource type="Script" path="res://Scripts/Recipes/sprinkled_modifier.gd" id="1_3v1x5"]
+[ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="1_anay0"]
+[ext_resource type="Script" path="res://Scripts/Animations/sprinkle_animation.gd" id="2_yg4bl"]
+[ext_resource type="PackedScene" uid="uid://2jhfai8rx0b0" path="res://Scenes/Common/Animations/sprinkle_stream.tscn" id="3_pn258"]
+[ext_resource type="Script" path="res://Scripts/Recipes/animated_product_modifier.gd" id="4_50o5q"]
+
+[sub_resource type="Resource" id="Resource_8lj6i"]
+script = ExtResource("2_yg4bl")
+sprinkle_scene = ExtResource("3_pn258")
+color = Color(1, 1, 1, 1)
+pour_time = 0.7
 
 [resource]
-script = ExtResource("1_3v1x5")
-color = Color(1, 1, 1, 1)
+script = ExtResource("4_50o5q")
+animations = Array[ExtResource("1_anay0")]([SubResource("Resource_8lj6i")])
 display_name = "Sugar"

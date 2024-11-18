@@ -3,6 +3,14 @@ class_name Order extends ReceiptResource
 @export var product: Product;
 @export var modifiers: Array[ProductModifier];
 
+var held_recipe: HeldRecipe;
+
+func set_held_recipe(held_item: HeldRecipe) -> void:
+    held_recipe = held_item;
+
+func _update(_delta: float) -> void:
+    pass;
+
 func print_to_label(label: RichTextLabel) -> int:
     var lines_out = 0;
     lines_out += product.print_to_label(label);
@@ -10,6 +18,22 @@ func print_to_label(label: RichTextLabel) -> int:
         label.append_text("\n");
         lines_out += modifier.print_to_label(label);
     return lines_out;
+
+# Assign a new product
+func set_product(new_product: Product) -> void:
+    if product != null:
+        product._exit_resource.call_deferred(self);
+    product = new_product;
+    new_product._enter_resource.call_deferred(self);
+
+func add_modifier(modifier: ProductModifier) -> bool:
+    if can_modify_product(modifier):
+        if modifiers.has(modifier):
+            return false;
+        modifiers.append(modifier);
+        modifier._enter_resource.call_deferred(self)
+        return true;
+    return false;
 
 func can_mix_product(addition: Product) -> Product:
     if product == null:
@@ -21,14 +45,14 @@ func can_modify_product(addition: ProductModifier) -> bool:
         return false;
     return addition in product.allowed_modifiers;
 
-
 const SAME_ORDER: int = 0;
 const DIFFERENT_MODIFIERS: int = 1;
 const DIFFERENT_ORDER: int = -1;
+
 func compare_order(other: Order) -> int:
     if other.product == product:
         if modifiers.all(func(m: ProductModifier) -> bool: return other.modifiers.has(m)):
             if other.modifiers.all(func(m: ProductModifier) -> bool: return modifiers.has(m)):
-                return 0;
-        return 1;
-    return -1;
+                return SAME_ORDER;
+        return DIFFERENT_MODIFIERS;
+    return DIFFERENT_ORDER;

@@ -6,7 +6,7 @@ signal filled();
 @export var cups: float = 0;
 @export var fill_time: float = 5;
 @export var cooldown_time: float = 0.75;
-@export var produces: PouredProduct;
+@export var produces: Product;
 
 @export var liquid: MeshInstance3D;
 @onready var liquid_shader: ShaderMaterial = liquid.mesh.surface_get_material(0);

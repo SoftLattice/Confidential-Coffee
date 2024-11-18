@@ -9,7 +9,7 @@ signal change_paths(new_path: CafePath);
 @export var next_path: CafePath;
 
 func _on_join_path(_customer: Customer) -> void:
-    printerr("Method not implemented");
+    printerr("Method '_on_join_path' not implemented");
 
 func is_path_open() -> bool:
     return false;
