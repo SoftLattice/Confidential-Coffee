@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=56 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
@@ -30,10 +30,12 @@
 [ext_resource type="PackedScene" uid="uid://bnkc8jhwbld7v" path="res://Scenes/Cafe/Assets/CoffeeMaker/coffee_maker.tscn" id="24_7t71w"]
 [ext_resource type="PackedScene" uid="uid://tqdyj3qifga6" path="res://Scenes/Cafe/Assets/cup_rack.tscn" id="25_2lf1c"]
 [ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="25_vr4f0"]
+[ext_resource type="PackedScene" uid="uid://d4ccxpjoi0xnb" path="res://Scenes/Cafe/Assets/Furniture/sink.tscn" id="26_je3xl"]
 [ext_resource type="Script" path="res://Scripts/Recipes/customer_order.gd" id="26_u5kap"]
 [ext_resource type="Shader" path="res://Scenes/Cafe/Assets/CoffeeMaker/carafe_liquid.gdshader" id="31_yesvg"]
 [ext_resource type="PackedScene" uid="uid://bwligg45xa31s" path="res://Scenes/Cafe/Assets/Modifiers/sugar.tscn" id="33_6jjiy"]
 [ext_resource type="PackedScene" uid="uid://bg2qaguqkksji" path="res://Scenes/Cafe/Assets/tea_tray.tscn" id="34_dm86h"]
+[ext_resource type="PackedScene" uid="uid://jvyguitt1ffy" path="res://Scenes/Cafe/Assets/Modifiers/cream.tscn" id="35_5gbk0"]
 
 [sub_resource type="Resource" id="Resource_s4e00"]
 script = ExtResource("3_0wid7")
@@ -73,7 +75,7 @@ ease = 2
 resource_name = "Material"
 cull_mode = 2
 albedo_texture = ExtResource("7_0je8c")
-roughness = 0.5
+texture_filter = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_asc6m"]
 resource_name = "counter-modular_Plane"
@@ -347,6 +349,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 mesh = SubResource("ArrayMesh_asc6m")
 skeleton = NodePath("")
 
+[node name="Sink" parent="Environment/Counters" instance=ExtResource("26_je3xl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 0)
+
 [node name="DeliveryPad" parent="Environment/Counters" instance=ExtResource("23_fucch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.001, 0)
 
@@ -367,6 +372,7 @@ mesh = SubResource("QuadMesh_ivdfq")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, -2)
+calculate_tangents = false
 size = Vector3(3, 4, 8)
 material = SubResource("StandardMaterial3D_k2l0x")
 
@@ -425,7 +431,10 @@ mesh = SubResource("ArrayMesh_5y8nk")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.558815, 1, -0.0870403)
 
 [node name="Sugar" parent="Environment" instance=ExtResource("33_6jjiy")]
-transform = Transform3D(-0.266027, 0, 0.963966, 0, 1, 0, -0.963966, 0, -0.266027, 0.638458, 1, 0.392721)
+transform = Transform3D(-0.266027, 0, 0.963966, 0, 1, 0, -0.963966, 0, -0.266027, -0.461644, 1, -0.062381)
+
+[node name="Cream" parent="Environment" instance=ExtResource("35_5gbk0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.609412, 1, -0.0315307)
 
 [node name="TeaTray" parent="Environment" instance=ExtResource("34_dm86h")]
 transform = Transform3D(0.882866, 0, 0.469626, 0, 1, 0, -0.469626, 0, 0.882866, -0.626086, 1, 0.272802)

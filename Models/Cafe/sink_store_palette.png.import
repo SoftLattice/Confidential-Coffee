@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvl0ame7rdfa2"
-path.s3tc="res://.godot/imported/counter-modular_store_palette.png-e829d730f37998fbee23d4ccfbc56475.s3tc.ctex"
-path.etc2="res://.godot/imported/counter-modular_store_palette.png-e829d730f37998fbee23d4ccfbc56475.etc2.ctex"
+uid="uid://b0a5q2c84swh1"
+path.s3tc="res://.godot/imported/sink_store_palette.png-dd1e1c5cdffa986f3279e875cfb5de3c.s3tc.ctex"
+path.etc2="res://.godot/imported/sink_store_palette.png-dd1e1c5cdffa986f3279e875cfb5de3c.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Models/Store/counter-modular_store_palette.png"
-dest_files=["res://.godot/imported/counter-modular_store_palette.png-e829d730f37998fbee23d4ccfbc56475.s3tc.ctex", "res://.godot/imported/counter-modular_store_palette.png-e829d730f37998fbee23d4ccfbc56475.etc2.ctex"]
+source_file="res://Models/Cafe/sink_store_palette.png"
+dest_files=["res://.godot/imported/sink_store_palette.png-dd1e1c5cdffa986f3279e875cfb5de3c.s3tc.ctex", "res://.godot/imported/sink_store_palette.png-dd1e1c5cdffa986f3279e875cfb5de3c.etc2.ctex"]
 
 [params]
 

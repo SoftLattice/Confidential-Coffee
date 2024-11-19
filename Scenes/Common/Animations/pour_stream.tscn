@@ -13,6 +13,7 @@ transparency = 1
 vertex_color_use_as_albedo = true
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
+disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_c6sdu"]
 material = SubResource("StandardMaterial3D_twsue")
@@ -21,7 +22,7 @@ size = Vector2(0.01, 0.01)
 [node name="PourStream" type="GPUParticles3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.3, 0)
 emitting = false
-amount = 128
+amount = 96
 lifetime = 0.6
 one_shot = true
 local_coords = true

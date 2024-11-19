@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bvib1pg6k5rf1"]
+[gd_scene load_steps=14 format=4 uid="uid://bvib1pg6k5rf1"]
 
 [ext_resource type="Script" path="res://Scenes/Cafe/Assets/paper_cup.gd" id="1_8rjvn"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_v1aut"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://Scenes/Cafe/Assets/paper_cup_liquid.gdshader" id="3_132e2"]
 [ext_resource type="Script" path="res://Scripts/Recipes/order.gd" id="3_n4v3i"]
 [ext_resource type="Script" path="res://Scripts/CafeInterfaces/clickable_asset.gd" id="6_tjwsn"]
+[ext_resource type="PackedScene" uid="uid://5h7uhx454al" path="res://Resources/Products/Modifiers/Assets/tea_bag.tscn" id="7_w6ieb"]
 
 [sub_resource type="Resource" id="Resource_0t7cj"]
 resource_local_to_scene = true
@@ -64,9 +65,10 @@ _surfaces = [{
 height = 0.168036
 radius = 0.055314
 
-[node name="PaperCup" type="Node3D"]
+[node name="PaperCup" type="Node3D" node_paths=PackedStringArray("max_liquid_position", "active_liquid_position")]
 script = ExtResource("1_8rjvn")
-volume = null
+max_liquid_position = NodePath("MaxLiquidPosition")
+active_liquid_position = NodePath("ActiveLiquidPosition")
 contents = SubResource("Resource_0t7cj")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
@@ -75,7 +77,7 @@ skeleton = NodePath("")
 
 [node name="Liquid" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00723813, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.007, 0)
 mesh = SubResource("ArrayMesh_w6blb")
 skeleton = NodePath("")
 
@@ -92,6 +94,14 @@ input_ray_pickable = false
 [node name="Shape" type="CollisionShape3D" parent="Selecter/Collider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0839224, 0)
 shape = SubResource("CylinderShape3D_3k7xm")
+
+[node name="MaxLiquidPosition" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154638, 0)
+
+[node name="ActiveLiquidPosition" type="Marker3D" parent="."]
+
+[node name="TeaBag" parent="." instance=ExtResource("7_w6ieb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [connection signal="picked_up" from="." to="Selecter/Collider" method="set_ray_pickable" binds= [false]]
 [connection signal="put_down" from="." to="Selecter/Collider" method="set_ray_pickable" binds= [true]]

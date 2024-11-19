@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://mgj6i8rpfulx"
-path="res://.godot/imported/counter-modular.glb-3ae6817f87537f1ea41ca628c53ed453.scn"
+uid="uid://b46tgbvin0of1"
+path="res://.godot/imported/cream.glb-66e3ac06a499b36df57b7c4dc66731df.scn"
 
 [deps]
 
-source_file="res://Models/Store/counter-modular.glb"
-dest_files=["res://.godot/imported/counter-modular.glb-3ae6817f87537f1ea41ca628c53ed453.scn"]
+source_file="res://Models/Consumables/cream.glb"
+dest_files=["res://.godot/imported/cream.glb-66e3ac06a499b36df57b7c4dc66731df.scn"]
 
 [params]
 

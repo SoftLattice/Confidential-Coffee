@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=4 uid="uid://bg2qaguqkksji"]
+[gd_scene load_steps=15 format=4 uid="uid://bg2qaguqkksji"]
 
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_1eia5"]
+[ext_resource type="Script" path="res://Scenes/Cafe/Assets/tea_tray.gd" id="1_aygxh"]
 [ext_resource type="Texture2D" uid="uid://hq6j8qpvvuqw" path="res://Models/Consumables/tea_tray_tea_label.png" id="2_3agqn"]
 [ext_resource type="Script" path="res://Scripts/CafeInterfaces/clickable_asset.gd" id="3_kkjk0"]
 [ext_resource type="Texture2D" uid="uid://cfhn3ae7576pb" path="res://Models/Consumables/tea_tray_herbal_label.png" id="3_uakuj"]
@@ -112,8 +113,11 @@ _surfaces = [{
 "vertex_data": PackedByteArray("//8AAGAeaY//////AABpjwAA//8AAGmPAAAAAGAeaY///wAAlDppj/////8zHGmPAAD//zMcaY8AAAAAlDppj///AADIVmmP/////2c4aY8AAP//ZzhpjwAAAADIVmmP//8AAPxyaY//////m1RpjwAA//+bVGmPAAAAAPxyaY///wAAL49pj//////PcGmPAAD//89waY8AAAAAL49pj///AABjq2mP/////wKNaY8AAP//Ao1pjwAAAABjq2mP//8AAJfHaY//////NqlpjwAA//82qWmPAAAAAJfHaY///wAAy+Npj/////9qxWmPAAD//2rFaY8AAAAAy+Npj///AAD//2mP/////57haY8AAP//nuFpjwAAAAD//2mP////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/")
 }]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_exvsh"]
+size = Vector3(0.199219, 0.0860596, 0.299072)
+
 [node name="TeaTray" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_aygxh")
 
 [node name="Tray" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_kbjpw")
@@ -139,7 +143,6 @@ mesh = SubResource("ArrayMesh_1cym4")
 skeleton = NodePath("")
 
 [node name="Clickable" type="Node3D" parent="Herbal"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("3_kkjk0")
 
 [node name="Select" type="Area3D" parent="Herbal/Clickable"]
@@ -148,7 +151,19 @@ script = ExtResource("3_kkjk0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.093323)
 shape = SubResource("BoxShape3D_qktvf")
 
+[node name="Clickable" type="Node3D" parent="."]
+script = ExtResource("3_kkjk0")
+
+[node name="Select" type="Area3D" parent="Clickable"]
+
+[node name="Collider" type="CollisionShape3D" parent="Clickable/Select"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0438344, 0)
+shape = SubResource("BoxShape3D_exvsh")
+
 [connection signal="mouse_entered" from="Tea/Clickable/Select" to="Tea/Clickable" method="_on_select_mouse_entered"]
 [connection signal="mouse_exited" from="Tea/Clickable/Select" to="Tea/Clickable" method="_on_select_mouse_exited"]
 [connection signal="mouse_entered" from="Herbal/Clickable/Select" to="Herbal/Clickable" method="_on_select_mouse_entered"]
 [connection signal="mouse_exited" from="Herbal/Clickable/Select" to="Herbal/Clickable" method="_on_select_mouse_exited"]
+[connection signal="clicked" from="Clickable" to="." method="_on_click"]
+[connection signal="mouse_entered" from="Clickable/Select" to="Clickable" method="_on_select_mouse_entered"]
+[connection signal="mouse_exited" from="Clickable/Select" to="Clickable" method="_on_select_mouse_exited"]

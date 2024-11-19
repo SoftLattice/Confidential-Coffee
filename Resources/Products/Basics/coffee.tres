@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="AnimatedProduct" load_steps=10 format=3 uid="uid://brewrw1m1dmg3"]
+[gd_resource type="Resource" script_class="AnimatedProduct" load_steps=11 format=3 uid="uid://brewrw1m1dmg3"]
 
 [ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_jab20"]
 [ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="2_6b12r"]
 [ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="3_0y42y"]
+[ext_resource type="Resource" uid="uid://upiav32y6nda" path="res://Resources/Products/Modifiers/cream.tres" id="3_520wd"]
 [ext_resource type="PackedScene" uid="uid://csh67jnwsteub" path="res://Scenes/Common/Animations/pour_stream.tscn" id="4_aj4lm"]
 [ext_resource type="Script" path="res://Scripts/Animations/liquid_pour_animation.gd" id="5_dxcu6"]
 [ext_resource type="Script" path="res://Scripts/Animations/liquid_fill_animation.gd" id="6_ar61j"]
@@ -23,4 +24,4 @@ pour_time = 0.7
 script = ExtResource("7_p1f64")
 animations = Array[ExtResource("3_0y42y")]([SubResource("Resource_km2b8"), SubResource("Resource_3gn64")])
 display_name = "Coffee"
-allowed_modifiers = Array[ExtResource("1_jab20")]([ExtResource("2_6b12r")])
+allowed_modifiers = Array[ExtResource("1_jab20")]([ExtResource("2_6b12r"), ExtResource("3_520wd")])

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://be2ri0clt0scq"
-path="res://.godot/imported/counter.glb-fc928a4ae17882e92d97601ff2838725.scn"
+uid="uid://b787g8gwb3gs3"
+path="res://.godot/imported/tea_bag.glb-d7ec475f97b55950ec6ae8ded0ea19a9.scn"
 
 [deps]
 
-source_file="res://Models/Store/counter.glb"
-dest_files=["res://.godot/imported/counter.glb-fc928a4ae17882e92d97601ff2838725.scn"]
+source_file="res://Models/Consumables/tea_bag.glb"
+dest_files=["res://.godot/imported/tea_bag.glb-d7ec475f97b55950ec6ae8ded0ea19a9.scn"]
 
 [params]
 

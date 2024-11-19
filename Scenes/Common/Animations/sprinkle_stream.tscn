@@ -9,6 +9,7 @@ collision_mode = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cksqv"]
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
+disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_kua5a"]
 material = SubResource("StandardMaterial3D_cksqv")

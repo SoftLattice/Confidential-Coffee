@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=4 uid="uid://bwligg45xa31s"]
 
 [ext_resource type="Texture2D" uid="uid://gmvwwfiv2j4g" path="res://Models/Store/sugar_store_palette.png" id="1_rtpc6"]
-[ext_resource type="Script" path="res://Scenes/Cafe/Assets/Modifiers/sugar.gd" id="1_xtb4l"]
+[ext_resource type="Script" path="res://Scenes/Cafe/Assets/Modifiers/simple_modifier.gd" id="1_xtb4l"]
 [ext_resource type="Script" path="res://Scripts/CafeInterfaces/clickable_asset.gd" id="2_2e6ml"]
 [ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="2_vwipr"]
 
