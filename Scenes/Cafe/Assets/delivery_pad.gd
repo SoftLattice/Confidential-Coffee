@@ -47,7 +47,6 @@ func _on_item_removed(held_item: HeldRecipe) -> void:
             spot_status[spot] = null;
             break;
     delivered_items.erase(held_item);
-    print("Removed an item!");
 
 # Convert whatever is on the counter to a customer order
 func to_order() -> CustomerOrder:

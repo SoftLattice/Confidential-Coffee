@@ -16,13 +16,13 @@ func _process(delta: float) -> void:
 func _ready() -> void:
     contents.set_held_recipe(self);
 
-func set_product(product: Product) -> void:
-    contents.set_product(product);
+func set_product(recipe: Recipe = null) -> void:
+    contents.set_product(recipe);
 
 func can_modify_product(modifier: ProductModifier) -> bool:
     return contents.can_modify_product(modifier);
 
-func can_mix_product(product: Product) -> Product:
+func can_mix_product(product: Product) -> Recipe:
     return contents.can_mix_product(product);
 
 func add_modifier(modifier: ProductModifier) -> bool:

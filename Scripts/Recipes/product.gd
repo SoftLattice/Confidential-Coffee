@@ -17,7 +17,7 @@ func print_to_label(label: RichTextLabel) -> int:
 func _on_resource_select() -> void:
     completed = not completed;
 
-func _enter_resource(_order: Order) -> void:
+func _enter_resource(_order: Order, _recipe: Recipe = null) -> void:
     pass;
 
 func _exit_resource(_order: Order) -> void:

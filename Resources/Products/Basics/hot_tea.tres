@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AnimatedProduct" load_steps=6 format=3 uid="uid://djv2otmb80oym"]
+
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_j7vx8"]
+[ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="2_83ueo"]
+[ext_resource type="Resource" uid="uid://upiav32y6nda" path="res://Resources/Products/Modifiers/cream.tres" id="2_dasph"]
+[ext_resource type="Script" path="res://Scripts/Recipes/animated_product.gd" id="3_kgd1j"]
+[ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="3_mxa6w"]
+
+[resource]
+script = ExtResource("3_kgd1j")
+animations = Array[ExtResource("2_83ueo")]([])
+display_name = ""
+allowed_modifiers = Array[ExtResource("1_j7vx8")]([ExtResource("2_dasph"), ExtResource("3_mxa6w")])

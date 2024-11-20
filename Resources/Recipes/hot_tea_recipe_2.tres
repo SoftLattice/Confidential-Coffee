@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://blrw18diawqt6"]
+
+[ext_resource type="Resource" uid="uid://qotcrywq3oec" path="res://Resources/Products/Basics/hot_water.tres" id="1_vj0gk"]
+[ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="2_ahqt7"]
+[ext_resource type="Script" path="res://Scripts/Animations/spawn_animation.gd" id="3_qjoct"]
+[ext_resource type="PackedScene" uid="uid://5h7uhx454al" path="res://Resources/Products/Modifiers/Assets/tea_bag.tscn" id="4_x3f4x"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_modify_animation.gd" id="5_t7tln"]
+[ext_resource type="Resource" uid="uid://2ciho3lnhqk7" path="res://Resources/Products/Basics/dry_tea.tres" id="6_rynbw"]
+[ext_resource type="Resource" uid="uid://djv2otmb80oym" path="res://Resources/Products/Basics/hot_tea.tres" id="7_2p6o4"]
+[ext_resource type="Script" path="res://Scripts/Recipes/recipe.gd" id="8_5q0ct"]
+
+[sub_resource type="Resource" id="Resource_3vixm"]
+script = ExtResource("3_qjoct")
+spawn_scene = ExtResource("4_x3f4x")
+
+[sub_resource type="Resource" id="Resource_8to0r"]
+script = ExtResource("5_t7tln")
+color = Color(0.678431, 0.486275, 0.176471, 0.662745)
+pour_time = 1.0
+intensity = 1.0
+delay = 0.2
+
+[resource]
+script = ExtResource("8_5q0ct")
+base = ExtResource("1_vj0gk")
+addition = ExtResource("6_rynbw")
+product = ExtResource("7_2p6o4")
+animations = Array[ExtResource("2_ahqt7")]([SubResource("Resource_3vixm"), SubResource("Resource_8to0r")])

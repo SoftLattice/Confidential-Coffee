@@ -9,7 +9,6 @@ class_name LiquidContainer extends HeldRecipe
 func set_liquid_level(f: float) -> void:
     liquid_material.set_shader_parameter("liquid_fraction", f);
     active_liquid_position.position = Vector3.ZERO.lerp(max_liquid_position.position,f);
-    print(active_liquid_position.position);
 
 func get_liquid_color() -> Color:
     return liquid_material.get_shader_parameter("liquid_color") as Color;
@@ -31,7 +30,7 @@ func modify_liquid(color: Color, pour_time: float, f: float = 1.0) -> void:
     color_tween.tween_method(set_liquid_color, current_color, out_color, pour_time);
 
 func add_pourable(product: Product) -> bool:
-    var result: Product = can_mix_product(product);
+    var result: Recipe = can_mix_product(product);
     if result == null:
         return false;
     set_product(result);

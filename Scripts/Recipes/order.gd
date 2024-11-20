@@ -20,11 +20,11 @@ func print_to_label(label: RichTextLabel) -> int:
     return lines_out;
 
 # Assign a new product
-func set_product(new_product: Product) -> void:
+func set_product(recipe: Recipe = null) -> void:
     if product != null:
         product._exit_resource.call_deferred(self);
-    product = new_product;
-    new_product._enter_resource.call_deferred(self);
+    product = recipe.product;
+    product._enter_resource.call_deferred(self, recipe);
 
 func add_modifier(modifier: ProductModifier) -> bool:
     if can_modify_product(modifier):
@@ -35,9 +35,10 @@ func add_modifier(modifier: ProductModifier) -> bool:
         return true;
     return false;
 
-func can_mix_product(addition: Product) -> Product:
+func can_mix_product(addition: Product) -> Recipe:
     if product == null:
-        return addition;
+        return NullRecipe.new(addition);
+
     return RecipeManager.mix_recipes(product, addition);
 
 func can_modify_product(addition: ProductModifier) -> bool:

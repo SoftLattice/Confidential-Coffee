@@ -4,3 +4,4 @@ class_name Recipe extends Resource
 @export var addition: Product;
 @export var product: Product;
 
+@export var animations: Array[AnimationResource];
