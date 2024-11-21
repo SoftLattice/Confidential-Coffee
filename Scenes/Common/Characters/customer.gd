@@ -28,6 +28,7 @@ signal order_completed(canceled: bool);
 @export var velocity: float = 1.0;
 @export var radius: float = 0.5;
 
+
 func is_customer_idle() -> bool:
     return animation_state_machine.current_state == idle_state;
 

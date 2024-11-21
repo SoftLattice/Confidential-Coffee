@@ -12,6 +12,7 @@ cull_mode = 2
 albedo_texture = ExtResource("1_asuv1")
 metallic = 0.695
 roughness = 0.305
+texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qnbry"]
 resource_name = "Plastic"

@@ -3,15 +3,6 @@ class_name Cafe extends Node
 @export var day_intro: RichTextLabel;
 @export var pcam_main: PhantomCamera3D;
 
-# Singleton pattern
-static var _active_cafe: Cafe;
-static func get_cafe() -> Cafe:
-    return _active_cafe;
-
-
-func _ready() -> void:
-    _active_cafe = self;
-    pcam_main = get_node("%PCamMainView");
 
 @export var mark_primary: Node3D;
 @export var mark_coffee: Node3D;
@@ -24,6 +15,16 @@ func _ready() -> void:
 @export var debug_customer_definition: CustomerDefinition;
 
 signal spawn_customer(customer_definition: CustomerDefinition, order: CustomerOrder);
+signal start_day();
+
+# Singleton pattern
+static var _active_cafe: Cafe;
+static func get_cafe() -> Cafe:
+    return _active_cafe;
+
+func _ready() -> void:
+    _active_cafe = self;
+    pcam_main = get_node("%PCamMainView");
 
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("debug"):
@@ -39,3 +40,6 @@ func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     cafe_hud.cancel_key.pressed.connect(order_receipt._on_cancel_order, CONNECT_ONE_SHOT);
 
     order_receipt.prepare_display.call_deferred(order);
+
+func _on_preamble_finished() -> void:
+    start_day.emit.call_deferred();
