@@ -1,20 +1,44 @@
-[gd_scene load_steps=22 format=4 uid="uid://buhgv18pjog7i"]
+[gd_scene load_steps=34 format=4 uid="uid://buhgv18pjog7i"]
 
 [ext_resource type="Script" path="res://Scenes/Handler/handler.gd" id="1_8y0lq"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_do60s"]
 [ext_resource type="Script" path="res://Scenes/Handler/handler_speech.gd" id="2_clqgc"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_knsqy"]
+[ext_resource type="Script" path="res://Scripts/Recipes/order.gd" id="2_luwtb"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_17adg"]
 [ext_resource type="PackedScene" uid="uid://b8xwen6ao2c85" path="res://Scenes/Common/SpeechBubble/speech_bubble.tscn" id="3_t0hm1"]
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="3_xl2kq"]
 [ext_resource type="Script" path="res://Scenes/Handler/Assets/customer_picture.gd" id="4_878ox"]
+[ext_resource type="Resource" uid="uid://b53vn6igp0fcw" path="res://Resources/Products/Basics/decaf.tres" id="4_a3rci"]
 [ext_resource type="Texture2D" uid="uid://350p5bbf7bbe" path="res://Scenes/Handler/Textures/polaroid_border.png" id="4_rt45n"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_uoek7"]
 [ext_resource type="Texture2D" uid="uid://dud8r1icn1ha2" path="res://temporary_icon.png" id="5_18pqv"]
+[ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="5_e4jxt"]
+[ext_resource type="Resource" uid="uid://brewrw1m1dmg3" path="res://Resources/Products/Basics/coffee.tres" id="6_pimuf"]
+[ext_resource type="Script" path="res://Scripts/Recipes/customer_order.gd" id="7_038mw"]
+[ext_resource type="Texture2D" uid="uid://d3iyd6wheyofv" path="res://Scenes/Handler/Textures/choice_border.png" id="7_iiuef"]
+[ext_resource type="Script" path="res://Scenes/Handler/receipt_area.gd" id="8_0g4aw"]
+[ext_resource type="PackedScene" uid="uid://c7jb0q5etl8tc" path="res://Scenes/Common/OrderReceipt/order_receipt.tscn" id="9_vek2f"]
+
+[sub_resource type="Resource" id="Resource_s4e00"]
+script = ExtResource("2_luwtb")
+product = ExtResource("4_a3rci")
+modifiers = Array[ExtResource("3_xl2kq")]([])
+
+[sub_resource type="Resource" id="Resource_u3lyc"]
+script = ExtResource("2_luwtb")
+product = ExtResource("6_pimuf")
+modifiers = Array[ExtResource("3_xl2kq")]([ExtResource("5_e4jxt")])
+
+[sub_resource type="Resource" id="Resource_q46gw"]
+script = ExtResource("7_038mw")
+items = Array[ExtResource("2_luwtb")]([SubResource("Resource_s4e00"), SubResource("Resource_u3lyc")])
+extra = "TIME: 6:00"
 
 [sub_resource type="Environment" id="Environment_nce2b"]
 background_color = Color(0.564962, 0.564962, 0.564962, 1)
 
-[sub_resource type="Environment" id="Environment_exbtq"]
+[sub_resource type="Environment" id="Environment_j0tdq"]
 
 [sub_resource type="Resource" id="Resource_skvnx"]
 script = ExtResource("4_uoek7")
@@ -83,12 +107,13 @@ size = Vector3(0.075, 0.075, 0.3)
 
 [node name="Handler" type="Node"]
 script = ExtResource("1_8y0lq")
+debug_order = SubResource("Resource_q46gw")
 
 [node name="Overlay" type="Node" parent="."]
 
-[node name="SpeechBubbles" type="CanvasLayer" parent="Overlay"]
+[node name="Dialog" type="CanvasLayer" parent="Overlay"]
 
-[node name="HandlerSpeech" type="Control" parent="Overlay/SpeechBubbles" node_paths=PackedStringArray("receiver_position")]
+[node name="HandlerSpeech" type="Control" parent="Overlay/Dialog" node_paths=PackedStringArray("receiver_position")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,14 +124,14 @@ script = ExtResource("2_clqgc")
 speech_bubble_scene = ExtResource("3_t0hm1")
 receiver_position = NodePath("../../../Environment/Phone/Receiver/ReceiverTarget")
 
-[node name="CustomerPicture" type="Node2D" parent="Overlay/SpeechBubbles/HandlerSpeech" node_paths=PackedStringArray("texture_rect", "debug_position")]
+[node name="CustomerPicture" type="Node2D" parent="Overlay/Dialog/HandlerSpeech" node_paths=PackedStringArray("texture_rect", "debug_position")]
 position = Vector2(-45, -54)
 script = ExtResource("4_878ox")
 texture_rect = NodePath("NinePatchRect/MarginContainer/Texture")
 debug_texture = ExtResource("5_18pqv")
 debug_position = NodePath("../Marker2D")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Overlay/SpeechBubbles/HandlerSpeech/CustomerPicture"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Overlay/Dialog/HandlerSpeech/CustomerPicture"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -126,7 +151,7 @@ patch_margin_bottom = 12
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Overlay/SpeechBubbles/HandlerSpeech/CustomerPicture/NinePatchRect"]
+[node name="MarginContainer" type="MarginContainer" parent="Overlay/Dialog/HandlerSpeech/CustomerPicture/NinePatchRect"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -139,14 +164,69 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 12
 
-[node name="Texture" type="TextureRect" parent="Overlay/SpeechBubbles/HandlerSpeech/CustomerPicture/NinePatchRect/MarginContainer"]
+[node name="Texture" type="TextureRect" parent="Overlay/Dialog/HandlerSpeech/CustomerPicture/NinePatchRect/MarginContainer"]
 clip_contents = true
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Marker2D" type="Marker2D" parent="Overlay/SpeechBubbles/HandlerSpeech"]
+[node name="Marker2D" type="Marker2D" parent="Overlay/Dialog/HandlerSpeech"]
 position = Vector2(67, 66)
+
+[node name="PlayerChoices" type="Control" parent="Overlay/Dialog"]
+layout_mode = 3
+anchor_top = 0.581
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.12999
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Overlay/Dialog/PlayerChoices"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Overlay/Dialog/PlayerChoices/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("7_iiuef")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Overlay/Dialog/PlayerChoices/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Receipts" type="CanvasLayer" parent="Overlay"]
+
+[node name="ReceiptArea" type="Control" parent="Overlay/Receipts" node_paths=PackedStringArray("spawn_location")]
+layout_mode = 3
+anchor_left = 0.742
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.160034
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("8_0g4aw")
+order_receipt_scene = ExtResource("9_vek2f")
+spawn_location = NodePath("../Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="Overlay/Receipts"]
+position = Vector2(421, 60)
 
 [node name="Environment" type="Node" parent="."]
 
@@ -157,7 +237,7 @@ environment = SubResource("Environment_nce2b")
 
 [node name="Camera3D" type="Camera3D" parent="Environment/Cameras"]
 transform = Transform3D(1, 0, 0, 0, 0.640184, 0.768221, 0, -0.768221, 0.640184, 0, 1.6, 0.7)
-environment = SubResource("Environment_exbtq")
+environment = SubResource("Environment_j0tdq")
 current = true
 
 [node name="PhantomCameraHost" type="Node" parent="Environment/Cameras/Camera3D"]

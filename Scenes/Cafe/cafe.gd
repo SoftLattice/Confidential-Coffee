@@ -17,6 +17,8 @@ class_name Cafe extends Node
 signal spawn_customer(customer_definition: CustomerDefinition, order: CustomerOrder);
 signal start_day();
 
+signal end_day();
+
 # Singleton pattern
 static var _active_cafe: Cafe;
 static func get_cafe() -> Cafe:
@@ -39,7 +41,11 @@ func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     cafe_hud.sell_key.pressed.connect(order_receipt._on_complete_order, CONNECT_ONE_SHOT);
     cafe_hud.cancel_key.pressed.connect(order_receipt._on_cancel_order, CONNECT_ONE_SHOT);
 
+    order.extra = cafe_hud.get_time();
     order_receipt.prepare_display.call_deferred(order);
 
 func _on_preamble_finished() -> void:
     start_day.emit.call_deferred();
+
+func _on_day_finished() -> void:
+    end_day.emit.call_deferred();

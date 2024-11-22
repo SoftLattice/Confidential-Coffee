@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=56 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://Scenes/Common/player_controller.gd" id="9_uktlt"]
 [ext_resource type="PackedScene" uid="uid://fe2ffiu87c5d" path="res://Scenes/Common/RegisterButtons/cancel_key.tscn" id="10_aa5we"]
 [ext_resource type="Script" path="res://Scenes/Cafe/preamble.gd" id="12_eedq1"]
+[ext_resource type="Script" path="res://Scenes/Cafe/postamble.gd" id="14_6ov2l"]
 [ext_resource type="Script" path="res://Scenes/Cafe/customer_spawner.gd" id="16_g4dun"]
 [ext_resource type="Script" path="res://Scenes/Cafe/player_hand.gd" id="17_m30q3"]
 [ext_resource type="Script" path="res://Scenes/Cafe/exit_door.gd" id="18_r0epc"]
@@ -51,6 +52,7 @@ modifiers = Array[ExtResource("25_vr4f0")]([ExtResource("5_f6vk7")])
 [sub_resource type="Resource" id="Resource_i73i6"]
 script = ExtResource("26_u5kap")
 items = Array[ExtResource("3_0wid7")]([SubResource("Resource_s4e00"), SubResource("Resource_u3lyc")])
+extra = ""
 
 [sub_resource type="Resource" id="Resource_1etxi"]
 script = ExtResource("7_k8tcd")
@@ -127,7 +129,7 @@ size = Vector3(0.619141, 2.61829, 1)
 
 [node name="Cafe" type="Node" node_paths=PackedStringArray("day_intro", "mark_primary")]
 script = ExtResource("1_8x71m")
-day_intro = NodePath("Overlay/PreambleViewport/Preamble/DayIntro")
+day_intro = NodePath("Overlay/OverlayViewports/Preamble/DayIntro")
 mark_primary = NodePath("Environment/PlayerControl")
 receipt_scene = ExtResource("7_goaex")
 debug_order = SubResource("Resource_i73i6")
@@ -135,9 +137,9 @@ debug_customer_definition = SubResource("Resource_1etxi")
 
 [node name="Overlay" type="Node" parent="."]
 
-[node name="PreambleViewport" type="CanvasLayer" parent="Overlay"]
+[node name="OverlayViewports" type="CanvasLayer" parent="Overlay"]
 
-[node name="Preamble" type="Control" parent="Overlay/PreambleViewport" node_paths=PackedStringArray("timer")]
+[node name="Preamble" type="Control" parent="Overlay/OverlayViewports" node_paths=PackedStringArray("timer")]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -150,7 +152,7 @@ script = ExtResource("12_eedq1")
 timer = NodePath("DisplayTimer")
 display_duration = 2.0
 
-[node name="ColorRect" type="ColorRect" parent="Overlay/PreambleViewport/Preamble"]
+[node name="ColorRect" type="ColorRect" parent="Overlay/OverlayViewports/Preamble"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -159,7 +161,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="DayIntro" type="RichTextLabel" parent="Overlay/PreambleViewport/Preamble"]
+[node name="DayIntro" type="RichTextLabel" parent="Overlay/OverlayViewports/Preamble"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -183,14 +185,60 @@ visible_characters_behavior = 1
 visible_ratio = 1.375
 script = ExtResource("3_n1fs1")
 
-[node name="DisplayTimer" type="Timer" parent="Overlay/PreambleViewport/Preamble"]
+[node name="DisplayTimer" type="Timer" parent="Overlay/OverlayViewports/Preamble"]
 wait_time = 3.0
+one_shot = true
+
+[node name="Postamble" type="Control" parent="Overlay/OverlayViewports" node_paths=PackedStringArray("timer")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6ohen")
+script = ExtResource("14_6ov2l")
+timer = NodePath("DisplayTimer")
+
+[node name="ColorRect" type="ColorRect" parent="Overlay/OverlayViewports/Postamble"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DayOutro" type="RichTextLabel" parent="Overlay/OverlayViewports/Postamble"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -49.0
+offset_right = 125.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=48][center]End of day[/center][/font_size]
+"
+fit_content = true
+visible_characters = 22
+visible_characters_behavior = 1
+visible_ratio = 1.375
+
+[node name="DisplayTimer" type="Timer" parent="Overlay/OverlayViewports/Postamble"]
+wait_time = 2.0
 one_shot = true
 
 [node name="HUDViewport" type="CanvasLayer" parent="Overlay"]
 layer = 0
 
-[node name="CafeHUD" type="Control" parent="Overlay/HUDViewport" node_paths=PackedStringArray("sell_key", "cancel_key")]
+[node name="CafeHUD" type="Control" parent="Overlay/HUDViewport" node_paths=PackedStringArray("sell_key", "cancel_key", "cafe_clock")]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 3
@@ -204,6 +252,7 @@ theme = ExtResource("1_6ohen")
 script = ExtResource("4_hgyob")
 sell_key = NodePath("SellKey")
 cancel_key = NodePath("CancelKey")
+cafe_clock = NodePath("ClockContainer")
 
 [node name="ClockContainer" type="MarginContainer" parent="Overlay/HUDViewport/CafeHUD" node_paths=PackedStringArray("clock_hand", "timer")]
 layout_mode = 1
@@ -218,12 +267,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 script = ExtResource("4_2fd8n")
-day_length = null
 clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
-timer = NodePath("Timer")
+timer = NodePath("DayTimer")
 
-[node name="Timer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
-wait_time = 150.0
+[node name="DayTimer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
+wait_time = 5.0
 one_shot = true
 
 [node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
@@ -432,11 +480,16 @@ shape = SubResource("BoxShape3D_6v8wq")
 
 [node name="Effects" type="Node" parent="."]
 
+[connection signal="end_day" from="." to="Overlay/OverlayViewports/Postamble" method="_start_postamble"]
 [connection signal="spawn_customer" from="." to="Environment/CustomerFlow/CustomerSpawner" method="_on_spawn_customer"]
 [connection signal="start_day" from="." to="Overlay/HUDViewport/CafeHUD" method="_on_start_day"]
 [connection signal="start_day" from="." to="Overlay/HUDViewport" method="set_visible" binds= [true]]
-[connection signal="finished" from="Overlay/PreambleViewport/Preamble" to="." method="_on_preamble_finished"]
-[connection signal="timeout" from="Overlay/PreambleViewport/Preamble/DisplayTimer" to="Overlay/PreambleViewport/Preamble" method="_on_timer_timeout"]
+[connection signal="finished" from="Overlay/OverlayViewports/Preamble" to="." method="_on_preamble_finished"]
+[connection signal="timeout" from="Overlay/OverlayViewports/Preamble/DisplayTimer" to="Overlay/OverlayViewports/Preamble" method="_on_timer_timeout"]
+[connection signal="timeout" from="Overlay/OverlayViewports/Postamble/DisplayTimer" to="Overlay/OverlayViewports/Postamble" method="_on_timer_timeout"]
+[connection signal="start_timer" from="Overlay/HUDViewport/CafeHUD" to="Overlay/HUDViewport/CafeHUD/ClockContainer/DayTimer" method="start"]
+[connection signal="day_finished" from="Overlay/HUDViewport/CafeHUD/ClockContainer" to="." method="_on_day_finished"]
+[connection signal="timeout" from="Overlay/HUDViewport/CafeHUD/ClockContainer/DayTimer" to="Overlay/HUDViewport/CafeHUD/ClockContainer" method="_on_day_finished"]
 [connection signal="clicked" from="Environment/Counters/DeliveryPad" to="Environment/Cameras/PixelCamera/PlayerHand" method="_on_deliver_item"]
 [connection signal="clicked" from="Environment/CupRack" to="Environment/Cameras/PixelCamera/PlayerHand" method="_on_take_cup"]
 [connection signal="customer_order_placed" from="Environment/CustomerFlow/CustomerPath" to="." method="_on_order_placed"]

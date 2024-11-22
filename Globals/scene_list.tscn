@@ -5,3 +5,4 @@
 [node name="SceneList" type="Node"]
 script = ExtResource("1_grk1m")
 cafe_scene = "res://Scenes/Cafe/cafe.tscn"
+handler_call = "res://Scenes/Handler/handler_call.tscn"

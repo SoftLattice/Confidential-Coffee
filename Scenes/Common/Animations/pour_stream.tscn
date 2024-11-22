@@ -17,15 +17,15 @@ disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_c6sdu"]
 material = SubResource("StandardMaterial3D_twsue")
-size = Vector2(0.01, 0.01)
+size = Vector2(0.01, 0.03)
 
 [node name="PourStream" type="GPUParticles3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.3, 0)
 emitting = false
-amount = 96
+amount = 24
 lifetime = 0.6
 one_shot = true
 local_coords = true
-transform_align = 2
+transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_obugs")
 draw_pass_1 = SubResource("QuadMesh_c6sdu")

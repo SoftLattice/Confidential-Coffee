@@ -1,6 +1,7 @@
 class_name CustomerOrder extends Resource
 
 @export var items: Array[Order];
+@export var extra: String;
 
 const CORRECT_ORDER: int = 0x0;
 const EXTRA_ITEMS: int = 0x1;

@@ -82,7 +82,7 @@ collision_mode = 2
 
 [sub_resource type="QuadMesh" id="QuadMesh_cxfwi"]
 material = SubResource("StandardMaterial3D_1ml1f")
-size = Vector2(0.02, 0.02)
+size = Vector2(0.02, 0.04)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ybf3r"]
 height = 0.140172
@@ -112,7 +112,7 @@ draw_pass_1 = SubResource("QuadMesh_6cxes")
 [node name="Drip" type="GPUParticles3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.160964, 0)
 emitting = false
-amount = 150
+amount = 16
 transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_5glxu")
 draw_pass_1 = SubResource("QuadMesh_cxfwi")

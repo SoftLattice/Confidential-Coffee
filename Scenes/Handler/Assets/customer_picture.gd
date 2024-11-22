@@ -1,6 +1,6 @@
 class_name CustomerPicture extends Node2D
 
-@export var slide_time: float = 3;
+@export var slide_time: float = 2;
 @export var texture_rect: TextureRect;
 
 @export var debug_texture: Texture;

@@ -23,6 +23,10 @@ func render_message(label: RichTextLabel, order: CustomerOrder) -> int:
         label.append_text("\n");
         lines_printed += recipe.print_to_label(label);
 
+    if order.extra:
+        label.append_text("\n\n");
+        label.append_text(order.extra);
+
     label.pop();
 
     #TODO: Print TIME of day????
