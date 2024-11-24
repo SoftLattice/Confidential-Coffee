@@ -5,6 +5,11 @@ class_name Order extends ReceiptResource
 
 var held_recipe: HeldRecipe;
 
+func clear_status() -> void:
+    product.clear_status();
+    for modifier in modifiers:
+        modifier.clear_status();
+
 func set_held_recipe(held_item: HeldRecipe) -> void:
     held_recipe = held_item;
 

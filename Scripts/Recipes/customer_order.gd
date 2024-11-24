@@ -8,6 +8,10 @@ const EXTRA_ITEMS: int = 0x1;
 const WRONG_MODIFIERS: int = 0x2;
 const MISSING_ITEMS: int = 0x4;
 
+func clear_status() -> void:
+    for order in items:
+        order.clear_status();
+
 func compare_orders(other_order: CustomerOrder) -> int:
     var orders: Array[Order] = items.duplicate();
     var other_orders: Array[Order] = other_order.items.duplicate();

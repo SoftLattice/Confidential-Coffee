@@ -48,4 +48,11 @@ func _on_preamble_finished() -> void:
     start_day.emit.call_deferred();
 
 func _on_day_finished() -> void:
+    # Send everyone home
+    var customers: Array[Customer];
+    customers.assign(get_tree().get_nodes_in_group("customer"));
+    for customer in customers:
+        customer.force_exit.call_deferred();
+
+    await get_tree().create_timer(5.).timeout;
     end_day.emit.call_deferred();

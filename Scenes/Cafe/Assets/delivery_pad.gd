@@ -59,3 +59,4 @@ func to_order() -> CustomerOrder:
 func clear_order() -> void:
     for item in delivered_items:
         item.queue_free();
+    delivered_items.clear();

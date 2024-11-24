@@ -3,6 +3,8 @@ class_name OrderReceipt extends Control
 @export var landing_label: RichTextLabel;
 @export var text_container: MarginContainer;
 @export var primary_container: Container;
+@export var font_size: int = 12;
+@export var capture_viewport: SubViewport;
 
 const VERTICAL_MARGIN: int = 4;
 var displayed_lines: int = 0;
@@ -12,7 +14,7 @@ var active_order: CustomerOrder = null;
 # This just pushes out a generic message for testing
 func render_message(label: RichTextLabel, order: CustomerOrder) -> int:
     label.text = "";
-    label.push_font_size(12);
+    label.push_font_size(font_size);
 
     var lines_printed: int = 1;
     label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER);
@@ -29,10 +31,10 @@ func render_message(label: RichTextLabel, order: CustomerOrder) -> int:
 
     label.pop();
 
-    #TODO: Print TIME of day????
     return lines_printed;
 
-func prepare_display(order: CustomerOrder) -> void:
+
+func prepare_display(order: CustomerOrder, pop_on_finish: bool = true) -> void:
     active_order = order;
     # Render the text into the landing display
     displayed_lines = render_message(landing_label, order);
@@ -41,18 +43,22 @@ func prepare_display(order: CustomerOrder) -> void:
     await RenderingServer.frame_post_draw;
 
     landing_label.custom_minimum_size = landing_label.size;
-    landing_label.get_parent().remove_child(landing_label);
-    text_container.add_child(landing_label);
+    landing_label.reparent(text_container);
 
     landing_label.meta_clicked.connect(_on_meta_clicked);
     await RenderingServer.frame_post_draw;
-    pop_receipt();
+    capture_viewport.size = primary_container.size;
+
+    if pop_on_finish:
+        pop_receipt();
 
 
 func _on_meta_clicked(resource: ReceiptResource) -> void:
     resource._on_resource_select();
     render_message(landing_label, active_order);
 
+func _exit_tree() -> void:
+    active_order.clear_status();
 
 # TODO: Juice up the receipt printing
 func pop_receipt() -> void:
@@ -63,6 +69,9 @@ func pop_receipt() -> void:
 func remove_receipt() -> void:
     var delivery_pad: DeliveryPad = DeliveryPad.get_delivery_pad();
     delivery_pad.clear_order();
+    # Convert the receipt to an image for review
+    var result_image: Image = await convert_to_image()
+    CafeManager.daily_receipts.append(ImageTexture.create_from_image(result_image));
     queue_free();
 
 
@@ -70,13 +79,20 @@ func _on_complete_order() -> void:
     var delivery_pad: DeliveryPad = DeliveryPad.get_delivery_pad();
     var delivered_order: CustomerOrder = delivery_pad.to_order();
     print(active_order.compare_orders(delivered_order));
-
-    delivery_pad.clear_order();
-
     customer.order_completed.emit.call_deferred(false);
-    
     remove_receipt();
 
 func _on_cancel_order() -> void:
     customer.order_completed.emit.call_deferred(true);
     remove_receipt();
+
+func get_receipt_size() -> Vector2:
+    return text_container.size;
+
+
+func convert_to_image() -> Image:
+    primary_container.reparent(capture_viewport);
+    primary_container.position = Vector2.ZERO;
+    await RenderingServer.frame_post_draw;
+    var output: Image = capture_viewport.get_texture().get_image();
+    return output;

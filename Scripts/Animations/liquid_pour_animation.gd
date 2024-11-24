@@ -17,4 +17,5 @@ func play_animation(held_item: HeldRecipe) -> void:
 
     await pour_stream.finished
     await held_item.get_tree().create_timer(pour_time).timeout;
-    pour_stream.queue_free();
+    if is_instance_valid(pour_stream):
+        pour_stream.queue_free();

@@ -1,44 +1,23 @@
-[gd_scene load_steps=34 format=4 uid="uid://buhgv18pjog7i"]
+[gd_scene load_steps=25 format=4 uid="uid://buhgv18pjog7i"]
 
-[ext_resource type="Script" path="res://Scenes/Handler/handler.gd" id="1_8y0lq"]
+[ext_resource type="Script" path="res://Scenes/Handler/handler_call.gd" id="1_8y0lq"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_do60s"]
 [ext_resource type="Script" path="res://Scenes/Handler/handler_speech.gd" id="2_clqgc"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_knsqy"]
-[ext_resource type="Script" path="res://Scripts/Recipes/order.gd" id="2_luwtb"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_17adg"]
 [ext_resource type="PackedScene" uid="uid://b8xwen6ao2c85" path="res://Scenes/Common/SpeechBubble/speech_bubble.tscn" id="3_t0hm1"]
-[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="3_xl2kq"]
 [ext_resource type="Script" path="res://Scenes/Handler/Assets/customer_picture.gd" id="4_878ox"]
-[ext_resource type="Resource" uid="uid://b53vn6igp0fcw" path="res://Resources/Products/Basics/decaf.tres" id="4_a3rci"]
 [ext_resource type="Texture2D" uid="uid://350p5bbf7bbe" path="res://Scenes/Handler/Textures/polaroid_border.png" id="4_rt45n"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_uoek7"]
 [ext_resource type="Texture2D" uid="uid://dud8r1icn1ha2" path="res://temporary_icon.png" id="5_18pqv"]
-[ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="5_e4jxt"]
-[ext_resource type="Resource" uid="uid://brewrw1m1dmg3" path="res://Resources/Products/Basics/coffee.tres" id="6_pimuf"]
-[ext_resource type="Script" path="res://Scripts/Recipes/customer_order.gd" id="7_038mw"]
 [ext_resource type="Texture2D" uid="uid://d3iyd6wheyofv" path="res://Scenes/Handler/Textures/choice_border.png" id="7_iiuef"]
 [ext_resource type="Script" path="res://Scenes/Handler/receipt_area.gd" id="8_0g4aw"]
-[ext_resource type="PackedScene" uid="uid://c7jb0q5etl8tc" path="res://Scenes/Common/OrderReceipt/order_receipt.tscn" id="9_vek2f"]
-
-[sub_resource type="Resource" id="Resource_s4e00"]
-script = ExtResource("2_luwtb")
-product = ExtResource("4_a3rci")
-modifiers = Array[ExtResource("3_xl2kq")]([])
-
-[sub_resource type="Resource" id="Resource_u3lyc"]
-script = ExtResource("2_luwtb")
-product = ExtResource("6_pimuf")
-modifiers = Array[ExtResource("3_xl2kq")]([ExtResource("5_e4jxt")])
-
-[sub_resource type="Resource" id="Resource_q46gw"]
-script = ExtResource("7_038mw")
-items = Array[ExtResource("2_luwtb")]([SubResource("Resource_s4e00"), SubResource("Resource_u3lyc")])
-extra = "TIME: 6:00"
+[ext_resource type="PackedScene" uid="uid://cl5xhxnhm4f51" path="res://Scenes/Handler/Assets/call_receipt.tscn" id="9_pl0u5"]
 
 [sub_resource type="Environment" id="Environment_nce2b"]
 background_color = Color(0.564962, 0.564962, 0.564962, 1)
 
-[sub_resource type="Environment" id="Environment_j0tdq"]
+[sub_resource type="Environment" id="Environment_77yl8"]
 
 [sub_resource type="Resource" id="Resource_skvnx"]
 script = ExtResource("4_uoek7")
@@ -105,9 +84,8 @@ size = Vector3(0.3, 0.15, 0.3)
 [sub_resource type="BoxMesh" id="BoxMesh_6iprx"]
 size = Vector3(0.075, 0.075, 0.3)
 
-[node name="Handler" type="Node"]
+[node name="HandlerCall" type="Node"]
 script = ExtResource("1_8y0lq")
-debug_order = SubResource("Resource_q46gw")
 
 [node name="Overlay" type="Node" parent="."]
 
@@ -176,9 +154,9 @@ position = Vector2(67, 66)
 [node name="PlayerChoices" type="Control" parent="Overlay/Dialog"]
 layout_mode = 3
 anchor_top = 0.581
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = 0.12999
+offset_top = 0.129974
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -189,10 +167,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 32
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 16
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Overlay/Dialog/PlayerChoices/MarginContainer"]
 layout_mode = 2
@@ -215,18 +193,17 @@ theme_override_constants/margin_bottom = 4
 
 [node name="ReceiptArea" type="Control" parent="Overlay/Receipts" node_paths=PackedStringArray("spawn_location")]
 layout_mode = 3
-anchor_left = 0.742
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -0.160034
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_0g4aw")
-order_receipt_scene = ExtResource("9_vek2f")
 spawn_location = NodePath("../Marker2D")
+call_receipt_scene = ExtResource("9_pl0u5")
 
 [node name="Marker2D" type="Marker2D" parent="Overlay/Receipts"]
-position = Vector2(421, 60)
+position = Vector2(378, 177)
 
 [node name="Environment" type="Node" parent="."]
 
@@ -237,7 +214,7 @@ environment = SubResource("Environment_nce2b")
 
 [node name="Camera3D" type="Camera3D" parent="Environment/Cameras"]
 transform = Transform3D(1, 0, 0, 0, 0.640184, 0.768221, 0, -0.768221, 0.640184, 0, 1.6, 0.7)
-environment = SubResource("Environment_j0tdq")
+environment = SubResource("Environment_77yl8")
 current = true
 
 [node name="PhantomCameraHost" type="Node" parent="Environment/Cameras/Camera3D"]

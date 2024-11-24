@@ -6,9 +6,6 @@ signal day_finished();
 @export var day_length: float = 12;
 @export var timer: Timer;
 
-func _start_clock() -> void:
-    pass;
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass # Replace with function body.
@@ -24,9 +21,5 @@ func get_time() -> String:
 
     return "TIME: %02d:%02d" % [hour+6,minute];
 
-func _on_start_timer() -> void:
-    print("Starting timer!");
-
 func _on_day_finished() -> void:
-    print("DAY IS DONE!");
     day_finished.emit.call_deferred();

@@ -39,5 +39,12 @@ func on_child_transition(new_state_name: String, state: State) -> void:
     if current_state:
         current_state._exit_state();
 
-    new_state._enter_state();
     current_state = new_state;
+    new_state._enter_state();
+
+func _set_state(new_state_name: String) -> void:
+    var new_state: State = states.get(new_state_name.to_lower());
+    if current_state:
+        current_state._exit_state();
+    current_state = new_state;
+    new_state._enter_state();

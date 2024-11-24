@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl5xhxnhm4f51"]
+
+[ext_resource type="Script" path="res://Scenes/Handler/Assets/call_receipt.gd" id="1_8ugqm"]
+
+[node name="CallReceipt" type="Control" node_paths=PackedStringArray("texture_rect")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8ugqm")
+texture_rect = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

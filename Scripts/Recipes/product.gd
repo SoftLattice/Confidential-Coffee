@@ -3,6 +3,9 @@ class_name Product extends ReceiptResource
 @export var display_name: String;
 @export var allowed_modifiers: Array[ProductModifier];
 
+func clear_status() -> void:
+    completed = false;
+
 var completed: bool = false;
 func print_to_label(label: RichTextLabel) -> int:
     label.push_meta(self, RichTextLabel.META_UNDERLINE_ON_HOVER);

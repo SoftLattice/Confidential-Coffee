@@ -227,9 +227,7 @@ bbcode_enabled = true
 text = "[font_size=48][center]End of day[/center][/font_size]
 "
 fit_content = true
-visible_characters = 22
 visible_characters_behavior = 1
-visible_ratio = 1.375
 
 [node name="DisplayTimer" type="Timer" parent="Overlay/OverlayViewports/Postamble"]
 wait_time = 2.0
@@ -271,7 +269,7 @@ clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 timer = NodePath("DayTimer")
 
 [node name="DayTimer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
