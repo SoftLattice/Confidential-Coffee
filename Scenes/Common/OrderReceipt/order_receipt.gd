@@ -10,6 +10,7 @@ const VERTICAL_MARGIN: int = 4;
 var displayed_lines: int = 0;
 var customer: Customer;
 var active_order: CustomerOrder = null;
+var disposition: int = 0;
 
 # This just pushes out a generic message for testing
 func render_message(label: RichTextLabel, order: CustomerOrder) -> int:
@@ -69,21 +70,31 @@ func pop_receipt() -> void:
 func remove_receipt() -> void:
     var delivery_pad: DeliveryPad = DeliveryPad.get_delivery_pad();
     delivery_pad.clear_order();
+
     # Convert the receipt to an image for review
     var result_image: Image = await convert_to_image()
-    CafeManager.daily_receipts.append(ImageTexture.create_from_image(result_image));
+    # Assign a mugshot
+    var mugshot: Texture = await customer.get_mugshot();
+    # Record interaction
+    var customer_result: CustomerResult = CustomerResult.new();
+    customer_result.mugshot = mugshot;
+    customer_result.receipt = ImageTexture.create_from_image(result_image);
+    customer_result.disposition = disposition;
+    
+    CafeManager.customer_results.append(customer_result);
     queue_free();
 
 
 func _on_complete_order() -> void:
     var delivery_pad: DeliveryPad = DeliveryPad.get_delivery_pad();
     var delivered_order: CustomerOrder = delivery_pad.to_order();
-    print(active_order.compare_orders(delivered_order));
+    disposition = active_order.compare_orders(delivered_order);
     customer.order_completed.emit.call_deferred(false);
     remove_receipt();
 
 func _on_cancel_order() -> void:
     customer.order_completed.emit.call_deferred(true);
+    disposition = -1;
     remove_receipt();
 
 func get_receipt_size() -> Vector2:

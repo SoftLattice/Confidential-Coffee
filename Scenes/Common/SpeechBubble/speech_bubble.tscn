@@ -51,7 +51,7 @@ theme = ExtResource("1_fv67g")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
-autowrap_mode = 2
+autowrap_mode = 1
 
 [node name="LabelMedium" type="RichTextLabel" parent="."]
 offset_right = 128.0
@@ -59,7 +59,7 @@ theme = ExtResource("1_fv67g")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
-autowrap_mode = 2
+autowrap_mode = 1
 
 [node name="LabelLarge" type="RichTextLabel" parent="."]
 offset_right = 192.0
@@ -67,7 +67,7 @@ theme = ExtResource("1_fv67g")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
-autowrap_mode = 2
+autowrap_mode = 1
 
 [node name="TailPosition" type="Marker2D" parent="."]
 

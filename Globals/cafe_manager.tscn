@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cl8q455gb1jia"]
+[gd_scene load_steps=9 format=3 uid="uid://cl8q455gb1jia"]
 
 [ext_resource type="Script" path="res://Globals/cafe_manager.gd" id="1_x4byq"]
+[ext_resource type="Script" path="res://Scripts/Recipes/product.gd" id="2_eb5aj"]
+[ext_resource type="Resource" uid="uid://brewrw1m1dmg3" path="res://Resources/Products/Basics/coffee.tres" id="3_xppur"]
+[ext_resource type="Resource" uid="uid://b53vn6igp0fcw" path="res://Resources/Products/Basics/decaf.tres" id="4_4336r"]
+[ext_resource type="Resource" uid="uid://djv2otmb80oym" path="res://Resources/Products/Basics/hot_tea.tres" id="5_13fa6"]
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="6_cjy6w"]
+[ext_resource type="Resource" uid="uid://upiav32y6nda" path="res://Resources/Products/Modifiers/cream.tres" id="7_xhdba"]
+[ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="8_3dr5r"]
 
 [node name="CafeManager" type="Node"]
 script = ExtResource("1_x4byq")
+product_list = Array[ExtResource("2_eb5aj")]([ExtResource("3_xppur"), ExtResource("4_4336r"), ExtResource("5_13fa6")])
+modifier_list = Array[ExtResource("6_cjy6w")]([ExtResource("7_xhdba"), ExtResource("8_3dr5r")])

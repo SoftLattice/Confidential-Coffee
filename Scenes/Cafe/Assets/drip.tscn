@@ -102,7 +102,7 @@ skeleton = NodePath("")
 [node name="Grounds" type="GPUParticles3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.267369, 0)
 emitting = false
-amount = 256
+amount = 128
 one_shot = true
 explosiveness = 0.5
 transform_align = 1

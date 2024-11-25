@@ -25,6 +25,7 @@ SaveData="*res://Globals/save_data.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 MovementHandler="*res://Globals/movement_handler.tscn"
 CafeManager="*res://Globals/cafe_manager.tscn"
+CustomerManager="*res://Globals/customer_manager.tscn"
 RecipeManager="*res://Globals/recipe_manager.tscn"
 
 [debug]

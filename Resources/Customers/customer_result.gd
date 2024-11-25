@@ -1,4 +1,5 @@
-extends Resource
+class_name CustomerResult extends Resource;
 
-@export var customer_mugshot: Texture;
-@export var customer_receipt: Texture;
+@export var mugshot: Texture;
+@export var receipt: Texture;
+@export var disposition: int;

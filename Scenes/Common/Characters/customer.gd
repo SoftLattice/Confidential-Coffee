@@ -9,10 +9,10 @@ signal order_completed(canceled: bool);
 signal immediate_exit();
 
 @export var visual_node: Node3D;
+@export var flag: Sprite3D;
 @export var cafe_path: CafePath;
 
 @export var order: CustomerOrder;
-
 @export var mugshot_viewport: SubViewport;
 var mugshot: Texture;
 
@@ -31,6 +31,9 @@ var mugshot: Texture;
 
 @export var velocity: float = 1.0;
 @export var radius: float = 0.5;
+
+func set_flag_index(index: int) -> void:
+    flag.frame = index % 8;
 
 func is_customer_idle() -> bool:
     return animation_state_machine.current_state == idle_state;

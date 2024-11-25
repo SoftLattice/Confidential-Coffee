@@ -171,7 +171,7 @@ mesh = SubResource("ArrayMesh_k13t0")
 skeleton = NodePath("")
 
 [node name="MilkCup" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.371481, 0, -1.2024)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.371481, 0, -1.2024)
 mesh = SubResource("ArrayMesh_4accq")
 skeleton = NodePath("")
 

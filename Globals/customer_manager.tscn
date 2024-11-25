@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://pedw51oka0gq"]
+
+[ext_resource type="Script" path="res://Globals/customer_manager.gd" id="1_bq8np"]
+[ext_resource type="PackedScene" uid="uid://b8xlf85e7irdy" path="res://Scenes/Common/Characters/MaleCustomer/male_customer.tscn" id="2_6jt3b"]
+[ext_resource type="PackedScene" uid="uid://nokltwamq7w5" path="res://Scenes/Common/Characters/FemaleCustomer/female_customer.tscn" id="3_f8u46"]
+
+[node name="CustomerManager" type="Node"]
+script = ExtResource("1_bq8np")
+customer_list = Array[PackedScene]([ExtResource("2_6jt3b"), ExtResource("3_f8u46")])

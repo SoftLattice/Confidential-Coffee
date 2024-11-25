@@ -7,6 +7,7 @@ class_name SpeechBubble extends Node2D
 @export var display_label: RichTextLabel;
 @export var label_options: Array[RichTextLabel];
 
+signal timeout();
 
 func _process(_delta: float) -> void:
     if is_instance_valid(track_position):
@@ -50,6 +51,7 @@ func prepare_display(render_function: Callable, duration: float = 3.) -> void:
 
     if duration > 0:
         await get_tree().create_timer(duration).timeout;
+        timeout.emit();
         queue_free();
 
 

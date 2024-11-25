@@ -1,22 +1,17 @@
 class_name Cafe extends Node
 
 @export var day_intro: RichTextLabel;
-@export var pcam_main: PhantomCamera3D;
-
 
 @export var mark_primary: Node3D;
-@export var mark_coffee: Node3D;
 
 @export var receipt_scene: PackedScene;
 
 @onready var cafe_hud: CafeHUD = get_node("%CafeHUD");
 
-@export var debug_order: CustomerOrder;
-@export var debug_customer_definition: CustomerDefinition;
+@export var customer_spawn_timer: Timer;
 
-signal spawn_customer(customer_definition: CustomerDefinition, order: CustomerOrder);
+signal spawn_customer(customer: Customer, order: CustomerOrder);
 signal start_day();
-
 signal end_day();
 
 # Singleton pattern
@@ -26,11 +21,12 @@ static func get_cafe() -> Cafe:
 
 func _ready() -> void:
     _active_cafe = self;
-    pcam_main = get_node("%PCamMainView");
+    CustomerManager.initialize_spawn_data();
+    customer_spawn_timer.start();
 
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("debug"):
-        spawn_customer.emit.call_deferred(debug_customer_definition, debug_order);
+        _on_customer_spawn_timer();
 
 func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     var order_receipt: OrderReceipt = receipt_scene.instantiate();
@@ -54,5 +50,11 @@ func _on_day_finished() -> void:
     for customer in customers:
         customer.force_exit.call_deferred();
 
-    await get_tree().create_timer(5.).timeout;
+    await get_tree().create_timer(3.).timeout;
     end_day.emit.call_deferred();
+
+
+func _on_customer_spawn_timer() -> void:
+    var customer_order: CustomerOrder = CafeManager.generate_random_customer_order();
+    var customer: Customer = CustomerManager.generate_random_customer();
+    spawn_customer.emit.call_deferred(customer, customer_order);

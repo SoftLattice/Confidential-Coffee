@@ -2,8 +2,12 @@ class_name CallReceipt extends Control
 
 signal drag_start();
 signal drag_stop();
+signal send_picture();
 
 @export var texture_rect: TextureRect;
+@export var picture_button: Button;
+
+var customer_result: CustomerResult;
 
 var _is_dragging: bool = false;
 var _relative_position: Vector2 = Vector2.ZERO;
@@ -23,3 +27,12 @@ func _process(_delta: float) -> void:
         new_global_position = new_global_position.min(get_viewport().get_visible_rect().size);
         new_global_position = new_global_position.max(Vector2.ZERO);
         global_position = new_global_position;
+
+func _on_take_picture() -> void:
+    send_picture.emit.call_deferred()
+
+func _on_request_picture() -> void:
+    picture_button.visible = true;
+
+func _on_stop_picture() -> void:
+    picture_button.visible = false;

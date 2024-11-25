@@ -2,7 +2,6 @@ class_name PlayerController extends Node3D
 
 @export var speed: float = 2.0;
 @export var drag_speed: float = 0.5;
-@export var pcam_main: PhantomCamera3D;
 
 
 func _process(delta: float) -> void:

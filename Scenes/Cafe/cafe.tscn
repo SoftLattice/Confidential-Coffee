@@ -1,21 +1,15 @@
-[gd_scene load_steps=56 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=44 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
-[ext_resource type="Script" path="res://Scripts/Recipes/order.gd" id="3_0wid7"]
 [ext_resource type="Script" path="res://Scenes/Cafe/day_intro.gd" id="3_n1fs1"]
 [ext_resource type="Script" path="res://Scenes/Cafe/clock_container.gd" id="4_2fd8n"]
 [ext_resource type="Script" path="res://Scenes/Cafe/hud.gd" id="4_hgyob"]
 [ext_resource type="Texture2D" uid="uid://cwywuy11l4fyj" path="res://Scenes/Cafe/Textures/clock_face.png" id="4_q2nnl"]
-[ext_resource type="Resource" uid="uid://b53vn6igp0fcw" path="res://Resources/Products/Basics/decaf.tres" id="5_0a4oh"]
-[ext_resource type="Resource" uid="uid://brewrw1m1dmg3" path="res://Resources/Products/Basics/coffee.tres" id="5_6i3pe"]
-[ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="5_f6vk7"]
 [ext_resource type="Texture2D" uid="uid://by61oyinxak7f" path="res://Scenes/Cafe/Textures/clock_hand.png" id="5_srdep"]
 [ext_resource type="PackedScene" uid="uid://mjw0orq2pttq" path="res://Scenes/Common/pixel_camera.tscn" id="5_vromj"]
-[ext_resource type="PackedScene" uid="uid://006km13gs34g" path="res://Scenes/Common/Characters/Handler/handler_intro.tscn" id="6_3f48u"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="7_0je8c"]
 [ext_resource type="PackedScene" uid="uid://c7jb0q5etl8tc" path="res://Scenes/Common/OrderReceipt/order_receipt.tscn" id="7_goaex"]
-[ext_resource type="Script" path="res://Resources/Customers/customer_definition.gd" id="7_k8tcd"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="7_vam80"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_qpvg1"]
 [ext_resource type="PackedScene" uid="uid://x6vv2vweb3wc" path="res://Scenes/Common/RegisterButtons/sell_key.tscn" id="9_4kugm"]
@@ -31,32 +25,11 @@
 [ext_resource type="PackedScene" uid="uid://ctsd8bv0jtyw1" path="res://Scenes/Cafe/Assets/delivery_pad.tscn" id="23_fucch"]
 [ext_resource type="PackedScene" uid="uid://bnkc8jhwbld7v" path="res://Scenes/Cafe/Assets/CoffeeMaker/coffee_maker.tscn" id="24_7t71w"]
 [ext_resource type="PackedScene" uid="uid://tqdyj3qifga6" path="res://Scenes/Cafe/Assets/cup_rack.tscn" id="25_2lf1c"]
-[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="25_vr4f0"]
 [ext_resource type="PackedScene" uid="uid://d4ccxpjoi0xnb" path="res://Scenes/Cafe/Assets/Furniture/sink.tscn" id="26_je3xl"]
-[ext_resource type="Script" path="res://Scripts/Recipes/customer_order.gd" id="26_u5kap"]
 [ext_resource type="PackedScene" uid="uid://bwligg45xa31s" path="res://Scenes/Cafe/Assets/Modifiers/sugar.tscn" id="33_6jjiy"]
 [ext_resource type="PackedScene" uid="uid://bg2qaguqkksji" path="res://Scenes/Cafe/Assets/tea_tray.tscn" id="34_dm86h"]
 [ext_resource type="PackedScene" uid="uid://jvyguitt1ffy" path="res://Scenes/Cafe/Assets/Modifiers/cream.tscn" id="35_5gbk0"]
 [ext_resource type="PackedScene" uid="uid://ycd3m38mbiy2" path="res://Scenes/Cafe/Assets/EspressoMachine/espresso_machine.tscn" id="37_whf18"]
-
-[sub_resource type="Resource" id="Resource_s4e00"]
-script = ExtResource("3_0wid7")
-product = ExtResource("5_0a4oh")
-modifiers = Array[ExtResource("25_vr4f0")]([])
-
-[sub_resource type="Resource" id="Resource_u3lyc"]
-script = ExtResource("3_0wid7")
-product = ExtResource("5_6i3pe")
-modifiers = Array[ExtResource("25_vr4f0")]([ExtResource("5_f6vk7")])
-
-[sub_resource type="Resource" id="Resource_i73i6"]
-script = ExtResource("26_u5kap")
-items = Array[ExtResource("3_0wid7")]([SubResource("Resource_s4e00"), SubResource("Resource_u3lyc")])
-extra = ""
-
-[sub_resource type="Resource" id="Resource_1etxi"]
-script = ExtResource("7_k8tcd")
-customer_scene = ExtResource("6_3f48u")
 
 [sub_resource type="Environment" id="Environment_w3stk"]
 background_mode = 1
@@ -127,13 +100,15 @@ point_count = 4
 [sub_resource type="BoxShape3D" id="BoxShape3D_6v8wq"]
 size = Vector3(0.619141, 2.61829, 1)
 
-[node name="Cafe" type="Node" node_paths=PackedStringArray("day_intro", "mark_primary")]
+[node name="Cafe" type="Node" node_paths=PackedStringArray("day_intro", "mark_primary", "customer_spawn_timer")]
 script = ExtResource("1_8x71m")
 day_intro = NodePath("Overlay/OverlayViewports/Preamble/DayIntro")
 mark_primary = NodePath("Environment/PlayerControl")
 receipt_scene = ExtResource("7_goaex")
-debug_order = SubResource("Resource_i73i6")
-debug_customer_definition = SubResource("Resource_1etxi")
+customer_spawn_timer = NodePath("CustomerSpawnTimer")
+
+[node name="CustomerSpawnTimer" type="Timer" parent="."]
+wait_time = 7.0
 
 [node name="Overlay" type="Node" parent="."]
 
@@ -269,7 +244,7 @@ clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 timer = NodePath("DayTimer")
 
 [node name="DayTimer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
-wait_time = 10.0
+wait_time = 5.0
 one_shot = true
 
 [node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
@@ -411,7 +386,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.630674, 1, 0.328773)
 transform = Transform3D(0.999397, 0, -0.034725, 0, 1, 0, 0.034725, 0, 0.999397, -0.526086, 1, 0.272802)
 
 [node name="EspressoMachine" parent="Environment" instance=ExtResource("37_whf18")]
-transform = Transform3D(-2.84124e-08, 0, -0.65, 0, 0.65, 0, 0.65, 0, -2.84124e-08, -2.108, 1, 0)
+transform = Transform3D(-2.84124e-08, 0, -0.65, 0, 0.65, 0, 0.65, 0, -2.84124e-08, -1.708, 1, 0)
 
 [node name="Walls" type="Node" parent="Environment"]
 
@@ -482,6 +457,7 @@ shape = SubResource("BoxShape3D_6v8wq")
 [connection signal="spawn_customer" from="." to="Environment/CustomerFlow/CustomerSpawner" method="_on_spawn_customer"]
 [connection signal="start_day" from="." to="Overlay/HUDViewport/CafeHUD" method="_on_start_day"]
 [connection signal="start_day" from="." to="Overlay/HUDViewport" method="set_visible" binds= [true]]
+[connection signal="timeout" from="CustomerSpawnTimer" to="." method="_on_customer_spawn_timer"]
 [connection signal="finished" from="Overlay/OverlayViewports/Preamble" to="." method="_on_preamble_finished"]
 [connection signal="timeout" from="Overlay/OverlayViewports/Preamble/DisplayTimer" to="Overlay/OverlayViewports/Preamble" method="_on_timer_timeout"]
 [connection signal="timeout" from="Overlay/OverlayViewports/Postamble/DisplayTimer" to="Overlay/OverlayViewports/Postamble" method="_on_timer_timeout"]

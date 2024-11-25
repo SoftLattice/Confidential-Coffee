@@ -9,5 +9,5 @@
 [resource]
 script = ExtResource("3_kgd1j")
 animations = Array[ExtResource("2_83ueo")]([])
-display_name = ""
+display_name = "Tea"
 allowed_modifiers = Array[ExtResource("1_j7vx8")]([ExtResource("2_dasph"), ExtResource("3_mxa6w")])

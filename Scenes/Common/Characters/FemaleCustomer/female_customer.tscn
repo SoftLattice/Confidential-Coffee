@@ -4,16 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://dr3obbvsegrk3" path="res://Scenes/Common/Characters/FemaleCustomer/female_customer.png" id="2_3xtq6"]
 [ext_resource type="Shader" path="res://Scenes/Common/Characters/character_cafe.gdshader" id="3_5t7vg"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3ehg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bug26"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_5t7vg")
 shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
-shader_parameter/modulate_strength = 0.0
+shader_parameter/modulate_strength = 0.5
 shader_parameter/albedo_texture = ExtResource("2_3xtq6")
 
 [node name="Customer" instance=ExtResource("1_idxm7")]
-character_texture = ExtResource("2_3xtq6")
 
-[node name="Sprite3D" parent="Visual" index="0"]
-material_override = SubResource("ShaderMaterial_m3ehg")
+[node name="Person" parent="Visual" index="1"]
+material_override = SubResource("ShaderMaterial_bug26")
