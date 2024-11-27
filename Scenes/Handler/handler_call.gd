@@ -5,8 +5,10 @@ signal disappointed();
 signal satisfied();
 signal receipt_picture(customer_result: CustomerResult);
 
-signal request_picture()
+signal request_picture();
 signal stop_picture();
+
+signal request_quote();
 
 @export var items_area: ItemsArea;
 @export var handler_speech: HandlerSpeech;
@@ -23,7 +25,7 @@ static func get_active_handler() -> HandlerCall:
 func _ready() -> void:
     _active_handler = self;
 
-    if debug_customer_results:
+    if debug_customer_results and false:
         customer_results.assign(debug_customer_results);
     else:
         customer_results.assign(CafeManager.customer_results);
@@ -43,12 +45,15 @@ func _ready() -> void:
 func _spawn_receipt(customer_result: CustomerResult) -> void:
     items_area.spawn_receipt.call_deferred(customer_result);
 
-func _spawn_mugshot(customer_result: CustomerResult) -> void:
-    items_area.spawn_customer_picture(customer_result);
+func _spawn_mugshot(customer_result: CustomerResult) -> CustomerPicture:
+    return items_area.spawn_customer_picture(customer_result);
 
 var active_customer_result: CustomerResult = null;
 func speak(render_bubble: Callable, duration: float) -> SpeechBubble:
     return handler_speech.speak(render_bubble, duration);
+
+func quiet() -> void:
+    handler_speech.quiet();
 
 func _on_goto_bed() -> void:
     end_day.emit.call_deferred();
@@ -56,10 +61,14 @@ func _on_goto_bed() -> void:
     var sleep_tween: Tween = create_tween();
     sleep_tween.tween_property(fadeout_rect, "color:a", 1., 3.);
     await sleep_tween.finished;
-
     get_tree().change_scene_to_file(SceneList.cafe_scene);
 
 
 func _on_receipt_picture(customer_result: CustomerResult) -> void:
     receipt_picture.emit.call_deferred(customer_result);
-    print("RECEIVED A PICTURE!");
+
+func _on_wrong_answer() -> void:
+    print("GOT IT WRONG");
+
+func _on_right_answer() -> void:
+    print("GOT IT RIGHT");

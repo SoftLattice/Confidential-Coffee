@@ -1,18 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8xlf85e7irdy"]
+[gd_scene load_steps=6 format=3 uid="uid://b8xlf85e7irdy"]
 
 [ext_resource type="PackedScene" uid="uid://dcdjonkjbxh0r" path="res://Scenes/Common/Characters/customer.tscn" id="1_vssai"]
 [ext_resource type="Texture2D" uid="uid://cid7i8pi17u5g" path="res://Scenes/Common/Characters/MaleCustomer/male_customer.png" id="2_hkh74"]
 [ext_resource type="Shader" path="res://Scenes/Common/Characters/character_cafe.gdshader" id="3_ya7t3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_55x7v"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i0v57"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_ya7t3")
 shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
-shader_parameter/modulate_strength = 0.5
+shader_parameter/modulate_strength = 1.0
 shader_parameter/albedo_texture = ExtResource("2_hkh74")
 
 [node name="Customer" instance=ExtResource("1_vssai")]
+
+[node name="Flag" parent="Visual" index="0"]
+material_overlay = SubResource("StandardMaterial3D_55x7v")
 
 [node name="Person" parent="Visual" index="1"]
 material_override = SubResource("ShaderMaterial_i0v57")

@@ -244,7 +244,7 @@ clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 timer = NodePath("DayTimer")
 
 [node name="DayTimer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
-wait_time = 5.0
+wait_time = 15.0
 one_shot = true
 
 [node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]

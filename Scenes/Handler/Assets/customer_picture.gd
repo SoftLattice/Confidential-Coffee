@@ -5,18 +5,15 @@ signal drag_stop();
 
 @export var slide_time: float = 2;
 @export var texture_rect: TextureRect;
-
-@export var debug_texture: Texture;
-@export var debug_position: Node2D;
+@export var container: Container;
 
 @export var select_area: Area2D;
 @export var slide_angle_jitter: float = 0.1;
 
-
 func set_texture(texture: Texture) -> void:
     texture_rect.texture = texture;
 
-func slide_to(to_position: Vector2) -> void:
+func slide_to(to_position: Vector2) -> Tween:
     var angle: float = randf_range(-slide_angle_jitter,slide_angle_jitter);
     var slide_tween: Tween = create_tween();
     slide_tween.bind_node(self).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true);
@@ -24,6 +21,7 @@ func slide_to(to_position: Vector2) -> void:
     slide_tween.tween_property(self, "rotation", angle, slide_time);
     slide_tween.set_parallel(false);
     slide_tween.tween_property(select_area, "input_pickable", true, 0);
+    return slide_tween;
     
 var _is_dragging: bool = false;
 var _relative_position: Vector2 = Vector2.ZERO;
@@ -43,3 +41,6 @@ func _process(_delta: float) -> void:
         new_global_position = new_global_position.min(get_viewport().get_visible_rect().size);
         new_global_position = new_global_position.max(Vector2.ZERO);
         global_position = new_global_position;
+
+func get_size() -> Vector2:
+    return container.size;

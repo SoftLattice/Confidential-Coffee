@@ -10,7 +10,7 @@ script = ExtResource("2_6y3v4")
 tail_node = NodePath("TailPosition")
 bubble_container = NodePath("Container")
 display_label = NodePath("Container/MarginContainer/RealTextLabel")
-label_options = [NodePath("LabelSmall"), NodePath("LabelMedium"), NodePath("LabelLarge")]
+label_options = [NodePath("LabelTiny"), NodePath("LabelSmall"), NodePath("LabelMedium"), NodePath("LabelLarge")]
 
 [node name="Container" type="MarginContainer" parent="."]
 offset_right = 40.0
@@ -44,6 +44,14 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 2
 shortcut_keys_enabled = false
+
+[node name="LabelTiny" type="RichTextLabel" parent="."]
+offset_right = 32.0
+theme = ExtResource("1_fv67g")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
 
 [node name="LabelSmall" type="RichTextLabel" parent="."]
 offset_right = 64.0

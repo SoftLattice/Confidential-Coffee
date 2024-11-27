@@ -1,11 +1,12 @@
 extends HandlerCallState
 
+const RESPONSES: Array[String] = ["Interesting...", "I see...", "Is that so?"]
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-    pass # Replace with function body.
+@export var wait_time: float = 2.0;
 
+func _enter_state() -> void:
+    handler_call.quiet();
+    await get_tree().create_timer(randf_range(0, wait_time)).timeout;
+    await handler_call.speak(simple_string_render.bind(RESPONSES.pick_random()),2).timeout;
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-    pass
+    transitioned.emit.call_deferred("idle");

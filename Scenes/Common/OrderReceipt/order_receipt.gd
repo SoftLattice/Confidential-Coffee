@@ -80,6 +80,7 @@ func remove_receipt() -> void:
     customer_result.mugshot = mugshot;
     customer_result.receipt = ImageTexture.create_from_image(result_image);
     customer_result.disposition = disposition;
+    customer_result.phrase_seed = customer.phrase_seed;
     
     CafeManager.customer_results.append(customer_result);
     queue_free();

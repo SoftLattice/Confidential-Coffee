@@ -1,6 +1,7 @@
 extends CustomerState
 
 signal leaving_queue();
+signal counter_distance_change(dist: float);
 var customer_path: CustomerPath;
 
 var counter_open: bool;
@@ -23,7 +24,11 @@ func _update(delta: float) -> void:
 
     customer.global_position = customer_path.get_global_position_from_offset(queue_offset);
 
+    var current_distance: float = customer_path.relative_counter_distance(customer.global_position);
     if is_equal_approx(queue_offset, customer_path.counter_offset):
         leaving_queue.emit();
         customer.stop_walking.emit.call_deferred();
+        counter_distance_change.emit.call_deferred(0.);
         transitioned.emit("ordering");
+    else:
+        counter_distance_change.emit.call_deferred(current_distance);

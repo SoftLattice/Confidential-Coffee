@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://buhgv18pjog7i"]
+[gd_scene load_steps=55 format=4 uid="uid://buhgv18pjog7i"]
 
 [ext_resource type="Script" path="res://Scenes/Handler/handler_call.gd" id="1_8y0lq"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_do60s"]
@@ -15,22 +15,51 @@
 [ext_resource type="PackedScene" uid="uid://tovik5tftqay" path="res://Scenes/Handler/Assets/customer_picture.tscn" id="4_5fsto"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/HandlerCall/satisfied.gd" id="4_qhrgc"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_uoek7"]
+[ext_resource type="Texture2D" uid="uid://dxlb7h8whrisa" path="res://Textures/Debug/mugshot_placeholder_2.png" id="5_ga42p"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/HandlerCall/handler_call_state.gd" id="6_enqi4"]
+[ext_resource type="Texture2D" uid="uid://w8khtakahg1b" path="res://Textures/Debug/receipt_placeholder_2.png" id="6_lnsdj"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/HandlerCall/receipt_request.gd" id="6_q7kib"]
 [ext_resource type="Texture2D" uid="uid://d3iyd6wheyofv" path="res://Scenes/Handler/Textures/choice_border.png" id="7_iiuef"]
 [ext_resource type="Script" path="res://Scenes/Handler/items_area.gd" id="8_0g4aw"]
 [ext_resource type="PackedScene" uid="uid://cl5xhxnhm4f51" path="res://Scenes/Handler/Assets/call_receipt.tscn" id="9_pl0u5"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/HandlerCall/answered.gd" id="11_l6iba"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/HandlerCall/quote_request.gd" id="13_y2m5h"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/HandlerCall/finished.gd" id="14_ihqgh"]
+[ext_resource type="Script" path="res://Scenes/Handler/player_choices.gd" id="17_vkimc"]
+[ext_resource type="Texture2D" uid="uid://bej6o4leq6swg" path="res://Scenes/Handler/Textures/choice_preview.png" id="18_0knpv"]
+[ext_resource type="Texture2D" uid="uid://c1bpkifrcive8" path="res://Textures/Icons/Speech/cancel.png" id="18_b5b3y"]
+[ext_resource type="Texture2D" uid="uid://bhtwphxjhjjcs" path="res://Textures/Icons/Speech/letter.png" id="19_g2rx5"]
+[ext_resource type="Texture2D" uid="uid://j3bgu550tnyr" path="res://Textures/Icons/Speech/money.png" id="20_85gpv"]
+[ext_resource type="Texture2D" uid="uid://bhh4h3lvqkmur" path="res://Textures/Icons/Speech/pencil.png" id="21_uf5qb"]
+[ext_resource type="Texture2D" uid="uid://cmy8s1t7p7gr" path="res://Textures/Icons/Speech/phone.png" id="22_h560k"]
+[ext_resource type="Texture2D" uid="uid://dqvyd47gncqw7" path="res://Textures/Icons/Speech/plane.png" id="23_l7uq2"]
+[ext_resource type="Texture2D" uid="uid://blh1thpej71ec" path="res://Textures/Icons/Speech/flag_0.png" id="24_if7cx"]
+[ext_resource type="Texture2D" uid="uid://cuenfx2dyycn6" path="res://Textures/Icons/Speech/flag_1.png" id="25_0eibq"]
+[ext_resource type="Texture2D" uid="uid://tx7dt51d8yxw" path="res://Textures/Icons/Speech/flag_2.png" id="26_uloh6"]
+[ext_resource type="Texture2D" uid="uid://bfw6s0mvjdo50" path="res://Textures/Icons/Speech/flag_3.png" id="27_fmg7q"]
+[ext_resource type="Texture2D" uid="uid://32aggctwdfc5" path="res://Textures/Icons/Speech/flag_4.png" id="28_rmbvt"]
+[ext_resource type="Texture2D" uid="uid://dq4l83lpu0exw" path="res://Textures/Icons/Speech/flag_5.png" id="29_ermfk"]
+[ext_resource type="Texture2D" uid="uid://b06vxkm7tiggt" path="res://Textures/Icons/Speech/flag_6.png" id="30_ytnqm"]
+[ext_resource type="Texture2D" uid="uid://brkegqcequi3p" path="res://Textures/Icons/Speech/flag_7.png" id="31_nh0io"]
 
 [sub_resource type="Resource" id="Resource_4jcoe"]
 script = ExtResource("2_msf10")
 mugshot = ExtResource("3_5wwre")
 receipt = ExtResource("3_h812d")
 disposition = 0
+phrase_seed = Array[int]([1, 2])
+
+[sub_resource type="Resource" id="Resource_td4sf"]
+script = ExtResource("2_msf10")
+mugshot = ExtResource("5_ga42p")
+receipt = ExtResource("6_lnsdj")
+disposition = 0
+phrase_seed = Array[int]([2, 3])
 
 [sub_resource type="Environment" id="Environment_nce2b"]
 background_color = Color(0.564962, 0.564962, 0.564962, 1)
 
-[sub_resource type="Environment" id="Environment_pkhi3"]
+[sub_resource type="Environment" id="Environment_26gpj"]
 
 [sub_resource type="Resource" id="Resource_skvnx"]
 script = ExtResource("4_uoek7")
@@ -102,7 +131,7 @@ script = ExtResource("1_8y0lq")
 items_area = NodePath("Overlay/Items/ItemsArea")
 handler_speech = NodePath("Overlay/Dialog/HandlerSpeech")
 fadeout_rect = NodePath("Overlay/Exit/FadeOut")
-debug_customer_results = Array[ExtResource("2_msf10")]([SubResource("Resource_4jcoe")])
+debug_customer_results = Array[ExtResource("2_msf10")]([SubResource("Resource_4jcoe"), SubResource("Resource_td4sf")])
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_f8ete")
@@ -113,6 +142,7 @@ script = ExtResource("6_enqi4")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_61cpy")
+quote_probability = 1.0
 
 [node name="Disappointed" type="Node" parent="StateMachine"]
 script = ExtResource("3_n0qd7")
@@ -122,6 +152,15 @@ script = ExtResource("4_qhrgc")
 
 [node name="ReceiptRequest" type="Node" parent="StateMachine"]
 script = ExtResource("6_q7kib")
+
+[node name="QuoteRequest" type="Node" parent="StateMachine"]
+script = ExtResource("13_y2m5h")
+
+[node name="Answered" type="Node" parent="StateMachine"]
+script = ExtResource("11_l6iba")
+
+[node name="Finished" type="Node" parent="StateMachine"]
+script = ExtResource("14_ihqgh")
 
 [node name="Overlay" type="Node" parent="."]
 
@@ -139,29 +178,46 @@ script = ExtResource("2_clqgc")
 speech_bubble_scene = ExtResource("3_t0hm1")
 receiver_position = NodePath("../../../Environment/Phone/Receiver/ReceiverTarget")
 
-[node name="PlayerChoices" type="Control" parent="Overlay/Dialog"]
+[node name="Items" type="CanvasLayer" parent="Overlay"]
+
+[node name="PlayerChoices" type="Control" parent="Overlay/Items" node_paths=PackedStringArray("main_container", "verb_container", "flag_container", "verb_texture", "flag_texture")]
 layout_mode = 3
-anchor_top = 0.581
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_top = 0.129974
+anchor_left = 0.287
+anchor_top = 1.578
+anchor_right = 0.287
+anchor_bottom = 1.578
+offset_left = 0.240005
+offset_top = -0.0600281
+offset_right = 0.240005
+offset_bottom = -0.0600281
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+script = ExtResource("17_vkimc")
+main_container = NodePath("MainContainer")
+verb_container = NodePath("MainContainer/Margin/VBoxContainer/Choices/VerbGrid")
+flag_container = NodePath("MainContainer/Margin/VBoxContainer/Choices/FlagGrid")
+verb_texture = NodePath("MainContainer/Margin/VBoxContainer/PreviewMargin/HBoxContainer/VerbRect")
+flag_texture = NodePath("MainContainer/Margin/VBoxContainer/PreviewMargin/HBoxContainer/FlagRect")
 
-[node name="MarginContainer" type="MarginContainer" parent="Overlay/Dialog/PlayerChoices"]
+[node name="MainContainer" type="MarginContainer" parent="Overlay/Items/PlayerChoices"]
+custom_minimum_size = Vector2(208, 0)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_left = 0.079
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 0.039999
+offset_top = -156.0
+offset_bottom = -3.05176e-05
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 16
+mouse_filter = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 16
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Overlay/Dialog/PlayerChoices/MarginContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Overlay/Items/PlayerChoices/MainContainer"]
 layout_mode = 2
 texture = ExtResource("7_iiuef")
 patch_margin_left = 4
@@ -171,14 +227,141 @@ patch_margin_bottom = 4
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Overlay/Dialog/PlayerChoices/MarginContainer"]
+[node name="Margin" type="MarginContainer" parent="Overlay/Items/PlayerChoices/MainContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Items" type="CanvasLayer" parent="Overlay"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/Items/PlayerChoices/MainContainer/Margin"]
+layout_mode = 2
+alignment = 1
+
+[node name="PreviewMargin" type="MarginContainer" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 7
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/PreviewMargin"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("18_0knpv")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/PreviewMargin"]
+custom_minimum_size = Vector2(62, 38)
+layout_mode = 2
+alignment = 1
+
+[node name="VerbRect" type="TextureRect" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/PreviewMargin/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="FlagRect" type="TextureRect" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/PreviewMargin/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Choices" type="HBoxContainer" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="VerbGrid" type="GridContainer" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+columns = 3
+
+[node name="Button1" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/VerbGrid"]
+layout_mode = 2
+icon = ExtResource("18_b5b3y")
+
+[node name="Button2" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/VerbGrid"]
+layout_mode = 2
+icon = ExtResource("19_g2rx5")
+
+[node name="Button3" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/VerbGrid"]
+layout_mode = 2
+icon = ExtResource("20_85gpv")
+
+[node name="Button4" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/VerbGrid"]
+layout_mode = 2
+icon = ExtResource("21_uf5qb")
+
+[node name="Button5" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/VerbGrid"]
+layout_mode = 2
+icon = ExtResource("22_h560k")
+
+[node name="Button6" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/VerbGrid"]
+layout_mode = 2
+icon = ExtResource("23_l7uq2")
+
+[node name="FlagGrid" type="GridContainer" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+columns = 3
+
+[node name="Button1" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/FlagGrid"]
+layout_mode = 2
+icon = ExtResource("24_if7cx")
+
+[node name="Button2" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/FlagGrid"]
+layout_mode = 2
+icon = ExtResource("25_0eibq")
+
+[node name="Button3" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/FlagGrid"]
+layout_mode = 2
+icon = ExtResource("26_uloh6")
+
+[node name="Button4" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/FlagGrid"]
+layout_mode = 2
+icon = ExtResource("27_fmg7q")
+
+[node name="Button5" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/FlagGrid"]
+layout_mode = 2
+icon = ExtResource("28_rmbvt")
+
+[node name="Button6" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/FlagGrid"]
+layout_mode = 2
+icon = ExtResource("29_ermfk")
+
+[node name="Button7" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/FlagGrid"]
+layout_mode = 2
+icon = ExtResource("30_ytnqm")
+
+[node name="Button8" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/Margin/VBoxContainer/Choices/FlagGrid"]
+layout_mode = 2
+icon = ExtResource("31_nh0io")
+
+[node name="SendMargin" type="MarginContainer" parent="Overlay/Items/PlayerChoices/MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="SendButton" type="Button" parent="Overlay/Items/PlayerChoices/MainContainer/SendMargin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Send"
 
 [node name="ItemsArea" type="Control" parent="Overlay/Items" node_paths=PackedStringArray("receipt_spawn_location", "mugshot_spawn_location")]
 layout_mode = 3
@@ -236,7 +419,7 @@ environment = SubResource("Environment_nce2b")
 
 [node name="Camera3D" type="Camera3D" parent="Environment/Cameras"]
 transform = Transform3D(1, 0, 0, 0, 0.640184, 0.768221, 0, -0.768221, 0.640184, 0, 1.6, 0.7)
-environment = SubResource("Environment_pkhi3")
+environment = SubResource("Environment_26gpj")
 current = true
 
 [node name="PhantomCameraHost" type="Node" parent="Environment/Cameras/Camera3D"]
@@ -289,6 +472,14 @@ transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0
 
 [connection signal="disappointed" from="." to="StateMachine" method="_set_state" binds= ["disappointed"]]
 [connection signal="receipt_picture" from="." to="StateMachine/ReceiptRequest" method="_on_receipt_picture"]
+[connection signal="request_quote" from="." to="Overlay/Items/PlayerChoices" method="pop_in"]
 [connection signal="satisfied" from="." to="StateMachine" method="_set_state" binds= ["satisfied"]]
 [connection signal="finished_talking" from="StateMachine/Disappointed" to="Overlay/Exit" method="set_visible" binds= [true]]
+[connection signal="right_answer" from="StateMachine/ReceiptRequest" to="." method="_on_right_answer"]
+[connection signal="wrong_answer" from="StateMachine/ReceiptRequest" to="." method="_on_wrong_answer"]
+[connection signal="right_answer" from="StateMachine/QuoteRequest" to="." method="_on_right_answer"]
+[connection signal="wrong_answer" from="StateMachine/QuoteRequest" to="." method="_on_wrong_answer"]
+[connection signal="finished_talking" from="StateMachine/Finished" to="Overlay/Exit" method="set_visible" binds= [true]]
+[connection signal="submit_phrase" from="Overlay/Items/PlayerChoices" to="StateMachine/QuoteRequest" method="_on_submit_quote"]
+[connection signal="pressed" from="Overlay/Items/PlayerChoices/MainContainer/SendMargin/SendButton" to="Overlay/Items/PlayerChoices" method="_on_send"]
 [connection signal="pressed" from="Overlay/Exit/Button" to="." method="_on_goto_bed"]

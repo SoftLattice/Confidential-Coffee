@@ -1,5 +1,6 @@
 extends Node
 
+@export var max_order_size: int = 4;
 @export var customer_results: Array[CustomerResult];
 
 @export var product_list: Array[Product];
@@ -23,6 +24,6 @@ func generate_random_order() -> Order:
 
 func generate_random_customer_order() -> CustomerOrder:
     var result: CustomerOrder = CustomerOrder.new();
-    for i in range(randi_range(1,4)):
+    for i in range(randi_range(1,max_order_size)):
         result.items.append(generate_random_order());
     return result;

@@ -1,18 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://nokltwamq7w5"]
+[gd_scene load_steps=6 format=3 uid="uid://nokltwamq7w5"]
 
 [ext_resource type="PackedScene" uid="uid://dcdjonkjbxh0r" path="res://Scenes/Common/Characters/customer.tscn" id="1_idxm7"]
 [ext_resource type="Texture2D" uid="uid://dr3obbvsegrk3" path="res://Scenes/Common/Characters/FemaleCustomer/female_customer.png" id="2_3xtq6"]
 [ext_resource type="Shader" path="res://Scenes/Common/Characters/character_cafe.gdshader" id="3_5t7vg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klcwi"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bug26"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_5t7vg")
 shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
-shader_parameter/modulate_strength = 0.5
+shader_parameter/modulate_strength = 1.0
 shader_parameter/albedo_texture = ExtResource("2_3xtq6")
 
 [node name="Customer" instance=ExtResource("1_idxm7")]
+
+[node name="Flag" parent="Visual" index="0"]
+material_overlay = SubResource("StandardMaterial3D_klcwi")
 
 [node name="Person" parent="Visual" index="1"]
 material_override = SubResource("ShaderMaterial_bug26")

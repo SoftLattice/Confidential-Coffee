@@ -1,17 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://tovik5tftqay"]
+[gd_scene load_steps=4 format=3 uid="uid://tovik5tftqay"]
 
 [ext_resource type="Script" path="res://Scenes/Handler/Assets/customer_picture.gd" id="1_73bo3"]
-[ext_resource type="Texture2D" uid="uid://dud8r1icn1ha2" path="res://temporary_icon.png" id="2_5ddhn"]
 [ext_resource type="Texture2D" uid="uid://350p5bbf7bbe" path="res://Scenes/Handler/Textures/polaroid_border.png" id="3_gyesx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sj50d"]
 size = Vector2(86, 104)
 
-[node name="CustomerPicture" type="Node2D" node_paths=PackedStringArray("texture_rect", "select_area")]
+[node name="CustomerPicture" type="Node2D" node_paths=PackedStringArray("texture_rect", "container", "select_area")]
 position = Vector2(-45, -54)
 script = ExtResource("1_73bo3")
 texture_rect = NodePath("NinePatchRect/MarginContainer/Texture")
-debug_texture = ExtResource("2_5ddhn")
+container = NodePath("NinePatchRect/MarginContainer")
 select_area = NodePath("Select")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]

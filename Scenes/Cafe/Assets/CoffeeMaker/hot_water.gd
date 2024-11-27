@@ -14,6 +14,3 @@ func _on_click() -> void:
         var container: LiquidContainer = player_hand.held_item;
         if container.add_pourable(produces):
             pour_water.emit.call_deferred();
-        else:
-            # TODO: Indicate cannot add hot water
-            print("I Can't do that...");

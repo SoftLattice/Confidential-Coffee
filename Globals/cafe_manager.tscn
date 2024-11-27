@@ -11,5 +11,6 @@
 
 [node name="CafeManager" type="Node"]
 script = ExtResource("1_x4byq")
+max_order_size = 2
 product_list = Array[ExtResource("2_eb5aj")]([ExtResource("3_xppur"), ExtResource("4_4336r"), ExtResource("5_13fa6")])
 modifier_list = Array[ExtResource("6_cjy6w")]([ExtResource("7_xhdba"), ExtResource("8_3dr5r")])

@@ -56,3 +56,10 @@ func _on_customer_order_completed(_canceled: bool) -> void:
         var next_customer: Customer = customer_queue[0];
         if next_customer.is_customer_ready():
             _on_customer_at_queue_front.call_deferred(next_customer);
+
+func relative_counter_distance(global_pos: Vector3) -> float:
+    var z_min: float = counter.global_position.z;
+    var z_max: float = queue_front.global_position.z;
+
+    var z_rel = (global_pos.z - z_min) / (z_max - z_min);
+    return clampf(z_rel, 0, 1);

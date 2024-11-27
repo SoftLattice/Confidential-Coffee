@@ -1,9 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://pedw51oka0gq"]
+[gd_scene load_steps=18 format=3 uid="uid://pedw51oka0gq"]
 
 [ext_resource type="Script" path="res://Globals/customer_manager.gd" id="1_bq8np"]
 [ext_resource type="PackedScene" uid="uid://b8xlf85e7irdy" path="res://Scenes/Common/Characters/MaleCustomer/male_customer.tscn" id="2_6jt3b"]
 [ext_resource type="PackedScene" uid="uid://nokltwamq7w5" path="res://Scenes/Common/Characters/FemaleCustomer/female_customer.tscn" id="3_f8u46"]
+[ext_resource type="Texture2D" uid="uid://c1bpkifrcive8" path="res://Textures/Icons/Speech/cancel.png" id="4_puc1c"]
+[ext_resource type="Texture2D" uid="uid://bhtwphxjhjjcs" path="res://Textures/Icons/Speech/letter.png" id="5_bkxky"]
+[ext_resource type="Texture2D" uid="uid://j3bgu550tnyr" path="res://Textures/Icons/Speech/money.png" id="6_6g1e6"]
+[ext_resource type="Texture2D" uid="uid://bhh4h3lvqkmur" path="res://Textures/Icons/Speech/pencil.png" id="7_xe7ks"]
+[ext_resource type="Texture2D" uid="uid://cmy8s1t7p7gr" path="res://Textures/Icons/Speech/phone.png" id="8_e0vcq"]
+[ext_resource type="Texture2D" uid="uid://dqvyd47gncqw7" path="res://Textures/Icons/Speech/plane.png" id="9_ggxp2"]
+[ext_resource type="Texture2D" uid="uid://blh1thpej71ec" path="res://Textures/Icons/Speech/flag_0.png" id="10_dlg2y"]
+[ext_resource type="Texture2D" uid="uid://cuenfx2dyycn6" path="res://Textures/Icons/Speech/flag_1.png" id="11_fnb5d"]
+[ext_resource type="Texture2D" uid="uid://tx7dt51d8yxw" path="res://Textures/Icons/Speech/flag_2.png" id="12_e3d4i"]
+[ext_resource type="Texture2D" uid="uid://bfw6s0mvjdo50" path="res://Textures/Icons/Speech/flag_3.png" id="13_ixton"]
+[ext_resource type="Texture2D" uid="uid://32aggctwdfc5" path="res://Textures/Icons/Speech/flag_4.png" id="14_5q5mg"]
+[ext_resource type="Texture2D" uid="uid://dq4l83lpu0exw" path="res://Textures/Icons/Speech/flag_5.png" id="15_yqa3y"]
+[ext_resource type="Texture2D" uid="uid://b06vxkm7tiggt" path="res://Textures/Icons/Speech/flag_6.png" id="16_smsk8"]
+[ext_resource type="Texture2D" uid="uid://brkegqcequi3p" path="res://Textures/Icons/Speech/flag_7.png" id="17_xl2fo"]
 
 [node name="CustomerManager" type="Node"]
 script = ExtResource("1_bq8np")
+verbs_used = 2
+flags_used = 2
 customer_list = Array[PackedScene]([ExtResource("2_6jt3b"), ExtResource("3_f8u46")])
+verb_icons = Array[Texture]([ExtResource("4_puc1c"), ExtResource("5_bkxky"), ExtResource("6_6g1e6"), ExtResource("7_xe7ks"), ExtResource("8_e0vcq"), ExtResource("9_ggxp2")])
+country_icons = Array[Texture]([ExtResource("10_dlg2y"), ExtResource("11_fnb5d"), ExtResource("12_e3d4i"), ExtResource("13_ixton"), ExtResource("14_5q5mg"), ExtResource("15_yqa3y"), ExtResource("16_smsk8"), ExtResource("17_xl2fo")])
+phrase_probability = 1.0

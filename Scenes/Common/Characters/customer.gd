@@ -9,6 +9,7 @@ signal order_completed(canceled: bool);
 signal immediate_exit();
 
 @export var visual_node: Node3D;
+@export var person_sprite: Sprite3D;
 @export var flag: Sprite3D;
 @export var cafe_path: CafePath;
 
@@ -47,16 +48,32 @@ func get_customer_path() -> CustomerPath:
 func is_customer_ready() -> bool:
     return queue_state_machine.current_state == next_up;
 
+var _active_bubble: SpeechBubble;
 func speak(render_function: Callable, duration: float = 3.) -> void:
+    if is_instance_valid(_active_bubble):
+        _active_bubble.queue_free();
+
     var bubble: SpeechBubble = speech_bubble_scene.instantiate();
+    bubble.z_index = roundi(-10 * counter_distance);
     add_child(bubble);
     bubble.track_position = speech_location;
     bubble.prepare_display(render_function, duration);
     bubble.global_position = Vector2(-1000,-1000);
+    _active_bubble = bubble;
+
+var phrase_seed: Array[int] = [];
+func set_phrase(index: Array[int]) -> void:
+    phrase_seed = index;
+
+
+func _utter_phrase() -> void:
+    if phrase_seed:
+        var phrase: Array[Texture] = CustomerManager.get_phrase_icons(phrase_seed);
+        speak.call_deferred(render_phrase.bind(phrase));
 
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("debug"):
-        speak.call_deferred(debug_render_message);
+        _utter_phrase();
 
 func force_exit() -> void:
     immediate_exit.emit.call_deferred();
@@ -81,6 +98,22 @@ func debug_render_message(label: RichTextLabel) -> void:
     label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER );
     label.push_font_size(16);
     label.append_text("HELLO THERE!");
-    #label.add_image(debug_texture, 16, 16);
     label.pop()
     label.pop();
+
+func render_phrase(label: RichTextLabel, icons: Array[Texture]) -> void:
+    label.text = "";
+    label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER );
+    var icon_size: Vector2 = Vector2(16,16).lerp(Vector2(4,4),counter_distance);
+    for icon in icons:
+        label.add_image(icon, roundi(icon_size.x), roundi(icon_size.y));
+    label.pop();
+
+
+var counter_distance: float = 1.0;
+func _on_counter_distance_change(dist:float) -> void:
+    counter_distance = dist;
+    var person_shader: ShaderMaterial = person_sprite.material_override;
+    person_shader.set_shader_parameter("modulate_strength", counter_distance);
+    var flag_overlay: StandardMaterial3D = flag.material_overlay;
+    flag_overlay.albedo_color = Color(0.5,0.5,0.5,dist);

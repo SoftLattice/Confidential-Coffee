@@ -36,8 +36,9 @@ func spawn_receipt(customer_result: CustomerResult) -> void:
     handler_call.stop_picture.connect(call_receipt._on_stop_picture);
     
 
-func spawn_customer_picture(customer_result: CustomerResult) -> void:
+func spawn_customer_picture(customer_result: CustomerResult) -> CustomerPicture:
     var customer_picture: CustomerPicture = customer_picture_scene.instantiate();
     add_child(customer_picture);
     customer_picture.set_texture(customer_result.mugshot);
     customer_picture.slide_to(mugshot_spawn_location.global_position);
+    return customer_picture;

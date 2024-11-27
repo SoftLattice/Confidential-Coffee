@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcdjonkjbxh0r"]
+[gd_scene load_steps=16 format=3 uid="uid://dcdjonkjbxh0r"]
 
 [ext_resource type="Script" path="res://Scenes/Common/Characters/customer.gd" id="1_ljmpa"]
 [ext_resource type="Texture2D" uid="uid://dxjl86xa2pcep" path="res://Scenes/Common/Characters/Handler/handler.png" id="2_topkw"]
@@ -13,20 +13,27 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/Customer/ordering.gd" id="9_7p6l2"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/Customer/exiting.gd" id="13_hcb6v"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xss8d"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_noaim"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_645i4")
 shader_parameter/modulate_color = Color(0.5, 0.5, 0.5, 0.5)
-shader_parameter/modulate_strength = 0.5
+shader_parameter/modulate_strength = 1.0
 shader_parameter/albedo_texture = ExtResource("2_topkw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yhs0y"]
 size = Vector3(0.718506, 2.19766, 0.293945)
 
-[node name="Customer" type="Node3D" node_paths=PackedStringArray("visual_node", "flag", "mugshot_viewport", "animation_state_machine", "idle_state", "walking_state", "speech_location", "queue_state_machine", "next_up") groups=["customer"]]
+[node name="Customer" type="Node3D" node_paths=PackedStringArray("visual_node", "person_sprite", "flag", "mugshot_viewport", "animation_state_machine", "idle_state", "walking_state", "speech_location", "queue_state_machine", "next_up") groups=["customer"]]
 script = ExtResource("1_ljmpa")
 visual_node = NodePath("Visual")
+person_sprite = NodePath("Visual/Person")
 flag = NodePath("Visual/Flag")
 mugshot_viewport = NodePath("Visual/MugshotViewport")
 animation_state_machine = NodePath("CustomerAnimationStateMachine")
@@ -45,6 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194373, 1.92046, 0)
 
 [node name="Flag" type="Sprite3D" parent="Visual"]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.166984, 1.66058, 0.001)
+material_overlay = SubResource("StandardMaterial3D_xss8d")
 transparent = false
 double_sided = false
 texture_filter = 0
@@ -113,5 +121,6 @@ shape = SubResource("BoxShape3D_yhs0y")
 [connection signal="place_order" from="." to="." method="_on_place_order"]
 [connection signal="start_walking" from="." to="CustomerAnimationStateMachine/Idle" method="_on_start_walking"]
 [connection signal="stop_walking" from="." to="CustomerAnimationStateMachine/Walking" method="_on_stop_walking"]
+[connection signal="counter_distance_change" from="CustomerQueueStateMachine/NextUp" to="." method="_on_counter_distance_change"]
 [connection signal="leaving_queue" from="CustomerQueueStateMachine/NextUp" to="Visual/Flag" method="set_layer_mask" binds= [3]]
 [connection signal="leaving_queue" from="CustomerQueueStateMachine/NextUp" to="Visual/Person" method="set_layer_mask" binds= [3]]
