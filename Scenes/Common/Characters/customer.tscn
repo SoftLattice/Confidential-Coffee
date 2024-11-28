@@ -30,7 +30,7 @@ shader_parameter/albedo_texture = ExtResource("2_topkw")
 [sub_resource type="BoxShape3D" id="BoxShape3D_yhs0y"]
 size = Vector3(0.718506, 2.19766, 0.293945)
 
-[node name="Customer" type="Node3D" node_paths=PackedStringArray("visual_node", "person_sprite", "flag", "mugshot_viewport", "animation_state_machine", "idle_state", "walking_state", "speech_location", "queue_state_machine", "next_up") groups=["customer"]]
+[node name="Customer" type="Node3D" node_paths=PackedStringArray("visual_node", "person_sprite", "flag", "mugshot_viewport", "animation_state_machine", "idle_state", "walking_state", "speech_location", "utter_timer", "queue_state_machine", "next_up") groups=["customer"]]
 script = ExtResource("1_ljmpa")
 visual_node = NodePath("Visual")
 person_sprite = NodePath("Visual/Person")
@@ -41,9 +41,15 @@ idle_state = NodePath("CustomerAnimationStateMachine/Idle")
 walking_state = NodePath("CustomerAnimationStateMachine/Walking")
 speech_bubble_scene = ExtResource("6_42wp8")
 speech_location = NodePath("SpeechLocation")
+utter_timer = NodePath("UtterTimer")
 queue_state_machine = NodePath("CustomerQueueStateMachine")
 next_up = NodePath("CustomerQueueStateMachine/NextUp")
 velocity = 1.25
+
+[node name="UtterTimer" type="Timer" parent="."]
+wait_time = 3.3
+one_shot = true
+autostart = true
 
 [node name="SpeechLocation" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194373, 1.92046, 0)
@@ -121,6 +127,8 @@ shape = SubResource("BoxShape3D_yhs0y")
 [connection signal="place_order" from="." to="." method="_on_place_order"]
 [connection signal="start_walking" from="." to="CustomerAnimationStateMachine/Idle" method="_on_start_walking"]
 [connection signal="stop_walking" from="." to="CustomerAnimationStateMachine/Walking" method="_on_stop_walking"]
+[connection signal="timeout" from="UtterTimer" to="." method="_utter_phrase"]
 [connection signal="counter_distance_change" from="CustomerQueueStateMachine/NextUp" to="." method="_on_counter_distance_change"]
 [connection signal="leaving_queue" from="CustomerQueueStateMachine/NextUp" to="Visual/Flag" method="set_layer_mask" binds= [3]]
 [connection signal="leaving_queue" from="CustomerQueueStateMachine/NextUp" to="Visual/Person" method="set_layer_mask" binds= [3]]
+[connection signal="start_exit" from="CustomerQueueStateMachine/Exiting" to="." method="_on_start_exit"]

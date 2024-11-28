@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://buhgv18pjog7i"]
+[gd_scene load_steps=56 format=4 uid="uid://buhgv18pjog7i"]
 
 [ext_resource type="Script" path="res://Scenes/Handler/handler_call.gd" id="1_8y0lq"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_do60s"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://dq4l83lpu0exw" path="res://Textures/Icons/Speech/flag_5.png" id="29_ermfk"]
 [ext_resource type="Texture2D" uid="uid://b06vxkm7tiggt" path="res://Textures/Icons/Speech/flag_6.png" id="30_ytnqm"]
 [ext_resource type="Texture2D" uid="uid://brkegqcequi3p" path="res://Textures/Icons/Speech/flag_7.png" id="31_nh0io"]
+[ext_resource type="FontFile" uid="uid://c8s18y77t6ywm" path="res://Fonts/Poppins/Poppins-Regular.ttf" id="38_rduij"]
 
 [sub_resource type="Resource" id="Resource_4jcoe"]
 script = ExtResource("2_msf10")
@@ -59,7 +60,7 @@ phrase_seed = Array[int]([2, 3])
 [sub_resource type="Environment" id="Environment_nce2b"]
 background_color = Color(0.564962, 0.564962, 0.564962, 1)
 
-[sub_resource type="Environment" id="Environment_26gpj"]
+[sub_resource type="Environment" id="Environment_edeyc"]
 
 [sub_resource type="Resource" id="Resource_skvnx"]
 script = ExtResource("4_uoek7")
@@ -142,7 +143,6 @@ script = ExtResource("6_enqi4")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_61cpy")
-quote_probability = 1.0
 
 [node name="Disappointed" type="Node" parent="StateMachine"]
 script = ExtResource("3_n0qd7")
@@ -399,7 +399,8 @@ offset_right = 4.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Go to bed"
+theme_override_fonts/font = ExtResource("38_rduij")
+text = "Shop in Bed"
 
 [node name="FadeOut" type="ColorRect" parent="Overlay/Exit"]
 visible = false
@@ -419,7 +420,7 @@ environment = SubResource("Environment_nce2b")
 
 [node name="Camera3D" type="Camera3D" parent="Environment/Cameras"]
 transform = Transform3D(1, 0, 0, 0, 0.640184, 0.768221, 0, -0.768221, 0.640184, 0, 1.6, 0.7)
-environment = SubResource("Environment_26gpj")
+environment = SubResource("Environment_edeyc")
 current = true
 
 [node name="PhantomCameraHost" type="Node" parent="Environment/Cameras/Camera3D"]
@@ -482,4 +483,4 @@ transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0
 [connection signal="finished_talking" from="StateMachine/Finished" to="Overlay/Exit" method="set_visible" binds= [true]]
 [connection signal="submit_phrase" from="Overlay/Items/PlayerChoices" to="StateMachine/QuoteRequest" method="_on_submit_quote"]
 [connection signal="pressed" from="Overlay/Items/PlayerChoices/MainContainer/SendMargin/SendButton" to="Overlay/Items/PlayerChoices" method="_on_send"]
-[connection signal="pressed" from="Overlay/Exit/Button" to="." method="_on_goto_bed"]
+[connection signal="pressed" from="Overlay/Exit/Button" to="." method="_on_goto_bed" flags=6]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://ycd3m38mbiy2"]
+[gd_scene load_steps=15 format=4 uid="uid://ycd3m38mbiy2"]
 
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_6d47h"]
+[ext_resource type="Script" path="res://Scenes/Cafe/purchase_required.gd" id="1_72p6y"]
 [ext_resource type="Texture2D" uid="uid://gmvwwfiv2j4g" path="res://Models/Store/sugar_store_palette.png" id="2_75q4y"]
+[ext_resource type="Resource" uid="uid://b2nv1gtlr074w" path="res://Resources/Purchases/espresso_machine.tres" id="2_on0ti"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3stj4"]
 resource_name = "Plastic"
@@ -164,6 +166,10 @@ _surfaces = [{
 
 [node name="EspressoMachine" type="Node3D"]
 transform = Transform3D(-2.84124e-08, 0, -0.65, 0, 0.65, 0, 0.65, 0, -2.84124e-08, 0, 0, 0)
+
+[node name="PurchaseRequired" type="Node" parent="." groups=["purchase_required"]]
+script = ExtResource("1_72p6y")
+required_purchase = ExtResource("2_on0ti")
 
 [node name="Dial" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.491008, 0.851564, -0.748498)

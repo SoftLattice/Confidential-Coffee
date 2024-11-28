@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StorePurchase" load_steps=2 format=3 uid="uid://b2nv1gtlr074w"]
+
+[ext_resource type="Script" path="res://Scripts/Store/store_purchase.gd" id="1_deluf"]
+
+[resource]
+script = ExtResource("1_deluf")
+title = "Espresso Mach."
+price = 100

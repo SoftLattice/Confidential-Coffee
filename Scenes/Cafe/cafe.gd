@@ -10,6 +10,8 @@ class_name Cafe extends Node
 
 @export var customer_spawn_timer: Timer;
 
+@export var options_scene: PackedScene;
+
 signal spawn_customer(customer: Customer, order: CustomerOrder);
 signal start_day();
 signal end_day();
@@ -24,9 +26,21 @@ func _ready() -> void:
     CustomerManager.initialize_spawn_data();
     customer_spawn_timer.start();
 
+    var purchase_nodes: Array[PurchaseRequired];
+    purchase_nodes.assign(get_tree().get_nodes_in_group("purchase_required"));
+
+    for purchase_node in purchase_nodes:
+        purchase_node.audit_purchase();
+
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("debug"):
         _on_customer_spawn_timer();
+
+    if Input.is_action_just_pressed("ui_cancel"):
+        var options: Node = options_scene.instantiate();
+        add_child(options);
+        options.tree_exiting.connect(func() -> void: get_tree().paused = false, CONNECT_ONE_SHOT);
+        get_tree().paused = true;
 
 func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     var order_receipt: OrderReceipt = receipt_scene.instantiate();

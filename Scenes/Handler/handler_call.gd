@@ -61,7 +61,7 @@ func _on_goto_bed() -> void:
     var sleep_tween: Tween = create_tween();
     sleep_tween.tween_property(fadeout_rect, "color:a", 1., 3.);
     await sleep_tween.finished;
-    get_tree().change_scene_to_file(SceneList.cafe_scene);
+    SceneList.load_scene(SceneList.market);
 
 
 func _on_receipt_picture(customer_result: CustomerResult) -> void:

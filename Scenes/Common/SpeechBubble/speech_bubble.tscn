@@ -6,6 +6,7 @@
 
 [node name="SpeechBubble" type="Node2D" node_paths=PackedStringArray("tail_node", "bubble_container", "display_label", "label_options")]
 z_index = -10
+position = Vector2(489, 0)
 script = ExtResource("2_6y3v4")
 tail_node = NodePath("TailPosition")
 bubble_container = NodePath("Container")

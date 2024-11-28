@@ -50,13 +50,35 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = 14.0
-offset_right = 150.0
-offset_bottom = 94.0
+offset_left = -99.0
+offset_top = -8.0
+offset_right = 99.0
+offset_bottom = 117.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="MainMenu/Options"]
+[node name="StartContainer" type="MarginContainer" parent="MainMenu/Options"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="MainMenu/Options/StartContainer"]
 layout_mode = 2
 text = "Start"
+
+[node name="OptionsContainer" type="MarginContainer" parent="MainMenu/Options"]
+layout_mode = 2
+
+[node name="OptionsButton" type="Button" parent="MainMenu/Options/OptionsContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="AboutContainer" type="MarginContainer" parent="MainMenu/Options"]
+layout_mode = 2
+
+[node name="AboutButton" type="Button" parent="MainMenu/Options/AboutContainer"]
+layout_mode = 2
+text = "About
+"
+
+[connection signal="pressed" from="MainMenu/Options/StartContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainMenu/Options/OptionsContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenu/Options/AboutContainer/AboutButton" to="." method="_on_about_button_pressed"]

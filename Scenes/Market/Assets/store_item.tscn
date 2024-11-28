@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx5l1rfywxedb"]
+
+[ext_resource type="Theme" uid="uid://b27k3mvunrqfx" path="res://Scenes/Market/market_item.tres" id="1_pxuhx"]
+[ext_resource type="Script" path="res://Scenes/Market/store_item.gd" id="2_bibww"]
+
+[node name="StoreItem" type="HBoxContainer" node_paths=PackedStringArray("item_title", "item_price", "buy_button")]
+theme = ExtResource("1_pxuhx")
+theme_override_constants/separation = 4
+script = ExtResource("2_bibww")
+item_title = NodePath("ItemTitle")
+item_price = NodePath("ItemPrice")
+buy_button = NodePath("BuyButton")
+
+[node name="ItemTitle" type="Label" parent="."]
+layout_mode = 2
+text = "Machine"
+vertical_alignment = 2
+
+[node name="Spacing" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "......................................"
+horizontal_alignment = 1
+vertical_alignment = 2
+clip_text = true
+
+[node name="ItemPrice" type="Label" parent="."]
+layout_mode = 2
+text = "$$$"
+vertical_alignment = 2
+
+[node name="BuyButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_mode = 0
+text = "Buy"
+
+[connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed" flags=6]

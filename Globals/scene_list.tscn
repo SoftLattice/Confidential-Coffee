@@ -4,5 +4,9 @@
 
 [node name="SceneList" type="Node"]
 script = ExtResource("1_grk1m")
+main_menu = "res://Scenes/Main/main_menu.tscn"
 cafe_scene = "res://Scenes/Cafe/cafe.tscn"
 handler_call = "res://Scenes/Handler/handler_call.tscn"
+market = "res://Scenes/Market/market.tscn"
+options_menu = "res://Scenes/Options/options.tscn"
+about_menu = "res://Scenes/About/about.tscn"

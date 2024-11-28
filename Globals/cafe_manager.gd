@@ -1,8 +1,21 @@
 extends Node
 
-@export var max_order_size: int = 4;
 @export var customer_results: Array[CustomerResult];
 
+@export_category("Market Properties")
+@export var deposits: int = 100;
+@export var daily_expenses: int = 75;
+@export var funds: int = 200;
+@export var rating: float = 0.6;
+
+@export var available_store_purchases: Array[StorePurchase];
+@export var owned_store_purchases: Array[StorePurchase];
+
+@export_category("Difficulty")
+@export var max_order_size: int = 4;
+@export var max_modifier_count: int = 2;
+
+@export_category("Recipes")
 @export var product_list: Array[Product];
 @export var modifier_list: Array[ProductModifier];
 
@@ -17,7 +30,7 @@ func generate_random_order() -> Order:
 
     if modifiers.size() > 0:
         modifiers.shuffle();
-        for i in range(mini(modifiers.size(), randi_range(0,2))):
+        for i in range(mini(modifiers.size(), randi_range(0,max_modifier_count))):
             result.modifiers.append(modifiers.pop_front());
     
     return result;

@@ -18,9 +18,13 @@ shadow_size = 1
 shadow_offset = Vector2(2, 2)
 
 [resource]
-MarginContainer/constants/margin_bottom = 4
-MarginContainer/constants/margin_left = 4
-MarginContainer/constants/margin_right = 4
-MarginContainer/constants/margin_top = 4
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 14
+Label/fonts/font = ExtResource("1_2fnfl")
+MarginContainer/constants/margin_bottom = 2
+MarginContainer/constants/margin_left = 2
+MarginContainer/constants/margin_right = 2
+MarginContainer/constants/margin_top = 2
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_6xiud")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
 RichTextLabel/fonts/normal_font = ExtResource("1_2fnfl")

@@ -20,10 +20,7 @@ func track_target() -> void:
     var viewport_bounds: Vector2 = get_viewport().get_visible_rect().size - bubble_container.size;
     var new_global_position: Vector2 = to_global(target_position - tail_node.position);
 
-    new_global_position.x = clampf(new_global_position.x, 0, viewport_bounds.x);
-    new_global_position.y = clampf(new_global_position.y, 0, viewport_bounds.y);
-
-    global_position = new_global_position;
+    global_position = new_global_position.clamp(Vector2.ZERO, viewport_bounds);
 
 
 var all_labels: Array[RichTextLabel];

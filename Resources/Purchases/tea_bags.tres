@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StorePurchase" load_steps=2 format=3 uid="uid://n6ipb25sutuh"]
+
+[ext_resource type="Script" path="res://Scripts/Store/store_purchase.gd" id="1_iembn"]
+
+[resource]
+script = ExtResource("1_iembn")
+title = "Tea Bags"
+price = 100
