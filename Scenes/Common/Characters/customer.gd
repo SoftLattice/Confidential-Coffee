@@ -68,6 +68,9 @@ func set_phrase(index: Array[int]) -> void:
 
 var _has_uttered: bool = false;
 func _utter_phrase() -> void:
+    if !is_instance_valid(utter_timer):
+        return;
+        
     utter_timer.start(utter_interval + randf_range(-0.5,2.));
     if phrase_seed:
         if counter_distance < 0.1:

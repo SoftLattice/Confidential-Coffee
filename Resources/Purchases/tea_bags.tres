@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="StorePurchase" load_steps=2 format=3 uid="uid://n6ipb25sutuh"]
+[gd_resource type="Resource" script_class="StorePurchase" load_steps=5 format=3 uid="uid://n6ipb25sutuh"]
 
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_2ftfx"]
 [ext_resource type="Script" path="res://Scripts/Store/store_purchase.gd" id="1_iembn"]
+[ext_resource type="Script" path="res://Scripts/Recipes/product.gd" id="2_1i1df"]
+[ext_resource type="Resource" uid="uid://djv2otmb80oym" path="res://Resources/Products/Basics/hot_tea.tres" id="3_g6fwq"]
 
 [resource]
 script = ExtResource("1_iembn")
 title = "Tea Bags"
 price = 100
+enabled_products = Array[ExtResource("2_1i1df")]([ExtResource("3_g6fwq")])
+enabled_modifiers = Array[ExtResource("1_2ftfx")]([])

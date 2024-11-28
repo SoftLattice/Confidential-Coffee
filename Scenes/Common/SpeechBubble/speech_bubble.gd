@@ -31,7 +31,7 @@ func prepare_display(render_function: Callable, duration: float = 3.) -> void:
 
     render_function.call(display_label);
 
-    # Figure out the smallest (vertical_ size)
+    # Figure out the smallest (vertical size)
     await RenderingServer.frame_post_draw;
     var label_sizes: Array[float] = [];
     for label in label_options:

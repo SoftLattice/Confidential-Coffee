@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=4 uid="uid://bg2qaguqkksji"]
+[gd_scene load_steps=18 format=4 uid="uid://bg2qaguqkksji"]
 
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_1eia5"]
 [ext_resource type="Script" path="res://Scenes/Cafe/Assets/tea_tray.gd" id="1_aygxh"]
 [ext_resource type="Texture2D" uid="uid://hq6j8qpvvuqw" path="res://Models/Consumables/tea_tray_tea_label.png" id="2_3agqn"]
 [ext_resource type="Resource" uid="uid://2ciho3lnhqk7" path="res://Resources/Products/Basics/dry_tea.tres" id="2_y711g"]
+[ext_resource type="Script" path="res://Scenes/Cafe/purchase_required.gd" id="3_761f0"]
 [ext_resource type="Script" path="res://Scripts/CafeInterfaces/clickable_asset.gd" id="3_kkjk0"]
 [ext_resource type="Texture2D" uid="uid://cfhn3ae7576pb" path="res://Models/Consumables/tea_tray_herbal_label.png" id="3_uakuj"]
+[ext_resource type="Resource" uid="uid://n6ipb25sutuh" path="res://Resources/Purchases/tea_bags.tres" id="4_xvkwn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_55cd8"]
 resource_name = "Tray"
@@ -120,6 +122,10 @@ size = Vector3(0.199219, 0.0860596, 0.299072)
 [node name="TeaTray" type="Node3D"]
 script = ExtResource("1_aygxh")
 produces = ExtResource("2_y711g")
+
+[node name="PurchaseRequired" type="Node" parent="." groups=["purchase_required"]]
+script = ExtResource("3_761f0")
+required_purchase = ExtResource("4_xvkwn")
 
 [node name="Tray" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_kbjpw")

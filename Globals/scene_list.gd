@@ -6,6 +6,8 @@ extends Node
 @export_file("*.tscn") var market: String;
 @export_file("*.tscn") var options_menu: String;
 @export_file("*.tscn") var about_menu: String;
+@export_file("*.tscn") var game_over_bankruptcy: String;
+@export_file("*.tscn") var game_over_arrest: String;
 
 func load_scene(scene_location: String) -> void:
     get_tree().change_scene_to_file(scene_location);

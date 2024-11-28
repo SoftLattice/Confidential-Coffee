@@ -44,7 +44,7 @@ speech_location = NodePath("SpeechLocation")
 utter_timer = NodePath("UtterTimer")
 queue_state_machine = NodePath("CustomerQueueStateMachine")
 next_up = NodePath("CustomerQueueStateMachine/NextUp")
-velocity = 1.25
+velocity = 1.5
 
 [node name="UtterTimer" type="Timer" parent="."]
 wait_time = 3.3

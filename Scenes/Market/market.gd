@@ -6,6 +6,8 @@ signal daily_expenses(value: int);
 signal deposit(value: int);
 
 @export var rating_texture: TextureRect;
+@export var rating_count_label: Label;
+
 @export var store_item_list: Container;
 
 @export var store_item_scene: PackedScene;
@@ -17,6 +19,7 @@ static func get_market() -> Market:
 func _ready() -> void:
     _active_market = self;
     (rating_texture.material as ShaderMaterial).set_shader_parameter("filled",CafeManager.rating);
+    rating_count_label.text = "(%d)"%[CafeManager.rating_count];
 
     for item in CafeManager.available_store_purchases:
         var store_item: StoreItem = store_item_scene.instantiate();
@@ -27,7 +30,7 @@ func _ready() -> void:
 
     CafeManager.funds -= CafeManager.daily_expenses;
     daily_expenses.emit.call_deferred(CafeManager.daily_expenses);
-    funds_change.emit.call_deferred(CafeManager.funds);
+    funds_change.emit(CafeManager.funds);
     CafeManager.daily_expenses = 0;
 
     await get_tree().create_timer(1.5).timeout;
@@ -37,7 +40,6 @@ func _ready() -> void:
     CafeManager.deposits = 0;
 
 func _on_purchase(store_item: StoreItem) -> void:
-    print("Bought ", store_item.purchase.title);
     CafeManager.funds -= store_item.purchase.price;
     purchase.emit.call_deferred(store_item.purchase.price);
     funds_change.emit.call_deferred(CafeManager.funds);
@@ -46,5 +48,13 @@ func _on_purchase(store_item: StoreItem) -> void:
     CafeManager.available_store_purchases.erase(store_item.purchase);
     CafeManager.owned_store_purchases.append(store_item.purchase);
 
+    # Activate the items in the manager
+    CafeManager.product_list.append_array(store_item.purchase.enabled_products);
+    CafeManager.modifier_list.append_array(store_item.purchase.enabled_modifiers);
+
 func _on_continue_pressed() -> void:
-    SceneList.load_scene(SceneList.cafe_scene);
+    if CafeManager.funds < 0:
+        SceneList.load_scene(SceneList.game_over_bankruptcy);
+    else:
+        SaveData.current_day += 1;
+        SceneList.load_scene(SceneList.cafe_scene);

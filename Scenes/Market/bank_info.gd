@@ -1,7 +1,9 @@
 extends MarginContainer
 
 @export var funds_label: Label;
+
 @export var expenses_label: Label;
+@export var expenses_container: Control;
 
 @export var deposit_label: Label;
 @export var deposit_container: Control;
@@ -17,9 +19,15 @@ func _on_purchase(price: int) -> void:
 
 func _on_funds_change(value:int) -> void:
     funds_label.text = "$%d" % [value];
+    
+    if value < 0:
+        funds_label.add_theme_color_override("font_color", Color(1,0,0));
+    else:
+        funds_label.remove_theme_color_override("font_color");
 
 func _on_daily_expenses(value:int) -> void:
-    expenses_label.text = "$%d" % [value];
+    expenses_label.text = "($%d)" % [value];
+    expenses_container.visible = true;
 
 func _on_deposit(value: int) -> void:
     deposit_label.text = "$%d" % [value];

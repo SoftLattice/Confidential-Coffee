@@ -6,7 +6,8 @@ extends Node
 @export var deposits: int = 100;
 @export var daily_expenses: int = 75;
 @export var funds: int = 200;
-@export var rating: float = 0.6;
+@export var rating: float = 0.0;
+@export var rating_count: int = 0;
 
 @export var available_store_purchases: Array[StorePurchase];
 @export var owned_store_purchases: Array[StorePurchase];
@@ -14,6 +15,7 @@ extends Node
 @export_category("Difficulty")
 @export var max_order_size: int = 4;
 @export var max_modifier_count: int = 2;
+@export var spawn_interval: float = 10.;
 
 @export_category("Recipes")
 @export var product_list: Array[Product];
@@ -39,4 +41,39 @@ func generate_random_customer_order() -> CustomerOrder:
     var result: CustomerOrder = CustomerOrder.new();
     for i in range(randi_range(1,max_order_size)):
         result.items.append(generate_random_order());
+    return result;
+
+func rate_dispositions(dispositions: Array[int]) -> void:
+    var total_dispostion: float = 0;
+
+    for disposition in dispositions:
+        print(_disposition_to_rating(disposition));
+        total_dispostion += _disposition_to_rating(disposition);
+    total_dispostion /= 5.;
+
+    var running_disposition: float = (rating * rating_count) + total_dispostion;
+    rating_count += dispositions.size();
+    rating = running_disposition / float(rating_count);
+    
+
+func _disposition_to_rating(disposition: int) -> float:
+    # Correct order = 5*
+    if disposition == CustomerOrder.CORRECT_ORDER:
+        return 5.;
+
+    # Dismissed or missing items = 1*
+    if disposition == -1:
+        return 1.;
+    if disposition & CustomerOrder.MISSING_ITEMS != 0:
+        return 1.;
+
+    # Messed up correct items = 3*
+    var result: float = 3.;
+    if disposition & CustomerOrder.WRONG_MODIFIERS != 0:
+        result = 3.;
+        
+    # Improved by extra items
+    if disposition & CustomerOrder.EXTRA_ITEMS != 0:
+        result += 1;
+
     return result;

@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=4 uid="uid://bp5pkfqhc04ah"]
+
+[ext_resource type="PackedScene" uid="uid://bffw125e6uejt" path="res://Scenes/GameOver/game_over_bankruptcy.tscn" id="1_s6jq3"]
+
+[sub_resource type="Environment" id="Environment_wh3eq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vtw6"]
+resource_name = "Folder"
+albedo_color = Color(0.51945, 0.362537, 0.227894, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm0ax"]
+resource_local_to_scene = true
+resource_name = "Cover"
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8aikl"]
+resource_local_to_scene = true
+resource_name = "bankrupt_folder_Cube_001"
+_surfaces = [{
+"aabb": AABB(-0.466279, -0.0162452, -0.861931, 0.932557, 0.0315132, 1.60746),
+"attribute_data": PackedByteArray("JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9JKTrPfBTsD0kpOs98FOwPSSk6z3wU7A9"),
+"format": 34359742487,
+"index_count": 108,
+"index_data": PackedByteArray("AQAHAAMAAQAFAAcADwAcAA0ADwAfABwADQALAA8ADQAJAAsAAwAiAAEAAwAlACIABAAIAAwABAAAAAgADAAVAAQADAAaABUABgAeAA4ABgARAB4ABQASAAcABQAXABIAKQAjACYAKQAgACMAAAAqAAgAAAAhACoACgAkAAIACgAnACQACQAoAAsACQArACgAEAAYAB0AEAATABgAFgA7ADUAFgAtADsAMAA6ADcAMAAzADoALwAyADgALwAbADIALAA2ADkALAAuADYAGQA0ADEAGQAUADQA"),
+"material": SubResource("StandardMaterial3D_7vtw6"),
+"name": "Folder",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 60,
+"vertex_data": PackedByteArray("FbzuvrgUhbxICq4+FbzuvrgUhbxICq4+FbzuvpgmejxICq4+FbzuvpgmejxICq4+FbzuvrgUhbzxthe/FbzuvrgUhbzxthe/Fbzuvpgmejzxthe/Fbzuvpgmejzxthe/FbzuPrgUhbxICq4+FbzuPrgUhbxICq4+FbzuPpgmejxICq4+FbzuPpgmejxICq4+FbzuPrgUhbzxthe/FbzuPrgUhbzxthe/FbzuPpgmejzxthe/FbzuPpgmejzxthe/FbzuvpgmejzXTR+/FbzuvpgmejzXTR+/FbzuvpgmejzXTR+/FbzuvrgUhbzXTR+/FbzuvrgUhbzXTR+/FbzuvrgUhbzXTR+/FbzuvrgUhbzXTR+/FbzuvrgUhbzXTR+/FbzuPrgUhbzXTR+/FbzuPrgUhbzXTR+/FbzuPrgUhbzXTR+/FbzuPrgUhbzXTR+/FbzuPrgUhbzXTR+/FbzuPpgmejzXTR+/FbzuPpgmejzXTR+/FbzuPpgmejzXTR+/FbzuvrgUhbwr2z4/FbzuvrgUhbwr2z4/FbzuvrgUhbwr2z4/Fbzuvpgmejwr2z4/Fbzuvpgmejwr2z4/Fbzuvpgmejwr2z4/FbzuPpgmejwr2z4/FbzuPpgmejwr2z4/FbzuPpgmejwr2z4/FbzuPrgUhbwr2z4/FbzuPrgUhbwr2z4/FbzuPrgUhbwr2z4/Qf96vrS2D7yCp1y/Qf96vrS2D7yCp1y/Qf96PrS2D7yCp1y/Qf96PrS2D7yCp1y/FbzuPodeH7ubMR+/FbzuPodeH7ubMR+/FbzuPodeH7ubMR+/FbzuvodeH7ubMR+/FbzuvodeH7ubMR+/FbzuvodeH7ubMR+/Qf96PjU2pTtHi1y/Qf96PjU2pTtHi1y/Qf96PjU2pTtHi1y/Qf96vjU2pTtHi1y/Qf96vjU2pTtHi1y/Qf96vjU2pTtHi1y//38AAP///78AAP9/////v/9///////+/AAD/f////7//fwAA////vwAA/3////+//3///////78AAP9/////v/9/AAD///+/////f////7//f///////v////3////+//38AAP///7////9/////v/9///////+/////f////7//////////v/9///////+/AAD/f////7//////////v/9/H3z///8//38AAP///7/iAWG+////vwAA/3////+//////////7//fx98////P/9/AAD///+/HP5hvv///7////9/////v/////////+//3///////7////9/////v/9//3////8//38AAP///78AAP9/////v/9//3////8//3///////78AAP9/////v/9//3////8//3///////7////9/////v/9//3////8//38AAP///7////9/////vx/8//////+/4gFhvv///78f/P//////vxz+Yb7///+//38f/P///z//fx98////Pxz+Yb7///+//38f/P///z//fx98////P+IBYb7///+/H/z//////7//fx/8////Pxz+Yb7///+/H/z//////7//fx/8////P+IBYb7///+/")
+}, {
+"aabb": AABB(-0.466279, 0.015268, -0.592635, 0.932557, 1e-05, 0.932557),
+"attribute_data": PackedByteArray("BgD4/wYABgD4//j/+P8GAA=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AwAAAAEAAwACAAAA"),
+"material": SubResource("StandardMaterial3D_qm0ax"),
+"name": "Cover",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/7////9/////f////3////9/")
+}]
+
+[node name="GameOver" instance=ExtResource("1_s6jq3")]
+bankruptcy = false
+
+[node name="Camera3D" parent="Environment/Cameras" index="1"]
+environment = SubResource("Environment_wh3eq")
+
+[node name="Folder" parent="Environment/Table" index="2"]
+mesh = SubResource("ArrayMesh_8aikl")

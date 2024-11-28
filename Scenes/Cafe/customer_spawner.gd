@@ -1,7 +1,5 @@
 extends Marker3D
 
-@export var customer_list: Array[PackedScene];
-
 func _on_spawn_customer(customer: Customer, order: CustomerOrder) -> void:
     var cafe: Cafe = Cafe.get_cafe();
     
@@ -9,3 +7,4 @@ func _on_spawn_customer(customer: Customer, order: CustomerOrder) -> void:
         cafe.add_child(customer);
         customer.global_transform = global_transform;
         customer.order = order;
+        customer.tree_exited.connect(Cafe.get_cafe()._on_customer_exited, CONNECT_DEFERRED);

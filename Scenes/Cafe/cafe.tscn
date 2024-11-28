@@ -117,7 +117,7 @@ customer_spawn_timer = NodePath("CustomerSpawnTimer")
 options_scene = ExtResource("3_56may")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="."]
-wait_time = 6.0
+wait_time = 8.0
 
 [node name="Overlay" type="Node" parent="."]
 
@@ -254,7 +254,7 @@ clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 timer = NodePath("DayTimer")
 
 [node name="DayTimer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
-wait_time = 20.0
+wait_time = 90.0
 one_shot = true
 
 [node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]

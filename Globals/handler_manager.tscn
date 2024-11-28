@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0pfaxfwodebo"]
+
+[ext_resource type="Script" path="res://Globals/handler_manager.gd" id="1_lrd2b"]
+
+[node name="HandlerManager" type="Node"]
+script = ExtResource("1_lrd2b")

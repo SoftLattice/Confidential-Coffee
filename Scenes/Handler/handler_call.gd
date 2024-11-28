@@ -42,6 +42,12 @@ func _ready() -> void:
     customer_results.shuffle();
     satisfied.emit.call_deferred();
 
+    var dispositions: Array[int] = [];
+    for customer_result in customer_results:
+        dispositions.append(customer_result.disposition);
+        
+    CafeManager.rate_dispositions(dispositions);
+
 func _spawn_receipt(customer_result: CustomerResult) -> void:
     items_area.spawn_receipt.call_deferred(customer_result);
 
@@ -71,4 +77,4 @@ func _on_wrong_answer() -> void:
     print("GOT IT WRONG");
 
 func _on_right_answer() -> void:
-    print("GOT IT RIGHT");
+    CafeManager.deposits += 50;

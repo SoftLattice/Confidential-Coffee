@@ -37,7 +37,7 @@ func _on_click() -> void:
             drain_tween.tween_property(self, "_is_busy", false, 0);
         else:
             # TODO: Indicate carafe is empty
-            print("Emptor...");
+            pass;
 
 func begin_filling() -> void:
     _is_busy = true;

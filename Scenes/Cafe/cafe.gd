@@ -1,15 +1,10 @@
 class_name Cafe extends Node
 
 @export var day_intro: RichTextLabel;
-
 @export var mark_primary: Node3D;
-
 @export var receipt_scene: PackedScene;
-
 @onready var cafe_hud: CafeHUD = get_node("%CafeHUD");
-
 @export var customer_spawn_timer: Timer;
-
 @export var options_scene: PackedScene;
 
 signal spawn_customer(customer: Customer, order: CustomerOrder);
@@ -24,6 +19,7 @@ static func get_cafe() -> Cafe:
 func _ready() -> void:
     _active_cafe = self;
     CustomerManager.initialize_spawn_data();
+    customer_spawn_timer.wait_time = CafeManager.spawn_interval;
     customer_spawn_timer.start();
 
     var purchase_nodes: Array[PurchaseRequired];
@@ -57,7 +53,12 @@ func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
 func _on_preamble_finished() -> void:
     start_day.emit.call_deferred();
 
+var _day_over: bool = false;
 func _on_day_finished() -> void:
+    if _day_over:
+        return;
+        
+    _day_over = true;
     # Send everyone home
     var customers: Array[Customer];
     customers.assign(get_tree().get_nodes_in_group("customer"));
@@ -72,3 +73,10 @@ func _on_customer_spawn_timer() -> void:
     var customer_order: CustomerOrder = CafeManager.generate_random_customer_order();
     var customer: Customer = CustomerManager.generate_random_customer();
     spawn_customer.emit.call_deferred(customer, customer_order);
+
+
+func _on_customer_exited() -> void:
+    if _day_over:
+        return;
+    if (CustomerManager.remaining_customers() == 0) and (get_tree().get_nodes_in_group("customer").size() == 0):
+        _on_day_finished();

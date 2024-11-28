@@ -45,3 +45,7 @@ func get_phrase_icons(index: Array[int]) -> Array[Texture]:
     result.append(verb_icons[index[0]])
     result.append(country_icons[index[1]]);
     return result;
+
+
+func remaining_customers() -> int:
+    return spawn_data.size();
