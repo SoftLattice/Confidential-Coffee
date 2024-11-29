@@ -1,7 +1,12 @@
 extends Node
 
-@export var verbs_used: int = 6;
-@export var flags_used: int = 8;
+signal spawn_parameters_changes();
+
+const MAX_FLAGS_USED: int = 8;
+const MAX_VERBS_USED: int = 6;
+
+@export var verbs_used: int = 1;
+@export var flags_used: int = 2;
 
 @export var customer_list: Array[PackedScene];
 @export var verb_icons: Array[Texture];
@@ -49,3 +54,13 @@ func get_phrase_icons(index: Array[int]) -> Array[Texture]:
 
 func remaining_customers() -> int:
     return spawn_data.size();
+
+
+func expand_flags(count: int) -> void:
+    flags_used = clampi(flags_used + count, 0, MAX_FLAGS_USED);
+    spawn_parameters_changes.emit.call_deferred();
+
+
+func expand_verbs(count: int) -> void:
+    verbs_used = clampi(verbs_used + count, 0, MAX_VERBS_USED);
+    spawn_parameters_changes.emit.call_deferred();

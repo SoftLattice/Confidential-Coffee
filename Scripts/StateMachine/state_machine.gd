@@ -14,6 +14,7 @@ func _ready() -> void:
             child.machine = self;
     
     if initial_state:
+        initial_state._is_active_state = true;
         initial_state._enter_state.call_deferred();
         current_state = initial_state;
 
@@ -37,14 +38,19 @@ func on_child_transition(new_state_name: String, state: State) -> void:
         return;
 
     if current_state:
+        current_state._is_active_state = false;
         current_state._exit_state();
 
     current_state = new_state;
+    new_state._is_active_state = true;
     new_state._enter_state();
+    new_state.enter_state.emit.call_deferred();
 
 func _set_state(new_state_name: String) -> void:
     var new_state: State = states.get(new_state_name.to_lower());
     if current_state:
+        current_state._is_active_state = false;
         current_state._exit_state();
     current_state = new_state;
+    new_state._is_active_state = true;
     new_state._enter_state();

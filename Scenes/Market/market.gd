@@ -45,16 +45,12 @@ func _on_purchase(store_item: StoreItem) -> void:
     funds_change.emit.call_deferred(CafeManager.funds);
     store_item.queue_free();
 
-    CafeManager.available_store_purchases.erase(store_item.purchase);
-    CafeManager.owned_store_purchases.append(store_item.purchase);
-
-    # Activate the items in the manager
-    CafeManager.product_list.append_array(store_item.purchase.enabled_products);
-    CafeManager.modifier_list.append_array(store_item.purchase.enabled_modifiers);
+    store_item.purchase.action_purchase.call_deferred()
 
 func _on_continue_pressed() -> void:
     if CafeManager.funds < 0:
         SceneList.load_scene(SceneList.game_over_bankruptcy);
     else:
         SaveData.current_day += 1;
+        CafeManager.daily_expenses += 2;
         SceneList.load_scene(SceneList.cafe_scene);

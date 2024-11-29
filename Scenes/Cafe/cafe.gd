@@ -19,8 +19,12 @@ static func get_cafe() -> Cafe:
 func _ready() -> void:
     _active_cafe = self;
     CustomerManager.initialize_spawn_data();
+
+    # Initial spawn is quick
+    customer_spawn_timer.start(0.5 * CafeManager.spawn_interval);
+
+    # Future spawns less frequent
     customer_spawn_timer.wait_time = CafeManager.spawn_interval;
-    customer_spawn_timer.start();
 
     var purchase_nodes: Array[PurchaseRequired];
     purchase_nodes.assign(get_tree().get_nodes_in_group("purchase_required"));

@@ -20,8 +20,6 @@
 
 [node name="CustomerManager" type="Node"]
 script = ExtResource("1_bq8np")
-verbs_used = 2
-flags_used = 2
 customer_list = Array[PackedScene]([ExtResource("2_6jt3b"), ExtResource("3_f8u46")])
 verb_icons = Array[Texture]([ExtResource("4_puc1c"), ExtResource("5_bkxky"), ExtResource("6_6g1e6"), ExtResource("7_xe7ks"), ExtResource("8_e0vcq"), ExtResource("9_ggxp2")])
 country_icons = Array[Texture]([ExtResource("10_dlg2y"), ExtResource("11_fnb5d"), ExtResource("12_e3d4i"), ExtResource("13_ixton"), ExtResource("14_5q5mg"), ExtResource("15_yqa3y"), ExtResource("16_smsk8"), ExtResource("17_xl2fo")])

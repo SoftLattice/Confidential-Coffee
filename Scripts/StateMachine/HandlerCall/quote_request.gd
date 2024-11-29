@@ -33,3 +33,9 @@ func _on_submit_quote(phrase_seed: Array[int]) -> void:
     exit_tween.tween_callback(_active_mugshot.queue_free);
 
     transitioned.emit.call_deferred("answered");
+
+func _on_skip_question() -> void:
+    if _is_active_state:
+        var exit_tween: Tween = _active_mugshot.slide_to(-2*_active_mugshot.get_size());
+        exit_tween.tween_callback(_active_mugshot.queue_free);
+        transitioned.emit.call_deferred("skipped");

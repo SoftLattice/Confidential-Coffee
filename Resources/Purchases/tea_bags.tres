@@ -9,5 +9,6 @@
 script = ExtResource("1_iembn")
 title = "Tea Bags"
 price = 100
+daily_cost = 5
 enabled_products = Array[ExtResource("2_1i1df")]([ExtResource("3_g6fwq")])
 enabled_modifiers = Array[ExtResource("1_2ftfx")]([])

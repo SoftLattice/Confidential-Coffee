@@ -3,9 +3,12 @@ extends Node
 @export var customer_results: Array[CustomerResult];
 
 @export_category("Market Properties")
-@export var deposits: int = 100;
-@export var daily_expenses: int = 75;
-@export var funds: int = 200;
+const INITIAL_FUNDS: int = 200;
+const BASE_DAILY_EXPENSES: int = 25;
+
+@export var deposits: int = 0;
+@export var daily_expenses: int = BASE_DAILY_EXPENSES;
+@export var funds: int = INITIAL_FUNDS;
 @export var rating: float = 0.0;
 @export var rating_count: int = 0;
 
@@ -13,9 +16,12 @@ extends Node
 @export var owned_store_purchases: Array[StorePurchase];
 
 @export_category("Difficulty")
+const SPAWN_SCALE: float = 15.;
+const SPAWN_LERP: float = 0.25;
+
 @export var max_order_size: int = 4;
 @export var max_modifier_count: int = 2;
-@export var spawn_interval: float = 10.;
+@export var spawn_interval: float = SPAWN_SCALE;
 
 @export_category("Recipes")
 @export var product_list: Array[Product];
@@ -43,6 +49,7 @@ func generate_random_customer_order() -> CustomerOrder:
         result.items.append(generate_random_order());
     return result;
 
+
 func rate_dispositions(dispositions: Array[int]) -> void:
     var total_dispostion: float = 0;
 
@@ -54,6 +61,9 @@ func rate_dispositions(dispositions: Array[int]) -> void:
     var running_disposition: float = (rating * rating_count) + total_dispostion;
     rating_count += dispositions.size();
     rating = running_disposition / float(rating_count);
+
+    # Customers are faster when it's a better rating
+    spawn_interval = lerpf(spawn_interval, SPAWN_SCALE / (rating + 1.0), SPAWN_LERP);
     
 
 func _disposition_to_rating(disposition: int) -> float:

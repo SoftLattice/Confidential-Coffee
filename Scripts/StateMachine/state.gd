@@ -1,7 +1,9 @@
 class_name State extends Node
 
+signal enter_state();
 signal transitioned(new_state: String);
 
+var _is_active_state: bool = false;
 var machine: StateMachine;
 
 func _initialize_state() -> void:

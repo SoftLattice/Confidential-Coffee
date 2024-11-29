@@ -45,7 +45,7 @@ func _ready() -> void:
     var dispositions: Array[int] = [];
     for customer_result in customer_results:
         dispositions.append(customer_result.disposition);
-        
+
     CafeManager.rate_dispositions(dispositions);
 
 func _spawn_receipt(customer_result: CustomerResult) -> void:
@@ -74,7 +74,8 @@ func _on_receipt_picture(customer_result: CustomerResult) -> void:
     receipt_picture.emit.call_deferred(customer_result);
 
 func _on_wrong_answer() -> void:
-    print("GOT IT WRONG");
+    HandlerManager.bad_intel_count += 1;
+    HandlerManager.warn_player = true;
 
 func _on_right_answer() -> void:
     CafeManager.deposits += 50;

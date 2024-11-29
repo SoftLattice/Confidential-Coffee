@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7t4t4yiek3u1"]
+[gd_scene load_steps=17 format=3 uid="uid://b7t4t4yiek3u1"]
 
 [ext_resource type="Script" path="res://Scenes/Market/market.gd" id="1_ajah2"]
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_ob1b7"]
@@ -9,6 +9,11 @@
 [ext_resource type="Shader" path="res://Scenes/Market/rating.gdshader" id="6_rc52b"]
 [ext_resource type="Script" path="res://Scenes/Market/bank_info.gd" id="6_s8aqf"]
 [ext_resource type="Texture2D" uid="uid://c1yphnqr1gthh" path="res://Scenes/Market/Textures/star_rating.png" id="6_xpl3x"]
+[ext_resource type="Texture2D" uid="uid://beq6y7it8y8k5" path="res://Scenes/Market/Textures/dirty_paper.png" id="10_5e7cl"]
+[ext_resource type="Script" path="res://Scenes/Market/warning_letter.gd" id="10_5svtk"]
+[ext_resource type="FontFile" uid="uid://eqi05m8rvn2t" path="res://Fonts/SpecialElite/SpecialElite-Regular.ttf" id="11_ie3ef"]
+[ext_resource type="Texture2D" uid="uid://chk7jrr5m5v2h" path="res://Scenes/Market/Textures/checked_box.png" id="11_urk4u"]
+[ext_resource type="Texture2D" uid="uid://7rlst7bxl7f8" path="res://Scenes/Market/Textures/unchecked_box.png" id="12_4r24a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_meya1"]
 shader = ExtResource("6_rc52b")
@@ -16,6 +21,9 @@ shader_parameter/filled = 0.0
 shader_parameter/mask_color = Color(1, 0, 1, 1)
 shader_parameter/gold_color = Color(0.894, 0.694, 0, 1)
 shader_parameter/grey_color = Color(0.3, 0.3, 0.3, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hrgp3"]
+viewport_path = NodePath("WarningLetter/WarningTexture/SubViewport")
 
 [node name="Market" type="Node" node_paths=PackedStringArray("rating_texture", "rating_count_label", "store_item_list")]
 script = ExtResource("1_ajah2")
@@ -343,6 +351,131 @@ text = "Options"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Continue"
+
+[node name="WarningSpot" type="Marker2D" parent="."]
+position = Vector2(249, 146)
+
+[node name="WarningEnd" type="Marker2D" parent="."]
+position = Vector2(358, -100)
+
+[node name="WarningLetter" type="Control" parent="." node_paths=PackedStringArray("checkbox_container", "slide_spot", "slide_end")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 150.0
+offset_top = 370.0
+offset_right = 150.0
+offset_bottom = 370.0
+script = ExtResource("10_5svtk")
+checkbox_container = NodePath("WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer")
+checked_texture = ExtResource("11_urk4u")
+slide_spot = NodePath("../WarningSpot")
+slide_end = NodePath("../WarningEnd")
+
+[node name="WarningTexture" type="TextureRect" parent="WarningLetter"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -96.0
+offset_right = 75.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_hrgp3")
+
+[node name="SubViewport" type="SubViewport" parent="WarningLetter/WarningTexture"]
+size = Vector2i(150, 192)
+
+[node name="TextureRect" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_5e7cl")
+
+[node name="MarginContainer" type="MarginContainer" parent="WarningLetter/WarningTexture/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("11_ie3ef")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[center]I don't like
+bad intel.[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect2" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect3" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect4" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect5" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect6" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect7" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect8" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect9" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect10" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect11" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
+
+[node name="TextureRect12" type="TextureRect" parent="WarningLetter/WarningTexture/SubViewport/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("12_4r24a")
 
 [connection signal="daily_expenses" from="." to="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo" method="_on_daily_expenses"]
 [connection signal="deposit" from="." to="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo" method="_on_deposit"]
