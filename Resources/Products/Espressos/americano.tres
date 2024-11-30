@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="AnimatedProduct" load_steps=9 format=3 uid="uid://dg3g6ciledgx7"]
+
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_hxgli"]
+[ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="2_g5yia"]
+[ext_resource type="PackedScene" uid="uid://csh67jnwsteub" path="res://Scenes/Common/Animations/pour_stream.tscn" id="3_5f6he"]
+[ext_resource type="Script" path="res://Scripts/Recipes/animated_product.gd" id="3_yy2j8"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_pour_animation.gd" id="4_4g6st"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_fill_animation.gd" id="5_0cp4s"]
+
+[sub_resource type="Resource" id="Resource_bf10v"]
+script = ExtResource("4_4g6st")
+pour_stream_scene = ExtResource("3_5f6he")
+color = Color(0.32549, 0.533333, 1, 0.662745)
+pour_time = 0.5
+
+[sub_resource type="Resource" id="Resource_v8wsj"]
+script = ExtResource("5_0cp4s")
+color = Color(0.227451, 0.207843, 0.196078, 1)
+pour_time = 0.5
+amount = 1.0
+
+[resource]
+script = ExtResource("3_yy2j8")
+animations = Array[ExtResource("2_g5yia")]([SubResource("Resource_bf10v"), SubResource("Resource_v8wsj")])
+display_name = "Americano"
+allowed_modifiers = Array[ExtResource("1_hxgli")]([])

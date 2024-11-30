@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AnimatedProduct" load_steps=6 format=3 uid="uid://c8gj03tlmyk80"]
+
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_0b6w5"]
+[ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="4_umqfo"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_fill_animation.gd" id="7_v8wqd"]
+[ext_resource type="Script" path="res://Scripts/Recipes/animated_product.gd" id="8_783ct"]
+
+[sub_resource type="Resource" id="Resource_ulnnw"]
+script = ExtResource("7_v8wqd")
+color = Color(0.150974, 0.13162, 0.0839425, 1)
+pour_time = 0.7
+amount = 0.5
+
+[resource]
+script = ExtResource("8_783ct")
+animations = Array[ExtResource("4_umqfo")]([SubResource("Resource_ulnnw")])
+display_name = "Espresso"
+allowed_modifiers = Array[ExtResource("1_0b6w5")]([])

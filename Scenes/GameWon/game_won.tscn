@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=4 uid="uid://d1hwoj8l1ngst"]
+[gd_scene load_steps=17 format=4 uid="uid://d1hwoj8l1ngst"]
 
 [ext_resource type="Script" path="res://Scenes/GameWon/game_won.gd" id="1_dpe5v"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="2_gpfgb"]
 [ext_resource type="AudioStream" uid="uid://bejjdf8fotm62" path="res://Sounds/End/waves.ogg" id="3_3yf2d"]
+[ext_resource type="Shader" path="res://Scenes/GameWon/game_won.gdshader" id="3_khsvn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dpf8r"]
 resource_name = "Cabana"
@@ -121,11 +122,15 @@ background_mode = 2
 background_energy_multiplier = 2.0
 sky = SubResource("Sky_gwcan")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q0qyy"]
-albedo_color = Color(0, 0.423529, 0.627451, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7dul"]
+render_priority = 0
+shader = ExtResource("3_khsvn")
+shader_parameter/height = 0.1
+shader_parameter/amplitude = 0.3
+shader_parameter/color = Color(0, 0.360784, 1, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ulugw"]
-material = SubResource("StandardMaterial3D_q0qyy")
+material = SubResource("ShaderMaterial_e7dul")
 size = Vector2(150, 150)
 
 [node name="GameWon" type="Node"]
@@ -179,7 +184,7 @@ mesh = SubResource("ArrayMesh_ogccf")
 skeleton = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.5, -0.224144, -0.836516, 0, 0.965926, -0.258819, 0.866025, -0.12941, -0.482963, -2.06899, 1.1, -0.879814)
+transform = Transform3D(-0.30237, -0.0432396, -0.952209, 0, 0.998971, -0.045363, 0.95319, -0.0137164, -0.302059, -2.069, 1.51, -0.88)
 environment = SubResource("Environment_de5sd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

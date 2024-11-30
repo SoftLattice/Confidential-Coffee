@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=6 format=3 uid="uid://7bxdol0gr0wj"]
+
+[ext_resource type="Resource" uid="uid://qotcrywq3oec" path="res://Resources/Products/Basics/hot_water.tres" id="1_8dpl8"]
+[ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="1_25mxn"]
+[ext_resource type="Script" path="res://Scripts/Recipes/recipe.gd" id="2_djkxv"]
+[ext_resource type="Resource" uid="uid://c8gj03tlmyk80" path="res://Resources/Products/Basics/espresso.tres" id="3_exyk7"]
+[ext_resource type="Resource" uid="uid://dg3g6ciledgx7" path="res://Resources/Products/Espressos/americano.tres" id="4_lfncc"]
+
+[resource]
+script = ExtResource("2_djkxv")
+base = ExtResource("3_exyk7")
+addition = ExtResource("1_8dpl8")
+product = ExtResource("4_lfncc")
+animations = Array[ExtResource("1_25mxn")]([])

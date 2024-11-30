@@ -5,10 +5,12 @@ signal put_down();
 
 @export var contents: Order;
 
+var _can_take: bool = true;
 # Try to take the item from the mat
 func _on_clicked() -> void:
-    if PlayerHand.get_active_hand().take_item(self):
-        picked_up.emit.call_deferred();
+    if _can_take:
+        if PlayerHand.get_active_hand().take_item(self):
+            picked_up.emit.call_deferred();
 
 func _process(delta: float) -> void:
     contents._update(delta);

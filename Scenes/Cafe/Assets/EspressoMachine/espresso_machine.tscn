@@ -1,9 +1,12 @@
-[gd_scene load_steps=15 format=4 uid="uid://ycd3m38mbiy2"]
+[gd_scene load_steps=28 format=4 uid="uid://ycd3m38mbiy2"]
 
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_6d47h"]
 [ext_resource type="Script" path="res://Scenes/Cafe/purchase_required.gd" id="1_72p6y"]
 [ext_resource type="Texture2D" uid="uid://gmvwwfiv2j4g" path="res://Models/Store/sugar_store_palette.png" id="2_75q4y"]
 [ext_resource type="Resource" uid="uid://b2nv1gtlr074w" path="res://Resources/Purchases/espresso_machine.tres" id="2_on0ti"]
+[ext_resource type="Script" path="res://Scripts/CafeInterfaces/clickable_asset.gd" id="5_5rwfq"]
+[ext_resource type="Script" path="res://Scenes/Cafe/Assets/EspressoMachine/spot.gd" id="5_vv8t4"]
+[ext_resource type="Resource" uid="uid://c8gj03tlmyk80" path="res://Resources/Products/Basics/espresso.tres" id="6_8qs4s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3stj4"]
 resource_name = "Plastic"
@@ -164,6 +167,58 @@ _surfaces = [{
 "vertex_data": PackedByteArray("dsQqPlBSTb0czcu80tErPqCLGr04f7C8HrcpPoAMgL04f7C8dsQqPlBSTb0DxPu8dsQqPlBSTb0DxPu8OhEsPmCYDr0OCdq8OhEsPmCYDr0OCdq8tncpPhAGhr0OCdq8tncpPhAGhr0OCdq8/QLBPmhYir0qQhK9/QLBPmhYir0qQhK9ScTBPsDPS72zU/28ScTBPsDPS72zU/28rUHAPuDIrr2zU/28rUHAPuDIrr2zU/28KbS/Puh1yb0pQpK8KbS/Puh1yb0pQpK8HoQoPrj7nL0CxHu8HoQoPrj7nL0CxHu8XYC/Png5070AAMAxXYC/Png5070AAMAx9iooPhBjpb0AAMAx9iooPhBjpb0AAMAxKbS/Puh1yb0tQpI8KbS/Puh1yb0tQpI8rUHAPuDIrr28U/08rUHAPuDIrr28U/08HoQoPrj7nL0KxHs8HoQoPrj7nL0KxHs87vEoPliikr0kzUs8tncpPhAGhr0XCdo8tncpPhAGhr0XCdo8HrcpPoAMgL1Af7A8dsQqPlBSTb0KxPs8dsQqPlBSTb0KxPs8/QLBPmhYir0sQhI9/QLBPmhYir0sQhI9OhEsPmCYDr0XCdo8OhEsPmCYDr0XCdo8dsQqPlBSTb0jzcs80tErPqCLGr1Af7A8ApcsPsC/6rwkzUs80gQtPiBawbwKxHs80gQtPiBawbwKxHs8Mt8sPsCJz7wAAMAxApcsPsC/6rwbzUu8/l0tPuC8n7wAAMAx/l0tPuC8n7wAAMAx0gQtPiBawbwCxHu80gQtPiBawbwCxHu8mYXCPqDuAr0AAMAxmYXCPqDuAr0AAMAxy1HCPrB1Fr0tQpI8y1HCPrB1Fr0tQpI8y1HCPrB1Fr0pQpK8y1HCPrB1Fr0pQpK8ScTBPsDPS728U/08ScTBPsDPS728U/08vqkoPtBvmb0AAMAx7vEoPliikr0bzUu8OhEsPmCYDr0OCdq8rUHAPuDIrr2zU/28rUHAPuDIrr2zU/28rUHAPuDIrr2zU/28ywnLif///7/LCcuJ////v8sJy4n///+/PAAP/f///7/LCcuJ////v7zRWf7///+/ywnLif///7+DLNAF////v8sJy4n///+/M/Yzdv///788AA/9////v7zRWf7///+/M/Yzdv///78z9jN2////v4Ms0AX///+/M/Yzdv///7+xS1oI////v7FLWgj///+/ywnLif///78z9jN2////v6hzVwz///+/qHNXDP///7/LCcuJ////vzP2M3b///+/pXdONP///z8z9jN2////vy96e1P///8/pXdONP///z/LCcuJ////v8sJy4n///+/L3p7U////z/LCcuJ////v8sJy4n///+/EH08gP///z/LCcuJ////vzP2M3b///+/EH08gP///z+lgUKu////P8sJy4n///+/ywnLif///7/LCcuJ////v8sJy4n///+/WIRazv///z/LCcuJ////v8sJy4n///+/ywnLif///78mh9f4////v8sJy4n///+/pLGl+////7/LCcuJ////vyaH1/j///+/M/Yzdv///79YhFrO////PzP2M3b///+/pLGl+////78z9jN2////v6WBQq7///8/M/Yzdv///7/LCcuJ////v8sJy4n///+/5xuw/////799djQq////v9zTnf7///+/WYOCwv///78=")
 }]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6tsx"]
+size = Vector3(0.382446, 0.128597, 0.131836)
+
+[sub_resource type="Curve" id="Curve_fm1n7"]
+bake_resolution = 10
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n6rmt"]
+curve = SubResource("Curve_fm1n7")
+
+[sub_resource type="Gradient" id="Gradient_e2u2e"]
+colors = PackedColorArray(0.435192, 0.435192, 0.435192, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7m88s"]
+gradient = SubResource("Gradient_e2u2e")
+
+[sub_resource type="Curve" id="Curve_hgmr0"]
+bake_resolution = 10
+_data = [Vector2(0, 0.225467), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_30buc"]
+curve = SubResource("Curve_hgmr0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gedl3"]
+direction = Vector3(0.5, 1, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.5
+gravity = Vector3(0, 1, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_30buc")
+color_ramp = SubResource("GradientTexture1D_7m88s")
+alpha_curve = SubResource("CurveTexture_n6rmt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x55yf"]
+transparency = 1
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.273873, 0.273873, 0.273873, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_uccib"]
+material = SubResource("StandardMaterial3D_x55yf")
+size = Vector2(0.2, 0.2)
+
 [node name="EspressoMachine" type="Node3D"]
 transform = Transform3D(-2.84124e-08, 0, -0.65, 0, 0.65, 0, 0.65, 0, -2.84124e-08, 0, 0, 0)
 
@@ -185,8 +240,12 @@ skeleton = NodePath("")
 mesh = SubResource("ArrayMesh_rx3rn")
 skeleton = NodePath("")
 
-[node name="Spot1" type="Node3D" parent="."]
+[node name="Spot1" type="Node3D" parent="." node_paths=PackedStringArray("placement_spot", "steam")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.372669, 0.333025, 0.436799)
+script = ExtResource("5_vv8t4")
+placement_spot = NodePath("CupSpot1")
+produces = ExtResource("6_8qs4s")
+steam = NodePath("SteamParticles")
 
 [node name="Gauge1" type="MeshInstance3D" parent="Spot1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118331, 0.518975, 0.0632011)
@@ -198,8 +257,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.370103, 0.0632012)
 mesh = SubResource("ArrayMesh_j5ipf")
 skeleton = NodePath("")
 
+[node name="Clickable" type="Node3D" parent="Spot1/Portafilter1"]
+script = ExtResource("5_5rwfq")
+
+[node name="Select" type="Area3D" parent="Spot1/Portafilter1/Clickable"]
+
+[node name="Collider" type="CollisionShape3D" parent="Spot1/Portafilter1/Clickable/Select"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0916137, -0.0565587, 0)
+shape = SubResource("BoxShape3D_x6tsx")
+
 [node name="CupSpot1" type="Marker3D" parent="Spot1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.98023e-08)
+
+[node name="SteamParticles" type="GPUParticles3D" parent="Spot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.209531, 0.294047, 0)
+emitting = false
+amount = 24
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.33
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_gedl3")
+draw_pass_1 = SubResource("QuadMesh_uccib")
 
 [node name="Spot2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.373, 0.333, -0.063)
@@ -230,3 +310,7 @@ mesh = SubResource("ArrayMesh_j5ipf")
 skeleton = NodePath("")
 
 [node name="CupSpot3" type="Marker3D" parent="Spot3"]
+
+[connection signal="clicked" from="Spot1/Portafilter1/Clickable" to="Spot1" method="_on_select"]
+[connection signal="mouse_entered" from="Spot1/Portafilter1/Clickable/Select" to="Spot1/Portafilter1/Clickable" method="_on_select_mouse_entered"]
+[connection signal="mouse_exited" from="Spot1/Portafilter1/Clickable/Select" to="Spot1/Portafilter1/Clickable" method="_on_select_mouse_exited"]

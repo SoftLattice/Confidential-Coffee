@@ -70,7 +70,7 @@ phrase_seed = Array[int]([])
 [sub_resource type="Environment" id="Environment_nce2b"]
 background_color = Color(0.564962, 0.564962, 0.564962, 1)
 
-[sub_resource type="Environment" id="Environment_52jpd"]
+[sub_resource type="Environment" id="Environment_6qrkf"]
 
 [sub_resource type="Resource" id="Resource_skvnx"]
 script = ExtResource("4_uoek7")
@@ -544,7 +544,7 @@ environment = SubResource("Environment_nce2b")
 
 [node name="Camera3D" type="Camera3D" parent="Environment/Cameras"]
 transform = Transform3D(1, 0, 0, 0, 0.640184, 0.768221, 0, -0.768221, 0.640184, 0, 1.6, 0.7)
-environment = SubResource("Environment_52jpd")
+environment = SubResource("Environment_6qrkf")
 current = true
 
 [node name="PhantomCameraHost" type="Node" parent="Environment/Cameras/Camera3D"]

@@ -16,11 +16,11 @@ func get_liquid_color() -> Color:
 func set_liquid_color(color: Color) -> void:
     liquid_material.set_shader_parameter("liquid_color", color);
 
-func fill_liquid(color: Color, pour_time: float) -> void:
+func fill_liquid(color: Color, pour_time: float, amount: float = 1.0) -> void:
     set_liquid_color(color);
     var fill_tween: Tween = create_tween();
     fill_tween.bind_node(self).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD);
-    fill_tween.tween_method(set_liquid_level, 0., 1., pour_time);
+    fill_tween.tween_method(set_liquid_level, liquid_material.get_shader_parameter("liquid_fraction"), amount, pour_time);
 
 func modify_liquid(color: Color, pour_time: float, f: float = 1.0) -> void:
     var color_tween: Tween = create_tween();

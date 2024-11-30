@@ -117,11 +117,11 @@ size = Vector3(0.619141, 2.61829, 1)
 
 [node name="Cafe" type="Node" node_paths=PackedStringArray("day_intro", "mark_primary", "customer_spawn_timer")]
 script = ExtResource("1_8x71m")
-receipt_scene = ExtResource("7_goaex")
-options_scene = ExtResource("3_56may")
 day_intro = NodePath("Overlay/OverlayViewports/Preamble/DayIntro")
 mark_primary = NodePath("Environment/CameraPath/CameraFollow/PlayerControl")
+receipt_scene = ExtResource("7_goaex")
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
+options_scene = ExtResource("3_56may")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="."]
 
@@ -254,7 +254,7 @@ clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 timer = NodePath("DayTimer")
 
 [node name="DayTimer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
-wait_time = 15.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]

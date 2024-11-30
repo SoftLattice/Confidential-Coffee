@@ -12,13 +12,13 @@ bake_resolution = 10
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_n6rmt"]
+[sub_resource type="CurveTexture" id="CurveTexture_72m5y"]
 curve = SubResource("Curve_x67lc")
 
 [sub_resource type="Gradient" id="Gradient_6rqo6"]
 colors = PackedColorArray(0.435192, 0.435192, 0.435192, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7m88s"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_34ywc"]
 gradient = SubResource("Gradient_6rqo6")
 
 [sub_resource type="Curve" id="Curve_hjhaa"]
@@ -26,7 +26,7 @@ bake_resolution = 10
 _data = [Vector2(0, 0.225467), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_30buc"]
+[sub_resource type="CurveTexture" id="CurveTexture_xjn1i"]
 curve = SubResource("Curve_hjhaa")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v241u"]
@@ -37,11 +37,11 @@ gravity = Vector3(0, 1, 0)
 damping_min = 1.0
 damping_max = 1.0
 scale_min = 0.5
-scale_curve = SubResource("CurveTexture_30buc")
-color_ramp = SubResource("GradientTexture1D_7m88s")
-alpha_curve = SubResource("CurveTexture_n6rmt")
+scale_curve = SubResource("CurveTexture_xjn1i")
+color_ramp = SubResource("GradientTexture1D_34ywc")
+alpha_curve = SubResource("CurveTexture_72m5y")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x55yf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_emi6j"]
 transparency = 1
 vertex_color_use_as_albedo = true
 backlight_enabled = true
@@ -53,7 +53,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_wmh4i"]
-material = SubResource("StandardMaterial3D_x55yf")
+material = SubResource("StandardMaterial3D_emi6j")
 size = Vector2(0.2, 0.2)
 
 [node name="HotWater" type="Node3D"]

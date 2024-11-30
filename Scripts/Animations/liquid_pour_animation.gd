@@ -15,7 +15,7 @@ func play_animation(held_item: HeldRecipe) -> void:
     pour_stream.lifetime = pour_time;
     material.albedo_color = color;
     pour_stream.emitting = true;
-    sound_clip.play();
+    sound_clip.play.call_deferred();
 
     await pour_stream.finished
     await held_item.get_tree().create_timer(pour_time).timeout;

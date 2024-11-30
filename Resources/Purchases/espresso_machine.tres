@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="StorePurchase" load_steps=4 format=3 uid="uid://b2nv1gtlr074w"]
+[gd_resource type="Resource" script_class="StorePurchase" load_steps=6 format=3 uid="uid://b2nv1gtlr074w"]
 
 [ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_36tuq"]
 [ext_resource type="Script" path="res://Scripts/Store/store_purchase.gd" id="1_deluf"]
 [ext_resource type="Script" path="res://Scripts/Recipes/product.gd" id="2_c68go"]
+[ext_resource type="Resource" uid="uid://c8gj03tlmyk80" path="res://Resources/Products/Basics/espresso.tres" id="3_nwypi"]
+[ext_resource type="Resource" uid="uid://dg3g6ciledgx7" path="res://Resources/Products/Espressos/americano.tres" id="4_s8ou2"]
 
 [resource]
 script = ExtResource("1_deluf")
 title = "Espresso Mach."
 price = 100
 daily_cost = 10
-enabled_products = Array[ExtResource("2_c68go")]([])
+enabled_products = Array[ExtResource("2_c68go")]([ExtResource("3_nwypi"), ExtResource("4_s8ou2")])
 enabled_modifiers = Array[ExtResource("1_36tuq")]([])
 unlock_flags = 1
 unlock_verbs = 0
