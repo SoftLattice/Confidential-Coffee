@@ -46,17 +46,12 @@ func prepare_display(order: CustomerOrder, pop_on_finish: bool = true) -> void:
     landing_label.custom_minimum_size = landing_label.size;
     landing_label.reparent(text_container);
 
-    landing_label.meta_clicked.connect(_on_meta_clicked);
     await RenderingServer.frame_post_draw;
     capture_viewport.size = primary_container.size;
 
     if pop_on_finish:
         pop_receipt();
 
-
-func _on_meta_clicked(resource: ReceiptResource) -> void:
-    resource._on_resource_select();
-    render_message(landing_label, active_order);
 
 func _exit_tree() -> void:
     active_order.clear_status();

@@ -132,14 +132,17 @@ barks = [NodePath("Bark1"), NodePath("Bark2"), NodePath("Bark3")]
 [node name="Bark1" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("13_uqd6u")
 volume_db = -20.0
+bus = &"SoundEffects"
 
 [node name="Bark2" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("14_8y02f")
 volume_db = -20.0
+bus = &"SoundEffects"
 
 [node name="Bark3" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("15_cr5gr")
 volume_db = -20.0
+bus = &"SoundEffects"
 
 [connection signal="approach_counter" from="." to="CustomerQueueStateMachine/NextUp" method="_on_approach_counter"]
 [connection signal="bark" from="." to="Audio" method="bark"]

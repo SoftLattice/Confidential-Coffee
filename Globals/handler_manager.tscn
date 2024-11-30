@@ -11,6 +11,8 @@ phone_pickup = NodePath("PhonePickup")
 
 [node name="PhoneCall" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_s175s")
+bus = &"SoundEffects"
 
 [node name="PhonePickup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_r4dhh")
+bus = &"SoundEffects"

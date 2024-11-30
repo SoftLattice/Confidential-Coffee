@@ -11,6 +11,9 @@ signal spawn_customer(customer: Customer, order: CustomerOrder);
 signal start_day();
 signal end_day();
 
+signal order_completed();
+signal order_canceled();
+
 # Singleton pattern
 static var _active_cafe: Cafe;
 static func get_cafe() -> Cafe:
@@ -47,6 +50,8 @@ func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
     cafe_hud.add_child(order_receipt);
     order_receipt.customer = customer;
 
+    customer.order_completed.connect(_on_customer_order_completed);
+
     # Connect the keys to the order receipt
     cafe_hud.sell_key.pressed.connect(order_receipt._on_complete_order, CONNECT_ONE_SHOT);
     cafe_hud.cancel_key.pressed.connect(order_receipt._on_cancel_order, CONNECT_ONE_SHOT);
@@ -71,6 +76,12 @@ func _on_day_finished() -> void:
 
     await get_tree().create_timer(3.).timeout;
     end_day.emit.call_deferred();
+
+func _on_customer_order_completed(canceled: bool) -> void:
+    if canceled:
+        order_canceled.emit.call_deferred();
+    else:
+        order_completed.emit.call_deferred();
 
 
 func _on_customer_spawn_timer() -> void:

@@ -238,12 +238,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.192029, 0.267794, 0.238551)
 
 [node name="HotWater" parent="." instance=ExtResource("7_fgril")]
 
-[node name="MachineRunning" type="AudioStreamPlayer" parent="."]
+[node name="Sound" type="Node" parent="."]
+
+[node name="MachineRunning1" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("8_4mufu")
+volume_db = -5.0
+bus = &"SoundEffects"
+
+[node name="MachineRunning2" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("8_4mufu")
+volume_db = -5.0
+bus = &"SoundEffects"
 
 [connection signal="filled" from="OriginCarafe1/Carafe" to="OriginDrip1/Drip" method="_on_carafe_filled"]
-[connection signal="start_filling" from="OriginCarafe1/Carafe" to="MachineRunning" method="play"]
+[connection signal="start_filling" from="OriginCarafe1/Carafe" to="Sound/MachineRunning1" method="play"]
 [connection signal="filled" from="OriginCarafe2/Carafe" to="OriginDrip2/Drip" method="_on_carafe_filled"]
-[connection signal="start_filling" from="OriginCarafe2/Carafe" to="MachineRunning" method="play"]
+[connection signal="start_filling" from="OriginCarafe2/Carafe" to="Sound/MachineRunning2" method="play"]
 
 [editable path="OriginCarafe2/Carafe"]

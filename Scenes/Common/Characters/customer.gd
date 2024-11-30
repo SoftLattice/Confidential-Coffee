@@ -71,7 +71,7 @@ var _has_uttered: bool = false;
 func _utter_phrase() -> void:
     if !is_instance_valid(utter_timer):
         return;
-        
+
     utter_timer.start(utter_interval + randf_range(-0.5,2.));
     if phrase_seed:
         if counter_distance < 0.1:
@@ -82,6 +82,8 @@ func _utter_phrase() -> void:
     else:
         utter_timer.queue_free();
 
+func _expletive() -> void:
+    speak.call_deferred(render_expletive);
 
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("debug"):
@@ -106,11 +108,19 @@ func get_mugshot() -> Texture:
 
 func render_phrase(label: RichTextLabel, icons: Array[Texture]) -> void:
     label.text = "";
-    label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER );
+    label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER);
     var icon_size: Vector2 = Vector2(16,16).lerp(Vector2(4,4),counter_distance);
     for icon in icons:
         label.add_image(icon, roundi(icon_size.x), roundi(icon_size.y));
         label.append_text(" ");
+    label.pop();
+
+func render_expletive(label: RichTextLabel) -> void:
+    label.text = "";
+    label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER);
+    label.push_font_size(16);
+    label.append_text("$#@!?");
+    label.pop();
     label.pop();
 
 var counter_distance: float = 1.0;

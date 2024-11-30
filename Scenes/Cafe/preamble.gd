@@ -7,10 +7,8 @@ signal finished();
 signal preamble_start();
 
 func _ready() -> void:
-    timer.wait_time = display_duration;
     preamble_start.emit.call_deferred();
-    timer.start.call_deferred();
 
-func _on_timer_timeout() -> void:
+func _on_alarm_finish() -> void:
     finished.emit.call_deferred();
     queue_free();

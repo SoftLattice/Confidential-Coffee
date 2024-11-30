@@ -8,13 +8,7 @@ func clear_status() -> void:
 
 var completed: bool = false;
 func print_to_label(label: RichTextLabel) -> int:
-    label.push_meta(self, RichTextLabel.META_UNDERLINE_ON_HOVER);
-    if completed:
-        label.push_strikethrough();
     label.append_text("%s" % [display_name.to_upper()]);
-    if completed:
-        label.pop();
-    label.pop()
     return 1;
 
 func _on_resource_select() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=50 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
@@ -29,6 +29,8 @@
 [ext_resource type="PackedScene" uid="uid://d4ccxpjoi0xnb" path="res://Scenes/Cafe/Assets/Furniture/sink.tscn" id="26_je3xl"]
 [ext_resource type="AudioStream" uid="uid://ckveexasfow46" path="res://Sounds/Transitions/alarm_clock.ogg" id="32_skmm6"]
 [ext_resource type="PackedScene" uid="uid://bwligg45xa31s" path="res://Scenes/Cafe/Assets/Modifiers/sugar.tscn" id="33_6jjiy"]
+[ext_resource type="AudioStream" uid="uid://cr5u4tlm2dkhj" path="res://Sounds/Cafe/register.ogg" id="33_76y18"]
+[ext_resource type="AudioStream" uid="uid://bvs6kflytmev8" path="res://Sounds/Cafe/reject.ogg" id="34_bbs4b"]
 [ext_resource type="PackedScene" uid="uid://bg2qaguqkksji" path="res://Scenes/Cafe/Assets/tea_tray.tscn" id="34_dm86h"]
 [ext_resource type="PackedScene" uid="uid://jvyguitt1ffy" path="res://Scenes/Cafe/Assets/Modifiers/cream.tscn" id="35_5gbk0"]
 [ext_resource type="PackedScene" uid="uid://ycd3m38mbiy2" path="res://Scenes/Cafe/Assets/EspressoMachine/espresso_machine.tscn" id="37_whf18"]
@@ -93,15 +95,19 @@ material = SubResource("StandardMaterial3D_c0mcq")
 size = Vector2(16, 8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2l0x"]
-albedo_color = Color(0.662745, 0.639216, 0.619608, 1)
+albedo_color = Color(0.541176, 0.552941, 0.372549, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_ivdfq"]
 material = SubResource("StandardMaterial3D_k2l0x")
 size = Vector2(16, 4)
 
+[sub_resource type="QuadMesh" id="QuadMesh_51tf7"]
+material = SubResource("StandardMaterial3D_k2l0x")
+size = Vector2(8, 4)
+
 [sub_resource type="Curve3D" id="Curve3D_srjgh"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.5, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.5, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
@@ -111,11 +117,11 @@ size = Vector3(0.619141, 2.61829, 1)
 
 [node name="Cafe" type="Node" node_paths=PackedStringArray("day_intro", "mark_primary", "customer_spawn_timer")]
 script = ExtResource("1_8x71m")
+receipt_scene = ExtResource("7_goaex")
+options_scene = ExtResource("3_56may")
 day_intro = NodePath("Overlay/OverlayViewports/Preamble/DayIntro")
 mark_primary = NodePath("Environment/CameraPath/CameraFollow/PlayerControl")
-receipt_scene = ExtResource("7_goaex")
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
-options_scene = ExtResource("3_56may")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="."]
 
@@ -123,7 +129,7 @@ options_scene = ExtResource("3_56may")
 
 [node name="OverlayViewports" type="CanvasLayer" parent="Overlay"]
 
-[node name="Preamble" type="Control" parent="Overlay/OverlayViewports" node_paths=PackedStringArray("timer")]
+[node name="Preamble" type="Control" parent="Overlay/OverlayViewports"]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -133,7 +139,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_6ohen")
 script = ExtResource("12_eedq1")
-timer = NodePath("DisplayTimer")
 
 [node name="ColorRect" type="ColorRect" parent="Overlay/OverlayViewports/Preamble"]
 layout_mode = 1
@@ -168,10 +173,6 @@ visible_characters = 22
 visible_characters_behavior = 1
 visible_ratio = 1.375
 script = ExtResource("3_n1fs1")
-
-[node name="DisplayTimer" type="Timer" parent="Overlay/OverlayViewports/Preamble"]
-wait_time = 3.0
-one_shot = true
 
 [node name="Postamble" type="Control" parent="Overlay/OverlayViewports" node_paths=PackedStringArray("timer")]
 visible = false
@@ -244,10 +245,10 @@ anchor_right = 1.0
 offset_left = -48.0
 offset_bottom = 48.0
 grow_horizontal = 0
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
 script = ExtResource("4_2fd8n")
 clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 timer = NodePath("DayTimer")
@@ -260,13 +261,14 @@ one_shot = true
 layout_mode = 2
 texture = ExtResource("4_q2nnl")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="CenterContainer" type="CenterContainer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
 layout_mode = 2
 use_top_left = true
 
 [node name="ClockCenter" type="Node2D" parent="Overlay/HUDViewport/CafeHUD/ClockContainer/CenterContainer"]
-position = Vector2(16, 16)
+position = Vector2(22, 22)
 scale = Vector2(0.5, 0.5)
 
 [node name="Hand" type="Sprite2D" parent="Overlay/HUDViewport/CafeHUD/ClockContainer/CenterContainer/ClockCenter"]
@@ -420,6 +422,10 @@ mesh = SubResource("PlaneMesh_fka11")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6)
 mesh = SubResource("QuadMesh_ivdfq")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Environment/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 2, -2)
+mesh = SubResource("QuadMesh_51tf7")
+
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, -2)
 calculate_tangents = false
@@ -427,15 +433,9 @@ size = Vector3(3, 4, 8)
 material = SubResource("StandardMaterial3D_k2l0x")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment/Walls/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.05)
 operation = 2
-size = Vector3(3, 3, 1)
-material = SubResource("StandardMaterial3D_k2l0x")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Environment/Walls/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.6)
-operation = 2
-size = Vector3(3, 3, 1)
+size = Vector3(3, 3, 2.5)
 material = SubResource("StandardMaterial3D_k2l0x")
 
 [node name="CustomerFlow" type="Node" parent="Environment"]
@@ -459,7 +459,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 
 [node name="CustomerExit" type="Marker3D" parent="Environment/CustomerFlow/CustomerPath"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.95)
 
 [node name="ExitDoor" type="Area3D" parent="Environment/CustomerFlow/CustomerPath/CustomerExit"]
 script = ExtResource("18_r0epc")
@@ -472,15 +472,26 @@ shape = SubResource("BoxShape3D_6v8wq")
 
 [node name="AlarmClock" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("32_skmm6")
+volume_db = -10.0
+bus = &"SoundEffects"
+
+[node name="Register" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("33_76y18")
+volume_db = -5.0
+
+[node name="Reject" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("34_bbs4b")
+volume_db = -5.0
 
 [connection signal="end_day" from="." to="Overlay/OverlayViewports/Postamble" method="_start_postamble"]
+[connection signal="order_canceled" from="." to="Audio/Reject" method="play"]
+[connection signal="order_completed" from="." to="Audio/Register" method="play"]
 [connection signal="spawn_customer" from="." to="Environment/CustomerFlow/CustomerSpawner" method="_on_spawn_customer"]
 [connection signal="start_day" from="." to="Overlay/HUDViewport/CafeHUD" method="_on_start_day"]
 [connection signal="start_day" from="." to="Overlay/HUDViewport" method="set_visible" binds= [true]]
 [connection signal="timeout" from="CustomerSpawnTimer" to="." method="_on_customer_spawn_timer"]
 [connection signal="finished" from="Overlay/OverlayViewports/Preamble" to="." method="_on_preamble_finished"]
 [connection signal="preamble_start" from="Overlay/OverlayViewports/Preamble" to="Audio/AlarmClock" method="play"]
-[connection signal="timeout" from="Overlay/OverlayViewports/Preamble/DisplayTimer" to="Overlay/OverlayViewports/Preamble" method="_on_timer_timeout"]
 [connection signal="timeout" from="Overlay/OverlayViewports/Postamble/DisplayTimer" to="Overlay/OverlayViewports/Postamble" method="_on_timer_timeout"]
 [connection signal="start_timer" from="Overlay/HUDViewport/CafeHUD" to="Overlay/HUDViewport/CafeHUD/ClockContainer/DayTimer" method="start"]
 [connection signal="day_finished" from="Overlay/HUDViewport/CafeHUD/ClockContainer" to="." method="_on_day_finished"]
@@ -489,3 +500,4 @@ stream = ExtResource("32_skmm6")
 [connection signal="clicked" from="Environment/CupRack" to="Environment/Cameras/PixelCamera/PlayerHand" method="_on_take_cup"]
 [connection signal="customer_order_placed" from="Environment/CustomerFlow/CustomerPath" to="." method="_on_order_placed"]
 [connection signal="area_entered" from="Environment/CustomerFlow/CustomerPath/CustomerExit/ExitDoor" to="Environment/CustomerFlow/CustomerPath/CustomerExit/ExitDoor" method="_on_area_entered"]
+[connection signal="finished" from="Audio/AlarmClock" to="Overlay/OverlayViewports/Preamble" method="_on_alarm_finish"]
