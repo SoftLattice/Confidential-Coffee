@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=4 uid="uid://cukqqplw4d30"]
+[gd_scene load_steps=13 format=4 uid="uid://cukqqplw4d30"]
 
 [ext_resource type="Script" path="res://Scenes/Cafe/Assets/CoffeeMaker/coffee_drip.gd" id="1_fg2xq"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="2_131po"]
+[ext_resource type="AudioStream" uid="uid://vu7lyy38ybgs" path="res://Sounds/Cafe/grounds.ogg" id="3_kla5e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7xsq"]
 resource_name = "Metal"
@@ -88,12 +89,13 @@ size = Vector2(0.02, 0.04)
 height = 0.140172
 radius = 0.162567
 
-[node name="Drip" type="Node3D" node_paths=PackedStringArray("visual", "grounds_particles", "drip_particles")]
+[node name="Drip" type="Node3D" node_paths=PackedStringArray("visual", "grounds_particles", "drip_particles", "sound")]
 transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 0, 0, 0)
 script = ExtResource("1_fg2xq")
 visual = NodePath("Mesh")
 grounds_particles = NodePath("Mesh/Grounds")
 drip_particles = NodePath("Mesh/Drip")
+sound = NodePath("Sound")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_xynma")
@@ -126,6 +128,9 @@ size = Vector3(0.294678, 0.118442, 0.304932)
 [node name="Collider" type="CollisionShape3D" parent="Select"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0671765, 0)
 shape = SubResource("CylinderShape3D_ybf3r")
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kla5e")
 
 [connection signal="mouse_entered" from="Select" to="." method="_on_select_mouse_entered"]
 [connection signal="mouse_exited" from="Select" to="." method="_on_select_mouse_exited"]

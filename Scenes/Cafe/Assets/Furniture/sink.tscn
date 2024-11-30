@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=4 uid="uid://d4ccxpjoi0xnb"]
+[gd_scene load_steps=20 format=4 uid="uid://d4ccxpjoi0xnb"]
 
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_0mp50"]
 [ext_resource type="Script" path="res://Scenes/Cafe/Assets/Furniture/sink.gd" id="1_cy0bj"]
 [ext_resource type="Texture2D" uid="uid://gmvwwfiv2j4g" path="res://Models/Store/sugar_store_palette.png" id="2_0ldry"]
 [ext_resource type="Script" path="res://Scripts/CafeInterfaces/clickable_asset.gd" id="3_yr8po"]
+[ext_resource type="AudioStream" uid="uid://d0nfv1c4nmq7s" path="res://Sounds/Cafe/faucet.ogg" id="5_ueiev"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r66bg"]
 resource_name = "Material"
@@ -134,11 +135,12 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_dnpfp")
 size = Vector2(0.125, 0.125)
 
-[node name="Sink" type="Node3D" node_paths=PackedStringArray("water_effect", "foam_effect")]
+[node name="Sink" type="Node3D" node_paths=PackedStringArray("water_effect", "foam_effect", "sound")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
 script = ExtResource("1_cy0bj")
 water_effect = NodePath("WaterEffect")
 foam_effect = NodePath("FoamEffect")
+sound = NodePath("Sound")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_etffm")
@@ -171,6 +173,9 @@ process_material = SubResource("ParticleProcessMaterial_uus1t")
 draw_passes = 2
 draw_pass_1 = SubResource("QuadMesh_57jqu")
 draw_pass_2 = null
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ueiev")
 
 [connection signal="clicked" from="Clickable" to="." method="_on_click"]
 [connection signal="mouse_entered" from="Clickable/Select" to="Clickable" method="_on_select_mouse_entered"]

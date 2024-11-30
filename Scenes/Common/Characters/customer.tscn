@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcdjonkjbxh0r"]
+[gd_scene load_steps=20 format=3 uid="uid://dcdjonkjbxh0r"]
 
 [ext_resource type="Script" path="res://Scenes/Common/Characters/customer.gd" id="1_ljmpa"]
 [ext_resource type="Texture2D" uid="uid://dxjl86xa2pcep" path="res://Scenes/Common/Characters/Handler/handler.png" id="2_topkw"]
@@ -11,7 +11,11 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/Customer/queued.gd" id="7_kuhq5"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/Customer/next_up.gd" id="8_6ed6q"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/Customer/ordering.gd" id="9_7p6l2"]
+[ext_resource type="Script" path="res://Scenes/Common/Characters/audio.gd" id="13_4ivty"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/Customer/exiting.gd" id="13_hcb6v"]
+[ext_resource type="AudioStream" uid="uid://dmipvyliyf086" path="res://Sounds/Customer/bark1.ogg" id="13_uqd6u"]
+[ext_resource type="AudioStream" uid="uid://dil3nlb3y67oy" path="res://Sounds/Customer/bark2.ogg" id="14_8y02f"]
+[ext_resource type="AudioStream" uid="uid://bof1wrryrvo44" path="res://Sounds/Customer/bark3.ogg" id="15_cr5gr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xss8d"]
 resource_local_to_scene = true
@@ -121,7 +125,24 @@ script = ExtResource("13_hcb6v")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10182, 0)
 shape = SubResource("BoxShape3D_yhs0y")
 
+[node name="Audio" type="Node" parent="." node_paths=PackedStringArray("barks")]
+script = ExtResource("13_4ivty")
+barks = [NodePath("Bark1"), NodePath("Bark2"), NodePath("Bark3")]
+
+[node name="Bark1" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("13_uqd6u")
+volume_db = -20.0
+
+[node name="Bark2" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("14_8y02f")
+volume_db = -20.0
+
+[node name="Bark3" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("15_cr5gr")
+volume_db = -20.0
+
 [connection signal="approach_counter" from="." to="CustomerQueueStateMachine/NextUp" method="_on_approach_counter"]
+[connection signal="bark" from="." to="Audio" method="bark"]
 [connection signal="immediate_exit" from="." to="CustomerQueueStateMachine" method="_on_immediate_exit"]
 [connection signal="order_completed" from="." to="CustomerQueueStateMachine/Ordering" method="_on_order_completed"]
 [connection signal="place_order" from="." to="." method="_on_place_order"]

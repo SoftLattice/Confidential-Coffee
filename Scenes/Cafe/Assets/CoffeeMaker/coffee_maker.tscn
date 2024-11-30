@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bnkc8jhwbld7v"]
+[gd_scene load_steps=20 format=4 uid="uid://bnkc8jhwbld7v"]
 
 [ext_resource type="Script" path="res://Scenes/Cafe/Assets/CoffeeMaker/coffee_maker.gd" id="1_ftk31"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_xa4m8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://b53vn6igp0fcw" path="res://Resources/Products/Basics/decaf.tres" id="5_lgkp4"]
 [ext_resource type="Shader" path="res://Scenes/Cafe/Assets/CoffeeMaker/carafe_liquid.gdshader" id="6_46tfj"]
 [ext_resource type="PackedScene" uid="uid://duljkoncxtkw6" path="res://Scenes/Cafe/Assets/CoffeeMaker/hot_water.tscn" id="7_fgril"]
+[ext_resource type="AudioStream" uid="uid://dyg2r2oyy6uuh" path="res://Sounds/Cafe/coffee_machine.ogg" id="8_4mufu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7xsq"]
 resource_name = "Metal"
@@ -237,7 +238,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.192029, 0.267794, 0.238551)
 
 [node name="HotWater" parent="." instance=ExtResource("7_fgril")]
 
+[node name="MachineRunning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_4mufu")
+
 [connection signal="filled" from="OriginCarafe1/Carafe" to="OriginDrip1/Drip" method="_on_carafe_filled"]
+[connection signal="start_filling" from="OriginCarafe1/Carafe" to="MachineRunning" method="play"]
 [connection signal="filled" from="OriginCarafe2/Carafe" to="OriginDrip2/Drip" method="_on_carafe_filled"]
+[connection signal="start_filling" from="OriginCarafe2/Carafe" to="MachineRunning" method="play"]
 
 [editable path="OriginCarafe2/Carafe"]

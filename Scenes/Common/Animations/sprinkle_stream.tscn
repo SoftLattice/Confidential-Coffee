@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://2jhfai8rx0b0"]
+[gd_scene load_steps=5 format=3 uid="uid://2jhfai8rx0b0"]
+
+[ext_resource type="AudioStream" uid="uid://vu7lyy38ybgs" path="res://Sounds/Cafe/grounds.ogg" id="1_4egu2"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cbu15"]
 spread = 180.0
@@ -25,3 +27,6 @@ local_coords = true
 transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_cbu15")
 draw_pass_1 = SubResource("QuadMesh_kua5a")
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_4egu2")

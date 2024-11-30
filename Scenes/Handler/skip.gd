@@ -4,13 +4,6 @@ signal skip_question();
 
 @export var main_container: Control;
 
-func _process(delta: float) -> void:
-    if Input.is_action_just_pressed("debug"):
-        if _is_in:
-            pop_out();
-        else:
-            pop_in();
-
 var _is_in: bool = false;
 func pop_in() -> void:
     _is_in = true;

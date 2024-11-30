@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://csh67jnwsteub"]
+[gd_scene load_steps=5 format=3 uid="uid://csh67jnwsteub"]
+
+[ext_resource type="AudioStream" uid="uid://btd0lvd3aigbt" path="res://Sounds/Cafe/pouring_liquid.ogg" id="1_iml3l"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_obugs"]
 direction = Vector3(-1, 0, 0)
@@ -29,3 +31,6 @@ local_coords = true
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_obugs")
 draw_pass_1 = SubResource("QuadMesh_c6sdu")
+
+[node name="SoundClip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_iml3l")

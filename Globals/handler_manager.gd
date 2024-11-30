@@ -9,6 +9,9 @@ const BASE_INTEL_DEPOSIT: int = 50;
 @export var flag_bonus: int = 25;
 @export var verb_bouns: int = 25;
 
+@export var phone_sound: AudioStreamPlayer;
+@export var phone_pickup: AudioStreamPlayer;
+
 func _ready() -> void:
     CustomerManager.spawn_parameters_changes.connect(recompute_bonus);
 

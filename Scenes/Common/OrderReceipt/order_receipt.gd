@@ -92,6 +92,7 @@ func _on_complete_order() -> void:
     var delivered_order: CustomerOrder = delivery_pad.to_order();
     disposition = active_order.compare_orders(delivered_order);
     customer.order_completed.emit.call_deferred(false);
+    CafeManager.daily_income += 1;
     remove_receipt();
 
 func _on_cancel_order() -> void:

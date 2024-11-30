@@ -1,6 +1,7 @@
 class_name Carafe extends ClickableAsset
 
 signal filled();
+signal start_filling();
 
 @export var max_cups: float = 8;
 @export var cups: float = 0;
@@ -43,6 +44,7 @@ func begin_filling() -> void:
     _is_busy = true;
     var fill_tween: Tween = create_tween();
     fill_tween.bind_node(self).set_parallel(true);
+    start_filling.emit.call_deferred();
     fill_tween.tween_property(self, "cups", max_cups, fill_time);
     fill_tween.tween_method(set_liquid_height, cups/max_cups, 1., fill_time);
     fill_tween.set_parallel(false);

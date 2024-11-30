@@ -15,6 +15,8 @@ const BASE_DAILY_EXPENSES: int = 25;
 @export var available_store_purchases: Array[StorePurchase];
 @export var owned_store_purchases: Array[StorePurchase];
 
+@export var daily_income: int = 0;
+
 @export_category("Difficulty")
 const SPAWN_SCALE: float = 15.;
 const SPAWN_LERP: float = 0.25;
@@ -54,7 +56,6 @@ func rate_dispositions(dispositions: Array[int]) -> void:
     var total_dispostion: float = 0;
 
     for disposition in dispositions:
-        print(_disposition_to_rating(disposition));
         total_dispostion += _disposition_to_rating(disposition);
     total_dispostion /= 5.;
 

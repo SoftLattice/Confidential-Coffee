@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0pfaxfwodebo"]
+[gd_scene load_steps=4 format=3 uid="uid://b0pfaxfwodebo"]
 
 [ext_resource type="Script" path="res://Globals/handler_manager.gd" id="1_lrd2b"]
+[ext_resource type="AudioStream" uid="uid://dfgfrsnt8kmim" path="res://Sounds/Transitions/phone.ogg" id="2_s175s"]
+[ext_resource type="AudioStream" uid="uid://dju7jwqqx1wl" path="res://Sounds/Transitions/phone_pickup.ogg" id="3_r4dhh"]
 
-[node name="HandlerManager" type="Node"]
+[node name="HandlerManager" type="Node" node_paths=PackedStringArray("phone_sound", "phone_pickup")]
 script = ExtResource("1_lrd2b")
+phone_sound = NodePath("PhoneCall")
+phone_pickup = NodePath("PhonePickup")
+
+[node name="PhoneCall" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_s175s")
+
+[node name="PhonePickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_r4dhh")

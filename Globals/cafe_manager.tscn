@@ -13,6 +13,7 @@
 
 [node name="CafeManager" type="Node"]
 script = ExtResource("1_x4byq")
+funds = 10000
 available_store_purchases = Array[ExtResource("2_wkgk6")]([ExtResource("3_ylhtj"), ExtResource("4_lqwt7")])
 max_order_size = 1
 max_modifier_count = 1

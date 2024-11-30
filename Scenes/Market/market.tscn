@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b7t4t4yiek3u1"]
+[gd_scene load_steps=18 format=3 uid="uid://b7t4t4yiek3u1"]
 
 [ext_resource type="Script" path="res://Scenes/Market/market.gd" id="1_ajah2"]
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_ob1b7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://Scenes/Market/rating.gdshader" id="6_rc52b"]
 [ext_resource type="Script" path="res://Scenes/Market/bank_info.gd" id="6_s8aqf"]
 [ext_resource type="Texture2D" uid="uid://c1yphnqr1gthh" path="res://Scenes/Market/Textures/star_rating.png" id="6_xpl3x"]
+[ext_resource type="Script" path="res://Scenes/Market/flee_country.gd" id="7_6atch"]
 [ext_resource type="Texture2D" uid="uid://beq6y7it8y8k5" path="res://Scenes/Market/Textures/dirty_paper.png" id="10_5e7cl"]
 [ext_resource type="Script" path="res://Scenes/Market/warning_letter.gd" id="10_5svtk"]
 [ext_resource type="FontFile" uid="uid://eqi05m8rvn2t" path="res://Fonts/SpecialElite/SpecialElite-Regular.ttf" id="11_ie3ef"]
@@ -29,7 +30,7 @@ viewport_path = NodePath("WarningLetter/WarningTexture/SubViewport")
 script = ExtResource("1_ajah2")
 rating_texture = NodePath("MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer2/Reviews/MarginContainer/VBoxContainer/HBoxContainer/RatingTexture")
 rating_count_label = NodePath("MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer2/Reviews/MarginContainer/VBoxContainer/HBoxContainer/RatingCount")
-store_item_list = NodePath("MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/StoreItemList")
+store_item_list = NodePath("MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer/StoreItemList")
 store_item_scene = ExtResource("5_iixin")
 
 [node name="MarketControl" type="Control" parent="."]
@@ -69,7 +70,7 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 script = ExtResource("3_o1q1a")
-store_item_container = NodePath("VBoxContainer/MarginContainer2/StoreItemList")
+store_item_container = NodePath("VBoxContainer/MarginContainer2/VBoxContainer/StoreItemList")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarketControl/HBoxContainer/MarginContainer/Store"]
 layout_mode = 2
@@ -99,9 +100,56 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="StoreItemList" type="VBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2"]
 layout_mode = 2
+
+[node name="StoreItemList" type="VBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FleeCountry" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer" node_paths=PackedStringArray("price_label", "buy_button")]
+layout_mode = 2
+theme = ExtResource("5_sncud")
+theme_override_constants/separation = 4
+script = ExtResource("7_6atch")
+price = 5000
+price_label = NodePath("ItemPrice")
+buy_button = NodePath("BuyButton")
+
+[node name="ItemTitle" type="Label" parent="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer/FleeCountry"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.556286, 0.492913, 1)
+text = "Flee  Country"
+vertical_alignment = 2
+
+[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer/FleeCountry"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.556863, 0.494118, 1)
+theme_override_font_sizes/font_size = 12
+text = "......................................"
+horizontal_alignment = 1
+vertical_alignment = 2
+clip_text = true
+
+[node name="ItemPrice" type="Label" parent="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer/FleeCountry"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.556863, 0.494118, 1)
+text = "$5,000"
+vertical_alignment = 2
+
+[node name="BuyButton" type="Button" parent="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer/FleeCountry"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_mode = 0
+disabled = true
+text = "Buy"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarketControl/HBoxContainer"]
 layout_mode = 2
@@ -118,7 +166,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.6
 
-[node name="BankInfo" type="MarginContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer" node_paths=PackedStringArray("funds_label", "expenses_label", "expenses_container", "deposit_label", "deposit_container", "purchases_label", "purchases_container")]
+[node name="BankInfo" type="MarginContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer" node_paths=PackedStringArray("funds_label", "expenses_label", "expenses_container", "income_label", "income_container", "deposit_label", "deposit_container", "purchases_label", "purchases_container")]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
@@ -128,6 +176,8 @@ script = ExtResource("6_s8aqf")
 funds_label = NodePath("MarginContainer/VBoxContainer/Funds/Value")
 expenses_label = NodePath("MarginContainer/VBoxContainer/Expenses/Value")
 expenses_container = NodePath("MarginContainer/VBoxContainer/Expenses")
+income_label = NodePath("MarginContainer/VBoxContainer/Sales/Value")
+income_container = NodePath("MarginContainer/VBoxContainer/Sales")
 deposit_label = NodePath("MarginContainer/VBoxContainer/Deposits/Value")
 deposit_container = NodePath("MarginContainer/VBoxContainer/Deposits")
 purchases_label = NodePath("MarginContainer/VBoxContainer/Purchases/Value")
@@ -156,7 +206,6 @@ scroll_active = false
 autowrap_mode = 2
 
 [node name="Expenses" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("5_sncud")
 theme_override_constants/separation = 4
@@ -178,6 +227,32 @@ clip_text = true
 [node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Expenses"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.835294, 0, 0, 1)
+text = "$$$"
+vertical_alignment = 2
+
+[node name="Sales" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5_sncud")
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Sales"]
+layout_mode = 2
+text = "Sales
+"
+vertical_alignment = 2
+
+[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Sales"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "......................................"
+horizontal_alignment = 1
+vertical_alignment = 2
+clip_text = true
+
+[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Sales"]
+layout_mode = 2
 text = "$$$"
 vertical_alignment = 2
 
@@ -478,7 +553,11 @@ layout_mode = 2
 texture = ExtResource("12_4r24a")
 
 [connection signal="daily_expenses" from="." to="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo" method="_on_daily_expenses"]
+[connection signal="daily_income" from="." to="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo" method="_on_income"]
 [connection signal="deposit" from="." to="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo" method="_on_deposit"]
+[connection signal="funds_change" from="." to="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer/FleeCountry" method="_on_funds_change"]
 [connection signal="funds_change" from="." to="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo" method="_on_funds_change"]
 [connection signal="purchase" from="." to="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo" method="_on_purchase"]
+[connection signal="flee_country" from="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer/FleeCountry" to="." method="_on_flee_country"]
+[connection signal="pressed" from="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer/FleeCountry/BuyButton" to="MarketControl/HBoxContainer/MarginContainer/Store/VBoxContainer/MarginContainer2/VBoxContainer/FleeCountry" method="_on_buy_button_pressed" flags=6]
 [connection signal="pressed" from="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer3/Finish/MarginContainer/HBoxContainer/Continue" to="." method="_on_continue_pressed" flags=6]

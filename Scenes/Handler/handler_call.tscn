@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=4 uid="uid://buhgv18pjog7i"]
+[gd_scene load_steps=66 format=4 uid="uid://buhgv18pjog7i"]
 
 [ext_resource type="Script" path="res://Scenes/Handler/handler_call.gd" id="1_8y0lq"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_do60s"]
@@ -44,6 +44,14 @@
 [ext_resource type="Texture2D" uid="uid://brkegqcequi3p" path="res://Textures/Icons/Speech/flag_7.png" id="31_nh0io"]
 [ext_resource type="FontFile" uid="uid://c8s18y77t6ywm" path="res://Fonts/Poppins/Poppins-Regular.ttf" id="38_rduij"]
 [ext_resource type="Script" path="res://Scenes/Handler/skip.gd" id="38_tamtc"]
+[ext_resource type="Script" path="res://Scenes/Handler/audio.gd" id="45_sl0gb"]
+[ext_resource type="AudioStream" uid="uid://bcm17kh6obeli" path="res://Sounds/Handler/handler_bark1.ogg" id="46_760mg"]
+[ext_resource type="AudioStream" uid="uid://bjwcfbumif2yg" path="res://Sounds/Handler/handler_bark2.ogg" id="47_glu5p"]
+[ext_resource type="AudioStream" uid="uid://25dpcki330mu" path="res://Sounds/Handler/handler_bark3.ogg" id="48_76rmr"]
+[ext_resource type="AudioStream" uid="uid://doto4e3u6jo18" path="res://Sounds/Handler/handler_bark4.ogg" id="49_wj34d"]
+[ext_resource type="AudioStream" uid="uid://celec7vhfelx7" path="res://Sounds/Handler/handler_bark5.ogg" id="50_xn4yi"]
+[ext_resource type="AudioStream" uid="uid://bqit3hyui4yes" path="res://Sounds/Handler/handler_bark6.ogg" id="51_xdpbb"]
+[ext_resource type="AudioStream" uid="uid://blyhrdq3qyi7a" path="res://Sounds/PhoneCall/camera.ogg" id="52_mpvgh"]
 
 [sub_resource type="Resource" id="Resource_4jcoe"]
 script = ExtResource("2_msf10")
@@ -57,12 +65,12 @@ script = ExtResource("2_msf10")
 mugshot = ExtResource("5_ga42p")
 receipt = ExtResource("6_lnsdj")
 disposition = 0
-phrase_seed = Array[int]([2, 3])
+phrase_seed = Array[int]([])
 
 [sub_resource type="Environment" id="Environment_nce2b"]
 background_color = Color(0.564962, 0.564962, 0.564962, 1)
 
-[sub_resource type="Environment" id="Environment_gorqh"]
+[sub_resource type="Environment" id="Environment_h51ml"]
 
 [sub_resource type="Resource" id="Resource_skvnx"]
 script = ExtResource("4_uoek7")
@@ -129,12 +137,13 @@ size = Vector3(0.3, 0.15, 0.3)
 [sub_resource type="BoxMesh" id="BoxMesh_6iprx"]
 size = Vector3(0.075, 0.075, 0.3)
 
-[node name="HandlerCall" type="Node" node_paths=PackedStringArray("items_area", "handler_speech", "fadeout_rect")]
+[node name="HandlerCall" type="Node" node_paths=PackedStringArray("items_area", "handler_speech", "fadeout_rect", "flash_overlay")]
 script = ExtResource("1_8y0lq")
 items_area = NodePath("Overlay/Items/ItemsArea")
 handler_speech = NodePath("Overlay/Dialog/HandlerSpeech")
 fadeout_rect = NodePath("Overlay/Exit/FadeOut")
 debug_customer_results = Array[ExtResource("2_msf10")]([SubResource("Resource_4jcoe"), SubResource("Resource_td4sf")])
+flash_overlay = NodePath("Overlay/Items/FlashOverlay")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_f8ete")
@@ -445,6 +454,16 @@ position = Vector2(378, 177)
 [node name="MugSpawn" type="Marker2D" parent="Overlay/Items"]
 position = Vector2(67, 66)
 
+[node name="FlashOverlay" type="ColorRect" parent="Overlay/Items"]
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
 [node name="Exit" type="CanvasLayer" parent="Overlay"]
 visible = false
 
@@ -481,7 +500,7 @@ environment = SubResource("Environment_nce2b")
 
 [node name="Camera3D" type="Camera3D" parent="Environment/Cameras"]
 transform = Transform3D(1, 0, 0, 0, 0.640184, 0.768221, 0, -0.768221, 0.640184, 0, 1.6, 0.7)
-environment = SubResource("Environment_gorqh")
+environment = SubResource("Environment_h51ml")
 current = true
 
 [node name="PhantomCameraHost" type="Node" parent="Environment/Cameras/Camera3D"]
@@ -532,12 +551,45 @@ skeleton = NodePath("../../..")
 [node name="ReceiverTarget" type="Marker3D" parent="Environment/Phone/Receiver"]
 transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0.00047645, 0.0370001, -0.107837)
 
+[node name="Audio" type="Node" parent="." node_paths=PackedStringArray("barks")]
+script = ExtResource("45_sl0gb")
+barks = [NodePath("Bark1"), NodePath("Bark2"), NodePath("Bark3"), NodePath("Bark4"), NodePath("Bark5"), NodePath("Bark6")]
+
+[node name="Bark1" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("46_760mg")
+volume_db = -15.0
+
+[node name="Bark2" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("47_glu5p")
+volume_db = -15.0
+
+[node name="Bark3" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("48_76rmr")
+volume_db = -15.0
+
+[node name="Bark4" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("49_wj34d")
+volume_db = -15.0
+
+[node name="Bark5" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("50_xn4yi")
+volume_db = -15.0
+
+[node name="Bark6" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("51_xdpbb")
+volume_db = -15.0
+
+[node name="Camera" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("52_mpvgh")
+
 [connection signal="disappointed" from="." to="StateMachine" method="_set_state" binds= ["disappointed"]]
 [connection signal="receipt_picture" from="." to="StateMachine/ReceiptRequest" method="_on_receipt_picture"]
+[connection signal="receipt_picture" from="." to="Audio/Camera" method="play" unbinds=1]
 [connection signal="request_picture" from="." to="Overlay/Items/Skip" method="pop_in"]
 [connection signal="request_quote" from="." to="Overlay/Items/PlayerChoices" method="pop_in"]
 [connection signal="request_quote" from="." to="Overlay/Items/Skip" method="pop_in"]
 [connection signal="satisfied" from="." to="StateMachine" method="_set_state" binds= ["satisfied"]]
+[connection signal="speaking" from="." to="Audio" method="_bark"]
 [connection signal="finished_talking" from="StateMachine/Disappointed" to="Overlay/Exit" method="set_visible" binds= [true]]
 [connection signal="right_answer" from="StateMachine/ReceiptRequest" to="." method="_on_right_answer"]
 [connection signal="wrong_answer" from="StateMachine/ReceiptRequest" to="." method="_on_wrong_answer"]

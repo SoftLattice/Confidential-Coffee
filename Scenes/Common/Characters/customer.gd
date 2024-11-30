@@ -1,5 +1,6 @@
 class_name Customer extends Node3D
 
+signal bark();
 signal start_walking();
 signal stop_walking();
 signal at_queue_front();
@@ -76,6 +77,7 @@ func _utter_phrase() -> void:
         if counter_distance < 0.1:
             var phrase: Array[Texture] = CustomerManager.get_phrase_icons(phrase_seed);
             speak.call_deferred(render_phrase.bind(phrase));
+            bark.emit.call_deferred();
             _has_uttered = true;
     else:
         utter_timer.queue_free();

@@ -6,6 +6,7 @@ class_name LiquidPourAnimation extends AnimationResource
 
 func play_animation(held_item: HeldRecipe) -> void:
     var pour_stream: GPUParticles3D = pour_stream_scene.instantiate();
+    var sound_clip: AudioStreamPlayer = pour_stream.get_child(0, true);
 
     # Create the stream
     held_item.add_child(pour_stream);
@@ -14,6 +15,7 @@ func play_animation(held_item: HeldRecipe) -> void:
     pour_stream.lifetime = pour_time;
     material.albedo_color = color;
     pour_stream.emitting = true;
+    sound_clip.play();
 
     await pour_stream.finished
     await held_item.get_tree().create_timer(pour_time).timeout;

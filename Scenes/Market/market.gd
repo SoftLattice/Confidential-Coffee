@@ -3,6 +3,7 @@ class_name Market extends Node
 signal purchase(value: int);
 signal funds_change(value: int);
 signal daily_expenses(value: int);
+signal daily_income(value: int);
 signal deposit(value: int);
 
 @export var rating_texture: TextureRect;
@@ -29,15 +30,22 @@ func _ready() -> void:
         funds_change.connect(store_item._on_funds_change);
 
     CafeManager.funds -= CafeManager.daily_expenses;
+    CafeManager.funds += CafeManager.daily_income;
+
     daily_expenses.emit.call_deferred(CafeManager.daily_expenses);
+    daily_income.emit.call_deferred(CafeManager.daily_income);
+
     funds_change.emit(CafeManager.funds);
     CafeManager.daily_expenses = 0;
+    CafeManager.daily_income = 0;
 
     await get_tree().create_timer(1.5).timeout;
     CafeManager.funds += CafeManager.deposits;
-    funds_change.emit.call_deferred(CafeManager.funds);
+
     deposit.emit.call_deferred(CafeManager.deposits);
     CafeManager.deposits = 0;
+
+    funds_change.emit.call_deferred(CafeManager.funds);
 
 func _on_purchase(store_item: StoreItem) -> void:
     CafeManager.funds -= store_item.purchase.price;
@@ -54,3 +62,6 @@ func _on_continue_pressed() -> void:
         SaveData.current_day += 1;
         CafeManager.daily_expenses += 2;
         SceneList.load_scene(SceneList.cafe_scene);
+
+func _on_flee_country() -> void:
+    SceneList.load_scene(SceneList.game_won);

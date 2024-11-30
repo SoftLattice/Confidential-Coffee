@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=47 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://bnkc8jhwbld7v" path="res://Scenes/Cafe/Assets/CoffeeMaker/coffee_maker.tscn" id="24_7t71w"]
 [ext_resource type="PackedScene" uid="uid://tqdyj3qifga6" path="res://Scenes/Cafe/Assets/cup_rack.tscn" id="25_2lf1c"]
 [ext_resource type="PackedScene" uid="uid://d4ccxpjoi0xnb" path="res://Scenes/Cafe/Assets/Furniture/sink.tscn" id="26_je3xl"]
+[ext_resource type="AudioStream" uid="uid://ckveexasfow46" path="res://Sounds/Transitions/alarm_clock.ogg" id="32_skmm6"]
 [ext_resource type="PackedScene" uid="uid://bwligg45xa31s" path="res://Scenes/Cafe/Assets/Modifiers/sugar.tscn" id="33_6jjiy"]
 [ext_resource type="PackedScene" uid="uid://bg2qaguqkksji" path="res://Scenes/Cafe/Assets/tea_tray.tscn" id="34_dm86h"]
 [ext_resource type="PackedScene" uid="uid://jvyguitt1ffy" path="res://Scenes/Cafe/Assets/Modifiers/cream.tscn" id="35_5gbk0"]
@@ -133,7 +134,6 @@ grow_vertical = 2
 theme = ExtResource("1_6ohen")
 script = ExtResource("12_eedq1")
 timer = NodePath("DisplayTimer")
-display_duration = 2.0
 
 [node name="ColorRect" type="ColorRect" parent="Overlay/OverlayViewports/Preamble"]
 layout_mode = 1
@@ -214,7 +214,7 @@ fit_content = true
 visible_characters_behavior = 1
 
 [node name="DisplayTimer" type="Timer" parent="Overlay/OverlayViewports/Postamble"]
-wait_time = 2.0
+wait_time = 4.0
 one_shot = true
 
 [node name="HUDViewport" type="CanvasLayer" parent="Overlay"]
@@ -253,7 +253,7 @@ clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 timer = NodePath("DayTimer")
 
 [node name="DayTimer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
-wait_time = 30.0
+wait_time = 15.0
 one_shot = true
 
 [node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
@@ -468,7 +468,10 @@ script = ExtResource("18_r0epc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2525, 0)
 shape = SubResource("BoxShape3D_6v8wq")
 
-[node name="Effects" type="Node" parent="."]
+[node name="Audio" type="Node" parent="."]
+
+[node name="AlarmClock" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("32_skmm6")
 
 [connection signal="end_day" from="." to="Overlay/OverlayViewports/Postamble" method="_start_postamble"]
 [connection signal="spawn_customer" from="." to="Environment/CustomerFlow/CustomerSpawner" method="_on_spawn_customer"]
@@ -476,6 +479,7 @@ shape = SubResource("BoxShape3D_6v8wq")
 [connection signal="start_day" from="." to="Overlay/HUDViewport" method="set_visible" binds= [true]]
 [connection signal="timeout" from="CustomerSpawnTimer" to="." method="_on_customer_spawn_timer"]
 [connection signal="finished" from="Overlay/OverlayViewports/Preamble" to="." method="_on_preamble_finished"]
+[connection signal="preamble_start" from="Overlay/OverlayViewports/Preamble" to="Audio/AlarmClock" method="play"]
 [connection signal="timeout" from="Overlay/OverlayViewports/Preamble/DisplayTimer" to="Overlay/OverlayViewports/Preamble" method="_on_timer_timeout"]
 [connection signal="timeout" from="Overlay/OverlayViewports/Postamble/DisplayTimer" to="Overlay/OverlayViewports/Postamble" method="_on_timer_timeout"]
 [connection signal="start_timer" from="Overlay/HUDViewport/CafeHUD" to="Overlay/HUDViewport/CafeHUD/ClockContainer/DayTimer" method="start"]

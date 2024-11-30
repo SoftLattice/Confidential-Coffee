@@ -1,5 +1,6 @@
 class_name HandlerCall extends Node
 
+signal speaking();
 signal end_day();
 signal disappointed();
 signal satisfied();
@@ -15,6 +16,7 @@ signal request_quote();
 @export var fadeout_rect: ColorRect;
 
 @export var debug_customer_results: Array[CustomerResult];
+@export var flash_overlay: ColorRect;
 
 var customer_results: Array[CustomerResult];
 
@@ -25,7 +27,7 @@ static func get_active_handler() -> HandlerCall:
 func _ready() -> void:
     _active_handler = self;
 
-    if debug_customer_results and false:
+    if debug_customer_results and true:
         customer_results.assign(debug_customer_results);
     else:
         customer_results.assign(CafeManager.customer_results);
@@ -33,6 +35,9 @@ func _ready() -> void:
 
     for customer_result in customer_results:
         _spawn_receipt(customer_result);
+
+    HandlerManager.phone_sound.stop();
+    HandlerManager.phone_pickup.play();
 
     if customer_results.size() < 1:
         disappointed.emit.call_deferred();
@@ -56,6 +61,7 @@ func _spawn_mugshot(customer_result: CustomerResult) -> CustomerPicture:
 
 var active_customer_result: CustomerResult = null;
 func speak(render_bubble: Callable, duration: float) -> SpeechBubble:
+    speaking.emit.call_deferred();
     return handler_speech.speak(render_bubble, duration);
 
 func quiet() -> void:
@@ -71,6 +77,10 @@ func _on_goto_bed() -> void:
 
 
 func _on_receipt_picture(customer_result: CustomerResult) -> void:
+    var flash_tween: Tween = create_tween();
+    flash_tween.bind_node(flash_overlay).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD);
+    flash_tween.tween_property(flash_overlay, "color:a", .5, 0);
+    flash_tween.tween_property(flash_overlay, "color:a", 0, 1.);
     receipt_picture.emit.call_deferred(customer_result);
 
 func _on_wrong_answer() -> void:

@@ -9,3 +9,4 @@ func _on_timer_timeout() -> void:
 func _start_postamble() -> void:
     timer.start();
     visible = true;
+    HandlerManager.phone_sound.play();
