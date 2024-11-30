@@ -89,9 +89,12 @@ func _on_customer_spawn_timer() -> void:
     var customer: Customer = CustomerManager.generate_random_customer();
     spawn_customer.emit.call_deferred(customer, customer_order);
 
-
 func _on_customer_exited() -> void:
     if _day_over:
         return;
+        
+    if !is_inside_tree():
+        return;
+
     if (CustomerManager.remaining_customers() == 0) and (get_tree().get_nodes_in_group("customer").size() == 0):
         _on_day_finished();

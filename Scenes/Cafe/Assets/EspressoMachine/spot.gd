@@ -4,10 +4,11 @@ extends Node3D
 @export var produces: Product;
 
 @export var steam: GPUParticles3D;
+@export var portafilter: Node3D;
 
+signal start_steam();
 
 var _active_item: LiquidContainer = null;
-
 var _running: bool = false;
 
 func _on_select() -> void:
@@ -32,8 +33,14 @@ func _receive_item() -> void:
             container._can_take = false;
             _running = true;
             steam.emitting = true;
-            await get_tree().create_timer(steam.lifetime).timeout;
+            var portafilter_tween: Tween = create_tween();
+            portafilter_tween.bind_node(portafilter).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD);
+            portafilter_tween.tween_property(portafilter, "rotation:y",-0.26, 0.25);
+            portafilter_tween.tween_interval(steam.lifetime - 0.5);
+            portafilter_tween.tween_property(portafilter, "rotation:y",0., 0.25);
+            start_steam.emit.call_deferred();
+            await portafilter_tween.finished;
             container._can_take = true;
 
-func _on_item_removed(container: LiquidContainer) -> void:
+func _on_item_removed(_container: LiquidContainer) -> void:
     _active_item = null;

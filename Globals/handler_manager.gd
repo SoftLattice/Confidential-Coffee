@@ -3,7 +3,7 @@ extends Node
 @export var bad_intel_count: int = 0;
 @export var warn_player: bool = false;
 
-const BASE_INTEL_DEPOSIT: int = 50;
+const BASE_INTEL_DEPOSIT: int = 25;
 @export var intel_deposit = BASE_INTEL_DEPOSIT;
 
 @export var flag_bonus: int = 25;
@@ -13,6 +13,7 @@ const BASE_INTEL_DEPOSIT: int = 50;
 @export var phone_pickup: AudioStreamPlayer;
 
 func _ready() -> void:
+    recompute_bonus();
     CustomerManager.spawn_parameters_changes.connect(recompute_bonus);
 
 func recompute_bonus() -> void:

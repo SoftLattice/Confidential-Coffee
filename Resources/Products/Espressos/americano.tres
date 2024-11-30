@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="AnimatedProduct" load_steps=9 format=3 uid="uid://dg3g6ciledgx7"]
+[gd_resource type="Resource" script_class="AnimatedProduct" load_steps=11 format=3 uid="uid://dg3g6ciledgx7"]
 
 [ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_hxgli"]
 [ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="2_g5yia"]
+[ext_resource type="Resource" uid="uid://upiav32y6nda" path="res://Resources/Products/Modifiers/cream.tres" id="2_ugioi"]
 [ext_resource type="PackedScene" uid="uid://csh67jnwsteub" path="res://Scenes/Common/Animations/pour_stream.tscn" id="3_5f6he"]
+[ext_resource type="Resource" uid="uid://c05hacu5870kx" path="res://Resources/Products/Modifiers/sugar.tres" id="3_861ev"]
 [ext_resource type="Script" path="res://Scripts/Recipes/animated_product.gd" id="3_yy2j8"]
 [ext_resource type="Script" path="res://Scripts/Animations/liquid_pour_animation.gd" id="4_4g6st"]
 [ext_resource type="Script" path="res://Scripts/Animations/liquid_fill_animation.gd" id="5_0cp4s"]
@@ -23,4 +25,4 @@ amount = 1.0
 script = ExtResource("3_yy2j8")
 animations = Array[ExtResource("2_g5yia")]([SubResource("Resource_bf10v"), SubResource("Resource_v8wsj")])
 display_name = "Americano"
-allowed_modifiers = Array[ExtResource("1_hxgli")]([])
+allowed_modifiers = Array[ExtResource("1_hxgli")]([ExtResource("2_ugioi"), ExtResource("3_861ev")])

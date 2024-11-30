@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://g8gikq7hlpdd"]
+
+[ext_resource type="Resource" uid="uid://ooetj3vqykou" path="res://Resources/Products/Espressos/hot_milk.tres" id="1_ekb27"]
+[ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="2_bbew5"]
+[ext_resource type="Resource" uid="uid://c8gj03tlmyk80" path="res://Resources/Products/Basics/espresso.tres" id="3_koxpm"]
+[ext_resource type="PackedScene" uid="uid://csh67jnwsteub" path="res://Scenes/Common/Animations/pour_stream.tscn" id="3_p81e4"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_pour_animation.gd" id="4_gnxll"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_fill_animation.gd" id="5_bebdr"]
+[ext_resource type="Script" path="res://Scripts/Recipes/recipe.gd" id="5_v7h1a"]
+[ext_resource type="Resource" uid="uid://ftcjkc08x0bl" path="res://Resources/Products/Espressos/latte.tres" id="7_umicb"]
+
+[sub_resource type="Resource" id="Resource_rltvg"]
+script = ExtResource("4_gnxll")
+pour_stream_scene = ExtResource("3_p81e4")
+color = Color(1, 1, 0.87451, 1)
+pour_time = 0.5
+
+[sub_resource type="Resource" id="Resource_aflro"]
+script = ExtResource("5_bebdr")
+color = Color(0.741176, 0.670588, 0.596078, 1)
+pour_time = 0.5
+amount = 1.0
+
+[resource]
+script = ExtResource("5_v7h1a")
+base = ExtResource("3_koxpm")
+addition = ExtResource("1_ekb27")
+product = ExtResource("7_umicb")
+animations = Array[ExtResource("2_bbew5")]([SubResource("Resource_rltvg"), SubResource("Resource_aflro")])

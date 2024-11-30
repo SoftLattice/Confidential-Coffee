@@ -20,12 +20,9 @@ func action_purchase() -> void:
     # Accumulate the daily costs
     CafeManager.daily_expenses += daily_cost;
 
-    # Activate the items in the manager
-    CafeManager.product_list.append_array(enabled_products);
-    CafeManager.modifier_list.append_array(enabled_modifiers);
-
     CustomerManager.expand_flags.call_deferred(unlock_flags);
     CustomerManager.expand_verbs.call_deferred(unlock_verbs);
 
     # Add any new purchases unlocked by this one
-    CafeManager.available_store_purchases.append.call_deferred(enables_purchase);
+    if enables_purchase:
+        CafeManager.available_store_purchases.append.call_deferred(enables_purchase);

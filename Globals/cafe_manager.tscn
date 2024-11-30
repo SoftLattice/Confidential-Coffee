@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cl8q455gb1jia"]
+[gd_scene load_steps=12 format=3 uid="uid://cl8q455gb1jia"]
 
 [ext_resource type="Script" path="res://Globals/cafe_manager.gd" id="1_x4byq"]
 [ext_resource type="Script" path="res://Scripts/Recipes/product.gd" id="2_eb5aj"]
 [ext_resource type="Script" path="res://Scripts/Store/store_purchase.gd" id="2_wkgk6"]
 [ext_resource type="Resource" uid="uid://brewrw1m1dmg3" path="res://Resources/Products/Basics/coffee.tres" id="3_xppur"]
 [ext_resource type="Resource" uid="uid://n6ipb25sutuh" path="res://Resources/Purchases/tea_bags.tres" id="3_ylhtj"]
+[ext_resource type="Resource" uid="uid://cxb122enwrm8f" path="res://Resources/Purchases/pastry_display.tres" id="4_8ruf1"]
 [ext_resource type="Resource" uid="uid://b53vn6igp0fcw" path="res://Resources/Products/Basics/decaf.tres" id="4_4336r"]
 [ext_resource type="Resource" uid="uid://b2nv1gtlr074w" path="res://Resources/Purchases/espresso_machine.tres" id="4_lqwt7"]
 [ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="6_cjy6w"]
@@ -13,9 +14,10 @@
 
 [node name="CafeManager" type="Node"]
 script = ExtResource("1_x4byq")
-funds = 10000
-available_store_purchases = Array[ExtResource("2_wkgk6")]([ExtResource("3_ylhtj"), ExtResource("4_lqwt7")])
+daily_expenses = 20
+funds = 250
+available_store_purchases = Array[ExtResource("2_wkgk6")]([ExtResource("3_ylhtj"), ExtResource("4_8ruf1"), ExtResource("4_lqwt7")])
 max_order_size = 1
 max_modifier_count = 1
-product_list = Array[ExtResource("2_eb5aj")]([ExtResource("3_xppur"), ExtResource("4_4336r")])
-modifier_list = Array[ExtResource("6_cjy6w")]([ExtResource("7_xhdba"), ExtResource("8_3dr5r")])
+base_product_list = Array[ExtResource("2_eb5aj")]([ExtResource("3_xppur"), ExtResource("4_4336r")])
+base_modifier_list = Array[ExtResource("6_cjy6w")]([ExtResource("7_xhdba"), ExtResource("8_3dr5r")])

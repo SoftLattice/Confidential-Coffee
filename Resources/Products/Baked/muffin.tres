@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Product" load_steps=3 format=3 uid="uid://c4yy2lgv181fl"]
+
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_xwvdw"]
+[ext_resource type="Script" path="res://Scripts/Recipes/product.gd" id="2_smjdm"]
+
+[resource]
+script = ExtResource("2_smjdm")
+display_name = "Muffin"
+allowed_modifiers = Array[ExtResource("1_xwvdw")]([])

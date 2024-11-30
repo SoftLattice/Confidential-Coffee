@@ -36,7 +36,6 @@ func _ready() -> void:
     daily_income.emit.call_deferred(CafeManager.daily_income);
 
     funds_change.emit(CafeManager.funds);
-    CafeManager.daily_expenses = 0;
     CafeManager.daily_income = 0;
 
     await get_tree().create_timer(1.5).timeout;

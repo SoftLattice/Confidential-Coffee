@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="AnimatedProduct" load_steps=9 format=3 uid="uid://ooetj3vqykou"]
+
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_bnnim"]
+[ext_resource type="Script" path="res://Scripts/Animations/animation_resource.gd" id="4_rbjxs"]
+[ext_resource type="PackedScene" uid="uid://csh67jnwsteub" path="res://Scenes/Common/Animations/pour_stream.tscn" id="5_dinfa"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_pour_animation.gd" id="6_7sfib"]
+[ext_resource type="Script" path="res://Scripts/Animations/liquid_fill_animation.gd" id="7_b41ot"]
+[ext_resource type="Script" path="res://Scripts/Recipes/animated_product.gd" id="8_1gdum"]
+
+[sub_resource type="Resource" id="Resource_a81cu"]
+script = ExtResource("6_7sfib")
+pour_stream_scene = ExtResource("5_dinfa")
+color = Color(1, 1, 0.87451, 1)
+pour_time = 0.7
+
+[sub_resource type="Resource" id="Resource_6gg5b"]
+script = ExtResource("7_b41ot")
+color = Color(1, 1, 0.87451, 1)
+pour_time = 0.7
+amount = 1.0
+
+[resource]
+script = ExtResource("8_1gdum")
+animations = Array[ExtResource("4_rbjxs")]([SubResource("Resource_a81cu"), SubResource("Resource_6gg5b")])
+display_name = "Hot Milk"
+allowed_modifiers = Array[ExtResource("1_bnnim")]([])

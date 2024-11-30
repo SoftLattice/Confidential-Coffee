@@ -11,4 +11,4 @@ extends Node
 @export_file("*.tscn") var game_won: String;
 
 func load_scene(scene_location: String) -> void:
-    get_tree().change_scene_to_file(scene_location);
+    get_tree().change_scene_to_file.call_deferred(scene_location);

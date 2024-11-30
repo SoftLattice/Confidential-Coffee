@@ -7,4 +7,4 @@ func _on_spawn_customer(customer: Customer, order: CustomerOrder) -> void:
         cafe.add_child(customer);
         customer.global_transform = global_transform;
         customer.order = order;
-        customer.tree_exited.connect(Cafe.get_cafe()._on_customer_exited, CONNECT_DEFERRED);
+        customer.tree_exiting.connect(Cafe.get_cafe()._on_customer_exited, CONNECT_DEFERRED);

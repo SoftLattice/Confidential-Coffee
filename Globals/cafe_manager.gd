@@ -26,16 +26,27 @@ const SPAWN_LERP: float = 0.25;
 @export var spawn_interval: float = SPAWN_SCALE;
 
 @export_category("Recipes")
-@export var product_list: Array[Product];
-@export var modifier_list: Array[ProductModifier];
+@export var base_product_list: Array[Product];
+@export var base_modifier_list: Array[ProductModifier];
 
 func generate_random_order() -> Order:
     var result: Order = Order.new();
-    result.product = product_list.pick_random();
+
+    var available_products: Array[Product];
+    available_products.append_array(base_product_list);
+    var available_modifiers: Array[ProductModifier];
+    available_modifiers.append_array(base_modifier_list);
+
+    for purchase in owned_store_purchases:
+        available_products.append_array(purchase.enabled_products);
+        available_modifiers.append_array(purchase.enabled_modifiers);
+
+    result.product = available_products.pick_random();
+
     var modifiers: Array[ProductModifier];
     modifiers.assign(result.product.allowed_modifiers.filter(
                 func(m: ProductModifier) -> bool:
-                    return modifier_list.has(m))
+                    return available_modifiers.has(m))
                 );
 
     if modifiers.size() > 0:
@@ -65,6 +76,15 @@ func rate_dispositions(dispositions: Array[int]) -> void:
 
     # Customers are faster when it's a better rating
     spawn_interval = lerpf(spawn_interval, SPAWN_SCALE / (rating + 1.0), SPAWN_LERP);
+
+    # As number of customers increases, so does order size
+    if rating_count > 30:
+        max_order_size = 3;
+    elif rating_count > 12:
+        max_order_size = 2;
+
+    if rating_count > 4:
+        max_modifier_count = 2;
     
 
 func _disposition_to_rating(disposition: int) -> float:

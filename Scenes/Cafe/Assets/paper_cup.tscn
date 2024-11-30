@@ -40,6 +40,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_132e2")
 shader_parameter/liquid_fraction = 0.0
+shader_parameter/minimum_width = 0.7
 shader_parameter/liquid_color = Color(0.28, 0.197447, 0.1092, 0.956863)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_w6blb"]

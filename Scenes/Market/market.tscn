@@ -173,15 +173,15 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 script = ExtResource("6_s8aqf")
-funds_label = NodePath("MarginContainer/VBoxContainer/Funds/Value")
-expenses_label = NodePath("MarginContainer/VBoxContainer/Expenses/Value")
-expenses_container = NodePath("MarginContainer/VBoxContainer/Expenses")
-income_label = NodePath("MarginContainer/VBoxContainer/Sales/Value")
-income_container = NodePath("MarginContainer/VBoxContainer/Sales")
-deposit_label = NodePath("MarginContainer/VBoxContainer/Deposits/Value")
-deposit_container = NodePath("MarginContainer/VBoxContainer/Deposits")
-purchases_label = NodePath("MarginContainer/VBoxContainer/Purchases/Value")
-purchases_container = NodePath("MarginContainer/VBoxContainer/Purchases")
+funds_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Funds/Value")
+expenses_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Expenses/Value")
+expenses_container = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Expenses")
+income_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Sales/Value")
+income_container = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Sales")
+deposit_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Deposits/Value")
+deposit_container = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Deposits")
+purchases_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Purchases/Value")
+purchases_container = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Purchases")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo"]
 layout_mode = 2
@@ -205,17 +205,27 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 2
 
-[node name="Expenses" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Expenses" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_sncud")
 theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Expenses"]
+[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Expenses"]
 layout_mode = 2
 text = "Daily Expenses"
 vertical_alignment = 2
 
-[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Expenses"]
+[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Expenses"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -224,25 +234,25 @@ horizontal_alignment = 1
 vertical_alignment = 2
 clip_text = true
 
-[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Expenses"]
+[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Expenses"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.835294, 0, 0, 1)
 text = "$$$"
 vertical_alignment = 2
 
-[node name="Sales" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer"]
+[node name="Sales" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("5_sncud")
 theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Sales"]
+[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Sales"]
 layout_mode = 2
 text = "Sales
 "
 vertical_alignment = 2
 
-[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Sales"]
+[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Sales"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -251,23 +261,23 @@ horizontal_alignment = 1
 vertical_alignment = 2
 clip_text = true
 
-[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Sales"]
+[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Sales"]
 layout_mode = 2
 text = "$$$"
 vertical_alignment = 2
 
-[node name="Deposits" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer"]
+[node name="Deposits" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("5_sncud")
 theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Deposits"]
+[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Deposits"]
 layout_mode = 2
 text = "DEPOSIT"
 vertical_alignment = 2
 
-[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Deposits"]
+[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Deposits"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -276,23 +286,23 @@ horizontal_alignment = 1
 vertical_alignment = 2
 clip_text = true
 
-[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Deposits"]
+[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Deposits"]
 layout_mode = 2
 text = "$$$"
 vertical_alignment = 2
 
-[node name="Purchases" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer"]
+[node name="Purchases" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("5_sncud")
 theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Purchases"]
+[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Purchases"]
 layout_mode = 2
 text = "Purchases"
 vertical_alignment = 2
 
-[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Purchases"]
+[node name="Spacing" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Purchases"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
@@ -301,28 +311,28 @@ horizontal_alignment = 1
 vertical_alignment = 2
 clip_text = true
 
-[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Purchases"]
+[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Purchases"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.835696, 0.000176592, 9.6454e-05, 1)
 text = "$$$"
 vertical_alignment = 2
 
-[node name="Control" type="Control" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Funds" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer"]
+[node name="Funds" type="HBoxContainer" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_sncud")
 theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Funds"]
+[node name="Label" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Funds"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Available Balance:"
 vertical_alignment = 2
 
-[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/Funds"]
+[node name="Value" type="Label" parent="MarketControl/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/BankInfo/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Funds"]
 layout_mode = 2
 text = "$$$"
 vertical_alignment = 2

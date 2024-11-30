@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dux71js1ov2y7"]
+[gd_scene load_steps=7 format=3 uid="uid://dux71js1ov2y7"]
 
 [ext_resource type="Script" path="res://Globals/recipe_manager.gd" id="1_ninxl"]
 [ext_resource type="Script" path="res://Scripts/Recipes/recipe.gd" id="2_luk2i"]
 [ext_resource type="Resource" uid="uid://bpvvyraced11t" path="res://Resources/Recipes/hot_tea_recipe_1.tres" id="3_a07hm"]
 [ext_resource type="Resource" uid="uid://blrw18diawqt6" path="res://Resources/Recipes/hot_tea_recipe_2.tres" id="4_ugwon"]
 [ext_resource type="Resource" uid="uid://7bxdol0gr0wj" path="res://Resources/Recipes/americano.tres" id="5_8enin"]
+[ext_resource type="Resource" uid="uid://g8gikq7hlpdd" path="res://Resources/Recipes/latte.tres" id="6_ixwpl"]
 
 [node name="RecipeManager" type="Node"]
 script = ExtResource("1_ninxl")
-recipes = Array[ExtResource("2_luk2i")]([ExtResource("3_a07hm"), ExtResource("4_ugwon"), ExtResource("5_8enin")])
+recipes = Array[ExtResource("2_luk2i")]([ExtResource("3_a07hm"), ExtResource("4_ugwon"), ExtResource("5_8enin"), ExtResource("6_ixwpl")])

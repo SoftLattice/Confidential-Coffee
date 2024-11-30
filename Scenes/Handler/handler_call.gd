@@ -27,7 +27,7 @@ static func get_active_handler() -> HandlerCall:
 func _ready() -> void:
     _active_handler = self;
 
-    if debug_customer_results and true:
+    if debug_customer_results and false:
         customer_results.assign(debug_customer_results);
     else:
         customer_results.assign(CafeManager.customer_results);

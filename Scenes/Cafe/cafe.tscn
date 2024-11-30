@@ -33,6 +33,7 @@
 [ext_resource type="AudioStream" uid="uid://bvs6kflytmev8" path="res://Sounds/Cafe/reject.ogg" id="34_bbs4b"]
 [ext_resource type="PackedScene" uid="uid://bg2qaguqkksji" path="res://Scenes/Cafe/Assets/tea_tray.tscn" id="34_dm86h"]
 [ext_resource type="PackedScene" uid="uid://jvyguitt1ffy" path="res://Scenes/Cafe/Assets/Modifiers/cream.tscn" id="35_5gbk0"]
+[ext_resource type="PackedScene" uid="uid://bf5mj52y0kh3u" path="res://Scenes/Cafe/Assets/PastryDisplay/pastry_display.tscn" id="35_e3ob4"]
 [ext_resource type="PackedScene" uid="uid://ycd3m38mbiy2" path="res://Scenes/Cafe/Assets/EspressoMachine/espresso_machine.tscn" id="37_whf18"]
 
 [sub_resource type="Environment" id="Environment_w3stk"]
@@ -43,12 +44,6 @@ background_color = Color(0.564962, 0.564962, 0.564962, 1)
 script = ExtResource("8_qpvg1")
 duration = 0.75
 transition = 4
-ease = 2
-
-[sub_resource type="Resource" id="Resource_xv80h"]
-script = ExtResource("8_qpvg1")
-duration = 1.0
-transition = 0
 ease = 2
 
 [sub_resource type="Curve3D" id="Curve3D_giobj"]
@@ -254,7 +249,7 @@ clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 timer = NodePath("DayTimer")
 
 [node name="DayTimer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
-wait_time = 10.0
+wait_time = 90.0
 one_shot = true
 
 [node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
@@ -334,15 +329,8 @@ spring_length = 1.75
 look_at_damping = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Environment/Cameras/PCamMainView"]
-remote_path = NodePath("../../PCamPointView")
 update_rotation = false
 update_scale = false
-
-[node name="PCamPointView" type="Node3D" parent="Environment/Cameras"]
-transform = Transform3D(0.774004, 0.0978828, -0.62557, 1.49012e-08, 0.987979, 0.154589, 0.633181, -0.119652, 0.7647, -0.1, 1.7, 1.7)
-script = ExtResource("7_vam80")
-look_at_mode = 2
-tween_resource = SubResource("Resource_xv80h")
 
 [node name="Lights" type="Node" parent="Environment"]
 
@@ -482,6 +470,9 @@ volume_db = -5.0
 [node name="Reject" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("34_bbs4b")
 volume_db = -5.0
+
+[node name="PastryDisplay" parent="." instance=ExtResource("35_e3ob4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.5, 0, 0)
 
 [connection signal="end_day" from="." to="Overlay/OverlayViewports/Postamble" method="_start_postamble"]
 [connection signal="order_canceled" from="." to="Audio/Reject" method="play"]

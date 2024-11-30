@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StorePurchase" load_steps=5 format=3 uid="uid://cxb122enwrm8f"]
+
+[ext_resource type="Script" path="res://Scripts/Recipes/product_modifier.gd" id="1_iyqc5"]
+[ext_resource type="Script" path="res://Scripts/Recipes/product.gd" id="2_284io"]
+[ext_resource type="Resource" uid="uid://c4yy2lgv181fl" path="res://Resources/Products/Baked/muffin.tres" id="3_kd85g"]
+[ext_resource type="Script" path="res://Scripts/Store/store_purchase.gd" id="6_3d6gu"]
+
+[resource]
+script = ExtResource("6_3d6gu")
+title = "Pastry Display"
+price = 300
+daily_cost = 10
+enabled_products = Array[ExtResource("2_284io")]([ExtResource("3_kd85g")])
+enabled_modifiers = Array[ExtResource("1_iyqc5")]([])
+unlock_flags = 0
+unlock_verbs = 1
