@@ -14,7 +14,8 @@ config/name="Confidential Coffee"
 run/main_scene="res://Scenes/Main/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://temporary_icon.png"
+boot_splash/image="res://Marketing/page_icon.png"
+config/icon="res://Marketing/page_icon.png"
 
 [autoload]
 
