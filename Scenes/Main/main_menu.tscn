@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://pu2tcvtr60nh"]
+[gd_scene load_steps=4 format=3 uid="uid://pu2tcvtr60nh"]
 
 [ext_resource type="Script" path="res://Scenes/Main/main.gd" id="1_nt4i4"]
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="2_kjelv"]
+[ext_resource type="Texture2D" uid="uid://be173gi3mvd40" path="res://Textures/Overlay/background.jpg" id="3_2tc82"]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_nt4i4")
@@ -15,14 +16,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_kjelv")
 
-[node name="ColorRect" type="ColorRect" parent="MainMenu"]
+[node name="ColorRect" type="TextureRect" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.890196, 0.780392, 0.572549, 1)
+texture = ExtResource("3_2tc82")
+stretch_mode = 1
 
 [node name="Title" type="RichTextLabel" parent="MainMenu"]
 layout_mode = 1

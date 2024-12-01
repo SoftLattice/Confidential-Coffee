@@ -28,6 +28,10 @@ func generate_random_customer() -> Customer:
         return null;
     var spawn_details = spawn_data.pop_front();
     var customer: Customer = customer_list[spawn_details[0]].instantiate();
+
+    # Assign the character a unique ID
+    customer._unique_id = MAX_FLAGS_USED * spawn_details[0] + spawn_details[1];
+
     customer.set_flag_index(spawn_details[1]);
     if randf() < phrase_probability:
         var phrase_seed: Array[int] = generate_random_phrase();

@@ -17,6 +17,7 @@ pour_time = 0.7
 script = ExtResource("5_r4wkr")
 color = Color(0.32549, 0.533333, 1, 0.662745)
 pour_time = 0.7
+amount = 1.0
 
 [resource]
 script = ExtResource("5_ic5xh")

@@ -18,6 +18,5 @@ daily_expenses = 20
 funds = 250
 available_store_purchases = Array[ExtResource("2_wkgk6")]([ExtResource("3_ylhtj"), ExtResource("4_8ruf1"), ExtResource("4_lqwt7")])
 max_order_size = 1
-max_modifier_count = 1
 base_product_list = Array[ExtResource("2_eb5aj")]([ExtResource("3_xppur"), ExtResource("4_4336r")])
 base_modifier_list = Array[ExtResource("6_cjy6w")]([ExtResource("7_xhdba"), ExtResource("8_3dr5r")])

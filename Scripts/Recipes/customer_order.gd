@@ -8,6 +8,12 @@ const EXTRA_ITEMS: int = 0x1;
 const WRONG_MODIFIERS: int = 0x2;
 const MISSING_ITEMS: int = 0x4;
 
+func copy_order() -> CustomerOrder:
+    var result: CustomerOrder = CustomerOrder.new();
+    for item in items:
+        result.items.append(item.duplicate(false));
+    return result;
+
 func clear_status() -> void:
     for order in items:
         order.clear_status();

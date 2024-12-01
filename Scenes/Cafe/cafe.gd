@@ -5,7 +5,6 @@ class_name Cafe extends Node
 @export var receipt_scene: PackedScene;
 @onready var cafe_hud: CafeHUD = get_node("%CafeHUD");
 @export var customer_spawn_timer: Timer;
-@export var options_scene: PackedScene;
 
 signal spawn_customer(customer: Customer, order: CustomerOrder);
 signal start_day();
@@ -40,12 +39,13 @@ func _process(_delta: float) -> void:
         _on_customer_spawn_timer();
 
     if Input.is_action_just_pressed("ui_cancel"):
-        var options: Node = options_scene.instantiate();
+        var options: Node = SceneList.options_scene.instantiate();
         add_child(options);
         options.tree_exiting.connect(func() -> void: get_tree().paused = false, CONNECT_ONE_SHOT);
         get_tree().paused = true;
 
 func _on_order_placed(order: CustomerOrder, customer: Customer) -> void:
+    CafeManager._cache_order(customer._unique_id, order);
     var order_receipt: OrderReceipt = receipt_scene.instantiate();
     cafe_hud.add_child(order_receipt);
     order_receipt.customer = customer;
@@ -85,8 +85,10 @@ func _on_customer_order_completed(canceled: bool) -> void:
 
 
 func _on_customer_spawn_timer() -> void:
-    var customer_order: CustomerOrder = CafeManager.generate_random_customer_order();
     var customer: Customer = CustomerManager.generate_random_customer();
+    if customer == null:
+        return;
+    var customer_order: CustomerOrder = CafeManager.generate_random_customer_order(customer._unique_id);
     spawn_customer.emit.call_deferred(customer, customer_order);
 
 func _on_customer_exited() -> void:

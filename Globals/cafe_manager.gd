@@ -56,12 +56,21 @@ func generate_random_order() -> Order:
     
     return result;
 
-func generate_random_customer_order() -> CustomerOrder:
+var _order_cache: Dictionary = {};
+func generate_random_customer_order(cache_uid: int = -1) -> CustomerOrder:
+    if cache_uid >= 0:
+        if _order_cache.has(cache_uid):
+            return (_order_cache[cache_uid] as CustomerOrder).copy_order();
+
     var result: CustomerOrder = CustomerOrder.new();
     for i in range(randi_range(1,max_order_size)):
         result.items.append(generate_random_order());
+
     return result;
 
+func _cache_order(cache_uid: int, order: CustomerOrder) -> void:
+    if !_order_cache.has(cache_uid):
+        _order_cache[cache_uid] = order.copy_order();
 
 func rate_dispositions(dispositions: Array[int]) -> void:
     var total_dispostion: float = 0;

@@ -1,8 +1,7 @@
-[gd_scene load_steps=50 format=4 uid="uid://c5gca0k3lihsi"]
+[gd_scene load_steps=51 format=4 uid="uid://c5gca0k3lihsi"]
 
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="1_6ohen"]
 [ext_resource type="Script" path="res://Scenes/Cafe/cafe.gd" id="1_8x71m"]
-[ext_resource type="PackedScene" uid="uid://7vkayglwow26" path="res://Scenes/Options/options.tscn" id="3_56may"]
 [ext_resource type="Script" path="res://Scenes/Cafe/day_intro.gd" id="3_n1fs1"]
 [ext_resource type="Script" path="res://Scenes/Cafe/clock_container.gd" id="4_2fd8n"]
 [ext_resource type="Script" path="res://Scenes/Cafe/hud.gd" id="4_hgyob"]
@@ -34,6 +33,8 @@
 [ext_resource type="PackedScene" uid="uid://bg2qaguqkksji" path="res://Scenes/Cafe/Assets/tea_tray.tscn" id="34_dm86h"]
 [ext_resource type="PackedScene" uid="uid://jvyguitt1ffy" path="res://Scenes/Cafe/Assets/Modifiers/cream.tscn" id="35_5gbk0"]
 [ext_resource type="PackedScene" uid="uid://bf5mj52y0kh3u" path="res://Scenes/Cafe/Assets/PastryDisplay/pastry_display.tscn" id="35_e3ob4"]
+[ext_resource type="AudioStream" uid="uid://dskrav2gvpc8h" path="res://Sounds/Music/cafe_background.ogg" id="35_ehueg"]
+[ext_resource type="Script" path="res://Scenes/Common/music_fade.gd" id="36_6rgcr"]
 [ext_resource type="PackedScene" uid="uid://ycd3m38mbiy2" path="res://Scenes/Cafe/Assets/EspressoMachine/espresso_machine.tscn" id="37_whf18"]
 
 [sub_resource type="Environment" id="Environment_w3stk"]
@@ -48,7 +49,7 @@ ease = 2
 
 [sub_resource type="Curve3D" id="Curve3D_giobj"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.5, 0, 0, 0, 0, 0, 0, 0, 0, 3.5, 0, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.5, 0, 0, 0, 0, 0, 0, 0, 0, 2.5, 0, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -116,7 +117,6 @@ day_intro = NodePath("Overlay/OverlayViewports/Preamble/DayIntro")
 mark_primary = NodePath("Environment/CameraPath/CameraFollow/PlayerControl")
 receipt_scene = ExtResource("7_goaex")
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
-options_scene = ExtResource("3_56may")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="."]
 
@@ -249,7 +249,7 @@ clock_hand = NodePath("CenterContainer/ClockCenter/Hand")
 timer = NodePath("DayTimer")
 
 [node name="DayTimer" type="Timer" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
-wait_time = 90.0
+wait_time = 60.0
 one_shot = true
 
 [node name="Clock" type="TextureRect" parent="Overlay/HUDViewport/CafeHUD/ClockContainer"]
@@ -304,7 +304,7 @@ scale = Vector2(0.8, 0.8)
 environment = SubResource("Environment_w3stk")
 
 [node name="PixelCamera" parent="Environment/Cameras" instance=ExtResource("5_vromj")]
-transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.1, 1.7, 1.7)
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.0998799, 1.7, 1.7)
 fov = 50.0
 
 [node name="PlayerHand" type="Marker3D" parent="Environment/Cameras/PixelCamera"]
@@ -314,7 +314,7 @@ paper_cup_scene = ExtResource("20_tpodc")
 
 [node name="PCamMainView" type="Node3D" parent="Environment/Cameras" node_paths=PackedStringArray("follow_target")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.1, 1.7, 1.7)
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.0998799, 1.7, 1.7)
 script = ExtResource("7_vam80")
 priority = 10
 follow_mode = 2
@@ -348,7 +348,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1.4, 0)
 curve = SubResource("Curve3D_giobj")
 
 [node name="CameraFollow" type="PathFollow3D" parent="Environment/CameraPath"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.000120125, 0, 0)
 progress = 3.5
 script = ExtResource("9_uktlt")
 
@@ -362,7 +362,7 @@ mesh = SubResource("ArrayMesh_asc6m")
 skeleton = NodePath("")
 
 [node name="Counter3" type="MeshInstance3D" parent="Environment/Counters"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
 mesh = SubResource("ArrayMesh_asc6m")
 skeleton = NodePath("")
 
@@ -471,10 +471,18 @@ volume_db = -5.0
 stream = ExtResource("34_bbs4b")
 volume_db = -5.0
 
+[node name="Music" type="AudioStreamPlayer" parent="Audio"]
+process_mode = 3
+stream = ExtResource("35_ehueg")
+volume_db = -20.0
+bus = &"Music"
+script = ExtResource("36_6rgcr")
+
 [node name="PastryDisplay" parent="." instance=ExtResource("35_e3ob4")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.5, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.5, 0, 0)
 
 [connection signal="end_day" from="." to="Overlay/OverlayViewports/Postamble" method="_start_postamble"]
+[connection signal="end_day" from="." to="Audio/Music" method="fade_out" binds= [4.0]]
 [connection signal="order_canceled" from="." to="Audio/Reject" method="play"]
 [connection signal="order_completed" from="." to="Audio/Register" method="play"]
 [connection signal="spawn_customer" from="." to="Environment/CustomerFlow/CustomerSpawner" method="_on_spawn_customer"]
@@ -492,3 +500,4 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.5, 0
 [connection signal="customer_order_placed" from="Environment/CustomerFlow/CustomerPath" to="." method="_on_order_placed"]
 [connection signal="area_entered" from="Environment/CustomerFlow/CustomerPath/CustomerExit/ExitDoor" to="Environment/CustomerFlow/CustomerPath/CustomerExit/ExitDoor" method="_on_area_entered"]
 [connection signal="finished" from="Audio/AlarmClock" to="Overlay/OverlayViewports/Preamble" method="_on_alarm_finish"]
+[connection signal="finished" from="Audio/AlarmClock" to="Audio/Music" method="play"]

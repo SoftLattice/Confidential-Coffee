@@ -26,6 +26,7 @@ CafeManager="*res://Globals/cafe_manager.tscn"
 HandlerManager="*res://Globals/handler_manager.tscn"
 CustomerManager="*res://Globals/customer_manager.tscn"
 RecipeManager="*res://Globals/recipe_manager.tscn"
+LicenseStore="*res://Globals/license_store.tscn"
 
 [debug]
 

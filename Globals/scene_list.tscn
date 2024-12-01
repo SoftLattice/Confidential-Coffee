@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dky7wqbfq767u"]
+[gd_scene load_steps=3 format=3 uid="uid://dky7wqbfq767u"]
 
 [ext_resource type="Script" path="res://Globals/scene_list.gd" id="1_grk1m"]
+[ext_resource type="PackedScene" uid="uid://7vkayglwow26" path="res://Scenes/Options/options.tscn" id="2_hre3q"]
 
 [node name="SceneList" type="Node"]
 script = ExtResource("1_grk1m")
@@ -13,3 +14,4 @@ about_menu = "res://Scenes/About/about.tscn"
 game_over_bankruptcy = "res://Scenes/GameOver/game_over_bankruptcy.tscn"
 game_over_arrest = "res://Scenes/GameOver/game_over_arrest.tscn"
 game_won = "res://Scenes/GameWon/game_won.tscn"
+options_scene = ExtResource("2_hre3q")

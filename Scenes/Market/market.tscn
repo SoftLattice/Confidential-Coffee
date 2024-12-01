@@ -117,7 +117,7 @@ layout_mode = 2
 theme = ExtResource("5_sncud")
 theme_override_constants/separation = 4
 script = ExtResource("7_6atch")
-price = 5000
+price = 2500
 price_label = NodePath("ItemPrice")
 buy_button = NodePath("BuyButton")
 

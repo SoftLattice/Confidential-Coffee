@@ -36,6 +36,8 @@ var mugshot: Texture;
 @export var velocity: float = 1.0;
 @export var radius: float = 0.5;
 
+var _unique_id: int = -1;
+
 func set_flag_index(index: int) -> void:
     flag.frame = index % 8;
 

@@ -45,6 +45,13 @@ func _ready() -> void:
     CafeManager.deposits = 0;
 
     funds_change.emit.call_deferred(CafeManager.funds);
+    
+func _process(_delta: float) -> void:
+    if Input.is_action_just_pressed("ui_cancel"):
+        var options: Node = SceneList.options_scene.instantiate();
+        add_child(options);
+        options.tree_exiting.connect(func() -> void: get_tree().paused = false, CONNECT_ONE_SHOT);
+        get_tree().paused = true;
 
 func _on_purchase(store_item: StoreItem) -> void:
     CafeManager.funds -= store_item.purchase.price;
@@ -59,8 +66,9 @@ func _on_continue_pressed() -> void:
         SceneList.load_scene(SceneList.game_over_bankruptcy);
     else:
         SaveData.current_day += 1;
-        CafeManager.daily_expenses += 2;
+        CafeManager.daily_expenses += 1;
         SceneList.load_scene(SceneList.cafe_scene);
 
 func _on_flee_country() -> void:
     SceneList.load_scene(SceneList.game_won);
+

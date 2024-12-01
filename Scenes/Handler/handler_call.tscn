@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://buhgv18pjog7i"]
+[gd_scene load_steps=71 format=4 uid="uid://buhgv18pjog7i"]
 
 [ext_resource type="Script" path="res://Scenes/Handler/handler_call.gd" id="1_8y0lq"]
 [ext_resource type="Texture2D" uid="uid://bd4yapyak5pla" path="res://Models/Palettes/store_palette.png" id="1_do60s"]
@@ -52,6 +52,8 @@
 [ext_resource type="AudioStream" uid="uid://celec7vhfelx7" path="res://Sounds/Handler/handler_bark5.ogg" id="50_xn4yi"]
 [ext_resource type="AudioStream" uid="uid://bqit3hyui4yes" path="res://Sounds/Handler/handler_bark6.ogg" id="51_xdpbb"]
 [ext_resource type="AudioStream" uid="uid://blyhrdq3qyi7a" path="res://Sounds/PhoneCall/camera.ogg" id="52_mpvgh"]
+[ext_resource type="AudioStream" uid="uid://01vse8dbf663" path="res://Sounds/Music/call_background.ogg" id="53_swknm"]
+[ext_resource type="Script" path="res://Scenes/Common/music_fade.gd" id="54_2qlmu"]
 
 [sub_resource type="Resource" id="Resource_4jcoe"]
 script = ExtResource("2_msf10")
@@ -70,7 +72,7 @@ phrase_seed = Array[int]([])
 [sub_resource type="Environment" id="Environment_nce2b"]
 background_color = Color(0.564962, 0.564962, 0.564962, 1)
 
-[sub_resource type="Environment" id="Environment_7xaqt"]
+[sub_resource type="Environment" id="Environment_chf0w"]
 
 [sub_resource type="Resource" id="Resource_skvnx"]
 script = ExtResource("4_uoek7")
@@ -198,6 +200,8 @@ script = ExtResource("6_enqi4")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_61cpy")
+wait_time = 1.5
+quote_probability = 1.0
 
 [node name="Disappointed" type="Node" parent="StateMachine"]
 script = ExtResource("3_n0qd7")
@@ -238,7 +242,23 @@ receiver_position = NodePath("../../../Environment/Phone/Receiver/ReceiverTarget
 
 [node name="Items" type="CanvasLayer" parent="Overlay"]
 
+[node name="ItemsArea" type="Control" parent="Overlay/Items" node_paths=PackedStringArray("receipt_spawn_location", "mugshot_spawn_location")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_0g4aw")
+receipt_spawn_location = NodePath("../ReceiptSpawn")
+mugshot_spawn_location = NodePath("../MugSpawn")
+call_receipt_scene = ExtResource("9_pl0u5")
+customer_picture_scene = ExtResource("4_5fsto")
+receipt_jitter_position = 8.0
+
 [node name="PlayerChoices" type="Control" parent="Overlay/Items" node_paths=PackedStringArray("main_container", "verb_container", "flag_container", "verb_texture", "flag_texture")]
+z_index = 100
 layout_mode = 3
 anchor_left = 0.287
 anchor_top = 1.578
@@ -250,7 +270,6 @@ offset_right = 0.240005
 offset_bottom = -0.0600281
 grow_horizontal = 2
 grow_vertical = 0
-mouse_filter = 2
 script = ExtResource("17_vkimc")
 main_container = NodePath("MainContainer")
 verb_container = NodePath("MainContainer/Margin/VBoxContainer/Choices/VerbGrid")
@@ -287,6 +306,7 @@ axis_stretch_vertical = 1
 
 [node name="Margin" type="MarginContainer" parent="Overlay/Items/PlayerChoices/MainContainer"]
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -410,6 +430,7 @@ icon = ExtResource("31_nh0io")
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+mouse_filter = 0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
@@ -421,29 +442,17 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Send"
 
-[node name="ItemsArea" type="Control" parent="Overlay/Items" node_paths=PackedStringArray("receipt_spawn_location", "mugshot_spawn_location")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("8_0g4aw")
-receipt_spawn_location = NodePath("../ReceiptSpawn")
-mugshot_spawn_location = NodePath("../MugSpawn")
-call_receipt_scene = ExtResource("9_pl0u5")
-customer_picture_scene = ExtResource("4_5fsto")
-receipt_jitter_position = 8.0
-
 [node name="Skip" type="Control" parent="Overlay/Items" node_paths=PackedStringArray("main_container")]
+z_index = 100
 layout_mode = 3
 anchor_left = 0.783
+anchor_top = 1.0
 anchor_right = 0.783
+anchor_bottom = 1.0
 offset_left = 0.159973
-offset_top = 314.0
-offset_right = 0.159973
-offset_bottom = 314.0
+offset_top = 44.0
+offset_right = 0.159943
+offset_bottom = 44.0
 grow_horizontal = 2
 script = ExtResource("38_tamtc")
 main_container = NodePath("Control")
@@ -544,7 +553,7 @@ environment = SubResource("Environment_nce2b")
 
 [node name="Camera3D" type="Camera3D" parent="Environment/Cameras"]
 transform = Transform3D(1, 0, 0, 0, 0.640184, 0.768221, 0, -0.768221, 0.640184, 0, 1.6, 0.7)
-environment = SubResource("Environment_7xaqt")
+environment = SubResource("Environment_chf0w")
 current = true
 
 [node name="PhantomCameraHost" type="Node" parent="Environment/Cameras/Camera3D"]
@@ -655,7 +664,17 @@ bus = &"SoundEffects"
 stream = ExtResource("52_mpvgh")
 bus = &"SoundEffects"
 
+[node name="Music" type="AudioStreamPlayer" parent="Audio"]
+process_mode = 3
+stream = ExtResource("53_swknm")
+volume_db = -10.0
+stream_paused = true
+bus = &"Music"
+script = ExtResource("54_2qlmu")
+
 [connection signal="disappointed" from="." to="StateMachine" method="_set_state" binds= ["disappointed"]]
+[connection signal="end_day" from="." to="Audio/Music" method="fade_out" binds= [3.0]]
+[connection signal="ready" from="." to="Audio/Music" method="play"]
 [connection signal="receipt_picture" from="." to="StateMachine/ReceiptRequest" method="_on_receipt_picture"]
 [connection signal="receipt_picture" from="." to="Audio/Camera" method="play" unbinds=1]
 [connection signal="request_picture" from="." to="Overlay/Items/Skip" method="pop_in"]

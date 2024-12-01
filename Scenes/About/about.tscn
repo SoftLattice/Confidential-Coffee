@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4p2ref74m74c"]
+[gd_scene load_steps=4 format=3 uid="uid://b4p2ref74m74c"]
 
 [ext_resource type="Script" path="res://Scenes/About/about.gd" id="1_icej0"]
 [ext_resource type="Theme" uid="uid://bplqepcs14bpk" path="res://Menus/Themes/main_theme.tres" id="2_hwfqw"]
+[ext_resource type="Texture2D" uid="uid://be173gi3mvd40" path="res://Textures/Overlay/background.jpg" id="3_fwqjo"]
 
-[node name="About" type="Node"]
+[node name="About" type="Node" node_paths=PackedStringArray("display_text")]
 script = ExtResource("1_icej0")
+display_text = NodePath("CanvasLayer/Options/DisplayText")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 10
@@ -20,30 +22,35 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_hwfqw")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Options"]
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/Options"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.890196, 0.780392, 0.572549, 1)
+texture = ExtResource("3_fwqjo")
+stretch_mode = 1
 
 [node name="Title" type="RichTextLabel" parent="CanvasLayer/Options"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.217
-anchor_right = 0.5
-anchor_bottom = 0.217
-offset_left = -119.0
-offset_top = -24.59
-offset_right = 119.0
-offset_bottom = 24.41
+anchor_left = 0.298
+anchor_top = 0.278
+anchor_right = 0.298
+anchor_bottom = 0.278
+offset_left = -130.04
+offset_top = -59.06
+offset_right = 129.96
+offset_bottom = 58.94
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[color=black][font_size=48][center]About[/center][/font_size][/color]"
+text = "[font_size=24]Confidential Coffee [/font_size] was made by [url=\"https://softlattice.itch.io\"]Soft Lattice Games[/url]
+
+Click below to see licenses used to make this possible!"
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
@@ -51,23 +58,60 @@ autowrap_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Options"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.619
-anchor_right = 0.5
-anchor_bottom = 0.619
-offset_left = -102.0
-offset_top = -76.13
-offset_right = 102.0
-offset_bottom = 75.87
+anchor_left = 0.275
+anchor_top = 0.683
+anchor_right = 0.275
+anchor_bottom = 0.683
+offset_left = -101.0
+offset_top = -64.41
+offset_right = 101.0
+offset_bottom = 64.59
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Options/VBoxContainer"]
+[node name="Godot" type="Button" parent="CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Godot"
+
+[node name="Fonts" type="Button" parent="CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Fonts"
+
+[node name="ThirdParty" type="Button" parent="CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Third Party"
+
+[node name="PhantomCam" type="Button" parent="CanvasLayer/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Phantom Cam"
 
 [node name="Back" type="Button" parent="CanvasLayer/Options/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Back"
 
+[node name="DisplayText" type="RichTextLabel" parent="CanvasLayer/Options"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -202.0
+offset_top = 18.0
+offset_right = -14.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 12
+
+[connection signal="meta_clicked" from="CanvasLayer/Options/Title" to="." method="_on_made_by_url_clicked"]
+[connection signal="pressed" from="CanvasLayer/Options/VBoxContainer/Godot" to="." method="_on_godot_pressed"]
+[connection signal="pressed" from="CanvasLayer/Options/VBoxContainer/Fonts" to="." method="_on_fonts_license_pressed"]
+[connection signal="pressed" from="CanvasLayer/Options/VBoxContainer/ThirdParty" to="." method="_on_third_party_license_pressed"]
+[connection signal="pressed" from="CanvasLayer/Options/VBoxContainer/PhantomCam" to="." method="_on_pcam_license_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/VBoxContainer/Back" to="." method="_on_back_pressed"]

@@ -53,6 +53,13 @@ func _ready() -> void:
 
     CafeManager.rate_dispositions(dispositions);
 
+func _process(_delta: float) -> void:
+    if Input.is_action_just_pressed("ui_cancel"):
+        var options: Node = SceneList.options_scene.instantiate();
+        add_child(options);
+        options.tree_exiting.connect(func() -> void: get_tree().paused = false, CONNECT_ONE_SHOT);
+        get_tree().paused = true;
+
 func _spawn_receipt(customer_result: CustomerResult) -> void:
     items_area.spawn_receipt.call_deferred(customer_result);
 
