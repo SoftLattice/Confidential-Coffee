@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1756656673|9671827';
+const CACHE_VERSION = '1756656973|9228484';
 /** @type {string} */
 const CACHE_PREFIX = 'Confidential Cof-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
