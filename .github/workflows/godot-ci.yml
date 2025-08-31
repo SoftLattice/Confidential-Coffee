@@ -43,3 +43,4 @@ jobs:
         with:
           branch: gh-pages
           folder: build/web
+          token: ${{ secrets.DEPLOY_TOKEN }}
