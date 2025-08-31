@@ -1,6 +1,7 @@
 name: CI
 env:
   GODOT_VERSION: 4.4.1
+  PROJECT_PATH: .
 on:
   push:
     branches: [ main ]
